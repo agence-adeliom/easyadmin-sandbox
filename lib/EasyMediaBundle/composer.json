@@ -1,0 +1,18 @@
+{
+    "name": "adeliom/easy-media-bundle",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=7.4",
+        "league/flysystem": "^2.1",
+        "symfony/filesystem": "^5.3",
+        "symfony/framework-bundle": ">=5.0",
+        "symfony/yaml": ">=5.0",
+        "maennchen/zipstream-php": "^2.1.0",
+        "illuminate/support": "^8.49"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\EasyMediaBundle\\": "src/"
+        }
+    }
+}

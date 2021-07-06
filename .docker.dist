@@ -1,0 +1,39 @@
+### Documentation available at https://docs.wodby.com/stacks/php/local
+### Changelog can be found at https://github.com/wodby/docker4php/releases
+### Images tags format explained at https://github.com/wodby/docker4php#images-tags
+
+### PROJECT SETTINGS
+
+PROJECT_NAME=
+
+### Database
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_ROOT_PASSWORD=root
+
+### --- PHP ----
+
+# Linux (uid 1000 gid 1000)
+#PHP_TAG=8.0-dev
+PHP_TAG=7.4-dev
+#PHP_TAG=7.3-dev
+
+### --- NODE ---
+
+NODE_TAG=14-dev
+#NODE_TAG=12-dev
+#NODE_TAG=10-dev
+#NODE_TAG=8-dev
+
+### --- MARIADB ----
+
+#MARIADB_TAG=10.5
+MARIADB_TAG=10.4
+#MARIADB_TAG=10.3
+#MARIADB_TAG=10.2
+
+
+### OTHERS
+APACHE_TAG=2.4

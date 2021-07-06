@@ -1,0 +1,17 @@
+.modal {
+    @apply absolute w-full h-full p-3 pt-0;
+}
+
+.modal-background {
+    @apply absolute top-0 right-0 bottom-0 left-0;
+    background-color: rgba($dark, 0.98);
+}
+
+.modal-content {
+    @apply w-full h-full m-0;
+    max-height: unset;
+}
+
+.modal-close {
+    z-index: 2;
+}
