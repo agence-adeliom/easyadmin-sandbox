@@ -41,7 +41,6 @@ trait Lock
     public function lockItem(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $path = $data["path"];
         $lockedList = array_map(function ($lock){
             return $lock->getPath();
         }, $this->locker->findAll());
@@ -61,7 +60,7 @@ trait Lock
             }
 
             $result[] = [
-                'message' => $this->translator->trans('MediaManager::messages.lock_success', ['attr' => $name]),
+                'message' => $this->translator->trans('lock_success', ['attr' => $name], "EasyMediaBundle"),
             ];
         }
 

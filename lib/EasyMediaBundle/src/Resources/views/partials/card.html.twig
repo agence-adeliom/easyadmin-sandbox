@@ -1,9 +1,14 @@
+{% trans_default_domain 'EasyMediaBundle' %}
+
+{% set ligtMode = (light is defined and light) ? true : false %}
+
 <v-touch class="card"
          :class="{'pdf-prev': selectedFileIs('pdf') || selectedFileIs('text')}"
+         {% if not ligtMode %}
          @swiperight="cardSwipGesture"
          @swipeleft="cardSwipGesture"
          @swipeup="cardSwipGesture"
-         @swipedown="cardSwipGesture">
+         @swipedown="cardSwipGesture"{% endif %}>
 
     <div class="card-image">
         {# pdf / text #}
@@ -48,14 +53,15 @@
 
         {# image #}
         <image-preview v-else
-                       :show-ops="true"
+                       {% if not ligtMode %}:show-ops="true"{% endif %}
                        :trans="trans"
-                       :ops_btn_disable="ops_btn_disable"
+                       {% if not ligtMode %}:ops_btn_disable="ops_btn_disable"
                        :in-movable-list="inMovableList"
                        :rename-item="renameItem"
                        :delete-item="deleteItem"
                        :image-editor-card="imageEditorCard"
-                       :add-to-movable-list="addToMovableList">
+                       :add-to-movable-list="addToMovableList"
+                       :edit-metas-item="editMetasItem"{% endif %}>
             <a :href="selectedFile.path"
                rel="noreferrer noopener"
                target="_blank"
@@ -69,8 +75,30 @@
         {# ops #}
         <div class="level mt-2 mb-2">
             <div class="level-left">
-                {# lock / unlock #}
                 <div class="level-item">
+                    {# name #}
+                    <p class="title">
+                        <span class="link"
+                              {% if not ligtMode %}@click.stop="copyLink(selectedFile.path)"
+                              :title="linkCopied ? trans('copied') : trans('to_cp')"
+                              v-tippy="{arrow: true, hideOnClick: false, followCursor: true}"
+                              @hidden="linkCopied = false"{% endif %}>
+                            {% verbatim %}{{ selectedFile.name }}{% endverbatim %}
+                        </span>
+
+                        {# open url #}
+                        <!--a :href="selectedFile.path"
+                           v-if="selectedFileIs('pdf') || selectedFileIs('text')"
+                           rel="noreferrer noopener"
+                           target="_blank"
+                           title="{{ 'public_url'|trans }}"
+                           v-tippy="{arrow: true}">
+                            <icon name="search" scale="1.1"></icon>
+                        </a-->
+                    </p>
+                </div>
+                {# lock / unlock #}
+                <!--div class="level-item">
                     <span v-if="$refs.lock"
                           class="icon is-large link"
                           :class="IsLocked(selectedFile) ? 'is-danger' : 'is-success'"
@@ -79,10 +107,10 @@
                           @click.stop="$refs.lock.click()">
                         <icon :name="IsLocked(selectedFile) ? 'lock' : 'lock-open'" scale="1.1"></icon>
                     </span>
-                </div>
+                </div-->
 
                 {# visibility #}
-                <div class="level-item">
+                <!--div class="level-item">
                     <span v-if="$refs.visibility"
                           class="icon is-large link"
                           :class="IsVisible(selectedFile) ? 'is-success' : 'is-danger'"
@@ -91,10 +119,10 @@
                           @click.stop="$refs.visibility.click()">
                         <icon :name="IsVisible(selectedFile) ? 'eye' : 'eye-slash'" scale="1.1"></icon>
                     </span>
-                </div>
+                </div-->
             </div>
 
-            <div class="level-right">
+            <div class="level-right hidden sm:flex">
                 {# download #}
                 <div class="level-item">
                     <span class="icon is-large link is-black"
@@ -108,41 +136,47 @@
         </div>
 
 
-        {# name #}
-        <p class="title is-marginless">
-            <span class="link"
-                  @click.stop="copyLink(selectedFile.path)"
-                  :title="linkCopied ? trans('copied') : trans('to_cp')"
-                  v-tippy="{arrow: true, hideOnClick: false, followCursor: true}"
-                  @hidden="linkCopied = false">
-                {% verbatim %}{{ selectedFile.name }}{% endverbatim %}
-            </span>
 
-            {# open url #}
-            <a :href="selectedFile.path"
-               v-if="selectedFileIs('pdf') || selectedFileIs('text')"
-               rel="noreferrer noopener"
-               target="_blank"
-               title="{{ 'public_url'|trans }}"
-               v-tippy="{arrow: true}">
-                <icon name="search" scale="1.1"></icon>
-            </a>
-        </p>
 
-        <p class="subtitle">
-            {# date #}
-            <span>{% verbatim %}{{ selectedFile.last_modified_formated }}{% endverbatim %}</span>
-        </p>
+        <div class="card-details">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="t-key">{{ 'type'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFile.type }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="selectedFile.size > 0">
+                        <td class="t-key">{{ 'size'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ getFileSize(selectedFile.size) }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="(selectedFileIs('image') || selectedFileIs('video')) && dimensions.length">
+                        <td class="t-key">{{ 'dimension'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFileDimensions }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="selectedFile.last_modified_formated">
+                        <td class="t-key">{{ 'last_modified'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFile.last_modified_formated }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="(selectedFileIs('image') || selectedFileIs('video')) && selectedFile.metas.title">
+                        <td class="t-key">{{ 'seo.title'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFile.metas.title }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="(selectedFileIs('image') || selectedFileIs('video')) && selectedFile.metas.alt">
+                        <td class="t-key">{{ 'seo.alt'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFile.metas.alt }}{% endverbatim %}</td>
+                    </tr>
+                    <tr v-if="selectedFile.metas.description">
+                        <td class="t-key">{{ 'seo.description'|trans }}:</td>
+                        <td class="t-val">{% verbatim %}{{ selectedFile.metas.description }}{% endverbatim %}</td>
+                    </tr>
 
-        <p class="card-details">
-            {# dim #}
-            <span class="tag" v-if="(selectedFileIs('image') || selectedFileIs('video')) && dimensions.length">
-                {% verbatim %}{{ selectedFileDimensions }}{% endverbatim %}
-            </span>
-
-            {# size #}
-            <span class="tag" v-if="selectedFile.size > 0">{% verbatim %}{{ getFileSize(selectedFile.size) }}{% endverbatim %}</span>
-        </p>
+                    <tr v-for="(value, name) in selectedFile.metas.extra" :key="name">
+                        <td class="t-key">{% verbatim %}{{ name }}{% endverbatim %}:</td>
+                        <td class="t-val">{% verbatim %}{{ value }}{% endverbatim %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </v-touch>

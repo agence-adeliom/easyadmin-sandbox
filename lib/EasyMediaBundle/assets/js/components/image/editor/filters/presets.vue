@@ -8,7 +8,7 @@
             <div v-for="(chunk, i) in chunkedItems"
                  :key="i"
                  class="col">
-                <button v-for="item in chunk"
+                <button type="button" v-for="item in chunk"
                         :key="item"
                         v-tippy="{arrow: true, theme: 'mm'}"
                         :disabled="processing"

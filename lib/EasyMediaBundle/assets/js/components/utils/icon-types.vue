@@ -45,8 +45,12 @@ export default {
                     icon : 'music'
                 },
                 {
-                    type : 'text',
-                    icon : 'regular/file-alt'
+                  type : 'text',
+                  icon : 'regular/file-alt'
+                },
+                {
+                  type : 'pdf',
+                  icon : 'regular/file-pdf'
                 }
             ]
         }

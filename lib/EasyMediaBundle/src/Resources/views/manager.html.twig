@@ -1,7 +1,10 @@
 {% trans_default_domain 'EasyMediaBundle' %}
 
+{% set isModal = (modal is defined and modal) ? true : false %}
+
+
 {% set options = {
-    'baseUrl' : base_url,
+    'baseUrl' : adeliom_easymedia.base_url,
     'hideFilesExt' : adeliom_easymedia.hide_files_ext,
     'mimeTypes' : adeliom_easymedia.extended_mimes,
     'broadcasting' : adeliom_easymedia.enable_broadcasting,
@@ -119,7 +122,9 @@
     'sharpen' : 'editor.sharpen'|trans,
     'stack_blur' : 'editor.stack_blur'|trans,
     'greyscale' : 'editor.greyscale'|trans,
-    'invert' : 'editor.invert'|trans
+    'invert' : 'editor.invert'|trans,
+    'public' : 'visibility.public'|trans,
+    'private' : 'visibility.private'|trans
 } %}
 
 <media-manager inline-template
@@ -135,23 +140,20 @@
                :user-id="{{ adeliom_easymedia.enable_broadcasting ? app.user.id : 0 }}"
                :upload-panel-img-list="{{ patterns|default(null) ?: '[]' }}">
 
-    <div class="media-manager"
-         :class="[
-            {'__stack-reverse': waitingForUpload},
-        ]">
+    <div class="media-manager" >
 
         {# global search #}
-        <global-search-panel
+        {#<global-search-panel
                 :trans="trans"
                 :file-type-is="fileTypeIs"
                 :add-to-movable-list="addToMovableList"
                 :in-movable-list="inMovableList"
                 :no-scroll="noScroll"
                 :browser-support="browserSupport">
-        </global-search-panel>
+        </global-search-panel>#}
 
         {# usage-intro panel #}
-        <usage-intro-panel :no-scroll="noScroll"></usage-intro-panel>
+{#        <usage-intro-panel :no-scroll="noScroll"></usage-intro-panel>#}
 
         {# top toolbar #}
         <transition name="mm-list" mode="out-in">
@@ -164,23 +166,23 @@
                         <div class="field" :class="{'has-addons': !isBulkSelecting()}">
                             {# upload #}
                             <div class="control" v-if="!isBulkSelecting()">
-                                <button class="button"
+                                <button type="button" class="button"
                                         ref="upload"
                                         :disabled="isLoading"
                                         @click.stop="toggleUploadPanel()"
                                         v-tippy="{arrow: true}"
                                         title="u">
-                                    <span class="icon"><icon name="shopping-basket"></icon></span>
+                                    <span class="icon"><icon name="upload"></icon></span>
                                     <span>{{ 'upload.main'|trans }}</span>
                                 </button>
                             </div>
 
                             {# new folder #}
                             <div class="control">
-                                <button class="button"
+                                <button type="button" class="button"
                                         :disabled="isLoading"
                                         @click.stop="createNewFolder()">
-                                    <span class="icon"><icon name="folder"></icon></span>
+                                    <span class="icon"><icon name="folder-plus"></icon></span>
                                     <span>{{ 'add.folder'|trans }}</span>
                                 </button>
                             </div>
@@ -191,8 +193,8 @@
                     <div class="level-item">
                         <div class="field has-addons">
                             {# move #}
-                            <div class="control">
-                                <button class="button is-link"
+                            <div class="control" v-if="isBulkSelecting() || !(isLoading || !movableItemsCount)">
+                                <button type="button" class="button is-link"
                                         ref="move"
                                         :disabled="isLoading || !movableItemsCount"
                                         v-tippy="{arrow: true}"
@@ -205,18 +207,30 @@
 
                             {# rename #}
                             <div class="control" v-if="!isBulkSelecting()">
-                                <button class="button is-link"
+                                <button type="button" class="button is-link"
                                         ref="rename"
-                                        :disabled="ops_btn_disable"
+                                        :disabled="ops_btn_disable || selectedFileIs('folder')"
                                         @click.stop="renameItem()">
-                                    <span class="icon"><icon name="terminal"></icon></span>
+                                    <span class="icon"><icon name="i-cursor"></icon></span>
                                     <span>{{ 'rename.main'|trans }}</span>
                                 </button>
                             </div>
 
+                            {# editMetas #}
+                            <div class="control" v-if="!isBulkSelecting() && !(ops_btn_disable || !fileTypeIs(selectedFile, 'image'))">
+                                <button type="button" class="button is-link"
+                                        ref="editMetas"
+                                        :disabled="ops_btn_disable || !fileTypeIs(selectedFile, 'image')"
+                                        @click.stop="editMetasItem()">
+                                    <span class="icon"><icon name="hashtag"></icon></span>
+                                    <span>{{ 'edit_metas.main'|trans }}</span>
+                                </button>
+                            </div>
+
+
                             {# editor #}
                             <div class="control" v-show="!isBulkSelecting()">
-                                <button class="button is-link"
+                                <button type="button" class="button is-link"
                                         ref="editor"
                                         :disabled="editor_btn_disable"
                                         v-tippy="{arrow: true}"
@@ -229,7 +243,7 @@
 
                             {# delete #}
                             <div class="control">
-                                <button class="button is-link"
+                                <button type="button" class="button is-link"
                                         ref="delete"
                                         :disabled="ops_btn_disable"
                                         v-tippy="{arrow: true}"
@@ -252,7 +266,7 @@
                                          :disabled="isLoading"
                                          tag="button"
                                          v-tippy="{arrow: true}"
-                                         title="(R) efresh"
+                                         title="{{ 'action.refresh'|trans }} (r)"
                                          @tap="refresh()"
                                          @hold="clearAll()">
                                     <span class="icon">
@@ -263,11 +277,11 @@
 
                             {# lock #}
                             <div class="control">
-                                <button class="button is-warning"
+                                <button type="button" class="button is-warning"
                                         ref="lock"
                                         :disabled="lock_btn_disable"
                                         v-tippy="{arrow: true}"
-                                        title="(L) ock"
+                                        title="{{ 'action.lock'|trans }} (l)"
                                         @click.stop="lockFileForm()">
                                     <span class="icon">
                                         <icon :name="IsLocked(selectedFile) ? 'lock' : 'lock-open'"></icon>
@@ -277,12 +291,12 @@
 
                             {# visibility #}
                             <div class="control">
-                                <button class="button"
+                                <button type="button" class="button"
                                         :class="IsVisible(selectedFile) ? 'is-light' : 'is-danger'"
                                         ref="visibility"
                                         :disabled="vis_btn_disable"
                                         v-tippy="{arrow: true}"
-                                        title="(V) isibility"
+                                        title="{{ 'action.visibility'|trans }} (v)"
                                         @click.stop="FileVisibilityForm()">
                                     <span class="icon">
                                         <icon :name="IsVisible(selectedFile) ? 'eye' : 'eye-slash'"></icon>
@@ -302,7 +316,7 @@
                         <div class="field" :class="{'has-addons' : isBulkSelecting()}">
                             {# bulk select all #}
                             <div class="control">
-                                <button @click.stop="blkSlctAll()"
+                                <button type="button" @click.stop="blkSlctAll()"
                                         ref="bulkSelectAll"
                                         class="button"
                                         :class="{'is-warning' : bulkSelectAll}"
@@ -323,7 +337,7 @@
 
                             {# bulk select #}
                             <div class="control">
-                                <button @click.stop="blkSlct()"
+                                <button type="button" @click.stop="blkSlct()"
                                         ref="bulkSelect"
                                         class="button"
                                         :class="{'is-danger' : bulkSelect}"
@@ -365,14 +379,14 @@
                                 <div class="control">
                                     <div class="field has-addons">
                                         {# global #}
-                                        <p class="control" v-if="!restrictModeIsOn">
+                                        {#<p class="control" v-if="!restrictModeIsOn">
                                             <global-search-btn
                                                     route="{{ path('media.global_search') }}"
                                                     :is-loading="isLoading"
                                                     :trans="trans"
                                                     :show-notif="showNotif">
                                             </global-search-btn>
-                                        </p>
+                                        </p>#}
 
                                         {# local #}
                                         <p class="control has-icons-left">
@@ -389,7 +403,7 @@
 
                                         {# clear #}
                                         <p class="control">
-                                            <button class="button is-black" :disabled="!searchFor"
+                                            <button type="button" class="button is-black" :disabled="!searchFor"
                                                     v-tippy="{arrow: true}"
                                                     title="{{ 'clear'|trans({'attr' : 'search.main'|trans }) }}"
                                                     @click.stop="resetInput('searchFor')">
@@ -411,7 +425,7 @@
         {# dropzone #}
         <section>
             <div class="media-manager__dz" :class="{'__dz-active': uploadArea}">
-                <form id="new-upload" :style="uploadPanelImg">
+                <div id="new-upload" :style="uploadPanelImg">
                     <input type="hidden" name="upload_path" :value="files.path">
                     <input type="hidden" name="random_names" :value="useRandomNamesForUpload">
 
@@ -437,7 +451,7 @@
                             </icon>
                         </span>
                     </div>
-                </form>
+                </div>
             </div>
 
             <transition name="mm-list">
@@ -446,15 +460,100 @@
                 </div>
             </transition>
         </section>
-
         {# ====================================================================== #}
 
         {# mobile breadCrumb #}
-        {% include '@EasyMedia/partials/mobile-nav.html.twig' %}
+{#        {% include '@EasyMedia/partials/mobile-nav.html.twig' %}#}
 
         {# ====================================================================== #}
 
         <div class="media-manager__stack">
+            {# path toolbar #}
+            <section class="__stack-breadcrumb level">
+                <div class="level-left">
+                    {# directories breadCrumb #}
+                    <div class="level-item">
+                        <nav class="breadcrumb has-arrow-separator is-hidden-touch">
+                            <transition-group tag="ul" name="mm-list">
+                                <li key="library-bc">
+                                    <a v-if="pathBarDirsList.length > 0 && !(isBulkSelecting() || isLoading)"
+                                       class="p-l-0 level"
+                                       v-tippy="{arrow: true}"
+                                       title="{{ 'backspace'|trans }}"
+                                       @click.stop="goToFolder(0)">
+                                        <span class="icon level-item is-marginless"><icon name="map"></icon></span>
+                                        <span class="level-item m-l-5 is-marginless">{{ 'library'|trans }}</span>
+                                    </a>
+                                    <p v-else class="p-l-0 level">
+                                        <span class="icon level-item is-marginless"><icon name="regular/map"></icon></span>
+                                        <span class="level-item m-l-5 is-marginless">{{ 'library'|trans }}</span>
+                                    </p>
+                                </li>
+
+                                <li v-for="(folder, index) in pathBarDirsList" :key="`${index}-${folder}`">
+                                    <p v-if="isLastItemByIndex(index, pathBarDirsList) || isBulkSelecting() || isLoading"
+                                       class="level">
+                                        <span class="icon level-item is-marginless"><icon name="regular/folder-open"></icon></span>
+                                        <span class="level-item m-l-5 is-marginless">{% verbatim %}{{ folder }}{% endverbatim %}</span>
+                                    </p>
+                                    <a v-else
+                                       v-tippy="{arrow: true}"
+                                       title="{{ 'backspace'|trans }}"
+                                       class="level"
+                                       @click.stop="pathBarDirsList.length > 1 ? goToFolder(index+1) : false">
+                                        <span class="icon level-item is-marginless"><icon name="folder"></icon></span>
+                                        <span class="level-item m-l-5 is-marginless">{% verbatim %}{{ folder }}{% endverbatim %}</span>
+                                    </a>
+                                </li>
+                            </transition-group>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="level-right">
+                    {# upload preview info #}
+                    <div class="level-item" v-if="waitingForUpload">
+                        <nav class="breadcrumb">
+                            <ul>
+                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewList.length }}{% endverbatim %} File's</p></li>
+                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewListSize }}{% endverbatim %}</p></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    {# toggle sidebar #}
+                    <div class="level-item" v-show="!isLoading && !waitingForUpload">
+                        <div class="is-hidden-touch"
+                             @click.stop="toggleInfoSidebar(), saveUserPref()"
+                             v-tippy="{arrow: true}"
+                             title="t"
+                             v-if="allItemsCount">
+                            <transition :name="infoSidebar ? 'mm-info-out' : 'mm-info-in'" mode="out-in">
+                                <div :key="infoSidebar ? 1 : 2" class="__stack-sidebar-toggle has-text-link">
+                                    <template v-if="infoSidebar">
+                                        <span>{{ 'close'|trans }}</span>
+                                        <span class="icon"><icon name="angle-double-right"></icon></span>
+                                    </template>
+                                    <template v-else>
+                                        <span>{{ 'open'|trans }}</span>
+                                        <span class="icon"><icon name="angle-double-left"></icon></span>
+                                    </template>
+                                </div>
+                            </transition>
+                        </div>
+
+                        {# show/hide toolbar #}
+                        <div class="block sm:hidden">
+                            <button type="button" class="button is-link __stack-left-toolbarToggle" @click.stop="toolBar = !toolBar">
+                                <span class="icon"><icon :name="toolBar ? 'times' : 'bars'"></icon></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {# ====================================================================== #}
+
             <section class="__stack-container">
 
                 {# upload preview #}
@@ -462,7 +561,7 @@
                     {# ops #}
                     <div class="dz-preview-ops btn-animate extra-func-btns">
                         {# add more files #}
-                        <button v-tippy="{arrow: true, placement: 'left'}"
+                        <button type="button" v-tippy="{arrow: true, placement: 'left'}"
                                 title="{{ 'add.more'|trans({'attr' : null}) }} (u)"
                                 @click.stop="toggleUploadPanel()"
                                 class="btn-plain">
@@ -474,7 +573,7 @@
                             </span>
                         </button>
                         {# upload #}
-                        <button v-tippy="{arrow: true, placement: 'left'}"
+                        <button type="button" v-tippy="{arrow: true, placement: 'left'}"
                                 title="{{ 'upload.main'|trans }} (Enter)"
                                 ref="process-dropzone"
                                 class="btn-plain">
@@ -486,7 +585,7 @@
                             </span>
                         </button>
                         {# reset #}
-                        <button v-tippy="{arrow: true, placement: 'left'}"
+                        <button type="button" v-tippy="{arrow: true, placement: 'left'}"
                                 title="{{ 'clear'|trans({'attr' : null}) }} (Esc)"
                                 ref="clear-dropzone"
                                 class="btn-plain">
@@ -557,15 +656,24 @@
                     <usage-intro-btn v-show="!isLoading && !waitingForUpload"></usage-intro-btn>
 
                     {# movable list #}
-                    <v-touch v-if="allItemsCount && !isLoading && !waitingForUpload"
+                    <v-touch v-if="allItemsCount && !isLoading && !waitingForUpload && !inMovableList()"
                              class="movable-list"
                              v-tippy="{arrow: true, hideOnClick: false}"
-                             :title="inMovableList() ? '{{ 'add.added'|trans }}' : '{{ 'add.list'|trans }} (c / x)'"
-                             @tap="addToMovableList()"
-                             @dbltap="showMovableList()"
+                             :title="'{{ 'add.list'|trans }} (c / x)'"
+                             @tap="addToMovableList()">
+                        <span class="icon is-large">
+                            <icon name="plus" scale="1.2"></icon>
+                        </span>
+                    </v-touch>
+
+                    <v-touch v-if="allItemsCount && movableItemsCount && !isLoading && !waitingForUpload"
+                             class="movable-list mt-4"
+                             v-tippy="{arrow: true, hideOnClick: false}"
+                             :title="'{{ 'show.list'|trans }}'"
+                             @tap="showMovableList()"
                              @hold="clearMovableList()">
                         <span class="icon is-large">
-                            <icon name="shopping-cart" scale="1.2"></icon>
+                            <icon name="list-ul" scale="1.2"></icon>
                         </span>
                         <span class="counter">{% verbatim %}{{ movableItemsCount || null }}{% endverbatim %}</span>
                     </v-touch>
@@ -607,7 +715,7 @@
                                      @dbltap="pressGesture($event, file, index)">
 
                                 {# lock file #}
-                                <button v-if="$refs.lock"
+                                <button type="button" v-if="$refs.lock"
                                         class="__box-lock-icon icon"
                                         :disabled="isLoading"
                                         :class="IsLocked(file) ? 'is-danger' : 'is-success'"
@@ -653,7 +761,7 @@
                                         <template v-if="fileTypeIs(file, 'folder')">
                                             <h4>{% verbatim %}{{ file.name }}{% endverbatim %}</h4>
                                             <small v-if="config.gfi">
-                                                <span>{% verbatim %}{{ file.count }}{% endverbatim %} {{ 'items'|trans }}</span>
+                                                <span>{% verbatim %}{{ file.count }}{% endverbatim %} {{ 'items'|trans|lower }}</span>
                                                 <span v-if="file.size > 0" class="__info-file-size">"{% verbatim %}{{ getFileSize(file.size) }}{% endverbatim %}"</span>
                                             </small>
                                         </template>
@@ -816,7 +924,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <table>
+                                <table v-if="!selectedFileIs('folder')">
                                     <tbody>
                                     <tr>
                                         <td class="t-key">{{ 'type'|trans }}:</td>
@@ -843,21 +951,20 @@
                                         </tr>
                                         </tbody>
                                     </table>
-
                                     <div class="__sidebar-zip" v-show="!isBulkSelecting()">
                                         <table>
                                             <tbody>
                                             <tr>
                                                 <td class="t-key">{{ 'download.folder'|trans }}:</td>
                                                 <td class="t-val">
-                                                    <form action="{{ path('media.folder_download') }}" method="post" @submit.prevent="ZipDownload($event)">
+                                                    <div action="{{ path('media.folder_download') }}" method="post" @submit.prevent="ZipDownload($event)">
                                                         <input type="hidden" name="token" value="{{ csrf_token('folder_download') }}"/>
                                                         <input type="hidden" name="folders" :value="files.path">
                                                         <input type="hidden" name="name" :value="selectedFile.name">
                                                         <button type="submit" class="btn-plain zip" :disabled="config.gfi && selectedFile.count == 0">
                                                             <span class="icon"><icon name="archive" scale="1.2"></icon></span>
                                                         </button>
-                                                    </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -875,11 +982,44 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <table v-if="(selectedFileIs('image') || selectedFileIs('video')) && selectedFile.metas.title" >
+                                        <tbody>
+                                        <tr>
+                                            <td class="t-key">{{ 'seo.title'|trans }}:</td>
+                                            <td class="t-val">{% verbatim %}{{ selectedFile.metas.title }}{% endverbatim %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table v-if="(selectedFileIs('image') || selectedFileIs('video')) && selectedFile.metas.alt" >
+                                        <tbody>
+                                        <tr>
+                                            <td class="t-key">{{ 'seo.alt'|trans }}:</td>
+                                            <td class="t-val">{% verbatim %}{{ selectedFile.metas.alt }}{% endverbatim %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table v-if="selectedFile.metas.description" >
+                                        <tbody>
+                                        <tr>
+                                            <td class="t-key">{{ 'seo.description'|trans }}:</td>
+                                            <td class="t-val">{% verbatim %}{{ selectedFile.metas.description }}{% endverbatim %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table v-for="(value, name) in selectedFile.metas.extra" :key="name">
+                                        <tbody>
+                                        <tr>
+                                            <td class="t-key">{% verbatim %}{{ name }}{% endverbatim %}:</td>
+                                            <td class="t-val">{% verbatim %}{{ value }}{% endverbatim %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
                                     <table>
                                         <tbody>
                                         <tr>
                                             <td class="t-key">{{ 'visibility.main'|trans }}:</td>
-                                            <td class="t-val">{% verbatim %}{{ selectedFile.visibility }}{% endverbatim %}</td>
+                                            <td class="t-val">{% verbatim %}{{ trans(selectedFile.visibility) }}{% endverbatim %}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -899,13 +1039,13 @@
                                                 <td class="t-key">{{ 'download.file'|trans }}:</td>
                                                 {# normal #}
                                                 <td class="t-val">
-                                                    <button class="btn-plain" @click.prevent="saveFile(selectedFile)">
+                                                    <button type="button" class="btn-plain" @click.prevent="saveFile(selectedFile)">
                                                         <span class="icon"><icon name="download" scale="1.2"></icon></span>
                                                     </button>
                                                 </td>
                                                 {# zip #}
                                                 <td class="t-val">
-                                                    <form action="{{ path('media.files_download') }}"
+                                                    <div action="{{ path('media.files_download') }}"
                                                           method="post"
                                                           @submit.prevent="ZipDownload($event)"
                                                           v-show="isBulkSelecting()">
@@ -915,7 +1055,7 @@
                                                         <button type="submit" class="btn-plain zip" :disabled="hasFolder()">
                                                             <span class="icon"><icon name="archive" scale="1.2"></icon></span>
                                                         </button>
-                                                    </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -978,91 +1118,7 @@
                 </v-touch>
             </section>
 
-            {# ====================================================================== #}
 
-            {# path toolbar #}
-            <section class="__stack-breadcrumb level is-mobile">
-                <div class="level-left">
-                    {# directories breadCrumb #}
-                    <div class="level-item">
-                        <nav class="breadcrumb has-arrow-separator is-hidden-touch">
-                            <transition-group tag="ul" name="mm-list">
-                                <li key="library-bc">
-                                    <a v-if="pathBarDirsList.length > 0 && !(isBulkSelecting() || isLoading)"
-                                       class="p-l-0 level"
-                                       v-tippy="{arrow: true}"
-                                       title="{{ 'backspace'|trans }}"
-                                       @click.stop="goToFolder(0)">
-                                        <span class="icon level-item is-marginless"><icon name="map"></icon></span>
-                                        <span class="level-item m-l-5 is-marginless">{{ 'library'|trans }}</span>
-                                    </a>
-                                    <p v-else class="p-l-0 level">
-                                        <span class="icon level-item is-marginless"><icon name="regular/map"></icon></span>
-                                        <span class="level-item m-l-5 is-marginless">{{ 'library'|trans }}</span>
-                                    </p>
-                                </li>
-
-                                <li v-for="(folder, index) in pathBarDirsList" :key="`${index}-${folder}`">
-                                    <p v-if="isLastItemByIndex(index, pathBarDirsList) || isBulkSelecting() || isLoading"
-                                       class="level">
-                                        <span class="icon level-item is-marginless"><icon name="regular/folder-open"></icon></span>
-                                        <span class="level-item m-l-5 is-marginless">{% verbatim %}{{ folder }}{% endverbatim %}</span>
-                                    </p>
-                                    <a v-else
-                                       v-tippy="{arrow: true}"
-                                       title="{{ 'backspace'|trans }}"
-                                       class="level"
-                                       @click.stop="pathBarDirsList.length > 1 ? goToFolder(index+1) : false">
-                                        <span class="icon level-item is-marginless"><icon name="folder"></icon></span>
-                                        <span class="level-item m-l-5 is-marginless">{% verbatim %}{{ folder }}{% endverbatim %}</span>
-                                    </a>
-                                </li>
-                            </transition-group>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="level-right">
-                    {# upload preview info #}
-                    <div class="level-item" v-if="waitingForUpload">
-                        <nav class="breadcrumb">
-                            <ul>
-                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewList.length }}{% endverbatim %} File's</p></li>
-                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewListSize }}{% endverbatim %}</p></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    {# toggle sidebar #}
-                    <div class="level-item" v-show="!isLoading && !waitingForUpload">
-                        <div class="is-hidden-touch"
-                             @click.stop="toggleInfoSidebar(), saveUserPref()"
-                             v-tippy="{arrow: true}"
-                             title="t"
-                             v-if="allItemsCount">
-                            <transition :name="infoSidebar ? 'mm-info-out' : 'mm-info-in'" mode="out-in">
-                                <div :key="infoSidebar ? 1 : 2" class="__stack-sidebar-toggle has-text-link">
-                                    <template v-if="infoSidebar">
-                                        <span>{{ 'close'|trans }}</span>
-                                        <span class="icon"><icon name="angle-double-right"></icon></span>
-                                    </template>
-                                    <template v-else>
-                                        <span>{{ 'open'|trans }}</span>
-                                        <span class="icon"><icon name="angle-double-left"></icon></span>
-                                    </template>
-                                </div>
-                            </transition>
-                        </div>
-
-                        {# show/hide toolbar #}
-                        <div class="is-hidden-desktop">
-                            <button class="button is-link __stack-left-toolbarToggle" @click.stop="toolBar = !toolBar">
-                                <span class="icon"><icon :name="toolBar ? 'times' : 'bars'"></icon></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
 
         {# ====================================================================== #}

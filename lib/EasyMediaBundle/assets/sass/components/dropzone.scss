@@ -1,0 +1,130 @@
+#new-upload {
+  @apply bg-center bg-repeat rounded cursor-pointer overflow-hidden relative bg-gray-900 transition-all duration-200;
+
+  &::before {
+    content: '';
+    background-image: var(--gradient);
+    @apply absolute rounded-full left-1/2 top-1/2 opacity-90 transition-all duration-200 w-80 h-80 transform -translate-x-1/2 -translate-y-1/2;
+  }
+
+  &:hover {
+    @apply shadow-lg;
+
+    &::before {
+      @apply shadow-lg;
+    }
+  }
+
+  .dz-message {
+    @apply font-normal m-0 relative text-center text-white p-8;
+  }
+
+  .form-switcher,
+  .save_link {
+    @apply absolute z-1;
+  }
+
+  .form-switcher {
+    @apply absolute bottom-2 left-2;
+  }
+
+  .save_link {
+    @apply bottom-0 right-2 filter drop-shadow;
+
+    .circle,
+    .anchor {
+      @apply transition-all duration-200;
+    }
+
+    .circle {
+      @apply text-theme;
+    }
+
+    .anchor {
+      @apply text-theme-50
+    }
+
+    &:hover {
+      .anchor {
+        @apply text-theme;
+      }
+
+      .circle {
+        @apply text-theme-50
+      }
+    }
+  }
+}
+
+#uploadProgress {
+  @apply mx-0 my-4;
+}
+
+#uploadPreview {
+  @apply hidden;
+
+  &.show {
+    @apply flex h-full left-0 overflow-hidden absolute top-0 w-full bg-theme;
+    z-index: 12;
+
+    & ~ .__stack-files,
+    & ~ .__stack-sidebar {
+      @apply filter blur opacity-25
+    }
+  }
+
+  .dz-preview-ops {
+    @apply flex flex-col;
+  }
+
+  .icon-btn {
+    @apply text-black
+  }
+
+  .btn-animate {
+    button {
+      @apply opacity-70 text-white transition-all duration-200 ease-out;
+
+      &:hover {
+        @apply opacity-100 filter drop-shadow transform -translate-y-1;
+      }
+    }
+  }
+
+  .sidebar-container {
+    @apply h-full overflow-y-scroll border-2 border-dashed border-gray-400;
+
+    max-width: 20%;
+    min-width: 20%;
+
+    .sidebar {
+      @apply flex flex-wrap;
+    }
+  }
+}
+
+
+
+.dz-success-mark,
+.dz-error-message,
+.dz-error-mark,
+.dz-details {
+  @apply hidden;
+}
+
+.dz-preview {
+  @apply flex p-4 relative flex-initial flex-shrink-0;
+
+  .dz-image img {
+    @apply rounded-lg cursor-pointer block transition-all duration-200;
+  }
+
+  .dz-remove {
+    @apply block absolute bottom-4 right-4;
+  }
+
+  .is-previewing {
+    @apply shadow-xl;
+    transform: translateY(-10px);
+  }
+}

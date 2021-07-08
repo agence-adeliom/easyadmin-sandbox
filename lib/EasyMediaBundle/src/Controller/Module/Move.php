@@ -3,7 +3,6 @@ namespace Adeliom\EasyMediaBundle\Controller\Module;
 
 
 use Adeliom\EasyMediaBundle\Event\EasyMediaFileMoved;
-use Adeliom\EasyMediaBundle\Event\EasyMediaFileRenamed;
 use Illuminate\Support\Str;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToCopyFile;
@@ -44,7 +43,7 @@ trait Move
             try {
                 if ($file_type == 'folder' && Str::startsWith($destination, "/$old_path")) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.move_into_self')
+                        $this->translator->trans('error.move_into_self', [] , "EasyMediaBundle")
                     );
                 }
 
@@ -58,7 +57,7 @@ trait Move
                                 $result[] = array_merge($defaults, ['success' => true]);
                             }catch (FilesystemException | UnableToCopyFile $exception){
                                 throw new \Exception(
-                                    $this->translator->trans('MediaManager::messages.error.moving')
+                                    $this->translator->trans('error.moving', [] , "EasyMediaBundle")
                                 );
                             }
                         }
@@ -72,7 +71,7 @@ trait Move
                                 $result[] = array_merge($defaults, ['success' => true]);
                             }catch (FilesystemException | UnableToCopyFile $exception){
                                 throw new \Exception(
-                                    $this->translator->trans('MediaManager::messages.error.moving')
+                                    $this->translator->trans('error.moving', [] , "EasyMediaBundle")
                                 );
                             }
                         }
@@ -92,13 +91,13 @@ trait Move
 
                         }catch (FilesystemException | UnableToMoveFile $exception){
                             throw new \Exception(
-                                $this->translator->trans('MediaManager::messages.error.moving')
+                                $this->translator->trans('error.moving', [] , "EasyMediaBundle")
                             );
                         }
                     }
                 } else {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.already_exists')
+                        $this->translator->trans('error.already_exists', [] , "EasyMediaBundle")
                     );
                 }
             } catch (\Exception $e) {

@@ -3,7 +3,7 @@
          :class="{'is-active' : show}"
          @click.stop="togglePanel()">
         <div class="dropdown-trigger">
-            <button class="button"
+            <button type="button" class="button"
                     :disabled="disabled"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button v-for="item in controlsList"
+        <button type="button" v-for="item in controlsList"
                 :key="item.op"
                 v-tippy="{arrow: true, theme: 'mm'}"
                 :class="{'is-active': item.mode ? dragModeIs(item.mode) : false}"

@@ -3,7 +3,6 @@ namespace Adeliom\EasyMediaBundle\Controller\Module;
 
 
 use League\Flysystem\StorageAttributes;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use ZipStream\Option\Archive;
@@ -17,7 +16,7 @@ trait Download
      *
      * @param Request $request [description]
      *
-     * @return [type] [description]
+     * @return StreamedResponse [type] [description]
      */
     public function downloadFolder(Request $request)
     {
@@ -44,7 +43,7 @@ trait Download
      *
      * @param Request $request [description]
      *
-     * @return [type] [description]
+     * @return StreamedResponse [type] [description]
      */
     public function downloadFiles(Request $request)
     {
@@ -62,7 +61,7 @@ trait Download
      *
      * @param mixed $name
      * @param mixed $list
-     * @param mixed $type
+     * @return StreamedResponse
      */
     protected function zipAndDownload($name, $list)
     {
@@ -83,7 +82,6 @@ trait Download
                     $progress += $counter;
 
                     $zip->addFileFromStream($name, $streamRead);
-                } else {
                 }
             }
 
@@ -112,8 +110,6 @@ trait Download
                     $progress += $counter;
 
                     $zip->addFileFromStream($full_name, $streamRead);
-                } else {
-
                 }
             }
 

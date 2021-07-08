@@ -19,7 +19,6 @@ trait Visibility
     public function changeItemVisibility(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $path = $data["path"];
         $result      = [];
         $toBroadCast = [];
 
@@ -34,7 +33,7 @@ trait Visibility
                     'success'    => true,
                     'name'       => $name,
                     'visibility' => $type,
-                    'message'    => $this->translator->trans('MediaManager::messages.visibility.success', ['attr' => $name]),
+                    'message'    => $this->translator->trans('visibility.success', ['attr' => $name], "EasyMediaBundle"),
                 ];
 
                 $toBroadCast[] = [
@@ -44,7 +43,7 @@ trait Visibility
             } catch (FilesystemException | UnableToSetVisibility $exception) {
                 $result[] = [
                     'success' => false,
-                    'message' => $this->translator->trans('MediaManager::messages.visibility.error', ['attr' => $name]),
+                    'message' => $this->translator->trans('visibility.error', ['attr' => $name], "EasyMediaBundle"),
                 ];
             }
         }

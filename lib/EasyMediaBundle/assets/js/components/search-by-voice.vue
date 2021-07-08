@@ -1,5 +1,5 @@
 <template>
-    <button v-if="isSupported"
+    <button type="button" v-if="isSupported"
             v-tippy="{arrow: true}"
             class="button"
             :title="run ? trans('voice_stop') : trans('voice_start')"

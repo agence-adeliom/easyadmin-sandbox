@@ -43,24 +43,25 @@ class EasyMediaMetaService
      */
     public function saveMetas(string $path, array $metas) : array
     {
-        $previousMetas = $this->getMetas($path);
+
         $newMetas = [];
         foreach ($metas as $key => $value){
-
             /** @var BaseEasyMediaMetas $meta */
             if($key == "dimensions"){
                 $value = json_encode($value);
-                $meta = $this->setMeta($key, $value);
+                $meta = $this->setMeta($key, $value, $this->getMeta($path, $key));
                 $meta->setPath($path);
                 $newMetas[] = $meta;
             }elseif($key == "extra"){
-                foreach ($value as $extra){
-                    $meta = $this->setMeta($extra["name"], $extra["data"]);
-                    $meta->setPath($path);
-                    $newMetas[] = $meta;
+                if (!empty($value)){
+                    foreach ($value as $extra){
+                        $meta = $this->setMeta($extra["name"], $extra["data"], $this->getMeta($path, $key));
+                        $meta->setPath($path);
+                        $newMetas[] = $meta;
+                    }
                 }
             }else{
-                $meta = $this->setMeta($key, $value);
+                $meta = $this->setMeta($key, $value, $this->getMeta($path, $key));
                 $meta->setPath($path);
                 $newMetas[] = $meta;
             }
@@ -96,6 +97,8 @@ class EasyMediaMetaService
         if(!$instance){
             $meta = new $this->metaEntity();
             $meta->setMetaKey($key);
+        }else{
+            $meta = $instance;
         }
         $meta->setMetaValue($value);
         return $meta;

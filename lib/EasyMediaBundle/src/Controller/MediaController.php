@@ -7,6 +7,7 @@ use Adeliom\EasyMediaBundle\Controller\Module\Download;
 use Adeliom\EasyMediaBundle\Controller\Module\GetContent;
 use Adeliom\EasyMediaBundle\Controller\Module\GlobalSearch;
 use Adeliom\EasyMediaBundle\Controller\Module\Lock;
+use Adeliom\EasyMediaBundle\Controller\Module\Metas;
 use Adeliom\EasyMediaBundle\Controller\Module\Move;
 use Adeliom\EasyMediaBundle\Controller\Module\NewFolder;
 use Adeliom\EasyMediaBundle\Controller\Module\Rename;
@@ -33,6 +34,7 @@ class MediaController extends AbstractController
         Lock,
         Move,
         Rename,
+        Metas,
         Upload,
         NewFolder,
         Visibility,
@@ -103,10 +105,6 @@ class MediaController extends AbstractController
     public function index()
     {
         $datas = [];
-        $datas["base_url"] = preg_replace('/\/+$/', '/', $this->rootPath);
         return $this->render("@EasyMedia/manager_view.html.twig", $datas);
-        dump($this->filesystem->listContents("/testF")->toArray());
-        dump($this);exit;
-        return null;
     }
 }

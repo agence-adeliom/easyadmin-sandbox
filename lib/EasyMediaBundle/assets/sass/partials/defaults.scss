@@ -22,19 +22,44 @@ img {
     transform: translate3d(0, 0, 0);
 }
 
-.title {
-    color: #363636;
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.125;
+.modal-close,
+.modal .delete,
+.__box-data .delete{
+    @apply select-none cursor-pointer pointer-events-auto inline-block flex-grow-0 flex-shrink-0 h-5 outline-none relative align-top w-5;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(10,10,10,.2);
+    border: none;
+    border-radius: 290486px;
+    font-size: 0;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    &:before,
+    &:after{
+        @apply bg-white block absolute;
+        content: "";
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%) rotate( 45deg );
+        transform-origin: center center;
+    }
+    &:before{
+        height: 2px;
+        width: 50%;
+    }
+    &:after{
+        height: 50%;
+        width: 2px;
+    }
 }
 
-.subtitle{
-    color: #4a4a4a;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.25;
-}
+
 
 .subtitle, .title {
     word-break: break-word;
@@ -57,7 +82,7 @@ img {
 
         &-left,
         &-right{
-            @apply flex mb-3 w-full justify-between;
+            /*w-full*/
         }
 
         &-left + &-right{
@@ -89,7 +114,7 @@ img {
     @apply max-w-full w-full;
 }
 
-.button, .input{
+.button, .input, .textarea{
     @apply inline-flex appearance-none rounded-md text-base align-top px-4 py-2 border border-gray-300;
 }
 
@@ -163,6 +188,15 @@ img {
     @apply items-center flex gap-x-4 w-full;
     &-content{
         flex-grow: 1;
+        .title {
+            color: #363636;
+            @apply text-lg font-bold;
+        }
+
+        .subtitle{
+            color: #4a4a4a;
+            @apply text-base font-normal;
+        }
     }
 }
 
@@ -226,41 +260,6 @@ img {
     &.is-active {
         @apply flex;
     }
-    &-close,
-    .delete{
-        @apply select-none cursor-pointer pointer-events-auto inline-block flex-grow-0 flex-shrink-0 h-5 outline-none relative align-top w-5;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        background-color: rgba(10,10,10,.2);
-        border: none;
-        border-radius: 290486px;
-        font-size: 0;
-        max-height: 20px;
-        max-width: 20px;
-        min-height: 20px;
-        min-width: 20px;
-        &:before,
-        &:after{
-            @apply bg-white block absolute;
-            content: "";
-            left: 50%;
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%) rotate( 45deg );
-            transform-origin: center center;
-        }
-        &:before{
-            height: 2px;
-            width: 50%;
-        }
-        &:after{
-            height: 50%;
-            width: 2px;
-        }
-    }
     &-close{
         @apply h-10 fixed w-10;
         right: 20px;
@@ -316,3 +315,6 @@ img {
         @apply hidden #{!important};
     }
 }
+
+
+

@@ -4,14 +4,11 @@
          class="modal mm-animated fadeIn is-active">
         <div class="modal-background"/>
         <div class="modal-content">
-            <div ref="search-input"
-                 :class="{'move': firstRun}"
-                 class="search-input">
+            <div ref="search-input" :class="{'move': firstRun}" class="search-input">
                 <section>
                     <div class="input-wrapper">
                         <input ref="search"
                                v-model="search"
-                               v-autowidth
                                :placeholder="trans('find')"
                                autofocus>
                     </div>
@@ -99,8 +96,7 @@
                 </li>
             </transition-group>
         </div>
-        <button class="modal-close is-large"
-                @click.stop="closePanel()"/>
+        <button type="button" class="modal-close is-large" @click.stop="closePanel()"/>
     </div>
 </template>
 
@@ -110,6 +106,8 @@
 import debounce          from 'lodash/debounce'
 import VueInputAutowidth from 'vue-input-autowidth'
 import panels            from '../../mixins/panels'
+import _       from 'lodash'
+
 
 export default {
     components: {
@@ -141,8 +139,7 @@ export default {
     computed: {
         fuseLib() {
             return new Fuse(this.filesIndex, {
-                keys      : ['name'],
-                threshold : 0.4
+                keys      : ['name']
             })
         },
         listCount() {
@@ -165,7 +162,6 @@ export default {
 
             EventHub.listen('global-search-deleted', (path) => {
                 let list = this.filterdFilesList
-
                 return list.some((e, i) => {
                     if (e.path == path) {
                         list.splice(i, 1)
@@ -197,9 +193,16 @@ export default {
             let search = this.search
 
             if (search) {
-                this.filterdFilesList = this.fuseLib.search(search)
 
-                return this.noData = this.listCount ? false : true
+                this.filterdFilesList = _.filter(this.filesIndex, _.flow(
+                    _.identity,
+                    _.values,
+                    _.join,
+                    _.toLower,
+                    _.partialRight(_.includes, search)
+                ));
+
+              return this.noData = this.listCount ? false : true
             }
 
             this.filterdFilesList = []

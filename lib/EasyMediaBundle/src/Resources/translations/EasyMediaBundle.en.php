@@ -16,6 +16,9 @@ return [
         'more'       => 'Add More Files',
         'list'       => 'Add To List',
     ],
+    'show' => [
+        'list'       => 'Open List',
+    ],
     'options'             => 'Options',
     'ajax_error'          => 'Oh NO! Something Went Wrong',
     'application'         => 'Application',
@@ -31,7 +34,7 @@ return [
         'genre'   => 'Genre',
     ],
     'cancel' => 'Cancel',
-    'clear'  => 'Clear %attr%',
+    'clear'  => 'Clear attr',
     'close'  => 'Close',
     'copy'   => [
         'copied'      => 'Copied',
@@ -64,7 +67,6 @@ return [
     'destination_folder' => 'Destination Folder',
     'dimension'          => 'Dimensions',
     'description'        => 'Description',
-    'focals'             => 'Focal Points',
     'download'           => [
         'downloaded' => 'Downloaded',
         'file'       => 'Download File',
@@ -113,7 +115,7 @@ return [
         'cant_upload'    => 'Sorry File Can\'t Be Uploaded',
         'creating_dir'   => 'Something Gone Wrong While Creating The Directory, Please Check Your Permissions',
         'deleting_file'  => 'Something Gone Wrong While Deleting This File/Folder, Please Check Your Permissions',
-        'doesnt_exist'   => 'Folder "%attr%" Doesnt Exist',
+        'doesnt_exist'   => 'Folder "attr" Doesnt Exist',
         'moving'         => 'There Seems To Be A Problem Moving This File/Folder, Make Sure You Have The Correct Permissions',
         'moving_cloud'   => 'Cloud Folders Can\'t Be "Renamed, Moved Or Copied"',
         'move_into_self' => 'Folder Can\'t Be "Moved Or Copied" Into It Self',
@@ -121,7 +123,7 @@ return [
     ],
     'filter' => [
         'main'       => 'Filter',
-        'by'         => 'Filter By %attr%',
+        'by'         => 'Filter By attr',
         'filtration' => 'Filters & Sorting',
     ],
     'find'          => 'Find...',
@@ -134,7 +136,7 @@ return [
     'library'       => 'Home',
     'loading'       => 'Loading Files',
     'lock'          => 'Lock Item',
-    'lock_success'  => '"%attr%" Lock Was Updated',
+    'lock_success'  => '"attr" Lock Was Updated',
     'locked'        => 'Locked',
     'remove'        => 'Remove',
     'paste'         => 'Paste Here',
@@ -153,7 +155,7 @@ return [
     ],
     'no_files_in_folder'   => 'No Files In This Folder',
     'no_val'               => 'Maybe You Should Add Something First !!!',
-    'non'                  => 'Non',
+    'non'                  => 'None',
     'not_allowed_file_ext' => 'File Type Is Not Allowed',
     'nothing_found'        => 'Nothing Found',
     'open'                 => 'Open',
@@ -166,14 +168,21 @@ return [
         'main'        => 'Rename',
         'success'     => 'Successfully Renamed',
     ],
+    'edit_metas' => [
+        'main'       => 'Metadatas',
+        'modal_title' => "Update metadates"
+    ],
+    'seo' => [
+        'title'       => 'Title',
+        'alt'       => 'Alt',
+        'description'       => 'Description',
+    ],
     'save' => [
         'link'    => 'Upload Image From Url',
         'main'    => 'Save',
         'success' => 'Successfully Saved As',
     ],
     'search' => [
-        'glbl'       => 'Global Search',
-        'glbl_avail' => 'Global Search Is Now Available.',
         'main'       => 'Search',
     ],
     'select' => [
@@ -203,13 +212,16 @@ return [
     'video'         => 'Video',
     'video_support' => 'Your Browser Does Not Support The Video Tag',
     'visibility'    => [
-        'error'   => '"%attr%" Visibility Couldn\'t Be Changed',
+        'error'   => '"attr" Visibility Couldn\'t Be Changed',
         'main'    => 'Visibility',
         'set'     => 'Change Visibility',
-        'success' => '"%attr%" Visibility Was Updated',
+        'success' => '"attr" Visibility Was Updated',
+        'private'    => 'Private',
+        'public'    => 'Public',
     ],
-    'voice' => [
-        'start' => 'Say Something',
-        'stop'  => 'Turn Microphone Off',
-    ],
+    'action' => [
+        "refresh" => "Refresh",
+        "lock" => "Lock",
+        "visibility" => "Visibility"
+    ]
 ];

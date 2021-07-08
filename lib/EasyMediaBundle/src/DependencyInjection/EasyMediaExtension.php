@@ -25,11 +25,6 @@ class EasyMediaExtension extends Extension implements PrependExtensionInterface
         foreach ($config as $k=>$v){
             $container->setParameter('adeliom_easymedia.'.$k, $v);
         }
-
-        // TODO: Set custom parameters
-        //$container->setParameter('acme_foo.bar', $config['bar']);
-        //$container->setParameter('acme_foo.integer_foo', $config['integer_foo']);
-        //$container->setParameter('acme_foo.integer_bar', $config['integer_bar']);
     }
 
     public function prepend(ContainerBuilder $container)

@@ -23,7 +23,7 @@
         <div v-if="img"
              class="options btn-animate"
              :class="{'show': panelIsVisible}">
-            <button v-tippy="{arrow: true, placement: 'left'}"
+            <button type="button" v-tippy="{arrow: true, placement: 'left'}"
                     class="btn-plain"
                     :class="{'alt': panelIsVisible}"
                     :title="trans('options')"
@@ -42,7 +42,7 @@
             <div :class="{'show': panelIsVisible}"
                  class="panel">
                 <!-- dims -->
-                <section class="dimensions">
+                <!--section class="dimensions">
                     <h3 class="is-size-4">
                         {{ trans('dimension') }}:
                     </h3>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section-->
 
                 <!-- focal -->
                 <!-- section class="focals">
@@ -107,7 +107,7 @@
               <!-- title -->
               <section>
                 <h3 class="is-size-4">
-                  {{ trans('title') }}:
+                  {{ trans('seo.title') }}:
                 </h3>
                 <input v-model="options.title"
                        placeholder="title"
@@ -116,7 +116,7 @@
               <!-- alt -->
               <section>
                 <h3 class="is-size-4">
-                  {{ trans('alt') }}:
+                  {{ trans('seo.alt') }}:
                 </h3>
                 <input v-model="options.alt"
                        placeholder="alt"
@@ -126,7 +126,7 @@
                 <!-- desc -->
                 <section>
                   <h3 class="is-size-4">
-                    {{ trans('description') }}:
+                    {{ trans('seo.description') }}:
                   </h3>
                   <textarea v-model="options.description"
                             rows="10"
@@ -134,13 +134,12 @@
                 </section>
 
                 <!-- extra data -->
-                <section class="extras">
+                <!--section class="extras">
                     <div class="level">
                         <h3 class="is-size-4">
                             Extra Data:
                         </h3>
-                        <!-- add more -->
-                        <button class="button is-success"
+                        <button type="button" class="button is-success"
                                 @click.stop="addToExtra()">
                             <span class="icon is-small">
                                 <icon name="plus"
@@ -149,25 +148,21 @@
                         </button>
                     </div>
 
-                    <!-- items -->
                     <section class="arr">
                         <div v-for="(item,i) in options.extra"
                              :key="i"
                              class="data-container">
                             <div class="field has-addons">
-                                <!-- key -->
                                 <div class="control full-width">
                                     <input v-model="item.name"
                                            placeholder="key"
                                            class="input">
                                 </div>
-                                <!-- val -->
                                 <div class="control full-width">
                                     <input v-model="item.data"
                                            placeholder="value"
                                            class="input">
                                 </div>
-                                <!-- remove -->
                                 <p class="control">
                                     <a class="button is-black"
                                        @click.stop="removeFromExtra(i)">
@@ -179,7 +174,7 @@
                             </div>
                         </div>
                     </section>
-                </section>
+                </section-->
 
 
             </div>
@@ -381,10 +376,10 @@ export default {
                 //    x: 50,
                 //    y: 50
                 //},
-                dimensions: {
-                    w: this.file.width || 0,
-                    h: this.file.height || 0
-                },
+                //dimensions: {
+                //    w: this.file.width || 0,
+                //    h: this.file.height || 0
+                //},
                 alt: null,
                 title: null,
                 description: null,
@@ -411,15 +406,15 @@ export default {
         switchPanel() {
             return this.panelIsVisible = !this.panelIsVisible
         },
-        addToExtra() {
-            this.options.extra.push({
-                name: null,
-                data: null
-            })
-        },
-        removeFromExtra(i) {
-            this.options.extra.splice(i, 1)
-        }
+        //addToExtra() {
+        //    this.options.extra.push({
+        //        name: null,
+        //        data: null
+        //    })
+        //},
+        //removeFromExtra(i) {
+        //    this.options.extra.splice(i, 1)
+        //}
     },
     watch: {
         options: {

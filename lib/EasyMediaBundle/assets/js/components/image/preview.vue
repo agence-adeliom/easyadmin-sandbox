@@ -16,7 +16,7 @@
                 <menu class="items-wrapper">
                     <!-- move -->
                     <div class="menu-item">
-                        <button class="button btn-plain"
+                        <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="addToMovableList()">
                             <span class="icon is-large">
@@ -30,13 +30,25 @@
                         </button>
                     </div>
 
+                    <!-- edit metas -->
+                    <div class="menu-item">
+                      <button type="button" class="button btn-plain"
+                              :disabled="ops_btn_disable"
+                              @click.stop="editMetasItem()">
+                              <span class="icon is-large">
+                                  <icon name="hashtag"
+                                        scale="1.2"/>
+                              </span>
+                      </button>
+                    </div>
+
                     <!-- rename -->
                     <div class="menu-item">
-                        <button class="button btn-plain"
+                        <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="renameItem()">
                             <span class="icon is-large">
-                                <icon name="terminal"
+                                <icon name="i-cursor"
                                       scale="1.2"/>
                             </span>
                         </button>
@@ -44,7 +56,7 @@
 
                     <!-- editor -->
                     <div class="menu-item">
-                        <button class="button btn-plain"
+                        <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="imageEditorCard()">
                             <span class="icon is-large">
@@ -55,8 +67,8 @@
                     </div>
 
                     <!-- delete -->
-                    <div class="menu-item">
-                        <button class="button btn-plain"
+                    <div class="menu-item bg-danger">
+                        <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="deleteItem()">
                             <span class="icon is-large">
@@ -82,6 +94,7 @@ export default {
         'ops_btn_disable',
         'inMovableList',
         'renameItem',
+        'editMetasItem',
         'deleteItem',
         'imageEditorCard',
         'addToMovableList'
@@ -112,10 +125,11 @@ export default {
     display: block;
 
     > div:first-child {
-        max-height: 40vh;
-        width: 100%;
         display: block;
         padding-bottom: 62.5%;
+        @screen sm {
+          width: 60vh;
+        }
     }
 }
 

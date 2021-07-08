@@ -13,7 +13,7 @@ trait Delete
      *
      * @param Request $request [description]
      *
-     * @return [type] [description]
+     * @return JsonResponse [type] [description]
      */
     public function deleteItem(Request $request)
     {
@@ -48,7 +48,7 @@ trait Delete
             }catch (\Exception $e){
                 $result[] = array_merge($defaults, [
                     'success' => false,
-                    'message' => $this->translator->trans('MediaManager::messages.error.deleting_file'),
+                    'message' => $this->translator->trans('error.deleting_file', [] , "EasyMediaBundle"),
                 ]);
             }
         }

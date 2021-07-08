@@ -23,7 +23,7 @@
         <div class="__corner">
             <p>MANAGER\\SHORTCUTS</p>
         </div>
-        <button class="modal-close is-large"
+        <button type="button" class="modal-close is-large"
                 @click.stop="closePanel()"/>
     </div>
 </template>

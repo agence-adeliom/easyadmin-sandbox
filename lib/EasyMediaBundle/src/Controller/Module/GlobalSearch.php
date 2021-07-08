@@ -3,11 +3,9 @@ namespace Adeliom\EasyMediaBundle\Controller\Module;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use League\Flysystem\DirectoryAttributes;
 use League\Flysystem\FileAttributes;
 use League\MimeTypeDetection\FinfoMimeTypeDetector;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 trait GlobalSearch
 {
@@ -35,7 +33,8 @@ trait GlobalSearch
                     'last_modified_formated' => $this->getItemTime($time),
                 ];
 
-            });
+            })->toArray();
+
 
         return new JsonResponse($results);
     }

@@ -21,6 +21,13 @@
 
     .modal-content {
         padding-bottom: 3rem; // add some space to breath
+        border: none;
+        background: none;
+        height: 100%;
+    }
+
+    .modal-close{
+        z-index: 2;
     }
 }
 

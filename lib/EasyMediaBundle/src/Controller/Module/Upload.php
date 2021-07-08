@@ -2,9 +2,9 @@
 namespace Adeliom\EasyMediaBundle\Controller\Module;
 
 
-use Adeliom\EasyMediaBundle\Event\EasyMediaFileRenamed;
 use Adeliom\EasyMediaBundle\Event\EasyMediaFileSaved;
 use Adeliom\EasyMediaBundle\Event\EasyMediaFileUploaded;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ trait Upload
     {
         $upload_path = $request->request->get("upload_path");
         $random_name = filter_var($request->request->get("random_names"), FILTER_VALIDATE_BOOLEAN);
-        $custom_attr = json_decode($request->request->get("custom_attrs"), true);
+        $custom_attr = json_decode($request->request->get("custom_attrs", '[]'), true);
         $result      = [];
 
         foreach ($request->files->get("file", []) as $one) {
@@ -36,12 +36,13 @@ trait Upload
                     ? $this->getRandomString() . ".$ext_only"
                     : $this->cleanName($name_only) . ".$ext_only";
 
-                $custom_attr = array_filter($custom_attr, function ($entry) use ($orig_name){
-                    return $entry["name"] == $orig_name;
-                });
-                $custom_attr = current($custom_attr);
-
-                $file_options = !empty($custom_attr) ? $custom_attr["options"] : null;
+                if(!empty($custom_attr)) {
+                    $custom_attr = array_filter($custom_attr, function ($entry) use ($orig_name) {
+                        return $entry["name"] == $orig_name;
+                    });
+                    $custom_attr = current($custom_attr);
+                }
+                $file_options = !empty($custom_attr) ? $custom_attr["options"] : [];
                 $file_type    = $one->getMimeType();
                 $destination  = !$upload_path ? $final_name : $this->clearDblSlash("$upload_path/$final_name");
 
@@ -49,21 +50,21 @@ trait Upload
                     // check for mime type
                     if (Str::contains($file_type, $this->unallowedMimes)) {
                         throw new \Exception(
-                            $this->translator->trans('MediaManager::messages.not_allowed_file_ext')
+                            $this->translator->trans('not_allowed_file_ext', [] , "EasyMediaBundle")
                         );
                     }
 
                     // check for extension
                     if (Str::contains($ext_only, $this->unallowedExt)) {
                         throw new \Exception(
-                            $this->translator->trans('MediaManager::messages.not_allowed_file_ext')
+                            $this->translator->trans('not_allowed_file_ext', [] , "EasyMediaBundle")
                         );
                     }
 
                     // check existence
                     if ($this->filesystem->fileExists($destination)) {
                         throw new \Exception(
-                            $this->translator->trans('MediaManager::messages.error.already_exists')
+                            $this->translator->trans('error.already_exists', [] , "EasyMediaBundle")
                         );
                     }
 
@@ -71,7 +72,7 @@ trait Upload
                     $full_path = $this->storeFile($one, $upload_path, $final_name);
 
                     // save metas
-                    $this->metasService->saveMetas($upload_path, $file_options);
+                    $this->metasService->saveMetas($upload_path . DIRECTORY_SEPARATOR . $final_name, $file_options);
 
                     // fire event
                     $this->eventDispatcher->dispatch(new EasyMediaFileUploaded($full_path, $file_type, $file_options), EasyMediaFileUploaded::NAME);
@@ -89,7 +90,7 @@ trait Upload
             } else {
                 $result[] = [
                     'success' => false,
-                    'message' => $this->translator->trans('MediaManager::messages.error.cant_upload'),
+                    'message' => $this->translator->trans('error.cant_upload', [] , "EasyMediaBundle"),
                 ];
             }
         }
@@ -126,7 +127,7 @@ trait Upload
                 // check existence
                 if ($this->filesystem->fileExists($destination)) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.already_exists')
+                        $this->translator->trans('error.already_exists', [] , "EasyMediaBundle")
                     );
                 }
 
@@ -135,7 +136,7 @@ trait Upload
                     $data = base64_decode($data);
                 } catch (\Throwable $th) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.no_file')
+                        $this->translator->trans('error.no_file', [] , "EasyMediaBundle")
                     );
                 }
 
@@ -159,7 +160,7 @@ trait Upload
         } else {
             $result = [
                 'success' => false,
-                'message' => $this->translator->trans('MediaManager::messages.error.cant_upload'),
+                'message' => $this->translator->trans('error.cant_upload', [] , "EasyMediaBundle"),
             ];
         }
 
@@ -198,14 +199,14 @@ trait Upload
                 // check for mime type
                 if (Str::contains($file_type, $ignore)) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.not_allowed_file_ext')
+                        $this->translator->trans('not_allowed_file_ext', [] , "EasyMediaBundle")
                     );
                 }
 
                 // check existence
                 if ($this->filesystem->fileExists($destination)) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.already_exists')
+                        $this->translator->trans('error.already_exists', [] , "EasyMediaBundle")
                     );
                 }
 
@@ -214,7 +215,7 @@ trait Upload
                     $data = file_get_contents($url);
                 } catch (\Throwable $th) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.no_file')
+                        $this->translator->trans('error.no_file', [] , "EasyMediaBundle")
                     );
                 }
 
@@ -238,7 +239,7 @@ trait Upload
         } else {
             $result = [
                 'success' => false,
-                'message' => $this->translator->trans('MediaManager::messages.error.cant_upload'),
+                'message' => $this->translator->trans('error.cant_upload', [] , "EasyMediaBundle"),
             ];
         }
 
@@ -248,11 +249,10 @@ trait Upload
     /**
      * save file to disk.
      *
-     * @param (Symfony\Component\HttpFoundation\File\UploadedFile) $file
-     * @param (string)                                             $upload_path [description]
-     * @param (string)                                             $file_name   [description]
-     *
-     * @return $file path
+     * @param UploadedFile $file
+     * @param $upload_path
+     * @param $file_name
+     * @return File $file path
      */
     protected function storeFile(UploadedFile $file, $upload_path, $file_name)
     {
@@ -263,9 +263,8 @@ trait Upload
     /**
      * allow/disallow user upload.
      *
-     * @param (Symfony\Component\HttpFoundation\File\UploadedFile || null) $file
-     *
-     * @return [boolean]
+     * @param null $file
+     * @return bool [boolean]
      */
     protected function allowUpload($file = null)
     {
@@ -275,9 +274,8 @@ trait Upload
     /**
      * do something to file b4 its saved to the server.
      *
-     * @param (Symfony\Component\HttpFoundation\File\UploadedFile) $file
-     *
-     * @return $file
+     * @param UploadedFile $file
+     * @return UploadedFile $file
      */
     protected function optimizeUpload(UploadedFile $file)
     {

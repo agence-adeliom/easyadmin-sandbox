@@ -8,10 +8,7 @@
 }
 
 .modal-content {
-    @apply w-full h-full m-0;
+    /* h-full */
+    @apply w-full  m-0;
     max-height: unset;
-}
-
-.modal-close {
-    z-index: 2;
 }

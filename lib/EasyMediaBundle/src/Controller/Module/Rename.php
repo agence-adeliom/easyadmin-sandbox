@@ -20,10 +20,8 @@ trait Rename
     public function renameItem(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $path = $data["path"];
         $file = $data["file"];
 
-        $old_filename     = $file['name'];
         $type             = $file['type'];
         $new_filename     = $this->cleanName($data["new_filename"], $type == 'folder');
         $old_path         = $file['storage_path'];
@@ -39,12 +37,12 @@ trait Rename
                     $this->eventDispatcher->dispatch(new EasyMediaFileRenamed($old_path, $new_path), EasyMediaFileRenamed::NAME);
                 } catch (FilesystemException | UnableToMoveFile $exception) {
                     throw new \Exception(
-                        $this->translator->trans('MediaManager::messages.error.moving')
+                        $this->translator->trans('error.moving', [] , "EasyMediaBundle")
                     );
                 }
             } else {
                 throw new \Exception(
-                    $this->translator->trans('MediaManager::messages.error.already_exists')
+                    $this->translator->trans('error.already_exists', [] , "EasyMediaBundle")
                 );
             }
         } catch (\Exception $e) {

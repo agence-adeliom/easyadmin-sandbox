@@ -61,19 +61,28 @@
             z-index: 1;
 
             &:nth-child(1) {
-                transform: translate3d(0, -7rem, 0);
+                //transform: translate3d(0, -7rem, 0);
+                transform: translate3d(5em, 0, 0);
             }
 
             &:nth-child(2) {
-                transform: translate3d(3.5rem, -6.25rem, 0);
+                //transform: translate3d(3.5rem, -6.25rem, 0);
+                transform: translate3d(9em, 0, 0);
             }
 
             &:nth-child(3) {
-                transform: translate3d(6.25rem, -3.5rem, 0);
+                //transform: translate3d(6.25rem, -3.5rem, 0);
+                transform: translate3d(13em, 0, 0);
             }
 
             &:nth-child(4) {
-                transform: translate3d(7rem, 0, 0);
+                //transform: translate3d(7rem, 0, 0);
+                transform: translate3d(17em, 0, 0);
+            }
+
+            &:nth-child(5) {
+                //transform: translate3d(7rem, 0, 0);
+                transform: translate3d(21em, 0, 0);
             }
         }
     }

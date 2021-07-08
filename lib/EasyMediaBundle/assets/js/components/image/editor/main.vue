@@ -17,7 +17,7 @@
 
                 <div class="right">
                     <!-- diff toggle -->
-                    <button v-tippy="{arrow: true, theme: 'mm'}"
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="(processing && !imageDiffIsReady) || diffDisable"
                             :class="{'is-active': showDiff}"
                             :title="trans('diff')"
@@ -27,7 +27,7 @@
                     </button>
 
                     <!-- reset filters -->
-                    <button v-tippy="{arrow: true, theme: 'mm'}"
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="processing || !haveFilters()"
                             :title="trans('crop_reset_filters')"
                             class="btn-plain"
@@ -83,18 +83,18 @@
                 </image-compare>
 
                 <!-- presets -->
-                <presets :style="hiddenBtns"
+                <!--presets :style="hiddenBtns"
                          :processing="processing"
                          :caman-filters="camanFilters"
                          :apply-filter="applyFilter"
                          :trans="trans"
-                         class="__caman-presets"/>
+                         class="__caman-presets"/ -->
 
                 <!-- operations -->
                 <div :style="hiddenBtns"
                      class="__bottom-toolbar">
                     <!-- reset everything -->
-                    <button v-tippy="{arrow: true, theme: 'mm'}"
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="processing || !hasChanged"
                             :title="trans('crop_reset')"
                             class="btn-plain"
@@ -106,7 +106,7 @@
                     </button>
 
                     <!-- clear -->
-                    <button v-tippy="{arrow: true, theme: 'mm'}"
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="processing || !croppedByUser"
                             :title="trans('clear')"
                             class="btn-plain"
@@ -118,7 +118,7 @@
                     </button>
 
                     <!-- apply -->
-                    <button v-tippy="{arrow: true, theme: 'mm'}"
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="processing || !hasChanged"
                             :title="trans('crop_apply')"
                             class="btn-plain"
@@ -144,6 +144,7 @@ export default {
     components: {
         filters      : require('./filters/index.vue').default,
         //presets      : require('./filters/presets.vue').default,
+        presets      : null,
         controls     : require('./controls.vue').default,
         imageCompare : require('vue-image-compare2').default
     },

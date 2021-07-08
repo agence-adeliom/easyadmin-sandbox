@@ -1,5 +1,5 @@
 <template>
-    <button v-tippy="{arrow: true}"
+    <button type="button" v-tippy="{arrow: true}"
             :disabled="loading || isLoading"
             :title="trans('glbl_search')"
             class="button"

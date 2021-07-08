@@ -111,6 +111,7 @@ export default {
             sortName                 : null,
             imageSlideDirection      : null,
             newFilename              : null,
+            newMetas              : {},
             newFolderName            : null,
             searchFor                : null,
             searchItemsCount         : null,
@@ -494,6 +495,13 @@ export default {
 
                 this.toggleModal('rename_file_modal')
             })
+        },
+        editMetasItem() {
+          this.$nextTick(() => {
+            if (this.$refs.editMetas.disabled) return
+
+            this.toggleModal('edit_metas_modal')
+          })
         },
         deleteItem() {
             this.$nextTick(() => {
