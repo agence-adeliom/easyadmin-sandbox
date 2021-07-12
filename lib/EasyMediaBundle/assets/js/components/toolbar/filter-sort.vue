@@ -1,7 +1,7 @@
 <template>
     <my-dropdown :disabled="disabled">
         <template v-slot:title>
-            {{ trans('filtration') }}
+          <span class="icon"><icon name="filter" scale="0.8"></icon></span>
         </template>
 
         <template v-slot:content>

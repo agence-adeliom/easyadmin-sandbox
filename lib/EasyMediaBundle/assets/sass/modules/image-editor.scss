@@ -1,14 +1,20 @@
 @import '~cropperjs/dist/cropper.css';
-@import '../partials/vars';
+
+:root{
+    --range: theme('colors.yellow.400');
+    --editor-btns: rgba(theme("colors.theme-70"), 0.8);
+}
 
 .__modal-editor {
+    @apply bg-transparent shadow-none transition-all transform;
+    .__modal-content-wrapper{
+        @apply w-full h-full;
+    }
     .__editor {
-        @apply bg-transparent shadow-none;
-
+        --tw-translate-x: -50px;
+        @apply bg-transparent shadow-none transition-all transform h-full flex-grow;
         min-width: unset !important;
         overflow: unset !important;
-        transform: translateX(-50px); // account for the presets width
-        transition: margin $anim-time $anim-ease;
 
         .top,
         .mid {
@@ -31,30 +37,23 @@
                 }
 
                 .__left-index {
-                    @apply flex;
-                }
-
-                .right {
-                    @apply ml-auto pl-8;
+                    @apply flex mr-4;
                 }
             }
         }
 
         .mid {
+            height: calc(100% - 65px);
             .__side-toolbar {
                 flex-flow: column nowrap;
             }
 
             .__cropper {
-                @apply m-4 mr-0 relative;
+                @apply m-4 mr-0 relative w-full;
 
                 .image {
                     @apply block;
-                    max-width: 75vw;
-                    max-height: 50vh;
-                    @screen md{
-                        max-width: 50vw;
-                    }
+
 
                     img {
                         @apply max-w-full;
@@ -66,41 +65,31 @@
                 }
 
                 .__diff {
-                    @apply overflow-hidden absolute top-0 z-10;
+                    @apply overflow-hidden absolute top-0 z-10 h-full;
                     @apply w-full #{!important};
-                    max-height: 75vh;
+                    max-height: 85vh;
 
-                    .image-compare-handle {
-                        color: $blue;
+                    .handle {
+                        @apply text-indigo-600;
                     }
 
-                    .image-compare-wrapper {
-                        background-color: rgba($black, 0.5);
-                        box-shadow: 10px 0 40px 0 rgba($black, 0.5);
-                    }
-
-                    img,
-                    .image-compare-wrapper,
-                    .image-compare-handle {
-                        transition: all $anim-time $anim-ease;
+                    .wrapper {
+                        --tw-shadow: 10px 0 40px 0 rgba(theme('colors.black'), 0.5);
+                        @apply bg-black bg-opacity-50 shadow m-0;
                     }
 
                     &.is-draggable {
-                        .image-compare-wrapper {
+                        .wrapper {
                             background-color: unset;
                         }
                     }
                 }
 
                 .__caman-presets {
-                    @apply pl-4 absolute right-0 top-0;
-                    transform: translateX(100%);
-                    z-index: 1;
+                    @apply pl-4 absolute right-0 top-0 transform translate-x-full z-1;
 
                     h3 {
-                        @apply rounded-sm font-bold p-3 text-center text-white;
-                        background: $grad_1;
-                        margin: 0 0 0.5rem;
+                        @apply rounded-sm font-bold p-3 text-center text-white m-0 mb-2 bg-purple-500;
                     }
 
                     section {
@@ -136,7 +125,7 @@
 
                             &:hover,
                             &.is-active {
-                                background: $audio;
+                                @apply bg-indigo-600;
                             }
 
                             &:disabled {
@@ -147,54 +136,59 @@
                 }
 
                 .__bottom-toolbar {
-                    @apply bottom-0 flex absolute right-0;
-                    transform: translateY(calc(100% + 1rem));
-                    z-index: 1;
+                    --tw-translate-x: calc(100% + 1rem);
+                    @apply bottom-0 flex absolute right-0 transform z-1;
                 }
             }
         }
     }
 
     .btn-plain {
-        @apply text-white p-3;
-        background-color: $editorBtns;
-        transition: all $anim-time $anim-ease;
+        @apply text-white p-3 transition-all leading-none w-10 h-10 items-center;
+        @apply bg-opacity-80 bg-theme-70;
+
 
         &:hover,
         &.is-active {
-            background: $audio;
+            @apply bg-indigo-600;
         }
 
         &:disabled {
             @apply bg-black bg-opacity-80 opacity-70;
         }
+
+        &.is-danger{
+            @apply bg-opacity-100 bg-red-400;
+        }
+        &.is-success{
+            @apply bg-opacity-100 bg-green-400;
+        }
+
+
     }
 }
 
 // crop styles
 .cropper-line {
-    background-color: transparent !important;
+    @apply bg-transparent #{!important};
 }
 
 .cropper-point {
-    z-index: 1;
+    @apply z-1;
 
     &.point-e,
     &.point-w,
     &.point-s,
     &.point-n {
-        background-color: transparent !important;
+        @apply bg-transparent #{!important};
     }
 
     &.point-ne,
     &.point-se,
     &.point-nw,
     &.point-sw {
-        background-color: transparent !important;
-        border-color: $white;
-        border-style: solid;
-        height: 20px;
-        width: 20px;
+        @apply bg-transparent #{!important};
+        @apply border-white border-solid h-5 w-5;
     }
 
     &.point-ne {
@@ -218,43 +212,37 @@
 #contentpopup2 {
     .title,
     .icon {
-        color: $range;
+        color: var(--range);
     }
 
     .range-neg {
-        background-image: linear-gradient(to right, $editorBtns var(--length), $range var(--length), $range 50%, $editorBtns 50%) !important;
+        background-image: linear-gradient(to right, var(--editor-btns) var(--length), var(--range) var(--length), var(--range) 50%, var(--editor-btns) 50%) !important;
     }
 
     .range-pos {
-        background-image: linear-gradient(to right, $editorBtns 50%, $range 50%, $range var(--length), $editorBtns var(--length)) !important;
+        background-image: linear-gradient(to right, var(--editor-btns) 50%, var(--range) 50%, var(--range) var(--length), var(--editor-btns) var(--length)) !important;
     }
 
     input[type='range'] {
-        @apply appearance-none h-2 w-full mx-0 my-2;
-        background-color: $editorBtns;
-        background-image: linear-gradient(to right, $range var(--length), $editorBtns var(--length));
-        border-radius: 100vw;
+        @apply appearance-none h-2 w-full mx-0 my-2 rounded-full;
+        background-color: var(--editor-btns);
+        background-image: linear-gradient(to right, var(--range) var(--length), var(--editor-btns) var(--length));
 
         &::-webkit-slider-thumb {
-            @apply appearance-none cursor-pointer h-4 w-4;
-            background-color: $white;
-            border-radius: 100vw;
+            @apply appearance-none cursor-pointer h-4 w-4 rounded-full bg-white;
         }
 
         &::-moz-range-thumb {
-            @apply cursor-pointer h-4 w-4;
-            background-color: $white;
-            border-radius: 100vw;
+            @apply cursor-pointer h-4 w-4 rounded-full bg-white;
         }
     }
 }
 
 // tippy theme
 .tippy-tooltip.mm-theme {
-    background-color: $black;
-    color: $white;
+    @apply bg-black text-white;
 }
 
 .tippy-popper[x-placement^=top] .tippy-tooltip.mm-theme .tippy-arrow {
-    border-top-color: $black;
+    @apply border-black;
 }

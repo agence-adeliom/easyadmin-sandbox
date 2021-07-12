@@ -1,4 +1,4 @@
-@import '~plyr/src/sass/plyr';
+@import '~plyr/dist/plyr.css';
 
 .plyr--video,
 .plyr--audio {
@@ -6,20 +6,20 @@
         &.plyr__tab-focus,
         &:hover,
         &[aria-expanded='true'] {
-            background-color: #f5164d !important;
+            @apply bg-blue-500 #{!important};
         }
     }
 }
 
 .plyr--full-ui input[type=range] {
-    color: #3bea91;
+    @apply text-blue-500;
 }
 
 .plyr__control--overlaid {
-    background: #7f4cf1;
+    @apply text-black bg-white;
 }
 
 .plyr__control.plyr__tab-focus,
 .plyr--full-ui input[type=range].plyr__tab-focus::-webkit-slider-runnable-track {
-    box-shadow: none;
+    @apply shadow-none;
 }

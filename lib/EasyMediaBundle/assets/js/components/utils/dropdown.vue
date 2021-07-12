@@ -10,10 +10,10 @@
                 <span>
                     <slot name="title"/>
                 </span>
-                <span v-show="!disabled"
+                <!--span v-show="!disabled"
                       class="icon is-small">
                     <icon name="angle-down"/>
-                </span>
+                </span-->
             </button>
         </div>
 
@@ -29,14 +29,10 @@
 
 <style lang="scss" scoped>
     .dropdown-menu {
+        @apply right-0;
         left: unset;
-        right: 0;
     }
-
-    .dropdown-item {
-        padding-top: 0;
-    }
-
+    .dropdown-item { @apply pt-0; }
 </style>
 
 <script>

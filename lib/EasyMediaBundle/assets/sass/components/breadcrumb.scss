@@ -1,6 +1,6 @@
 // default
 .__stack-breadcrumb {
-  @apply p-3 border-b border-theme bg-theme z-1;
+  @apply py-3 px-6 bg-theme z-1 border-b border-t border-theme-5 shadow-lg;
   @apply m-0;
 
   .level-left, .level-right{
@@ -17,7 +17,6 @@
 
     li {
       @apply relative inline-flex;
-
       &::before {
         content: "\2794";
         @apply text-theme-50
@@ -27,9 +26,11 @@
           content: none;
         }
       }
-
       .icon{
-        @apply mr-2;
+        @apply mr-1;
+      }
+      .level{
+        @apply flex;
       }
     }
 

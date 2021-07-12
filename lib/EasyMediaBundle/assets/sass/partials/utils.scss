@@ -65,14 +65,8 @@
 }
 
 .btn-plain {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    color: $black;
-    cursor: pointer;
-    padding: 0;
-    vertical-align: bottom;
-
+    @apply rounded-none bg-transparent cursor-pointer border-none p-0 text-black align-bottom;
+    @include state-colors();
     &:focus {
         box-shadow: none !important;
         outline: none;
@@ -82,7 +76,7 @@
         cursor: not-allowed;
 
         * {
-            color: darken($active_theme, 25%);
+            @apply text-theme-25;
         }
     }
 }

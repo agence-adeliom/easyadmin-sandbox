@@ -24,7 +24,6 @@ trait GetContent
     {
         $data = json_decode($request->getContent(), true);
         $path = $data["path"] == '/' ? '' : $data["path"];
-
         /*if ($path && !$this->filesystem->fileExists($path)) {
             return new JsonResponse([
                 'error' => $this->translator->trans('MediaManager::messages.error.doesnt_exist', ['attr' => $path]),

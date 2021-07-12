@@ -15,16 +15,16 @@
 
                 <menu class="items-wrapper">
                     <!-- move -->
-                    <div class="menu-item">
+                    <div class="menu-item" v-if="!inMovableList()">
                         <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="addToMovableList()">
                             <span class="icon is-large">
                                 <icon v-if="inMovableList()"
-                                      name="shopping-cart"
+                                      name="minus"
                                       scale="1.2"/>
                                 <icon v-else
-                                      name="cart-plus"
+                                      name="plus"
                                       scale="1.2"/>
                             </span>
                         </button>
@@ -116,16 +116,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../sass/modules/scroll-btn';
+//@import '../../../sass/modules/scroll-btn';
 @import '../../../sass/packages/goo';
 
 .wrapper {
-    overflow: hidden;
-    position: relative;
-    display: block;
-
+  @apply overflow-hidden relative block;
     > div:first-child {
-        display: block;
+      @apply block;
         padding-bottom: 62.5%;
         @screen sm {
           width: 60vh;

@@ -3,22 +3,10 @@
 #no_files,
 #no_search,
 #ajax_error {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: $active_theme;
+    @apply absolute inset-0 flex overflow-hidden items-center flex-col justify-center bg-theme z-10;
 
     h3 {
-        margin-top: 1rem;
-        color: darken($active_theme, 50%);
+        @apply mt-4 text-theme-50 text-lg;
     }
 }
 
@@ -27,12 +15,12 @@
 #ajax_error_anim,
 #no_search_anim,
 #no_files_anim {
-    overflow: hidden;
+    @apply overflow-hidden;
 }
 
 #loading_files {
     #loading_files_anim {
-        height: 100%;
+        @apply h-full;
 
         svg {
             transform: scale(1.5) !important;
@@ -40,7 +28,7 @@
     }
 
     h3 {
-        margin: 0 0 2rem;
+        @apply m-0 mb-8;
     }
 }
 
@@ -62,6 +50,6 @@
     }
 
     h3 {
-        margin-left: 1rem;
+        @apply ml-4;
     }
 }

@@ -1,3 +1,5 @@
+{% trans_default_domain 'EasyMediaBundle' %}
+
 {% block easy_media_row %}
     {% set row_attr = row_attr|merge({
         class: row_attr.class|default('') ~ ' form-group'
@@ -30,7 +32,7 @@
                     <!--media-modal item="links" :name="inputName" :multi="true"></media-modal-->
 
                     <section>
-                        <button type="button" class="btn btn-primary" @click="toggleModalFor('media')">select media</button>
+                        <button type="button" class="btn btn-primary" @click="toggleModalFor('media')">{{ 'select.file'|trans }}</button>
 
                         <div class="selection-preview" v-if="selectedFile">
                             <div class="__box-data" @click.stop="toggleModal('preview_modal')">

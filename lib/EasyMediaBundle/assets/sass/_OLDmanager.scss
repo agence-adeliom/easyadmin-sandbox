@@ -3,16 +3,18 @@
 // self
 @import './partials/defaults';
 @import './partials/vars';
-@import './partials/vue';
-@import './partials/loaders';
-@import './partials/utils';
-@import './packages/animate';
-@import './packages/progress';
-@import './packages/switcher';
-@import './partials/notie';
+@import './partials/vue'; //OK
+@import './partials/loaders'; //OK
+@import './partials/utils';  //OK
+@import './packages/animate'; //OK
+@import './packages/progress'; //OK
+@import './packages/switcher'; //OK
+@import 'packages/notie'; //OK
 @import './modules/usage-intro';
-@import './modules/media_player';
+@import './modules/media_player'; //OK
 
+
+//OK
 .media-manager {
     &.top-space {
         @apply pt-8;
@@ -729,7 +731,7 @@
     &:hover {
         box-shadow: 0 15px 30px 0 rgba($black, 0.05), 0 5px 15px 0 rgba($black, 0.08);
         color: $black;
-        transform: translateY(-0.7rem);
+        transform: translateY(  -0.7rem);
     }
 }
 

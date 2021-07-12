@@ -2,6 +2,8 @@
 namespace Adeliom\EasyMediaBundle\Controller\Module;
 
 
+use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToCreateDirectory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,8 +27,12 @@ trait NewFolder
 
         if ($this->filesystem->fileExists($full_path)) {
             $message = $this->translator->trans('error.already_exists', [] , "EasyMediaBundle");
-        } elseif (!$this->filesystem->createDirectory($full_path)) {
-            $message = $this->translator->trans('error.creating_dir', [] , "EasyMediaBundle");
+        } else {
+            try {
+                $this->filesystem->createDirectory($full_path);
+            } catch (FilesystemException | UnableToCreateDirectory $exception) {
+                $message = $this->translator->trans('error.creating_dir', [] , "EasyMediaBundle");
+            }
         }
 
         return new JsonResponse(compact('message', 'new_folder_name'));

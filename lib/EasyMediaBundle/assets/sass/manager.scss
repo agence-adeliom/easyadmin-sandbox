@@ -1,39 +1,52 @@
 @import './tailwind';
 
+@mixin state-colors {
+  &.is-warning { @apply bg-yellow-400; }
+  &.is-danger { @apply bg-red-400; }
+  &.is-link { @apply bg-blue-500; }
+  &.is-success { @apply bg-green-400; }
+  &.is-black {  @apply bg-black; }
+
+  &.is-danger,
+  &.is-link,
+  &.is-black,
+  &.is-success {
+    * {
+      @apply text-white;
+    }
+  }
+}
+
+@import './partials/vue';
+@import './partials/loaders';
+@import './partials/utils';
+@import './packages/animate';
+@import './packages/switcher';
+@import './packages/notie';
+@import './packages/progress';
+
+@import './modules/media_player';
+
+
 .media-manager {
+  @apply bg-theme rounded;
   &.top-space {
     @apply pt-8;
   }
 
   &__toolbar {
-    @apply flex-wrap p-4 bg-theme border border-theme rounded-t m-0 -mb-px;
-
-    .level-left + .level-right {
-      @apply mt-3;
-      @screen sm{
-        @apply mt-0;
-      }
-    }
-    .level-left, .level-right{
-      @screen sm {
-        @apply flex mb-3 w-full justify-between;
-      }
-    }
+    @apply flex-wrap p-4 sm:py-2 bg-theme-75 border border-theme rounded-t m-0;
   }
 
   &__dz {
-    @apply rounded h-0 m-0 opacity-0 p-0 invisible transition-all duration-200;
+    @apply h-0 m-0 opacity-0 p-0 bg-theme invisible transition-all duration-200;
     &.__dz-active {
-      @apply rounded p-1 opacity-100 visible h-auto mx-4 border-2 border-dashed border-gray-400;
+      @apply p-2 m-2 opacity-100 visible h-auto border-2 border-dashed border-gray-400;
     }
   }
 
   &__stack {
-    @apply flex relative flex-col-reverse border border-theme rounded-b;
-
-    @screen sm{
-      @apply flex-col;
-    }
+    @apply flex relative flex-col border border-theme rounded-sm;
 
     &::before {
       content: '';
@@ -42,13 +55,38 @@
   }
 }
 
+.__toolbar {
+  &-container{
+    @apply mx-auto;
+  }
+  &-level{
+    @apply relative flex flex-col items-center justify-between sm:flex-row gap-4 sm:h-16;
+    &_main{
+      @apply flex-1 flex items-center justify-between w-full sm:items-stretch sm:justify-start gap-4;
+    }
+    &_second{
+      @apply flex items-center justify-between w-full sm:w-auto sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-4;
+    }
+  }
+
+}
+
 @import './components/dropzone';
 @import './components/breadcrumb';
 @import './components/sidebar';
 @import './components/stack';
 @import './components/movable';
 @import './components/modal';
+@import './components/image';
 @import './components/media';
+@import './components/files';
+@import './components/box';
+@import './components/card';
+@import './components/icon';
+@import './components/dropdown';
+@import './components/tag';
+@import './components/field';
+
 
 
 .progress-bar strong {

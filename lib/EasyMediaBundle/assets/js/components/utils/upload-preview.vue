@@ -1,441 +1,255 @@
 <template>
-    <section class="preview-container"
-             style="--width: 25%;">
-        <!-- preview -->
-        <!-- focus-point v-if="img"
-                     v-model="options.focalPoint">
-            <img :src="img">
-        </focus-point -->
+  <section class="preview-container"
+           style="--width: 45%;">
+    <!-- preview -->
+    <div v-if="img">
+      <img :src="img">
+    </div>
 
-        <div v-if="img" >
-          <img :src="img">
-        </div>
+    <div v-else
+         class="icons-preview">
+      <icon-types :file="type"
+                  :file-type-is="fileTypeIs"
+                  :scale="10"
+                  :except="['image']"/>
+    </div>
 
-        <div v-else
-             class="icons-preview">
-            <icon-types :file="type"
-                        :file-type-is="fileTypeIs"
-                        :scale="10"
-                        :except="['image']"/>
-        </div>
-
-        <!-- options -->
-        <div v-if="img"
-             class="options btn-animate"
-             :class="{'show': panelIsVisible}">
-            <button type="button" v-tippy="{arrow: true, placement: 'left'}"
-                    class="btn-plain"
-                    :class="{'alt': panelIsVisible}"
-                    :title="trans('options')"
-                    @click.stop="switchPanel()">
+    <!-- options -->
+    <div v-if="img"
+         class="options btn-animate"
+         :class="{'show': panelIsVisible}">
+      <button type="button" v-tippy="{arrow: true, placement: 'left'}"
+              class="btn-plain"
+              :class="{'alt': panelIsVisible}"
+              :title="trans('options')"
+              @click.stop="switchPanel()">
                 <span class="icon is-large">
                     <icon>
                         <icon name="circle"
                               scale="2.5"/>
-                        <icon name="cog"
+                        <icon :name="!panelIsVisible ? 'cog' : 'times'"
                               class="icon-btn"/>
                     </icon>
                 </span>
-            </button>
+      </button>
 
-            <!-- panel -->
-            <div :class="{'show': panelIsVisible}"
-                 class="panel">
-                <!-- dims -->
-                <!--section class="dimensions">
-                    <h3 class="is-size-4">
-                        {{ trans('dimension') }}:
-                    </h3>
-                    <div class="data-container">
-                        <div class="field has-addons">
-                            <div class="control">
-                                <a class="button is-link no-click">
-                                    W
-                                </a>
-                            </div>
-                            <div class="control full-width">
-                                <input v-model.number="options.dimensions.w"
-                                       class="input">
-                            </div>
-                        </div>
-                        <div class="field has-addons">
-                            <div class="control">
-                                <a class="button is-link no-click">
-                                    H
-                                </a>
-                            </div>
-                            <div class="control full-width">
-                                <input v-model.number="options.dimensions.h"
-                                       class="input">
-                            </div>
-                        </div>
-                    </div>
-                </section-->
+      <!-- panel -->
+      <div :class="{'show': panelIsVisible}"
+           class="panel">
 
-                <!-- focal -->
-                <!-- section class="focals">
-                    <h3 class="is-size-4">
-                        {{ trans('focals') }}:
-                    </h3>
-                    <div class="data-container">
-                        <div class="field has-addons">
-                            <div class="control">
-                                <a class="button is-link no-click">
-                                    X
-                                </a>
-                            </div>
-                            <div class="control full-width">
-                                <input v-model.number="options.focalPoint.x"
-                                       class="input">
-                            </div>
-                        </div>
+        <!-- title -->
+        <section>
+          <label class="input-label" >
+            {{ trans('seo.title') }}
+          </label>
+          <input v-model="options.title"
+                 class="input">
+        </section>
+        <!-- alt -->
+        <section>
+          <label class="input-label" >
+            {{ trans('seo.alt') }}
+          </label>
+          <input v-model="options.alt"
+                 class="input">
+        </section>
 
-                        <div class="field has-addons">
-                            <div class="control">
-                                <a class="button is-link no-click">
-                                    Y
-                                </a>
-                            </div>
-                            <div class="control full-width">
-                                <input v-model.number="options.focalPoint.y"
-                                       class="input">
-                            </div>
-                        </div>
-                    </div>
-                </section -->
+        <!-- desc -->
+        <section>
+          <label class="input-label" >
+            {{ trans('seo.description') }}
+          </label>
+          <textarea v-model="options.description"
+                    rows="10"
+                    class="textarea"/>
+        </section>
+      </div>
+    </div>
 
-              <!-- title -->
-              <section>
-                <h3 class="is-size-4">
-                  {{ trans('seo.title') }}:
-                </h3>
-                <input v-model="options.title"
-                       placeholder="title"
-                       class="input">
-              </section>
-              <!-- alt -->
-              <section>
-                <h3 class="is-size-4">
-                  {{ trans('seo.alt') }}:
-                </h3>
-                <input v-model="options.alt"
-                       placeholder="alt"
-                       class="input">
-              </section>
-
-                <!-- desc -->
-                <section>
-                  <h3 class="is-size-4">
-                    {{ trans('seo.description') }}:
-                  </h3>
-                  <textarea v-model="options.description"
-                            rows="10"
-                            class="textarea"/>
-                </section>
-
-                <!-- extra data -->
-                <!--section class="extras">
-                    <div class="level">
-                        <h3 class="is-size-4">
-                            Extra Data:
-                        </h3>
-                        <button type="button" class="button is-success"
-                                @click.stop="addToExtra()">
-                            <span class="icon is-small">
-                                <icon name="plus"
-                                      scale="1.2"/>
-                            </span>
-                        </button>
-                    </div>
-
-                    <section class="arr">
-                        <div v-for="(item,i) in options.extra"
-                             :key="i"
-                             class="data-container">
-                            <div class="field has-addons">
-                                <div class="control full-width">
-                                    <input v-model="item.name"
-                                           placeholder="key"
-                                           class="input">
-                                </div>
-                                <div class="control full-width">
-                                    <input v-model="item.data"
-                                           placeholder="value"
-                                           class="input">
-                                </div>
-                                <p class="control">
-                                    <a class="button is-black"
-                                       @click.stop="removeFromExtra(i)">
-                                        <span class="icon is-small">
-                                            <icon name="times"/>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                </section-->
-
-
-            </div>
-        </div>
-
-        <!-- info -->
-        <div v-show="!panelIsVisible"
-             class="info">
-            {{ name }}
-        </div>
-    </section>
+    <!-- info -->
+    <div v-show="!panelIsVisible"
+         class="info">
+      {{ name }}
+    </div>
+  </section>
 </template>
 
 <style lang="scss">
-    @import '../../../sass/partials/vars';
-    @import '../../../sass/packages/focal-point';
+img {
+  @apply block;
+}
 
-    img {
-        display: block;
+.preview-container {
+  @apply h-full w-full relative overflow-x-hidden overflow-y-scroll;
+
+  .icons-preview {
+    @apply h-full w-full items-center justify-center flex;
+  }
+
+  .info {
+    @apply sticky bottom-0 text-white transition-all px-4 py-2 left-0;
+    background: linear-gradient(45deg, black, transparent);
+    @screen sm{
+      left: -2px;
     }
 
-    .preview-container {
-        height: 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        position: relative;
-        width: 100%;
-
-        .icons-preview {
-            align-items: center;
-            display: flex;
-            height: 100%;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .info {
-            background: linear-gradient(45deg, $black, transparent);
-            bottom: 0;
-            color: $white;
-            left: -2px;
-            padding: 0.5rem 1rem;
-            position: sticky;
-            transition: all $anim-time ease;
-
-            &:hover {
-                opacity: 0;
-            }
-
-            &:empty {
-                padding: 0;
-            }
-        }
-
-        .options {
-            align-items: flex-start;
-            display: flex;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            transition: all $anim-time ease;
-            width: var(--width);
-
-            &.show {
-                right: 0 !important;
-                z-index: 3;
-            }
-
-            .btn-plain {
-                padding-right: $option_btns-space;
-                padding-top: $option_btns-space;
-                z-index: 2;
-
-                &.alt {
-                    color: $black !important;
-                    opacity: 1 !important;
-
-                    .icon-btn {
-                        color: $white !important;
-                    }
-                }
-            }
-
-            .panel {
-                backdrop-filter: blur(5px);
-                background-color: rgba(darken($active_theme, 5%), 0.8);
-                border-radius: 0;
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                overflow: scroll;
-                padding: 1rem;
-                width: 100%;
-
-                > section:last-child {
-                    margin-top: auto;
-                }
-            }
-
-            .dimensions,
-            .focals,
-            .extras {
-                margin-bottom: 1rem;
-
-                .data-container {
-                    display: flex;
-                    width: 100%;
-                }
-
-                .field {
-                    width: 50%;
-
-                    &:first-of-type {
-                        margin-right: 0.75rem;
-                    }
-                }
-            }
-
-            .extras {
-                .level {
-                    margin: 0;
-                }
-
-                .data-container {
-                    margin-bottom: 0.5rem;
-
-                    &:last-of-type {
-                        margin: 0;
-                    }
-                }
-
-                .field {
-                    margin: 0 !important;
-                    width: 100%;
-                }
-
-                .arr {
-                    margin-top: 1rem;
-
-                    &:empty {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-
-            textarea,
-            input {
-                box-shadow: none;
-                opacity: 0.5;
-                transition: all $anim-time ease;
-
-                &:focus {
-                    opacity: 0.8;
-                }
-            }
-
-            h3 {
-                margin-bottom: 0.25rem;
-            }
-        }
+    &:hover {
+      @apply opacity-0;
     }
 
-    @include media('max', 1023) {
-        .preview-container {
-            .info {
-                left: 0;
-            }
-
-            .options {
-                display: none;
-            }
-        }
+    &:empty {
+      @apply p-0;
     }
+  }
+
+  .options {
+    @apply h-full absolute top-0 transition-all items-start hidden;
+    width: var(--width);
+    @screen sm{
+      @apply flex;
+    }
+    &.show {
+      @apply right-0 #{!important};
+      @apply z-3;
+    }
+
+    .btn-plain {
+      @apply pr-4 pt-4 z-2;
+      &.alt {
+        @apply text-black opacity-100 #{!important};
+        .icon-btn {
+          @apply text-white #{!important};
+        }
+      }
+    }
+
+    .panel {
+      @apply backdrop-blur bg-theme-5 rounded-none flex flex-col h-full w-full overflow-scroll p-4 gap-6;
+    }
+
+    .dimensions,
+    .focals,
+    .extras {
+      @apply mb-4;
+      .data-container {
+        @apply flex w-full;
+      }
+
+      .field {
+        @apply w-1/2;
+        &:first-of-type {
+          @apply mr-3;
+        }
+      }
+    }
+
+    .extras {
+      .level {
+        @apply m-0;
+      }
+
+      .data-container {
+        @apply mb-2;
+        &:last-of-type {
+          @apply m-0;
+        }
+      }
+
+      .field {
+        @apply m-0 #{!important};
+        @apply w-full;
+      }
+
+      .arr {
+        @apply mt-4;
+        &:empty {
+          @apply mb-0;
+        }
+      }
+    }
+
+    textarea,
+    input {
+      @apply shadow-none opacity-50 transition-all;
+      &:focus {
+        @apply opacity-80;
+      }
+    }
+
+    h3 {
+      @apply mb-1;
+    }
+  }
+}
+
+
 
 </style>
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
-import FocusPoint from 'vue-focuspoint-component'
 
 export default {
-    components: {
-        FocusPoint
-    },
-    props: [
-        'file',
-        'fileTypeIs',
-        'trans'
-    ],
-    data() {
-        return {
-            img: this.file.dataURL || null,
-            type: this.file.type,
-            name: this.file.name,
-            panelIsVisible: false,
+  props: [
+    'file',
+    'fileTypeIs',
+    'trans'
+  ],
+  data() {
+    return {
+      img: this.file.dataURL || null,
+      type: this.file.type,
+      name: this.file.name,
+      panelIsVisible: false,
 
-            options: {
-                //focalPoint: {
-                //    x: 50,
-                //    y: 50
-                //},
-                //dimensions: {
-                //    w: this.file.width || 0,
-                //    h: this.file.height || 0
-                //},
-                alt: null,
-                title: null,
-                description: null,
-                extra: []
-            }
-        }
-    },
-    activated() {
-        this.updateParentPanel()
-        this.addSpaceToOptBtn()
-    },
-    methods: {
-        updateParentPanel() {
-            this.$parent.uploadPreviewOptionsPanelIsVisible = this.panelIsVisible
-        },
-        addSpaceToOptBtn() {
-            let cont = document.querySelector('.options')
-
-            if (cont) {
-                let btn = cont.querySelector('.btn-plain')
-                cont.style.right = `calc((var(--width) * -1) + ${btn.offsetWidth}px)`
-            }
-        },
-        switchPanel() {
-            return this.panelIsVisible = !this.panelIsVisible
-        },
-        //addToExtra() {
-        //    this.options.extra.push({
-        //        name: null,
-        //        data: null
-        //    })
-        //},
-        //removeFromExtra(i) {
-        //    this.options.extra.splice(i, 1)
-        //}
-    },
-    watch: {
-        options: {
-            deep: true,
-            handler(val) {
-                let list = this.$parent.uploadPreviewOptionsList
-                let data = cloneDeep(val)
-                data.extra = data.extra.filter((item) => item.name || item.data) || []
-
-                let index = list.findIndex((e) => e.name == this.name)
-                index < 0
-                    ? list.push({
-                        name: this.name,
-                        options: data
-                    })
-                    : list[index].options = data
-            }
-        },
-        panelIsVisible(val) {
-            this.updateParentPanel()
-        }
+      options: {
+        alt: null,
+        title: null,
+        description: null,
+        extra: []
+      }
     }
+  },
+  activated() {
+    this.updateParentPanel()
+    this.addSpaceToOptBtn()
+  },
+  methods: {
+    updateParentPanel() {
+      this.$parent.uploadPreviewOptionsPanelIsVisible = this.panelIsVisible
+    },
+    addSpaceToOptBtn() {
+      let cont = document.querySelector('.options')
+
+      if (cont) {
+        let btn = cont.querySelector('.btn-plain')
+        cont.style.right = `calc((var(--width) * -1) + ${btn.offsetWidth}px)`
+      }
+    },
+    switchPanel() {
+      return this.panelIsVisible = !this.panelIsVisible
+    }
+  },
+  watch: {
+    options: {
+      deep: true,
+      handler(val) {
+        let list = this.$parent.uploadPreviewOptionsList
+        let data = cloneDeep(val)
+        data.extra = data.extra.filter((item) => item.name || item.data) || []
+
+        let index = list.findIndex((e) => e.name == this.name)
+        index < 0
+            ? list.push({
+              name: this.name,
+              options: data
+            })
+            : list[index].options = data
+      }
+    },
+    panelIsVisible(val) {
+      this.updateParentPanel()
+    }
+  }
 }
 </script>

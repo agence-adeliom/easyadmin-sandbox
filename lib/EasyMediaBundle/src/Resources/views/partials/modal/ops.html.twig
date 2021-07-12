@@ -118,7 +118,7 @@
             <div action="{{ path('media.edit_metas_file') }}" >
                 <section class="modal-card-body">
                     <div class="">
-                        <label>{{ 'seo.title'|trans }}</label>
+                        <label class="input-label">{{ 'seo.title'|trans }}</label>
                         <input class="input" type="text"
                                v-if="selectedFile"
                                v-model="newMetas.title"
@@ -126,7 +126,7 @@
                                @focus="newMetas.title = selectedFile.metas.title ? selectedFile.metas.title : ''">
                     </div>
                     <div class="mt-4">
-                        <label>{{ 'seo.alt'|trans }}</label>
+                        <label class="input-label">{{ 'seo.alt'|trans }}</label>
                         <input class="input" type="text"
                                v-if="selectedFile"
                                v-model="newMetas.alt"
@@ -134,7 +134,7 @@
                                @focus="newMetas.alt = selectedFile.metas.alt ? selectedFile.metas.alt : ''">
                     </div>
                     <div class="mt-4">
-                        <label>{{ 'seo.description'|trans }}</label>
+                        <label class="input-label">{{ 'seo.description'|trans }}</label>
                         <textarea class="textarea"
                                  v-if="selectedFile"
                                  v-model="newMetas.description"
@@ -151,7 +151,7 @@
                             :disabled="isLoading"
                             :class="{'is-loading': isLoading}"
                             @click.prevent="EditMetasFileForm($event)">
-                        {{ 'save'|trans }}
+                        {{ 'save.main'|trans }}
                     </button>
                 </footer>
             </div>
@@ -173,7 +173,7 @@
 
             <div action="{{ path('media.rename_file') }}" >
                 <section class="modal-card-body">
-                    <h3 class="title">{{ 'new.file_folder'|trans }}</h3>
+                    <label class="input-label">{{ 'new.file_folder'|trans }}</label>
                     <input class="input" type="text"
                            v-if="selectedFile"
                            v-model="newFilename"

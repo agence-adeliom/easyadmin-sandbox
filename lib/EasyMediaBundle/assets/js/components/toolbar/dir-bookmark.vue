@@ -59,21 +59,11 @@
 
 <style lang="scss" scoped>
     .control {
-        flex: 1;
-
-        button {
-            width: 100%;
-        }
+        @apply flex-1;
+        button { @apply w-full; }
     }
-
-    .btns {
-        margin-top: 0.5rem;
-    }
-
-    .tags {
-        flex-wrap: nowrap;
-    }
-
+    .btns { @apply mt-2; }
+    .tags { @apply flex-nowrap; }
 </style>
 
 <script>

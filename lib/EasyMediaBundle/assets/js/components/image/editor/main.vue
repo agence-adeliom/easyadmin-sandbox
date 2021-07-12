@@ -13,31 +13,31 @@
                              :processing="processing"
                              :caman-filters="camanFilters"
                              class="__left-index"/>
-                </section>
-
-                <div class="right">
-                    <!-- diff toggle -->
-                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
-                            :disabled="(processing && !imageDiffIsReady) || diffDisable"
-                            :class="{'is-active': showDiff}"
-                            :title="trans('diff')"
-                            class="btn-plain"
-                            @click.stop="toggleDiff()">
-                        <span class="icon"><icon name="code"/></span>
-                    </button>
 
                     <!-- reset filters -->
                     <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
                             :disabled="processing || !haveFilters()"
                             :title="trans('crop_reset_filters')"
                             class="btn-plain"
+                            :class="{'is-danger': !(processing || !haveFilters())}"
                             @click.stop="resetFilters()">
                         <span class="icon">
                             <icon :name="processing ? 'spinner' : 'times'"
                                   :pulse="processing"/>
                         </span>
                     </button>
-                </div>
+
+                    <!-- diff toggle -->
+                    <!--button type="button" v-tippy="{arrow: true, theme: 'mm'}"
+                            :disabled="(processing && !imageDiffIsReady) || diffDisable"
+                            :class="{'is-active': showDiff}"
+                            :title="trans('diff')"
+                            class="btn-plain"
+                            @click.stop="toggleDiff()">
+                      <span class="icon"><icon name="code"/></span>
+                    </button-->
+
+                </section>
             </div>
         </div>
 
@@ -93,17 +93,6 @@
                 <!-- operations -->
                 <div :style="hiddenBtns"
                      class="__bottom-toolbar">
-                    <!-- reset everything -->
-                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
-                            :disabled="processing || !hasChanged"
-                            :title="trans('crop_reset')"
-                            class="btn-plain"
-                            @click.stop="operations('reset')">
-                        <span class="icon">
-                            <icon :name="processing ? 'spinner' : 'times'"
-                                  :pulse="processing"/>
-                        </span>
-                    </button>
 
                     <!-- clear -->
                     <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
@@ -111,8 +100,21 @@
                             :title="trans('clear')"
                             class="btn-plain"
                             @click.stop="operations('clear')">
+                          <span class="icon">
+                              <icon :name="processing ? 'spinner' : 'ban'"
+                                    :pulse="processing"/>
+                          </span>
+                    </button>
+
+                    <!-- reset everything -->
+                    <button type="button" v-tippy="{arrow: true, theme: 'mm'}"
+                            :disabled="processing || !hasChanged"
+                            :title="trans('crop_cancel')"
+                            class="btn-plain"
+                            :class="{'is-danger': !(processing || !hasChanged)}"
+                            @click.stop="operations('reset')">
                         <span class="icon">
-                            <icon :name="processing ? 'spinner' : 'ban'"
+                            <icon :name="processing ? 'spinner' : 'times'"
                                   :pulse="processing"/>
                         </span>
                     </button>
@@ -122,6 +124,7 @@
                             :disabled="processing || !hasChanged"
                             :title="trans('crop_apply')"
                             class="btn-plain"
+                            :class="{'is-success': !(processing || !hasChanged)}"
                             @click.stop="applyChanges()">
                         <span class="icon">
                             <icon :name="processing ? 'spinner' : 'check'"
@@ -541,10 +544,10 @@ export default {
                     let canvas = document.querySelector('.__cropper').offsetHeight
 
                     if (diff) {
-                        this.$refs.editor.style.marginTop = diff > canvas
+                        /*this.$refs.editor.style.marginTop = diff > canvas
                             ? `-${(diff - canvas)}px`
                             : `-${(canvas - diff)}px`
-
+*/
                         clearInterval(t)
                     }
                 }, 50)

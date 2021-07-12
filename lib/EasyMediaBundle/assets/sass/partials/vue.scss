@@ -3,20 +3,20 @@ $list: (mm-list, mm-img-prv, mm-img-nxt, mm-img-dwn, mm-img-up, mm-info-in, mm-i
 @each $class in $list {
     .#{$class}-enter-active,
     .#{$class}-leave-active {
-        transition: all $anim-time $anim-ease;
+        @apply transition-all duration-200;
     }
 
     .#{$class}-enter-active {
-        z-index: 1;
+        @apply z-1;
     }
 
     .#{$class}-leave-active {
-        z-index: 0;
+        @apply z-0;
     }
 
     .#{$class}-enter,
     .#{$class}-leave-to {
-        opacity: 0;
+        @apply opacity-0;
     }
 }
 

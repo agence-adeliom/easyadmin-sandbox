@@ -29,7 +29,7 @@
     'audio' : 'audio.main'|trans,
     'bm_add_to_list' : 'bookmarks.add'|trans,
     'bm' : 'bookmarks.main'|trans,
-    'clear' : 'clear'|trans({'attr' : 'selection'}),
+    'clear' : 'clear'|trans({'attr' : 'crop.selection'|trans}),
     'copy_success' : 'copy.success'|trans,
     'copy' : 'copy.main'|trans,
     'create_folder_notif' : 'new.create_folder_notif'|trans,
@@ -39,6 +39,7 @@
     'crop_flip_vertical' : 'crop.flip_vertical'|trans,
     'crop_reset_filters' : 'crop.reset_filters'|trans,
     'crop_reset' : 'crop.reset'|trans,
+    'crop_cancel' : 'crop.cancel'|trans,
     'crop_rotate_left' : 'crop.rotate_left'|trans,
     'crop_rotate_right' : 'crop.rotate_right'|trans,
     'crop_zoom_in' : 'crop.zoom_in'|trans,
@@ -73,6 +74,7 @@
     'non' : 'non'|trans,
     'nothing_found' : 'nothing_found'|trans,
     'open' : 'open'|trans,
+    'close' : 'close'|trans,
     'options' : 'options'|trans,
     'presets' : 'crop.presets'|trans,
     'refresh_notif' : 'refresh_notif'|trans,
@@ -124,7 +126,10 @@
     'greyscale' : 'editor.greyscale'|trans,
     'invert' : 'editor.invert'|trans,
     'public' : 'visibility.public'|trans,
-    'private' : 'visibility.private'|trans
+    'private' : 'visibility.private'|trans,
+    'seo.title' : 'seo.title'|trans,
+    'seo.alt' : 'seo.alt'|trans,
+    'seo.description' : 'seo.description'|trans
 } %}
 
 <media-manager inline-template
@@ -142,280 +147,246 @@
 
     <div class="media-manager" >
 
-        {# global search #}
-        {#<global-search-panel
-                :trans="trans"
-                :file-type-is="fileTypeIs"
-                :add-to-movable-list="addToMovableList"
-                :in-movable-list="inMovableList"
-                :no-scroll="noScroll"
-                :browser-support="browserSupport">
-        </global-search-panel>#}
-
-        {# usage-intro panel #}
-{#        <usage-intro-panel :no-scroll="noScroll"></usage-intro-panel>#}
-
         {# top toolbar #}
         <transition name="mm-list" mode="out-in">
-            <nav class="media-manager__toolbar level" v-show="toolBar">
 
-                {# left toolbar #}
-                <div class="level-left">
-                    {# first #}
-                    <div class="level-item">
-                        <div class="field" :class="{'has-addons': !isBulkSelecting()}">
-                            {# upload #}
-                            <div class="control" v-if="!isBulkSelecting()">
-                                <button type="button" class="button"
-                                        ref="upload"
-                                        :disabled="isLoading"
-                                        @click.stop="toggleUploadPanel()"
-                                        v-tippy="{arrow: true}"
-                                        title="u">
-                                    <span class="icon"><icon name="upload"></icon></span>
-                                    <span>{{ 'upload.main'|trans }}</span>
-                                </button>
-                            </div>
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <nav class="media-manager__toolbar" v-show="toolBar">
+                <div class="__toolbar-container">
+                    <div class="__toolbar-level">
+                        <div class="__toolbar-level_main">
+                            {# first #}
+                            <div class="level-item">
+                                <div class="field" :class="{'has-addons': !isBulkSelecting()}">
+                                    {# upload #}
+                                    <div class="control" v-if="!isBulkSelecting()">
+                                        <button type="button" class="button"
+                                                ref="upload"
+                                                :disabled="isLoading"
+                                                @click.stop="toggleUploadPanel()"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'upload.main'|trans }} (u)">
+                                            <span class="icon"><icon name="upload"></icon></span>
+                                        </button>
+                                    </div>
 
-                            {# new folder #}
-                            <div class="control">
-                                <button type="button" class="button"
-                                        :disabled="isLoading"
-                                        @click.stop="createNewFolder()">
-                                    <span class="icon"><icon name="folder-plus"></icon></span>
-                                    <span>{{ 'add.folder'|trans }}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {# middle #}
-                    <div class="level-item">
-                        <div class="field has-addons">
-                            {# move #}
-                            <div class="control" v-if="isBulkSelecting() || !(isLoading || !movableItemsCount)">
-                                <button type="button" class="button is-link"
-                                        ref="move"
-                                        :disabled="isLoading || !movableItemsCount"
-                                        v-tippy="{arrow: true}"
-                                        title="m / p"
-                                        @click.stop="moveItem()">
-                                    <span class="icon"><icon name="share" scale="0.8"></icon></span>
-                                    <span>{{ 'move.main'|trans }}</span>
-                                </button>
-                            </div>
-
-                            {# rename #}
-                            <div class="control" v-if="!isBulkSelecting()">
-                                <button type="button" class="button is-link"
-                                        ref="rename"
-                                        :disabled="ops_btn_disable || selectedFileIs('folder')"
-                                        @click.stop="renameItem()">
-                                    <span class="icon"><icon name="i-cursor"></icon></span>
-                                    <span>{{ 'rename.main'|trans }}</span>
-                                </button>
-                            </div>
-
-                            {# editMetas #}
-                            <div class="control" v-if="!isBulkSelecting() && !(ops_btn_disable || !fileTypeIs(selectedFile, 'image'))">
-                                <button type="button" class="button is-link"
-                                        ref="editMetas"
-                                        :disabled="ops_btn_disable || !fileTypeIs(selectedFile, 'image')"
-                                        @click.stop="editMetasItem()">
-                                    <span class="icon"><icon name="hashtag"></icon></span>
-                                    <span>{{ 'edit_metas.main'|trans }}</span>
-                                </button>
-                            </div>
-
-
-                            {# editor #}
-                            <div class="control" v-show="!isBulkSelecting()">
-                                <button type="button" class="button is-link"
-                                        ref="editor"
-                                        :disabled="editor_btn_disable"
-                                        v-tippy="{arrow: true}"
-                                        title="e"
-                                        @click.stop="imageEditor()">
-                                    <span class="icon"><icon name="regular/object-ungroup" scale="1.2"></icon></span>
-                                    <span>{{ 'editor.main'|trans }}</span>
-                                </button>
-                            </div>
-
-                            {# delete #}
-                            <div class="control">
-                                <button type="button" class="button is-link"
-                                        ref="delete"
-                                        :disabled="ops_btn_disable"
-                                        v-tippy="{arrow: true}"
-                                        title="d / del"
-                                        @click.stop="deleteItem()">
-                                    <span class="icon"><icon name="regular/trash-alt"></icon></span>
-                                    <span>{{ 'delete.main'|trans }}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {# last #}
-                    <div class="level-item">
-                        <div class="field has-addons">
-                            {# refresh #}
-                            <div class="control" v-if="!isBulkSelecting()">
-                                <v-touch class="button is-primary"
-                                         ref="refresh"
-                                         :disabled="isLoading"
-                                         tag="button"
-                                         v-tippy="{arrow: true}"
-                                         title="{{ 'action.refresh'|trans }} (r)"
-                                         @tap="refresh()"
-                                         @hold="clearAll()">
-                                    <span class="icon">
-                                        <icon name="sync" :spin="isLoading"></icon>
-                                    </span>
-                                </v-touch>
-                            </div>
-
-                            {# lock #}
-                            <div class="control">
-                                <button type="button" class="button is-warning"
-                                        ref="lock"
-                                        :disabled="lock_btn_disable"
-                                        v-tippy="{arrow: true}"
-                                        title="{{ 'action.lock'|trans }} (l)"
-                                        @click.stop="lockFileForm()">
-                                    <span class="icon">
-                                        <icon :name="IsLocked(selectedFile) ? 'lock' : 'lock-open'"></icon>
-                                    </span>
-                                </button>
-                            </div>
-
-                            {# visibility #}
-                            <div class="control">
-                                <button type="button" class="button"
-                                        :class="IsVisible(selectedFile) ? 'is-light' : 'is-danger'"
-                                        ref="visibility"
-                                        :disabled="vis_btn_disable"
-                                        v-tippy="{arrow: true}"
-                                        title="{{ 'action.visibility'|trans }} (v)"
-                                        @click.stop="FileVisibilityForm()">
-                                    <span class="icon">
-                                        <icon :name="IsVisible(selectedFile) ? 'eye' : 'eye-slash'"></icon>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                {# ====================================================================== #}
-
-                {# right toolbar #}
-                <div class="level-right" v-if="!waitingForUpload">
-                    <div class="level-item">
-                        <div class="field" :class="{'has-addons' : isBulkSelecting()}">
-                            {# bulk select all #}
-                            <div class="control">
-                                <button type="button" @click.stop="blkSlctAll()"
-                                        ref="bulkSelectAll"
-                                        class="button"
-                                        :class="{'is-warning' : bulkSelectAll}"
-                                        v-show="isBulkSelecting()"
-                                        :disabled="searchItemsCount == 0 || isLoading"
-                                        v-tippy="{arrow: true}"
-                                        title="a">
-                                    <template v-if="bulkSelectAll">
-                                        <span class="icon"><icon name="minus" scale="0.8"></icon></span>
-                                        <span>{{ 'select.non'|trans }}</span>
-                                    </template>
-                                    <template v-else>
-                                        <span class="icon"><icon name="plus" scale="0.8"></icon></span>
-                                        <span>{{ 'select.all'|trans }}</span>
-                                    </template>
-                                </button>
-                            </div>
-
-                            {# bulk select #}
-                            <div class="control">
-                                <button type="button" @click.stop="blkSlct()"
-                                        ref="bulkSelect"
-                                        class="button"
-                                        :class="{'is-danger' : bulkSelect}"
-                                        :disabled="searchItemsCount == 0 || !allItemsCount || isLoading"
-                                        v-tippy="{arrow: true}"
-                                        title="b">
-                                    <span class="icon"><icon name="puzzle-piece"></icon></span>
-                                    <span>{{ 'select.bulk'|trans }}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <template>
-                        {# dir bookmarks #}
-                        <!--div class="level-item" v-if="!restrictModeIsOn && firstRun">
-                            <dir-bookmarks :disabled="isLoading"
-                                           :dir-bookmarks="dirBookmarks"
-                                           :path="files.path"
-                                           :trans="trans">
-                            </dir-bookmarks>
-                        </div-->
-
-                        <div class="level-item">
-                            {# filter & sort #}
-                            <div class="mr-3" v-if="searchItemsCount != 0 && allItemsCount">
-                                <filter-and-sorting :disabled="isLoading"
-                                                    :filter-name-is="filterNameIs"
-                                                    :sort-name-is="sortNameIs"
-                                                    :set-filter-name="setFilterName"
-                                                    :set-sort-name="setSortName"
-                                                    :have-a-file-of-type="haveAFileOfType"
-                                                    :trans="trans">
-                                </filter-and-sorting>
-                            </div>
-
-                            {# search #}
-                            <div v-if="allItemsCount">
-                                <div class="control">
-                                    <div class="field has-addons">
-                                        {# global #}
-                                        {#<p class="control" v-if="!restrictModeIsOn">
-                                            <global-search-btn
-                                                    route="{{ path('media.global_search') }}"
-                                                    :is-loading="isLoading"
-                                                    :trans="trans"
-                                                    :show-notif="showNotif">
-                                            </global-search-btn>
-                                        </p>#}
-
-                                        {# local #}
-                                        <p class="control has-icons-left">
-                                            <input class="input"
-                                                   :disabled="isLoading"
-                                                   type="text"
-                                                   ref="search"
-                                                   v-model="searchFor"
-                                                   :placeholder="trans('find')">
-                                            <span class="icon is-left">
-                                            <icon name="search"></icon>
-                                        </span>
-                                        </p>
-
-                                        {# clear #}
-                                        <p class="control">
-                                            <button type="button" class="button is-black" :disabled="!searchFor"
-                                                    v-tippy="{arrow: true}"
-                                                    title="{{ 'clear'|trans({'attr' : 'search.main'|trans }) }}"
-                                                    @click.stop="resetInput('searchFor')">
-                                                <span class="icon"><icon name="times"></icon></span>
-                                            </button>
-                                        </p>
+                                    {# new folder #}
+                                    <div class="control">
+                                        <button type="button" class="button"
+                                                ref="new_folder"
+                                                :disabled="isLoading"
+                                                @click.stop="createNewFolder()"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'add.folder'|trans }} (n)">
+                                            <span class="icon"><icon name="folder-plus"></icon></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
 
+                            {# middle #}
+                            <div class="level-item">
+                                <div class="field has-addons">
+                                    {# move #}
+                                    <div class="control" v-show="isBulkSelecting() || !(isLoading || !movableItemsCount)">
+                                        <button type="button" class="button is-link"
+                                                ref="move"
+                                                :disabled="isLoading || !movableItemsCount"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'move.main'|trans }} (m / p)"
+                                                @click.stop="moveItem()">
+                                            <span class="icon"><icon name="share" scale="0.8"></icon></span>
+                                        </button>
+                                    </div>
+
+                                    {# rename #}
+                                    <div class="control" v-if="!isBulkSelecting()">
+                                        <button type="button" class="button is-link"
+                                                ref="rename"
+                                                :disabled="ops_btn_disable"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'rename.main'|trans }}"
+                                                @click.stop="renameItem()">
+                                            <span class="icon"><icon name="i-cursor"></icon></span>
+                                        </button>
+                                    </div>
+
+                                    {# editMetas #}
+                                    <div class="control" v-if="!isBulkSelecting() && !(ops_btn_disable || !fileTypeIs(selectedFile, 'image'))">
+                                        <button type="button" class="button is-link"
+                                                ref="editMetas"
+                                                :disabled="ops_btn_disable || !fileTypeIs(selectedFile, 'image')"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'edit_metas.main'|trans }}"
+                                                @click.stop="editMetasItem()">
+                                            <span class="icon"><icon name="hashtag"></icon></span>
+                                        </button>
+                                    </div>
+
+
+                                    {# editor #}
+                                    <div class="control" v-show="!isBulkSelecting() && !editor_btn_disable">
+                                        <button type="button" class="button is-link"
+                                                ref="editor"
+                                                :disabled="editor_btn_disable"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'editor.main'|trans }} (e)"
+                                                @click.stop="imageEditor()">
+                                            <span class="icon"><icon name="regular/object-ungroup" scale="1.2"></icon></span>
+                                        </button>
+                                    </div>
+
+                                    {# delete #}
+                                    <div class="control">
+                                        <button type="button" class="button is-link"
+                                                ref="delete"
+                                                :disabled="ops_btn_disable"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'delete.main'|trans }} (d / del)"
+                                                @click.stop="deleteItem()">
+                                            <span class="icon"><icon name="regular/trash-alt"></icon></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </template>
+                        <div class="__toolbar-level_second">
+                            {# last #}
+                            <div class="level-item">
+                                <div class="field has-addons">
+                                    {# refresh #}
+                                    <div class="control" v-if="!isBulkSelecting()">
+                                        <v-touch class="button is-primary"
+                                                 ref="refresh"
+                                                 :disabled="isLoading"
+                                                 tag="button"
+                                                 v-tippy="{arrow: true}"
+                                                 title="{{ 'action.refresh'|trans }} (r)"
+                                                 @tap="refresh()"
+                                                 @hold="clearAll()">
+                                    <span class="icon">
+                                        <icon name="sync" :spin="isLoading"></icon>
+                                    </span>
+                                        </v-touch>
+                                    </div>
+
+                                    {# lock #}
+                                    <div class="control hidden">
+                                        <button type="button" class="button is-warning"
+                                                ref="lock"
+                                                :disabled="lock_btn_disable"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'action.lock'|trans }} (l)"
+                                                @click.stop="lockFileForm()">
+                                            <span class="icon">
+                                                <icon :name="IsLocked(selectedFile) ? 'lock' : 'lock-open'"></icon>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    {# visibility #}
+                                    <div class="control hidden">
+                                        <button type="button" class="button"
+                                                :class="IsVisible(selectedFile) ? 'is-light' : 'is-danger'"
+                                                ref="visibility"
+                                                :disabled="vis_btn_disable"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'action.visibility'|trans }} (v)"
+                                                @click.stop="FileVisibilityForm()">
+                                    <span class="icon">
+                                        <icon :name="IsVisible(selectedFile) ? 'eye' : 'eye-slash'"></icon>
+                                    </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="level-item">
+                                <div class="field" :class="{'has-addons' : isBulkSelecting()}">
+                                    {# bulk select all #}
+                                    <div class="control">
+                                        <button type="button" @click.stop="blkSlctAll()"
+                                                ref="bulkSelectAll"
+                                                class="button"
+                                                :class="{'is-warning' : bulkSelectAll}"
+                                                v-show="isBulkSelecting()"
+                                                :disabled="searchItemsCount == 0 || isLoading"
+                                                v-tippy="{arrow: true}"
+                                                title="a">
+                                            <template v-if="bulkSelectAll">
+                                                <span class="icon"><icon name="minus" scale="0.8"></icon></span>
+                                                <span>{{ 'select.non'|trans }}</span>
+                                            </template>
+                                            <template v-else>
+                                                <span class="icon"><icon name="plus" scale="0.8"></icon></span>
+                                                <span>{{ 'select.all'|trans }}</span>
+                                            </template>
+                                        </button>
+                                    </div>
+
+                                    {# bulk select #}
+                                    <div class="control">
+                                        <button type="button" @click.stop="blkSlct()"
+                                                ref="bulkSelect"
+                                                class="button"
+                                                :class="{'is-danger' : bulkSelect}"
+                                                :disabled="searchItemsCount == 0 || !allItemsCount || isLoading"
+                                                v-tippy="{arrow: true}"
+                                                title="{{ 'select.bulk'|trans }} (b)">
+                                            <span class="icon"><icon name="layer-group"></icon></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="level-item flex">
+                                {# search #}
+                                <div v-if="allItemsCount">
+                                    <div class="control">
+                                        <div class="field has-addons">
+                                             {# local #}
+                                            <p class="control has-icons-left">
+                                                <input class="input"
+                                                       :disabled="isLoading"
+                                                       type="text"
+                                                       ref="search"
+                                                       v-model="searchFor"
+                                                       :placeholder="trans('find')">
+                                                <span class="icon is-left">
+                                            <icon name="search"></icon>
+                                        </span>
+                                            </p>
+
+                                            {# clear #}
+                                            <p class="control">
+                                                <button type="button" class="button is-black" :disabled="!searchFor"
+                                                        v-tippy="{arrow: true}"
+                                                        title="{{ 'clear'|trans({'attr' : 'search.main'|trans|lower }) }}"
+                                                        @click.stop="resetInput('searchFor')">
+                                                    <span class="icon"><icon name="times"></icon></span>
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# filter & sort #}
+                                <div class="ml-3" v-if="searchItemsCount != 0 && allItemsCount">
+                                    <filter-and-sorting :disabled="isLoading"
+                                                        :filter-name-is="filterNameIs"
+                                                        :sort-name-is="sortNameIs"
+                                                        :set-filter-name="setFilterName"
+                                                        :set-sort-name="setSortName"
+                                                        :have-a-file-of-type="haveAFileOfType"
+                                                        :trans="trans"
+                                                        v-tippy="{arrow: true}"
+                                                        title="{{ 'filter.filtration'|trans }}">
+                                        >
+                                    </filter-and-sorting>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </transition>
@@ -460,12 +431,31 @@
                 </div>
             </transition>
         </section>
-        {# ====================================================================== #}
-
-        {# mobile breadCrumb #}
-{#        {% include '@EasyMedia/partials/mobile-nav.html.twig' %}#}
 
         {# ====================================================================== #}
+
+
+        <!--<div class="level-right">
+            {# upload preview info #}
+            <div class="level-item" v-if="waitingForUpload">
+                <nav class="breadcrumb">
+                    <ul>
+                        <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewList.length }}{% endverbatim %} File's</p></li>
+                        <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewListSize }}{% endverbatim %}</p></li>
+                    </ul>
+                </nav>
+            </div>
+
+            {# toggle sidebar #}
+            <div class="level-item" v-show="!isLoading && !waitingForUpload">
+                {# show/hide toolbar #}
+                <div class="block sm:hidden">
+                    <button type="button" class="button is-link __stack-left-toolbarToggle" @click.stop="toolBar = !toolBar">
+                        <span class="icon"><icon :name="toolBar ? 'times' : 'bars'"></icon></span>
+                    </button>
+                </div>
+            </div>
+        </div>-->
 
         <div class="media-manager__stack">
             {# path toolbar #}
@@ -510,52 +500,11 @@
                     </div>
                 </div>
 
-                <div class="level-right">
-                    {# upload preview info #}
-                    <div class="level-item" v-if="waitingForUpload">
-                        <nav class="breadcrumb">
-                            <ul>
-                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewList.length }}{% endverbatim %} File's</p></li>
-                                <li><p class="level has-text-weight-bold">{% verbatim %}{{ uploadPreviewListSize }}{% endverbatim %}</p></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    {# toggle sidebar #}
-                    <div class="level-item" v-show="!isLoading && !waitingForUpload">
-                        <div class="is-hidden-touch"
-                             @click.stop="toggleInfoSidebar(), saveUserPref()"
-                             v-tippy="{arrow: true}"
-                             title="t"
-                             v-if="allItemsCount">
-                            <transition :name="infoSidebar ? 'mm-info-out' : 'mm-info-in'" mode="out-in">
-                                <div :key="infoSidebar ? 1 : 2" class="__stack-sidebar-toggle has-text-link">
-                                    <template v-if="infoSidebar">
-                                        <span>{{ 'close'|trans }}</span>
-                                        <span class="icon"><icon name="angle-double-right"></icon></span>
-                                    </template>
-                                    <template v-else>
-                                        <span>{{ 'open'|trans }}</span>
-                                        <span class="icon"><icon name="angle-double-left"></icon></span>
-                                    </template>
-                                </div>
-                            </transition>
-                        </div>
-
-                        {# show/hide toolbar #}
-                        <div class="block sm:hidden">
-                            <button type="button" class="button is-link __stack-left-toolbarToggle" @click.stop="toolBar = !toolBar">
-                                <span class="icon"><icon :name="toolBar ? 'times' : 'bars'"></icon></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             {# ====================================================================== #}
 
             <section class="__stack-container">
-
                 {# upload preview #}
                 <div id="uploadPreview">
                     {# ops #}
@@ -653,7 +602,7 @@
 
                 <div class="extra-func-btns">
                     {# intro #}
-                    <usage-intro-btn v-show="!isLoading && !waitingForUpload"></usage-intro-btn>
+{#                    <usage-intro-btn v-show="!isLoading && !waitingForUpload"></usage-intro-btn>#}
 
                     {# movable list #}
                     <v-touch v-if="allItemsCount && !isLoading && !waitingForUpload && !inMovableList()"
@@ -680,6 +629,24 @@
                 </div>
 
                 {# ====================================================================== #}
+                {# toggle sidebar #}
+                <div class="__stack-sidebar-toggle is-hidden-touch"
+                     :class="{'__stack-sidebar-hidden' : !infoSidebar}"
+                     @click.stop="toggleInfoSidebar(), saveUserPref()"
+                     v-tippy="{arrow: true}"
+                     :title="infoSidebar ? trans('close') + ' (t)' : trans('open') + ' (t)'"
+                     v-if="allItemsCount">
+                    <transition :name="infoSidebar ? 'mm-info-out' : 'mm-info-in'" mode="out-in">
+                        <div :key="infoSidebar ? 1 : 2" class="__stack-sidebar-toggle-button has-text-link">
+                            <template v-if="infoSidebar">
+                                <span class="icon"><icon name="angle-double-left"></icon></span>
+                            </template>
+                            <template v-else>
+                                <span class="icon"><icon name="angle-double-right"></icon></span>
+                            </template>
+                        </div>
+                    </transition>
+                </div>
 
                 {# files box #}
                 <v-touch class="__stack-files mm-animated"
@@ -690,6 +657,7 @@
                          @hold="containerClick($event)"
                          @dbltap="containerClick($event)"
                          @pinchin="containerClick($event)">
+
 
                     {# no search #}
                     <section>
@@ -762,7 +730,7 @@
                                             <h4>{% verbatim %}{{ file.name }}{% endverbatim %}</h4>
                                             <small v-if="config.gfi">
                                                 <span>{% verbatim %}{{ file.count }}{% endverbatim %} {{ 'items'|trans|lower }}</span>
-                                                <span v-if="file.size > 0" class="__info-file-size">"{% verbatim %}{{ getFileSize(file.size) }}{% endverbatim %}"</span>
+                                                <span v-if="file.size > 0" class="__info-file-size">{% verbatim %}{{ getFileSize(file.size) }}{% endverbatim %}</span>
                                             </small>
                                         </template>
 

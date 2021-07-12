@@ -22,14 +22,11 @@ $anim_2: cubic-bezier(0.215, 0.61, 0.355, 1);
     width: 57px;
 
     > div {
+        @apply bg-white float-left inline-block rounded-full;
         animation-delay: 0;
         animation-fill-mode: both;
         animation-iteration-count: infinite;
         animation-name: ball-grid-pulse;
-        background-color: $black;
-        border-radius: 100%;
-        display: inline-block;
-        float: left;
         height: 15px;
         margin: 2px;
         width: 15px;

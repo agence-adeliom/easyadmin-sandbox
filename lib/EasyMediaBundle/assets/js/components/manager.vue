@@ -1,5 +1,3 @@
-<style lang="scss" scoped src="../../sass/packages/bulma.scss"></style>
-
 <script>
 import debounce    from 'lodash/debounce'
 import Vue2Filters from 'vue2-filters'
@@ -29,18 +27,13 @@ import Watchers       from '../modules/watch'
 export default {
     components: {
         containerClickOverlay: require('./utils/container-click-overlay.vue').default,
-        contentRatio         : require('./utils/ratio.vue').default,
         dirBookmarks         : require('./toolbar/dir-bookmark.vue').default,
         filterAndSorting     : require('./toolbar/filter-sort.vue').default,
-        globalSearchBtn      : require('./globalSearch/button.vue').default,
-        globalSearchPanel    : require('./globalSearch/panel.vue').default,
         imageEditor          : require('./image/editor/main.vue').default,
         imageIntersect       : require('./image/lazyLoading.vue').default,
         imagePreview         : require('./image/preview.vue').default,
         InfiniteLoading      : require('vue-infinite-loading').default,
         uploadPreview        : require('./utils/upload-preview.vue').default,
-        usageIntroBtn        : require('./usageIntro/button.vue').default,
-        usageIntroPanel      : require('./usageIntro/panel.vue').default,
     },
     name  : 'media-manager',
     mixins: [
@@ -213,6 +206,7 @@ export default {
             EventHub.listen('image-edited', (msg) => {
                 this.imageWasEdited = true
                 this.showNotif(`${this.trans('save_success')} "${msg}"`, 'success', 5)
+                this.toggleModal()
             })
 
             // get images dimensions
@@ -345,6 +339,13 @@ export default {
                             // file upload
                             if (key == 'u') {
                                 this.$refs.upload.click()
+                            }
+
+                            // new folder
+                            if (key == 'n') {
+                              setInterval(()=>{
+                                this.$refs.new_folder.click()
+                              },1);
                             }
                         }
                         // end of no bulk selection

@@ -1,3 +1,97 @@
+.modal{
+  @apply hidden items-center overflow-hidden fixed justify-center;
+  z-index: 1050;
+  &-background {
+    @apply fixed inset-0 bg-black bg-opacity-90;
+  }
+  &.is-active {
+    @apply flex p-3 pb-0;
+  }
+  &-close{
+    @apply select-none cursor-pointer pointer-events-auto inline-block flex-grow-0 flex-shrink-0 h-12 w-12 outline-none fixed top-3 right-3 align-top appearance-none bg-theme-75 bg-opacity-20 rounded-full border-none;
+    font-size: 0;
+
+    &:before,
+    &:after{
+      @apply bg-white block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45;
+      content: "";
+    }
+    &:before{
+      height: 2px;
+      width: 50%;
+    }
+    &:after{
+      height: 50%;
+      width: 2px;
+    }
+
+
+
+    /*
+        @apply h-12 fixed w-12 top-8 right-8;
+
+     */
+  }
+  &-card, &-content {
+    @apply flex flex-col overflow-hidden;
+    max-height: calc(100vh - 40px);
+    -ms-overflow-y: visible;
+
+    @screen sm{
+      margin: 0 auto;
+      width: 640px;
+    }
+
+    &-foot,
+    &-head {
+      @apply items-center bg-gray-200 flex flex-shrink-0 justify-start p-5 relative;
+    }
+    &-head{
+      @apply rounded-t shadow-sm;
+    }
+    &-foot {
+      @apply rounded-b flex-col-reverse sm:flex-row gap-2 sm:gap-0;
+      & > .button {
+        @apply w-full m-0 sm:w-auto sm:mr-2;
+        &:last-child {
+          @apply sm:mr-0;
+        }
+      }
+
+      /*
+      .button:not(:last-child) {
+        @apply mr-2;
+      }
+       */
+
+      .level{
+        @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4;
+        &-left, &-right{
+          @apply flex flex-row gap-2  ;
+        }
+      }
+    }
+    &-title{
+      @apply text-gray-800 flex-grow flex-shrink-0 text-2xl leading-none;
+    }
+    &-body{
+      @apply bg-white flex-grow flex-shrink overflow-auto p-5 scrolling-touch;
+    }
+  }
+  &-card{
+    &-head{
+      @include state-colors();
+    }
+    &-title {
+      max-width: calc(100% - 20px);
+    }
+    &-foot {
+      @apply justify-end;
+    }
+  }
+}
+
+
 .__modal{
 
   &-content-wrapper {
@@ -74,7 +168,10 @@
     @apply mt-4 pt-4 text-right;
   }
   &-folder-warning {
-    @apply items-end flex mt-4;
+    @apply items-end flex mt-4 text-red-400;
+    .icon{
+      @apply mr-2;
+    }
   }
 }
 

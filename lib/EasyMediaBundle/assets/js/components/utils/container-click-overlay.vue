@@ -4,26 +4,13 @@
 </template>
 
 <style scoped lang="scss">
-    @import '../../../sass/partials/vars';
-
     .gesture-overlay {
-        background-color: rgba($blue, 0.25);
-        bottom: 0;
-        left: 0;
-        opacity: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition: all $anim-time;
-        visibility: hidden;
-        z-index: 10;
+      @apply bg-blue-500 bg-opacity-25 absolute inset-0 invisible z-10 transition-all
     }
 
     .active {
-        opacity: 1;
-        visibility: visible;
+      @apply visible opacity-100;
     }
-
 </style>
 
 <script>
