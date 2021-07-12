@@ -34,7 +34,6 @@ class EasyMediaField implements FieldInterface
             //->addWebpackEncoreEntry('admin-field-map')
             ->addCssFiles('bundles/easymedia/style/style.css')
             ->addJsFiles('bundles/easymedia/js/app.js')
-            ->addJsFiles('//cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js')
             ;
     }
 }

@@ -50,8 +50,7 @@ label.input-label{
     @apply border-transparent text-white bg-blue-500;
   }
   &.is-primary {
-    background-color: var(--bs-primary);
-    @apply border-transparent text-white;
+    @apply border-transparent text-white bg-purple-500;
   }
   &.is-success {
     @apply border-transparent text-white bg-green-400;

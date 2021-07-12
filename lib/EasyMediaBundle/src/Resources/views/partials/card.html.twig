@@ -1,10 +1,10 @@
 {% trans_default_domain 'EasyMediaBundle' %}
 
-{% set ligtMode = (light is defined and light) ? true : false %}
+{% set lightMode = (light is defined and light) ? true : false %}
 
 <v-touch class="card"
          :class="{'pdf-prev': selectedFileIs('pdf') || selectedFileIs('text')}"
-         {% if not ligtMode %}
+         {% if not lightMode %}
          @swiperight="cardSwipGesture"
          @swipeleft="cardSwipGesture"
          @swipeup="cardSwipGesture"
@@ -53,9 +53,9 @@
 
         {# image #}
         <image-preview v-else
-                       {% if not ligtMode %}:show-ops="true"{% endif %}
+                       {% if not lightMode %}:show-ops="!ops_btn_disable"{% endif %}
                        :trans="trans"
-                       {% if not ligtMode %}:ops_btn_disable="ops_btn_disable"
+                       {% if not lightMode %}:ops_btn_disable="ops_btn_disable"
                        :in-movable-list="inMovableList"
                        :rename-item="renameItem"
                        :delete-item="deleteItem"
@@ -79,7 +79,7 @@
                     {# name #}
                     <p class="title">
                         <span class="link"
-                              {% if not ligtMode %}@click.stop="copyLink(selectedFile.path)"
+                              {% if not lightMode %}@click.stop="copyLink(selectedFile.path)"
                               :title="linkCopied ? trans('copied') : trans('to_cp')"
                               v-tippy="{arrow: true, hideOnClick: false, followCursor: true}"
                               @hidden="linkCopied = false"{% endif %}>

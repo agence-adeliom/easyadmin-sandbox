@@ -1,5 +1,5 @@
 {# multi #}
-<template v-if="movableItemsFilter.length">
+<template v-if="movableItemsFilter.length && enableMove">
     <ul>
         <li class="media link"
             v-for="(one, i) in movableItemsFilter"

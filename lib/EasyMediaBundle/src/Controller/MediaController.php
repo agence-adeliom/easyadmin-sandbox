@@ -21,6 +21,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -107,4 +108,18 @@ class MediaController extends AbstractController
         $datas = [];
         return $this->render("@EasyMedia/manager_view.html.twig", $datas);
     }
+
+    public function browse(Request $request)
+    {
+        $data = [
+            "provider" => $request->query->get("provider"),
+            "restrict" => $request->query->get("restrict"),
+            "CKEditor" => $request->query->get("CKEditor"),
+            "CKEditorFuncNum" => $request->query->get("CKEditorFuncNum"),
+            "langCode" => $request->query->get("langCode", "en")
+        ];
+        return $this->render("@EasyMedia/browser.html.twig", $data);
+    }
+
+
 }

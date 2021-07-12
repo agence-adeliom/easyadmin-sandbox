@@ -44,7 +44,6 @@ export default {
     this.eventsListener();
   },
   mounted() {
-    console.log(this);
     if(this.media){
       this.getInfos(this.media);
     }

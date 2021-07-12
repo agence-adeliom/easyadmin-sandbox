@@ -31,7 +31,7 @@
   }
   &-content{
     .level{
-      @apply flex;
+      @apply flex justify-between;
     }
   }
 }

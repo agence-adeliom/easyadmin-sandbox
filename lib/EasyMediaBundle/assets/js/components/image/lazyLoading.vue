@@ -55,7 +55,7 @@ export default {
         intersected: {
             immediate: true,
             handler(val) {
-                if (val) {
+              if (val) {
                     this.src = this.file.path
                     this.$nextTick(() => this.sendDimensionsToParent())
                 }

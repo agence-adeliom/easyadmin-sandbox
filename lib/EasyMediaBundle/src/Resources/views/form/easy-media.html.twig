@@ -19,6 +19,7 @@
         'file_infos' : path('media.get_file_info'),
     } %}
 
+
     <div {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}>
         {{- form_label(form) -}}
 
@@ -38,12 +39,11 @@
                             <div class="__box-data" @click.stop="toggleModal('preview_modal')">
                                 <div class="__box-preview">
                                     <template v-if="fileTypeIs(selectedFile, 'image')">
-                                        <image-intersect
-                                                :file="selectedFile"
-                                                :check-for-dimensions="checkForDimensions"
-                                                :browser-support="browserSupport"
-                                                root-el=".selection-preview">
-                                        </image-intersect>
+                                        <div class="__box-img">
+                                            <img v-if="selectedFile.path"
+                                                 :src="selectedFile.path"
+                                                 loading="lazy">
+                                        </div>
                                     </template>
 
                                     <span v-else class="icon is-large">

@@ -69,7 +69,14 @@ export default {
         'hideExt',
         'hidePath',
         'restrict',
-        'userId'
+        'userId',
+        'enableEditor',
+        'enableUpload',
+        'enableMove',
+        'enableRename',
+        'enableMetas',
+        'enableDelete',
+        'enableBulkSelection'
     ],
     data() {
         return {
@@ -410,7 +417,7 @@ export default {
                         }
 
                         // toggle file details sidebar
-                        if (key == 't' && !this.isASmallScreen) {
+                        if (key == 't' && !this.isASmallScreen && !this.isBulkSelecting()) {
                             this.toggleInfoSidebar()
                             this.saveUserPref()
                         }

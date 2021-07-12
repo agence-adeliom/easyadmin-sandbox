@@ -1,5 +1,5 @@
 {# multi #}
-<template v-if="bulkItemsFilter.length">
+<template v-if="bulkItemsFilter.length && enableDelete">
     {# less than 8 items #}
     <template v-if="bulkItemsFilter.length <= 8">
         <div class="media" v-for="one in bulkItemsFilter" :key="one.path">

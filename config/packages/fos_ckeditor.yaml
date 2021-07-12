@@ -1,0 +1,18 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+fos_ck_editor:
+    configs:
+        main_config:
+            toolbar: full
+            filebrowserBrowseRoute: media.browse
+            filebrowserImageBrowseRoute: media.browse
+            filebrowserImageBrowseRouteParameters:
+                provider: 'image'
+                restrict:
+                    uploadTypes:
+                        - 'image/*'
+                    uploadSize: 5
+
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'

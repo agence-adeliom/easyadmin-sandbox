@@ -19,7 +19,7 @@
     </div>
 
     {# image_editor #}
-    <div v-if="isActiveModal('imageEditor_modal')"
+    <div v-if="isActiveModal('imageEditor_modal') && enableEditor"
          class="modal mm-animated fadeIn is-active __modal-editor">
         <v-touch class="modal-background link" @dbltap="toggleModal()"></v-touch>
         <div class="mm-animated fadeInDown __modal-content-wrapper">
@@ -69,7 +69,8 @@
 
     {# new_folder_modal #}
     <div class="modal mm-animated fadeIn"
-         :class="{'is-active': isActiveModal('new_folder_modal')}">
+         :class="{'is-active': isActiveModal('new_folder_modal')}"
+            v-if="enableUpload">
         <div class="modal-background link" @click.stop="toggleModal()"></div>
         <div class="modal-card mm-animated fadeInDown">
             <header class="modal-card-head is-link">
@@ -105,7 +106,8 @@
 
     {# edit_metas_modal #}
     <div class="modal mm-animated fadeIn"
-         :class="{'is-active': isActiveModal('edit_metas_modal')}">
+         :class="{'is-active': isActiveModal('edit_metas_modal')}"
+         v-if="enableMetas">
         <div class="modal-background link" @click.stop="toggleModal()"></div>
         <div class="modal-card mm-animated fadeInDown">
             <header class="modal-card-head is-link">
@@ -161,7 +163,8 @@
 
     {# rename_file_modal #}
     <div class="modal mm-animated fadeIn"
-         :class="{'is-active': isActiveModal('rename_file_modal')}">
+         :class="{'is-active': isActiveModal('rename_file_modal')}"
+         v-if="enableRename">
         <div class="modal-background link" @click.stop="toggleModal()"></div>
         <div class="modal-card mm-animated fadeInDown">
             <header class="modal-card-head is-warning">
@@ -198,7 +201,8 @@
 
     {# move_file_modal #}
     <div class="modal mm-animated fadeIn"
-         :class="{'is-active': isActiveModal('move_file_modal')}">
+         :class="{'is-active': isActiveModal('move_file_modal')}"
+         v-if="enableMove">
         <div class="modal-background link" @click.stop="toggleModal()"></div>
         <div class="modal-card mm-animated fadeInDown"
               action="{{ path('media.move_file') }}"
@@ -278,7 +282,7 @@
 
     {# confirm_delete_modal #}
     <div class="modal mm-animated fadeIn"
-         :class="{'is-active': isActiveModal('confirm_delete_modal')}">
+         :class="{'is-active': isActiveModal('confirm_delete_modal')}" v-if="enableDelete">
         <div class="modal-background link" @click.stop="toggleModal()"></div>
         <div class="modal-card mm-animated fadeInDown">
             <header class="modal-card-head is-danger">

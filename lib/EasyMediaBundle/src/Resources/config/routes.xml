@@ -5,6 +5,7 @@
         http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route methods="GET" id="media.index" controller="Adeliom\EasyMediaBundle\Controller\MediaController::index" path="/" ></route>
+    <route methods="GET" id="media.browse" controller="Adeliom\EasyMediaBundle\Controller\MediaController::browse" path="/browse" ></route>
 
     <route methods="POST" id="media.upload" controller="Adeliom\EasyMediaBundle\Controller\MediaController::upload" path="/upload" ></route>
     <route methods="POST" id="media.uploadCropped" controller="Adeliom\EasyMediaBundle\Controller\MediaController::uploadEditedImage" path="/upload-cropped" ></route>

@@ -1,7 +1,7 @@
 {% trans_default_domain 'EasyMediaBundle' %}
 
 {% set isModal = (modal is defined and modal) ? true : false %}
-
+{% set isBrowser = (browser is defined and browser) ? true : false %}
 
 {% set options = {
     'baseUrl' : adeliom_easymedia.base_url,
@@ -143,7 +143,15 @@
                :hide-path="{{ hidePath|default(null) ? hidePath|json_encode : '[]' }}"
                :restrict="{{ restrict|default(null) ? restrict|json_encode : '{}' }}"
                :user-id="{{ adeliom_easymedia.enable_broadcasting ? app.user.id : 0 }}"
-               :upload-panel-img-list="{{ patterns|default(null) ?: '[]' }}">
+               :upload-panel-img-list="{{ patterns|default(null) ?: '[]' }}"
+               :enable-editor="{{ (editor is defined and not editor) ? 'false' : 'true' }}"
+               :enable-upload="{{ (upload is defined and not upload) ? 'false' : 'true' }}"
+               :enable-move="{{ (move is defined and not move) ? 'false' : 'true' }}"
+               :enable-rename="{{ (rename is defined and not rename) ? 'false' : 'true' }}"
+               :enable-metas="{{ (metas is defined and not metas) ? 'false' : 'true' }}"
+               :enable-delete="{{ (delete is defined and not delete) ? 'false' : 'true' }}"
+               :enable-bulk-selection="{{ (bulk_selection is defined and not bulk_selection) ? 'false' : 'true' }}"
+>
 
     <div class="media-manager" >
 
@@ -156,7 +164,7 @@
                     <div class="__toolbar-level">
                         <div class="__toolbar-level_main">
                             {# first #}
-                            <div class="level-item">
+                            <div class="level-item" v-if="enableUpload">
                                 <div class="field" :class="{'has-addons': !isBulkSelecting()}">
                                     {# upload #}
                                     <div class="control" v-if="!isBulkSelecting()">
@@ -188,7 +196,7 @@
                             <div class="level-item">
                                 <div class="field has-addons">
                                     {# move #}
-                                    <div class="control" v-show="isBulkSelecting() || !(isLoading || !movableItemsCount)">
+                                    <div class="control" v-if="enableMove" v-show="isBulkSelecting() || !(isLoading || !movableItemsCount)">
                                         <button type="button" class="button is-link"
                                                 ref="move"
                                                 :disabled="isLoading || !movableItemsCount"
@@ -200,7 +208,7 @@
                                     </div>
 
                                     {# rename #}
-                                    <div class="control" v-if="!isBulkSelecting()">
+                                    <div class="control" v-if="!isBulkSelecting() && enableRename">
                                         <button type="button" class="button is-link"
                                                 ref="rename"
                                                 :disabled="ops_btn_disable"
@@ -212,7 +220,7 @@
                                     </div>
 
                                     {# editMetas #}
-                                    <div class="control" v-if="!isBulkSelecting() && !(ops_btn_disable || !fileTypeIs(selectedFile, 'image'))">
+                                    <div class="control" v-if="!isBulkSelecting() && !(ops_btn_disable || !fileTypeIs(selectedFile, 'image')) && enableMetas">
                                         <button type="button" class="button is-link"
                                                 ref="editMetas"
                                                 :disabled="ops_btn_disable || !fileTypeIs(selectedFile, 'image')"
@@ -237,7 +245,7 @@
                                     </div>
 
                                     {# delete #}
-                                    <div class="control">
+                                    <div class="control" v-if="enableDelete">
                                         <button type="button" class="button is-link"
                                                 ref="delete"
                                                 :disabled="ops_btn_disable"
@@ -301,7 +309,7 @@
                                 </div>
                             </div>
 
-                            <div class="level-item">
+                            <div class="level-item" v-if="enableBulkSelection">
                                 <div class="field" :class="{'has-addons' : isBulkSelecting()}">
                                     {# bulk select all #}
                                     <div class="control">
@@ -600,7 +608,7 @@
                 {# overlay #}
                 <container-click-overlay></container-click-overlay>
 
-                <div class="extra-func-btns">
+                <div class="extra-func-btns" v-if="enableMove">
                     {# intro #}
 {#                    <usage-intro-btn v-show="!isLoading && !waitingForUpload"></usage-intro-btn>#}
 
@@ -635,7 +643,7 @@
                      @click.stop="toggleInfoSidebar(), saveUserPref()"
                      v-tippy="{arrow: true}"
                      :title="infoSidebar ? trans('close') + ' (t)' : trans('open') + ' (t)'"
-                     v-if="allItemsCount">
+                     v-if="allItemsCount && !this.isBulkSelecting()">
                     <transition :name="infoSidebar ? 'mm-info-out' : 'mm-info-in'" mode="out-in">
                         <div :key="infoSidebar ? 1 : 2" class="__stack-sidebar-toggle-button has-text-link">
                             <template v-if="infoSidebar">
@@ -755,7 +763,7 @@
                 {# ====================================================================== #}
 
                 {# info sidebar #}
-                <v-touch v-if="infoSidebar"
+                <v-touch v-if="infoSidebar && !this.isBulkSelecting()"
                          class="__stack-sidebar is-hidden-touch"
                          @swiperight="toggleInfoSidebar(), saveUserPref()"
                          @swipeleft="toggleInfoSidebar(), saveUserPref()">

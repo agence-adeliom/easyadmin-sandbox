@@ -106,3 +106,18 @@
     }
   }
 }
+
+#media-holder.fullscreen{
+  .media-manager{
+    @apply h-full;
+    &__stack{
+      height: calc(100% - 135px);
+      @screen sm{
+        height: calc(100% - 82px);
+      }
+      .__stack-container{
+        @apply flex-1;
+      }
+    }
+  }
+}
