@@ -14,13 +14,12 @@ use Adeliom\EasyMediaBundle\Controller\Module\Rename;
 use Adeliom\EasyMediaBundle\Controller\Module\Upload;
 use Adeliom\EasyMediaBundle\Controller\Module\Utils;
 use Adeliom\EasyMediaBundle\Controller\Module\Visibility;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -85,8 +84,30 @@ class MediaController extends AbstractController
         $this->GFI = $container->getParameter("adeliom_easymedia.get_folder_info");
         $this->LMF = $container->getParameter("adeliom_easymedia.last_modified_format");
         $this->paginationAmount = $container->getParameter("adeliom_easymedia.pagination_amount");
-        $adapter = new LocalFilesystemAdapter($this->rootPath);
+
+        // The internal adapter
+        $adapter = new LocalFilesystemAdapter(
+            // Determine the root directory
+            $this->rootPath,
+            // Customize how visibility is converted to unix permissions
+            PortableVisibilityConverter::fromArray([
+                'file' => [
+                    'public' => 0644,
+                    'private' => 0640,
+                ],
+                'dir' => [
+                    'public' => 0755,
+                    'private' => 0740,
+                ],
+            ]),
+            // Write flags
+            LOCK_EX,
+            // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
+            // Disallowing them causes exceptions when encountered
+            LocalFilesystemAdapter::DISALLOW_LINKS
+        );
         $this->filesystem = new Filesystem($adapter);
+
         $this->em = $em;
 
         $this->locker = $em->getRepository($this->lockEntity);

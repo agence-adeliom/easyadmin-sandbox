@@ -29,7 +29,9 @@ trait NewFolder
             $message = $this->translator->trans('error.already_exists', [] , "EasyMediaBundle");
         } else {
             try {
-                $this->filesystem->createDirectory($full_path);
+                $this->filesystem->createDirectory($full_path, [
+                    "directory_visibility" => "public"
+                ]);
             } catch (FilesystemException | UnableToCreateDirectory $exception) {
                 $message = $this->translator->trans('error.creating_dir', [] , "EasyMediaBundle");
             }

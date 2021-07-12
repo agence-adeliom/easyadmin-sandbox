@@ -107,7 +107,8 @@
   }
 }
 
-#media-holder.fullscreen{
+#media-holder.fullscreen,
+#main > #media-holder{
   .media-manager{
     @apply h-full;
     &__stack{
@@ -121,3 +122,10 @@
     }
   }
 }
+
+#main > #media-holder{
+  .media-manager{
+    height: calc(100vh - 82px);
+  }
+}
+
