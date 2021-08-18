@@ -121,6 +121,7 @@ export default {
 
 .wrapper {
   @apply overflow-hidden relative block;
+  min-height: auto;
     > div:first-child {
       @apply block;
         padding-bottom: 62.5%;

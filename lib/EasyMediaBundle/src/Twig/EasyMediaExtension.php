@@ -43,11 +43,20 @@ class EasyMediaExtension extends AbstractExtension
         ];
     }
 
-    public function resolveMedia(?File $file)
+    public function resolveMedia($file)
     {
-        if($file){
-            $baseUrl = $this->container->getParameter("adeliom_easymedia.base_url");
-            $storage = $this->container->getParameter("adeliom_easymedia.storage");
+        if(is_string($file) && !empty($file)){
+            $rootPath = $this->container->getParameter("easy_media.storage");
+            $basePath = $this->container->getParameter("easy_media.base_url");
+            $path = $rootPath . DIRECTORY_SEPARATOR . str_replace($basePath, "", $file);
+            if (file_exists($path) && is_file($path)){
+                $file = new File($path);
+            }
+        }
+
+        if($file instanceof File){
+            $baseUrl = $this->container->getParameter("easy_media.base_url");
+            $storage = $this->container->getParameter("easy_media.storage");
 
             $path = $file->getPathname();
             $path = str_replace($storage, "", $path);
@@ -59,81 +68,113 @@ class EasyMediaExtension extends AbstractExtension
         return null;
     }
 
-    public function mediaMeta(?File $file, ?string $key = null){
-        if($path = $this->resolveMedia($file)) {
-            $metasService = $this->container->get("adeliom_easymedia.service.metas");
-            $basePath = $this->container->getParameter("adeliom_easymedia.base_url");
-            $rootPath = $this->container->getParameter("adeliom_easymedia.storage");
-            $path = DIRECTORY_SEPARATOR . str_replace($basePath, "", $path);
-            $meta = null;
+    public function mediaMeta($file, ?string $key = null){
 
-            if($key){
-                if($meta = $metasService->getMeta($path, $key)){
-                    return $meta->getMetaValue();
-                }
-            }else{
-                $metas = [];
-                if($meta = $metasService->getMetas($path)){
-                    foreach ($meta as $item){
-                        $metas[$item->getMetaKey()] = $item->getMetaValue();
+        if(is_string($file) && !empty($file)){
+            $rootPath = $this->container->getParameter("easy_media.storage");
+            $basePath = $this->container->getParameter("easy_media.base_url");
+            $path = $rootPath . DIRECTORY_SEPARATOR . str_replace($basePath, "", $file);
+            if (file_exists($path) && is_file($path)){
+                $file = new File($path);
+            }
+        }
+
+        if($file instanceof File){
+            if($path = $this->resolveMedia($file)) {
+                $metasService = $this->container->get("easy_media.service.metas");
+                $basePath = $this->container->getParameter("easy_media.base_url");
+                $rootPath = $this->container->getParameter("easy_media.storage");
+                $path = DIRECTORY_SEPARATOR . str_replace($basePath, "", $path);
+                $meta = null;
+
+                if($key){
+                    if($meta = $metasService->getMeta($path, $key)){
+                        return $meta->getMetaValue();
                     }
-                    return $metas;
+                }else{
+                    $metas = [];
+                    if($meta = $metasService->getMetas($path)){
+                        foreach ($meta as $item){
+                            $metas[$item->getMetaKey()] = $item->getMetaValue();
+                        }
+                        return $metas;
+                    }
                 }
             }
         }
         return null;
     }
 
-    public function mediaInfos(?File $file)
+    public function mediaInfos($file)
     {
-        if($path = $this->resolveMedia($file)){
-            $basePath = $this->container->getParameter("adeliom_easymedia.base_url");
-            $rootPath = $this->container->getParameter("adeliom_easymedia.storage");
-            $path = str_replace($basePath, "", $path);
+        if(is_string($file) && !empty($file)){
+            $rootPath = $this->container->getParameter("easy_media.storage");
+            $basePath = $this->container->getParameter("easy_media.base_url");
+            $path = $rootPath . DIRECTORY_SEPARATOR . str_replace($basePath, "", $file);
+            if (file_exists($path) && is_file($path)){
+                $file = new File($path);
+            }
+        }
 
-            $adapter = new LocalFilesystemAdapter($rootPath);
-            $filesystem = new Filesystem($adapter);
-            $metasService = $this->container->get("adeliom_easymedia.service.metas");
-            $LMF = $this->container->getParameter("adeliom_easymedia.last_modified_format");
+        if($file instanceof File){
+            if($path = $this->resolveMedia($file)){
+                $basePath = $this->container->getParameter("easy_media.base_url");
+                $rootPath = $this->container->getParameter("easy_media.storage");
+                $path = str_replace($basePath, "", $path);
 
-            $detector = new FinfoMimeTypeDetector();
+                $adapter = new LocalFilesystemAdapter($rootPath);
+                $filesystem = new Filesystem($adapter);
+                $metasService = $this->container->get("easy_media.service.metas");
+                $LMF = $this->container->getParameter("easy_media.last_modified_format");
 
-            /** @var FileAttributes $file */
-            $time = $filesystem->lastModified($path) ?? null;
-            $mimeType = $detector->detectMimeTypeFromFile($rootPath . DIRECTORY_SEPARATOR . $path);
-            $metas = $metasService->getMetas(DIRECTORY_SEPARATOR . $path);
+                $detector = new FinfoMimeTypeDetector();
 
-            $title = current(array_filter($metas, function ($item){return $item->getMetaKey() == "title";}));
-            $alt = current(array_filter($metas, function ($item){return $item->getMetaKey() == "alt";}));
-            $description = current(array_filter($metas, function ($item){return $item->getMetaKey() == "description";}));
-            $extra = current(array_filter($metas, function ($item){return !in_array($item->getMetaKey(), ["title","alt","description","dimensions"]); }));
+                /** @var FileAttributes $file */
+                $time = $filesystem->lastModified($path) ?? null;
+                $mimeType = $detector->detectMimeTypeFromFile($rootPath . DIRECTORY_SEPARATOR . $path);
+                $metas = $metasService->getMetas(DIRECTORY_SEPARATOR . $path);
+
+                $title = current(array_filter($metas, function ($item){return $item->getMetaKey() == "title";}));
+                $alt = current(array_filter($metas, function ($item){return $item->getMetaKey() == "alt";}));
+                $description = current(array_filter($metas, function ($item){return $item->getMetaKey() == "description";}));
+                $extra = current(array_filter($metas, function ($item){return !in_array($item->getMetaKey(), ["title","alt","description","dimensions"]); }));
 
 
-            return [
-                'name'                   => basename($path),
-                'type'                   => $mimeType,
-                'size'                   => $filesystem->fileSize($path),
-                'visibility'             => $filesystem->visibility($path),
-                'path'                   => $path,
-                'storage_path'           => dirname($path),
-                'last_modified'          => $time,
-                'last_modified_formated' => $time ? (new \DateTime("@$time"))->format($LMF) : null,
-                'metas' => [
-                    "title" => $title ? $title->getMetaValue() : null,
-                    "alt" => $alt ? $alt->getMetaValue() : null,
-                    "description" => $description ? $description->getMetaValue() : null,
-                    "extra" => $extra,
-                ]
+                return [
+                    'name'                   => basename($path),
+                    'type'                   => $mimeType,
+                    'size'                   => $filesystem->fileSize($path),
+                    'visibility'             => $filesystem->visibility($path),
+                    'path'                   => $path,
+                    'storage_path'           => dirname($path),
+                    'last_modified'          => $time,
+                    'last_modified_formated' => $time ? (new \DateTime("@$time"))->format($LMF) : null,
+                    'metas' => [
+                        "title" => $title ? $title->getMetaValue() : null,
+                        "alt" => $alt ? $alt->getMetaValue() : null,
+                        "description" => $description ? $description->getMetaValue() : null,
+                        "extra" => $extra,
+                    ]
 
-            ];
+                ];
+            }
         }
 
         return null;
     }
 
-    public function fileIsType(?File $file, $compare){
-        if($file) {
-            $mimes = $this->container->getParameter("adeliom_easymedia.extended_mimes");
+    public function fileIsType($file, $compare){
+        if(is_string($file) && !empty($file)){
+            $rootPath = $this->container->getParameter("easy_media.storage");
+            $basePath = $this->container->getParameter("easy_media.base_url");
+            $path = $rootPath . DIRECTORY_SEPARATOR . str_replace($basePath, "", $file);
+            if (file_exists($path) && is_file($path)){
+                $file = new File($path);
+            }
+        }
+
+        if($file instanceof File){
+            $mimes = $this->container->getParameter("easy_media.extended_mimes");
             $type = $file->getMimeType();
             if ($type) {
                 if ($compare == 'image' && in_array($type, $mimes["image"])) {

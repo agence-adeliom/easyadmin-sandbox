@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Article;
 use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -29,7 +30,10 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
-        yield MenuItem::linkToCrud('Medias TEST', 'fa fa-picture-o', MediaEntity::class);
+        yield MenuItem::section('Contenu');
+
+        yield MenuItem::linkToCrud('Medias', 'fa fa-picture-o', MediaEntity::class);
+        yield MenuItem::linkToCrud('Article', 'fa fa-file-alt', Article::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

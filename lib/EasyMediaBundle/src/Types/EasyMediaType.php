@@ -21,7 +21,7 @@ class EasyMediaType extends Type
         $listeners = $platform->getEventManager()->getListeners('getContainer');
         $listener = array_shift($listeners);
         $container = $listener->getContainer();
-        $root = $container->getParameter("adeliom_easymedia.storage");
+        $root = $container->getParameter("easy_media.storage");
 
         if($value){
             if(file_exists(dirname($root) . $value)){

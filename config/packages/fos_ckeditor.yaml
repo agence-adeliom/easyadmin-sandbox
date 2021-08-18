@@ -1,5 +1,6 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 fos_ck_editor:
+    input_sync: true
     configs:
         main_config:
             toolbar: full

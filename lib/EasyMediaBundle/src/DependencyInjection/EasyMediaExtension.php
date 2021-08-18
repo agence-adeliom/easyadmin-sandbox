@@ -14,16 +14,14 @@ class EasyMediaExtension extends Extension implements PrependExtensionInterface
 
     public function load(array $configs, ContainerBuilder $container)
     {
-        //$configuration = $this->getConfiguration($configs, $container);
-        //$config = $this->processConfiguration($configuration, $configs);
-        //var_dump($config);die;
+        $configuration = $this->getConfiguration($configs, $container);
+        $config = $this->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $configuration = $this->getConfiguration($configs, $container);
-        $config = $this->processConfiguration($configuration, $configs);
         foreach ($config as $k=>$v){
-            $container->setParameter('adeliom_easymedia.'.$k, $v);
+            $container->setParameter('easy_media.'.$k, $v);
         }
     }
 
@@ -41,21 +39,21 @@ class EasyMediaExtension extends Extension implements PrependExtensionInterface
         //     'type' => 'xml',
         //     'prefix' => 'Acme\FooBundle\Entity'
         // );
-        // $container->prependExtensionConfig('doctrine', $doctrineConfig);
+        $container->prependExtensionConfig('easy_media', $config);
         // TODO: Set custom twig config
         $twigConfig = [];
-        //$twigConfig['globals']['adeliom_easymedia_service'] = "@adeliom_easymedia.service";
-        $twigConfig['paths'][__DIR__.'/../Resources/views'] = "adeliom_easymedia";
-        $twigConfig['globals']['adeliom_easymedia'] = [];
+        //$twigConfig['globals']['easy_media_service'] = "@easy_media.service";
+        $twigConfig['paths'][__DIR__.'/../Resources/views'] = "easy_media";
+        $twigConfig['globals']['easy_media'] = [];
         foreach ($config as $k=>$v){
-            $twigConfig['globals']['adeliom_easymedia'][$k] = $v;
+            $twigConfig['globals']['easy_media'][$k] = $v;
         }
-        // $twigConfig['paths'][__DIR__.'/../Resources/public'] = "adeliom_easymedia.public";
+        // $twigConfig['paths'][__DIR__.'/../Resources/public'] = "easy_media.public";
         $container->prependExtensionConfig('twig', $twigConfig);
     }
 
     public function getAlias()
     {
-        return 'adeliom_easymedia';
+        return 'easy_media';
     }
 }

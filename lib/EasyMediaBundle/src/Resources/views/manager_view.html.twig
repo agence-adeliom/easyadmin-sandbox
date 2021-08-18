@@ -15,6 +15,11 @@
 {% block head_stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/easymedia/style/style.css') }}"/>
+    <style>
+        .content-wrapper{
+            padding: 0;
+        }
+    </style>
 {% endblock %}
 
 {# scripts #}

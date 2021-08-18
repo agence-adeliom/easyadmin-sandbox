@@ -6,13 +6,13 @@
     }) %}
 
     {% set options = {
-        'baseUrl' : adeliom_easymedia.base_url,
-        'hideFilesExt' : adeliom_easymedia.hide_files_ext,
-        'mimeTypes' : adeliom_easymedia.extended_mimes,
-        'broadcasting' : adeliom_easymedia.enable_broadcasting,
-        'gfi' : adeliom_easymedia.get_folder_info,
-        'ratioBar' : adeliom_easymedia.show_ratio_bar,
-        'previewFilesBeforeUpload' : adeliom_easymedia.preview_files_before_upload|trans()
+        'baseUrl' : easy_media.base_url,
+        'hideFilesExt' : easy_media.hide_files_ext,
+        'mimeTypes' : easy_media.extended_mimes,
+        'broadcasting' : easy_media.enable_broadcasting,
+        'gfi' : easy_media.get_folder_info,
+        'ratioBar' : easy_media.show_ratio_bar,
+        'previewFilesBeforeUpload' : easy_media.preview_files_before_upload|trans()
     } %}
 
     {% set routes = {
@@ -20,10 +20,11 @@
     } %}
 
 
+<div class="{{ form.vars.ea_crud_form.ea_field.columns ?? form.vars.ea_crud_form.ea_field.defaultColumns ?? '' }}">
     <div {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}>
         {{- form_label(form) -}}
 
-        <div class="form-widget">
+        <div class="form-widget easy-media-widget" data-widget="{{ form.vars.id }}">
             <easy-media-modal inline-template v-cloak :config="{{ options|json_encode }}" :routes="{{ routes|json_encode }}" >
                 <div>
                     <div v-if="inputName">{% include '@EasyMedia/extras/modal.html.twig' %}</div>
@@ -92,7 +93,6 @@
                             </div>
                             <button type="button" class="modal-close is-large" @click.stop="toggleModal()"></button>
                         </div>
-
                         {{ form_widget(form, {'type': 'hidden', 'attr': {':value': 'media'} }) }}
                     </section>
 
@@ -119,4 +119,12 @@
         </div>
 
     </div>
+
+    <link rel="stylesheet" href="{{ asset('bundles/easymedia/style/style.css') }}">
+    <script type="text/javascript" src="{{ asset('bundles/easymedia/js/app.js') }}"></script>
+
+    <script type="text/javascript">
+        new Vue({ el: ".easy-media-widget[data-widget='{{ form.vars.id }}']" })
+    </script>
+</div>
 {% endblock %}

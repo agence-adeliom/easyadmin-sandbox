@@ -65,4 +65,9 @@ class EasyMediaType extends AbstractType
     {
         return TextType::class;
     }
+
+    public function getBlockPrefix()
+    {
+        return "easy_media";
+    }
 }

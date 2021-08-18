@@ -1,0 +1,3 @@
+twig:
+  form_themes:
+    - '@EasyMedia/form/easy-media.html.twig'

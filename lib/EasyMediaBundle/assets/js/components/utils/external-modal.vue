@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         updateParent(path) {
-            return this.$parent[this.item] = path
+          return this.$parent[this.item] = path
         }
     },
     render() {}

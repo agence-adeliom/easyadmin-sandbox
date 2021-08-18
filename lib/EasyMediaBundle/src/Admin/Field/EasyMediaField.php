@@ -27,13 +27,13 @@ class EasyMediaField implements FieldInterface
             // you can use your own form types too
             ->setFormType(EasyMediaType::class)
             ->addCssClass('field-easy-media')
+            ->setDefaultColumns('col-md-8 col-xxl-7')
 
             // loads the CSS and JS assets associated to the given Webpack Encore entry
             // in any CRUD page (index/detail/edit/new). It's equivalent to calling
             // encore_entry_link_tags('...') and encore_entry_script_tags('...')
             //->addWebpackEncoreEntry('admin-field-map')
-            ->addCssFiles('bundles/easymedia/style/style.css')
-            ->addJsFiles('bundles/easymedia/js/app.js')
+
             ;
     }
 }

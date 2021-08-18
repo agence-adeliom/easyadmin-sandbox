@@ -97,6 +97,9 @@
 
     .sidebar {
       @apply flex flex-wrap;
+      min-height: unset;
+      height: auto;
+      background: none;
     }
   }
 

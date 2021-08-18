@@ -14,7 +14,9 @@
                 <img src="{{ field.value|resolve_media }}" alt="{{ field.value|media_meta("alt") }}" title="{{ field.value|media_meta("title") }}" class="align-self-center mr-3 rounded" style="object-fit:cover;">
             {% else %}
                 <span class="align-self-center mr-3 d-inline-flex align-items-center justify-content-center">
-                    <i class="fa fa-2x {{ mime_icon((field.value|media_infos).type) }}"></i>
+                    {% if field.value|media_infos %}
+                        <i class="fa fa-2x {{ mime_icon((field.value|media_infos).type) }}"></i>
+                    {% endif %}
                 </span>
             {% endif %}
         </div>
@@ -41,7 +43,9 @@
                         <img src="{{ field.value|resolve_media }}" alt="{{ field.value|media_meta("alt") }}" title="{{ field.value|media_meta("title") }}" class="img-fluid">
                     {% else %}
                         <div class="ratio ratio-16x9 w-100">
-                            <object data="{{ field.value|resolve_media }}" type="{{ (field.value|media_infos).type }}"  class="img-fluid"></object>
+                            {% if field.value|media_infos %}
+                                <object data="{{ field.value|resolve_media }}" type="{{ (field.value|media_infos).type }}"  class="img-fluid"></object>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>

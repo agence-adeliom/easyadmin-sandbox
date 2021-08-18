@@ -16,4 +16,6 @@ return [
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
     Adeliom\EasyMediaBundle\EasyMediaBundle::class => ['all' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
+    Adeliom\EasyEditorBundle\EasyEditorBundle::class => ['all' => true],
+    Adeliom\EasyFieldsBundle\EasyFieldsBundle::class => ['all' => true],
 ];

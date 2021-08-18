@@ -33,7 +33,7 @@ class EasyMediaMetaService
     {
         $this->entityManager = $entityManager;
         $this->container = $container;
-        $this->metaEntity = $this->container->getParameter("adeliom_easymedia.metas_entity");
+        $this->metaEntity = $this->container->getParameter("easy_media.metas_entity");
         $this->repository = $this->entityManager->getRepository($this->metaEntity);
     }
 

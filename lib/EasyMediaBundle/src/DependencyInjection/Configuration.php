@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder('adeliom_easymedia');
+        $builder = new TreeBuilder('easy_media');
 
         $rootNode = $builder->getRootNode();
         $rootNode->children()

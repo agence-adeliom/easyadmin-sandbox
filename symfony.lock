@@ -1,4 +1,10 @@
 {
+    "adeliom/easy-editor-bundle": {
+        "version": "dev-master"
+    },
+    "adeliom/easy-fields-bundle": {
+        "version": "dev-master"
+    },
     "adeliom/easy-media-bundle": {
         "version": "dev-master"
     },

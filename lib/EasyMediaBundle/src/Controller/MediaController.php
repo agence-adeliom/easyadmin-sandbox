@@ -72,18 +72,18 @@ class MediaController extends AbstractController
 
     public function __construct(Container $container, TranslatorInterface $translator, EventDispatcherInterface $eventDispatcher, EntityManagerInterface $em)
     {
-        $this->rootPath = $container->getParameter("adeliom_easymedia.storage");
-        $this->baseUrl = $container->getParameter("adeliom_easymedia.base_url");
-        $this->fileChars = $container->getParameter("adeliom_easymedia.allowed_fileNames_chars");
-        $this->folderChars = $container->getParameter("adeliom_easymedia.allowed_folderNames_chars");
-        $this->sanitizedText = $container->getParameter("adeliom_easymedia.sanitized_text");
-        $this->lockEntity = $container->getParameter("adeliom_easymedia.lock_entity");
-        $this->metasEntity = $container->getParameter("adeliom_easymedia.metas_entity");
-        $this->metasService = $container->get("adeliom_easymedia.service.metas");
-        $this->ignoreFiles = $container->getParameter("adeliom_easymedia.ignore_files");
-        $this->GFI = $container->getParameter("adeliom_easymedia.get_folder_info");
-        $this->LMF = $container->getParameter("adeliom_easymedia.last_modified_format");
-        $this->paginationAmount = $container->getParameter("adeliom_easymedia.pagination_amount");
+        $this->rootPath = $container->getParameter("easy_media.storage");
+        $this->baseUrl = $container->getParameter("easy_media.base_url");
+        $this->fileChars = $container->getParameter("easy_media.allowed_fileNames_chars");
+        $this->folderChars = $container->getParameter("easy_media.allowed_folderNames_chars");
+        $this->sanitizedText = $container->getParameter("easy_media.sanitized_text");
+        $this->lockEntity = $container->getParameter("easy_media.lock_entity");
+        $this->metasEntity = $container->getParameter("easy_media.metas_entity");
+        $this->metasService = $container->get("easy_media.service.metas");
+        $this->ignoreFiles = $container->getParameter("easy_media.ignore_files");
+        $this->GFI = $container->getParameter("easy_media.get_folder_info");
+        $this->LMF = $container->getParameter("easy_media.last_modified_format");
+        $this->paginationAmount = $container->getParameter("easy_media.pagination_amount");
 
         // The internal adapter
         $adapter = new LocalFilesystemAdapter(
@@ -113,8 +113,8 @@ class MediaController extends AbstractController
         $this->locker = $em->getRepository($this->lockEntity);
         $this->metas = $em->getRepository($this->metasEntity);
 
-        $this->unallowedMimes = $container->getParameter("adeliom_easymedia.unallowed_mimes");
-        $this->unallowedExt = $container->getParameter("adeliom_easymedia.unallowed_ext");
+        $this->unallowedMimes = $container->getParameter("easy_media.unallowed_mimes");
+        $this->unallowedExt = $container->getParameter("easy_media.unallowed_ext");
         $this->eventDispatcher = $eventDispatcher;
         $this->translator = $translator;
     }

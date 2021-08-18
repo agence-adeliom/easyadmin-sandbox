@@ -4,13 +4,13 @@
 {% set isBrowser = (browser is defined and browser) ? true : false %}
 
 {% set options = {
-    'baseUrl' : adeliom_easymedia.base_url,
-    'hideFilesExt' : adeliom_easymedia.hide_files_ext,
-    'mimeTypes' : adeliom_easymedia.extended_mimes,
-    'broadcasting' : adeliom_easymedia.enable_broadcasting,
-    'gfi' : adeliom_easymedia.get_folder_info,
-    'ratioBar' : adeliom_easymedia.show_ratio_bar,
-    'previewFilesBeforeUpload' : adeliom_easymedia.preview_files_before_upload|trans()
+    'baseUrl' : easy_media.base_url,
+    'hideFilesExt' : easy_media.hide_files_ext,
+    'mimeTypes' : easy_media.extended_mimes,
+    'broadcasting' : easy_media.enable_broadcasting,
+    'gfi' : easy_media.get_folder_info,
+    'ratioBar' : easy_media.show_ratio_bar,
+    'previewFilesBeforeUpload' : easy_media.preview_files_before_upload|trans()
 } %}
 
 {% set routes = {
@@ -142,7 +142,7 @@
                :hide-ext="{{ hideExt|default(null) ? hideExt|json_encode : '[]' }}"
                :hide-path="{{ hidePath|default(null) ? hidePath|json_encode : '[]' }}"
                :restrict="{{ restrict|default(null) ? restrict|json_encode : '{}' }}"
-               :user-id="{{ adeliom_easymedia.enable_broadcasting ? app.user.id : 0 }}"
+               :user-id="{{ easy_media.enable_broadcasting ? app.user.id : 0 }}"
                :upload-panel-img-list="{{ patterns|default(null) ?: '[]' }}"
                :enable-editor="{{ (editor is defined and not editor) ? 'false' : 'true' }}"
                :enable-upload="{{ (upload is defined and not upload) ? 'false' : 'true' }}"

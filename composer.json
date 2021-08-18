@@ -7,6 +7,14 @@
         {
             "type": "path",
             "url": "lib/EasyMediaBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyEditorBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyFieldsBundle"
         }
     ],
     "require": {
@@ -16,6 +24,8 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "adeliom/easy-media-bundle": "*@dev",
+        "adeliom/easy-editor-bundle": "*@dev",
+        "adeliom/easy-fields-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",

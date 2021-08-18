@@ -29,13 +29,13 @@
 
 
 .media-manager {
-  @apply bg-theme rounded;
+  @apply bg-theme;
   &.top-space {
     @apply pt-8;
   }
 
   &__toolbar {
-    @apply flex-wrap p-4 sm:py-2 bg-theme-75 border border-theme rounded-t m-0;
+    @apply flex-wrap p-4 sm:py-2 bg-theme-75 border border-theme m-0;
   }
 
   &__dz {
