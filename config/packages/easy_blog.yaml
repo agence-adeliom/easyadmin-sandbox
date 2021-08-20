@@ -1,0 +1,9 @@
+easy_blog:
+  post:
+    class: App\Entity\Post
+    repository: App\Repository\PostRepository
+    crud: App\Controller\Admin\PostCrudController
+  category:
+    class: App\Entity\Category
+    repository: App\Repository\CategoryRepository
+    crud: App\Controller\Admin\CategoryCrudController

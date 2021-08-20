@@ -3,7 +3,7 @@
     {% for breadcrumb in data %}
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
             {% if not loop.first %}
-                <span class="{{ easy_seo_breadcrumb.separator_class }}">{{ easy_seo_breadcrumb.separator }}</span>
+            <span class="{{ easy_seo_breadcrumb.separator_class }}">{{ easy_seo_breadcrumb.separator }}</span>
             {% endif %}
             <meta itemprop="position" content="{{ loop.index }}" />
             {% set type = loop.last ? "span" : "a" %}

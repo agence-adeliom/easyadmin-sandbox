@@ -46,13 +46,13 @@ class SitemapSubscriber implements EventSubscriberInterface
      */
     public function populate(SitemapPopulateEvent $event): void
     {
-        $this->registerBlogPostsUrls($event->getUrlContainer());
+        $this->registerPagesUrls($event->getUrlContainer());
     }
 
     /**
      * @param UrlContainerInterface $urls
      */
-    public function registerBlogPostsUrls(UrlContainerInterface $urls): void
+    public function registerPagesUrls(UrlContainerInterface $urls): void
     {
         $pages = $this->repository->getPublished();
 

@@ -2,11 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use Adeliom\EasyBlogBundle\Controller\BaseCategoryCrudController;
+use Adeliom\EasyBlogBundle\Controller\BasePostCrudController;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
 use Adeliom\EasyPageBundle\Controller\BasePageCrudController;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
+use App\Entity\Category;
 use App\Entity\Page;
+use App\Entity\Post;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -25,12 +29,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 
-class PageCrudController extends BasePageCrudController
+class CategoryCrudController extends BaseCategoryCrudController
 {
 
     public static function getEntityFqcn(): string
     {
-        return Page::class;
+        return Category::class;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -46,18 +50,6 @@ class PageCrudController extends BasePageCrudController
         $filters->add(ChoiceFilter::new("state","Status")->setChoices(ThreeStateStatusEnum::toArray()));
 
         return $filters;
-    }
-
-
-    public function informationsFields(string $pageName, $subject): iterable
-    {
-        yield from parent::informationsFields($pageName, $subject);
-        yield EasyEditorField::new('content')
-            ->setRequired(true)
-            ->allowAdd(true)
-            ->allowDrag(true)
-            ->allowDelete(true)
-            ->setColumns(12);
     }
 
 }

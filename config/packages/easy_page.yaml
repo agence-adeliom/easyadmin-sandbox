@@ -1,3 +1,4 @@
 easy_page:
   page_class: App\Entity\Page
+  page_repository: App\Repository\PageRepository
   page_controller: App\Controller\Page\PageController

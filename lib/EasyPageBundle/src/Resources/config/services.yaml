@@ -29,6 +29,7 @@ services:
             - '%easy_page.page_class%'
         calls:
             - [ 'setConfig', [ '%easy_page.cache%' ] ]
+        tags: [ doctrine.repository_service ]
 
     Adeliom\EasyPageBundle\EventListener\LayoutsListener:
         arguments:
@@ -37,9 +38,6 @@ services:
         tags:
             - kernel.event_subscriber
 
-#    Adeliom\EasyPageBundle\EventListener\PageListener:
-#        tags:
-#            - { name: kernel.event_listener, event: easypage.before_render }
 
     Adeliom\EasyPageBundle\EventListener\DoctrineMappingListener:
         arguments:

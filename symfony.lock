@@ -1,4 +1,7 @@
 {
+    "adeliom/easy-blog-bundle": {
+        "version": "dev-master"
+    },
     "adeliom/easy-common-bundle": {
         "version": "dev-master"
     },
