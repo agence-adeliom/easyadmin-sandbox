@@ -25,4 +25,5 @@ return [
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     Adeliom\EasySeoBundle\EasySeoBundle::class => ['all' => true],
     Adeliom\EasyBlogBundle\EasyBlogBundle::class => ['all' => true],
+    BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
 ];

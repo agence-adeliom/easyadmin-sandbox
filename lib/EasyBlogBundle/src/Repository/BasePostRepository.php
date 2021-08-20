@@ -61,9 +61,12 @@ class BasePostRepository extends ServiceEntityRepository {
     /**
      * @return BasePostEntity[]
      */
-    public function getPublished()
+    public function getPublished(bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
+        if ($returnQueryBuilder){
+            return $qb;
+        }
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getResult();
@@ -72,12 +75,15 @@ class BasePostRepository extends ServiceEntityRepository {
     /**
      * @return BasePostEntity[]
      */
-    public function getByCategory(BaseCategoryEntity $categoryEntity)
+    public function getByCategory(BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere('post.category = :category')
             ->setParameter('category', $categoryEntity)
         ;
+        if ($returnQueryBuilder){
+            return $qb;
+        }
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getResult();
@@ -87,7 +93,7 @@ class BasePostRepository extends ServiceEntityRepository {
      * @return BasePostEntity
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getBySlug(string $slug, ?BaseCategoryEntity $categoryEntity)
+    public function getBySlug(string $slug, ?BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere('post.slug = :slug')
@@ -97,6 +103,9 @@ class BasePostRepository extends ServiceEntityRepository {
                 ->setParameter('category', $categoryEntity);
         }
         $qb->setMaxResults(1);
+        if ($returnQueryBuilder){
+            return $qb;
+        }
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getOneOrNullResult();

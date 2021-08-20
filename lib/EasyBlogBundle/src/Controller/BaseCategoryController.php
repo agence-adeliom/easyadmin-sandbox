@@ -7,6 +7,8 @@ use Adeliom\EasyBlogBundle\Repository\BaseCategoryRepository;
 use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
 use Adeliom\EasySeoBundle\Entity\SEO;
 use Adeliom\EasySeoBundle\Services\BreadCrumbCollection;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,13 +67,17 @@ class BaseCategoryController extends AbstractController
         $template = '@EasyBlog/front/category.html.twig';
 
         $category = $this->categoryRepository->getBySlug($category);
-        $posts = $this->postRepository->getByCategory($category);
+        $postsQueryBuilder = $this->postRepository->getByCategory($category, true);
+
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($postsQueryBuilder)
+        );
 
         $this->breadcrumb->addRouteItem($category->getName(), ['route' => "easy_blog_category_index", 'params' => ['category' => $category->getSlug()]]);
 
         $args = [
             'category' => $category,
-            'posts'  => $posts,
+            'posts'  => $pagerfanta,
             'breadcrumb' => $breadcrumb
         ];
         $event = new EasyBlogCategoryEvent($category, $args, $template);
@@ -88,11 +94,15 @@ class BaseCategoryController extends AbstractController
         $template = '@EasyBlog/front/root.html.twig';
 
         $categories = $this->categoryRepository->getPublished();
-        $posts = $this->postRepository->getPublished();
+        $postsQueryBuilder = $this->postRepository->getPublished(true);
+
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($postsQueryBuilder)
+        );
 
         $args = [
             'categories' => $categories,
-            'posts'  => $posts,
+            'posts'  => $pagerfanta,
             'page'  => [
                 'name' => null,
                 'seo' => new SEO()
