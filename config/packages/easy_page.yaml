@@ -1,0 +1,3 @@
+easy_page:
+  page_class: App\Entity\Page
+  page_controller: App\Controller\Page\PageController

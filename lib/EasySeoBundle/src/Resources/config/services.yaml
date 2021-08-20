@@ -1,0 +1,17 @@
+services:
+  Adeliom\EasySeoBundle\Twig\EasySeoExtension:
+    arguments:
+      - "@twig"
+      - "@easy_seo.breadcrumb"
+      - '%easy_seo.title%'
+      - '%easy_seo.breadcrumbs%'
+    tags:
+      - twig.extension
+
+  Adeliom\EasySeoBundle\Services\BreadCrumbCollection:
+    public: true
+    calls:
+      - [ 'setGenerator', [ '@router.default' ] ]
+
+  easy_seo.breadcrumb:
+    alias: Adeliom\EasySeoBundle\Services\BreadCrumbCollection

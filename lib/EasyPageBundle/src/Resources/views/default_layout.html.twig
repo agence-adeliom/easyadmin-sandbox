@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.attributes.get('_locale') }}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ seo_title('Welcome to Easy Page !') }}{% endblock %}</title>
+    {% block easy_page_head_metas %}{% endblock %}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+{% block easy_page_breadcrumbs %}{% endblock %}
+
+{% block easy_page_page_content %}
+    {% block easy_page_pages_list %}{% endblock %}
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

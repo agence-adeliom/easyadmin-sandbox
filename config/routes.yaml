@@ -2,7 +2,7 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-easymedia:
-  # loads routes from the given routing file stored in some bundle
-  resource: '@EasyMediaBundle/Resources/config/routes.xml'
-  prefix: /medias
+
+
+
+

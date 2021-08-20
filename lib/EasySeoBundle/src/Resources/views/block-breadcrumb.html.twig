@@ -1,0 +1,16 @@
+<div id="easy_seo-breadcrumbs" class="{{ easy_seo_breadcrumb.class }}">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+    {% for breadcrumb in data %}
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            {% if not loop.first %}
+                <span class="{{ easy_seo_breadcrumb.separator_class }}">{{ easy_seo_breadcrumb.separator }}</span>
+            {% endif %}
+            <meta itemprop="position" content="{{ loop.index }}" />
+            {% set type = loop.last ? "span" : "a" %}
+            <{{ type }} itemprop="item" href="{{ breadcrumb.target }}" class="{{ easy_seo_breadcrumb.link_class }} {{ loop.last ? easy_seo_breadcrumb.current_class : "" }}">
+                <span itemprop="name">{{ breadcrumb.linkName|trans }}</span>
+            </{{ type }}>
+        </li>
+    {% endfor %}
+    </ol>
+</div>

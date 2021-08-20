@@ -15,6 +15,18 @@
         {
             "type": "path",
             "url": "lib/EasyFieldsBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyCommonBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyPageBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasySeoBundle"
         }
     ],
     "require": {
@@ -26,12 +38,15 @@
         "adeliom/easy-media-bundle": "*@dev",
         "adeliom/easy-editor-bundle": "*@dev",
         "adeliom/easy-fields-bundle": "*@dev",
+        "adeliom/easy-common-bundle": "*@dev",
+        "adeliom/easy-seo-bundle": "*@dev",
+        "adeliom/easy-page-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
-        "easycorp/easyadmin-bundle": "^3.3",
+        "easycorp/easyadmin-bundle": "^3.4",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",

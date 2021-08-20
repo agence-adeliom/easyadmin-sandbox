@@ -21,12 +21,12 @@ class AdminListener
             $response->headers->set("X-CRUD-CONTROLLER", $request->query->get("crudControllerFqcn"));
         }
 
-        if($request->get('easyadmin_context')){
+        if($request->get('easyadmin_context') && $request->query->has("crudControllerFqcn")){
             /**
              * @var AdminContext $context
              */
             $context = $request->get('easyadmin_context');
-            if($context->getEntity()){
+            if($context && $context->getEntity()){
                 $response->headers->set("X-CRUD-ENTITY", $context->getEntity()->getFqcn());
                 if ($context->getEntity()->getPrimaryKeyValueAsString()){
                     $response->headers->set("X-CRUD-ENTITY-ID", $context->getEntity()->getPrimaryKeyValueAsString());

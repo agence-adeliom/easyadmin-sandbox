@@ -4,12 +4,11 @@
 {% trans_default_domain 'EasyMediaBundle' %}
 
 {% if field.value %}
-
     {% set html_id = 'ea-media-field-' ~ field.uniqueId %}
     {% set infos = field.value|media_infos %}
-
+    {% if infos %}
     <a href="#" class="d-flex align-items-center text-dark" data-bs-toggle="modal" data-bs-target="#{{ html_id }}">
-        <div class="flex-shrink-0 ratio ratio-1x1" style="height: 48px;width: 48px" {% if ea.crud.currentAction == 'detail' %}data-bs-toggle="tooltip" data-bs-placement="top" title="{{ field.value|media_meta("title") ?: infos.name }}"{% endif %}>
+        <div class="flex-shrink-0 ratio ratio-1x1" style="height: 48px;width: 48px" {% if ea.crud.currentAction == 'detail' %}data-bs-toggle="tooltip" data-bs-placement="top" title="{{ field.value|media_meta("title") ?: (infos ? infos.name : '') }}"{% endif %}>
             {% if file_is_type(field.value, "image") %}
                 <img src="{{ field.value|resolve_media }}" alt="{{ field.value|media_meta("alt") }}" title="{{ field.value|media_meta("title") }}" class="align-self-center mr-3 rounded" style="object-fit:cover;">
             {% else %}
@@ -22,7 +21,7 @@
         </div>
         {% if ea.crud.currentAction == 'detail' %}
         <div class="flex-grow-1 ms-3">
-            <span class="fs-5 d-block">{{ infos.name }}</span>
+            <span class="fs-5 d-block">{{ infos ? infos.name : '' }}</span>
             {% if field.value|media_meta("title") and file_is_type(field.value, "image") %}
                 <span class="d-block">{{ 'seo.title'|trans }} : {{ field.value|media_meta("title") }}</span>
                 <span class="d-block">{{ 'seo.alt'|trans }} : {{ field.value|media_meta("alt") }}</span>
@@ -52,4 +51,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endif %}
