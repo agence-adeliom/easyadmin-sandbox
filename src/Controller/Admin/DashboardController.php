@@ -8,6 +8,7 @@ use App\Entity\Category;
 use App\Entity\MediaEntity;
 use App\Entity\Page;
 use App\Entity\Post;
+use App\Entity\Shop\Product\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -44,6 +45,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
         yield MenuItem::section('Settings');
         yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::linkToCrud('Product', 'fa fa-file-alt', Product::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

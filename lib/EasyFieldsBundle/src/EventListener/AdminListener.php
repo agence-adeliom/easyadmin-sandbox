@@ -12,7 +12,6 @@ class AdminListener
     {
         $request = $event->getRequest();
         $response = $event->getResponse();
-
         if($request->query->has("crudAction")){
             $response->headers->set("X-CRUD-ACTION", $request->query->get("crudAction"));
         }
