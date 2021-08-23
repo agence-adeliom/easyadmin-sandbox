@@ -1,19 +1,8 @@
 {
-    "name": "adeliom/easy-editor-bundle",
+    "name": "agence-adeliom/easy-editor-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony bundle for Editor.js",
-    "homepage": "https://github.com/tbmatuka/EditorjsBundle",
+    "description": "Symfony bundle",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Tin Benjamin Matuka",
-            "homepage": "https://tbmatuka.com/"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/tbmatuka/EditorjsBundle/issues",
-        "source": "https://github.com/tbmatuka/EditorjsBundle"
-    },
     "autoload": {
         "psr-4": {
             "Adeliom\\EasyEditorBundle\\": "src/"

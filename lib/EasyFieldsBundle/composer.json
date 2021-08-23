@@ -1,5 +1,5 @@
 {
-    "name": "adeliom/easy-fields-bundle",
+    "name": "agence-adeliom/easy-fields-bundle",
     "type": "symfony-bundle",
     "description": "Symfony bundle for EasyAdmin",
     "homepage": "https://github.com/tbmatuka/EditorjsBundle",

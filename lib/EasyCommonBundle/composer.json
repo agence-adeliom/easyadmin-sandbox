@@ -1,19 +1,8 @@
 {
-    "name": "adeliom/easy-common-bundle",
+    "name": "agence-adeliom/easy-common-bundle",
     "type": "symfony-bundle",
     "description": "Symfony bundle for EasyAdmin",
-    "homepage": "https://github.com/tbmatuka/EditorjsBundle",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Tin Benjamin Matuka",
-            "homepage": "https://tbmatuka.com/"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/tbmatuka/EditorjsBundle/issues",
-        "source": "https://github.com/tbmatuka/EditorjsBundle"
-    },
     "autoload": {
         "psr-4": {
             "Adeliom\\EasyCommonBundle\\": "src/"

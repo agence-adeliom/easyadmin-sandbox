@@ -43,14 +43,14 @@
         "ext-exif": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "adeliom/easy-media-bundle": "*@dev",
-        "adeliom/easy-editor-bundle": "*@dev",
-        "adeliom/easy-fields-bundle": "*@dev",
-        "adeliom/easy-common-bundle": "*@dev",
-        "adeliom/easy-seo-bundle": "*@dev",
-        "adeliom/easy-page-bundle": "*@dev",
-        "adeliom/easy-blog-bundle": "*@dev",
-        "adeliom/easy-block-bundle": "*@dev",
+        "agence-adeliom/easy-media-bundle": "*@dev",
+        "agence-adeliom/easy-editor-bundle": "*@dev",
+        "agence-adeliom/easy-fields-bundle": "*@dev",
+        "agence-adeliom/easy-common-bundle": "*@dev",
+        "agence-adeliom/easy-seo-bundle": "*@dev",
+        "agence-adeliom/easy-page-bundle": "*@dev",
+        "agence-adeliom/easy-blog-bundle": "*@dev",
+        "agence-adeliom/easy-block-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
@@ -145,5 +145,8 @@
             "allow-contrib": false,
             "require": "5.3.*"
         }
+    },
+    "symfony": {
+        "endpoint": "https://recipes.adev2.com/"
     }
 }

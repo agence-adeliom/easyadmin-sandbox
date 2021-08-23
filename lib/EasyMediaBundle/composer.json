@@ -1,5 +1,5 @@
 {
-    "name": "adeliom/easy-media-bundle",
+    "name": "agence-adeliom/easy-media-bundle",
     "type": "symfony-bundle",
     "require": {
         "php": ">=7.4",

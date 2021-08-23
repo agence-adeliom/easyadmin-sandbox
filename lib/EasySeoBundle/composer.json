@@ -1,5 +1,5 @@
 {
-    "name": "adeliom/easy-seo-bundle",
+    "name": "agence-adeliom/easy-seo-bundle",
     "type": "symfony-bundle",
     "require": {
         "presta/sitemap-bundle": "^3.0"

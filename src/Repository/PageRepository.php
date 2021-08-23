@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use Adeliom\EasyPageBundle\Repository\BasePageRepository;
-use App\Entity\Article;
 use App\Entity\Page;
 use Doctrine\Persistence\ManagerRegistry;
 
