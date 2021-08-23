@@ -18,33 +18,40 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoType extends AbstractType
 {
+    protected $translator;
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre',
+                'label' => $this->translator->trans("form.title", [], "EasySEOBundle"),
             ])
             ->add('cover', EasyMediaType::class, [
-                'label' => 'Couverture',
+                'label' => $this->translator->trans("form.cover", [], "EasySEOBundle"),
+                "restrictions_uploadTypes" => ["image/*"],
             ])
             ->add('cannonical', UrlType::class, [
-                'label' => 'URL canonique'
+                'label' => $this->translator->trans("form.cannonical", [], "EasySEOBundle"),
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => $this->translator->trans("form.description", [], "EasySEOBundle"),
             ])
             ->add('keywords', TextType::class, [
-                'label' => 'Mots-clés',
+                'label' => $this->translator->trans("form.keywords", [], "EasySEOBundle"),
             ])
             ->add('key', TextType::class, [
-                'label' => 'Clé de la page',
+                'label' => $this->translator->trans("form.key", [], "EasySEOBundle"),
             ])
             ->add('robots', ChoiceType::class, [
-                'label' => 'Robots',
+                'label' => $this->translator->trans("form.robots", [], "EasySEOBundle"),
                 'multiple' => 'true',
                 'attr' => [
                     'data-ea-widget' => 'ea-autocomplete',
@@ -59,7 +66,7 @@ class SeoType extends AbstractType
                 ]
             ])
             ->add('sitemap', CheckboxType::class, [
-                'label' => 'Inclure dans le sitemap',
+                'label' => $this->translator->trans("form.sitemap", [], "EasySEOBundle"),
             ])
         ;
     }

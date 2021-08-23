@@ -20,15 +20,6 @@ trait EntityNameTrait
      */
     private $name;
 
-    /**
-     * @var string|null
-     * @Groups("main")
-     * @Gedmo\Slug(fields={"name"})
-     *
-     * @ORM\Column(length=100, unique=true)
-     */
-    private $slug;
-
     public function __toString()
     {
         return $this->name ?: "";
@@ -42,15 +33,5 @@ trait EntityNameTrait
     public function setName(?string $name): void
     {
         $this->name = $name;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): void
-    {
-        $this->slug = $slug;
     }
 }

@@ -31,6 +31,10 @@
         {
             "type": "path",
             "url": "lib/EasySeoBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyBlockBundle"
         }
     ],
     "require": {
@@ -46,6 +50,7 @@
         "adeliom/easy-seo-bundle": "*@dev",
         "adeliom/easy-page-bundle": "*@dev",
         "adeliom/easy-blog-bundle": "*@dev",
+        "adeliom/easy-block-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",

@@ -4,7 +4,7 @@ namespace Adeliom\EasyPageBundle\Entity;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyCommonBundle\Traits\EntityIdTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityNameTrait;
+use Adeliom\EasyCommonBundle\Traits\EntityNameSlugTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityPublishableTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityThreeStateStatusTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityTimestampableTrait;
@@ -30,7 +30,7 @@ class BasePageEntity {
         EntityTimestampableTrait::__construct as private __TimestampableConstruct;
     }
 
-    use EntityNameTrait;
+    use EntityNameSlugTrait;
     use EntityThreeStateStatusTrait;
     use EntityPublishableTrait {
         EntityPublishableTrait::__construct as private __PublishableConstruct;

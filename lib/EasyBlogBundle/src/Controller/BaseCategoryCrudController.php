@@ -17,9 +17,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseCategoryCrudController extends AbstractCrudController
 {
+    protected $translator;
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            'translator' => '?'.TranslatorInterface::class
+        ]);
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -34,6 +44,7 @@ abstract class BaseCategoryCrudController extends AbstractCrudController
     {
         $context = $this->get(AdminContextProvider::class)->getContext();
         $subject = $context->getEntity();
+        $this->translator = $this->container->get('translator');
 
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
@@ -44,33 +55,33 @@ abstract class BaseCategoryCrudController extends AbstractCrudController
 
     public function informationsFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Informations de la page')->addCssClass("col-8");
-        yield TextField::new('name')
+        yield FormField::addPanel($this->translator->trans("admin.panel.information", [], "EasyBlogBundle"))->addCssClass("col-8");
+        yield TextField::new('name', $this->translator->trans("admin.field.name", [], "EasyBlogBundle"))
             ->setRequired(true)
             ->setColumns(12);
     }
 
     public function metadataFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Métadonnées')->collapsible()->addCssClass("col-4");
-        yield SlugField::new('slug')
+        yield FormField::addPanel($this->translator->trans("admin.panel.metadatas", [], "EasyBlogBundle"))->collapsible()->addCssClass("col-4");
+        yield SlugField::new('slug', $this->translator->trans("admin.field.slug", [], "EasyBlogBundle"))
             ->setRequired(true)
             ->hideOnIndex()
             ->setTargetFieldName('name')
-            ->setUnlockConfirmationMessage("Are you sure ?")
+            ->setUnlockConfirmationMessage($this->translator->trans("admin.field.slug_edit", [], "EasyBlogBundle"))
             ->setColumns(12);
     }
 
     public function seoFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('SEO')->collapsible()->addCssClass("col-4");
+        yield FormField::addPanel($this->translator->trans("admin.panel.seo", [], "EasyBlogBundle"))->collapsible()->addCssClass("col-4");
         yield SEOField::new("seo");
     }
 
     public function publishFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Publication')->collapsible()->addCssClass("col-4");
-        yield BooleanField::new("status", "Status")
+        yield FormField::addPanel($this->translator->trans("admin.panel.publication", [], "EasyBlogBundle"))->collapsible()->addCssClass("col-4");
+        yield BooleanField::new("status", $this->translator->trans("admin.field.state", [], "EasyBlogBundle"))
             ->setRequired(true)
             ->renderAsSwitch(true);
     }

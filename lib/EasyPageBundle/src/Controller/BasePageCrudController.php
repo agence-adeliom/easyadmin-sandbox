@@ -16,9 +16,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BasePageCrudController extends AbstractCrudController
 {
+    protected $translator;
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            'translator' => '?'.TranslatorInterface::class
+        ]);
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -33,6 +43,7 @@ abstract class BasePageCrudController extends AbstractCrudController
     {
         $context = $this->get(AdminContextProvider::class)->getContext();
         $subject = $context->getEntity();
+        $this->translator = $this->container->get('translator');
 
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
@@ -43,29 +54,29 @@ abstract class BasePageCrudController extends AbstractCrudController
 
     public function informationsFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Informations de la page')->addCssClass("col-8");
-        yield TextField::new('name')
+        yield FormField::addPanel($this->translator->trans("admin.panel.information", [], "EasyPageBundle"))->addCssClass("col-8");
+        yield TextField::new('name', $this->translator->trans("admin.field.name", [], "EasyPageBundle"))
             ->setRequired(true)
             ->setColumns(12);
     }
 
     public function metadataFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Métadonnées')->collapsible()->addCssClass("col-4");
-        yield SlugField::new('slug')
+        yield FormField::addPanel($this->translator->trans("admin.panel.metadatas", [], "EasyPageBundle"))->collapsible()->addCssClass("col-4");
+        yield SlugField::new('slug', $this->translator->trans("admin.field.slug", [], "EasyPageBundle"))
             ->setRequired(true)
             ->hideOnIndex()
             ->setTargetFieldName('name')
-            ->setUnlockConfirmationMessage("Are you sure ?")
+            ->setUnlockConfirmationMessage($this->translator->trans("admin.field.slug_edit", [], "EasyPageBundle"))
             ->setColumns(12);
 
 
-        yield TextField::new('action')
+        yield TextField::new('action', $this->translator->trans("admin.field.action", [], "EasyPageBundle"))
             ->hideOnIndex()
-            ->setHelp("To apply change you have to clear symfony cache")
+            ->setHelp($this->translator->trans("admin.field.action_help", [], "EasyPageBundle"))
             ->setColumns(12);
 
-        yield AssociationField::new("parent", "Page parente")
+        yield AssociationField::new("parent", $this->translator->trans("admin.field.parent", [], "EasyPageBundle"))
             ->setQueryBuilder(function (QueryBuilder $queryBuilder) use ($subject) {
                 $rootAllias = $queryBuilder->getAllAliases()[0];
                 if($subject->getPrimaryKeyValue()){
@@ -79,23 +90,23 @@ abstract class BasePageCrudController extends AbstractCrudController
 
     public function seoFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('SEO')->collapsible()->addCssClass("col-4");
+        yield FormField::addPanel($this->translator->trans("admin.panel.seo", [], "EasyPageBundle"))->collapsible()->addCssClass("col-4");
         yield SEOField::new("seo");
     }
 
     public function publishFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('Publication')->collapsible()->addCssClass("col-4");
-        yield ChoiceField::new("state", "Status")
+        yield FormField::addPanel($this->translator->trans("admin.panel.publication", [], "EasyPageBundle"))->collapsible()->addCssClass("col-4");
+        yield ChoiceField::new("state", $this->translator->trans("admin.field.state", [], "EasyPageBundle"))
             ->setChoices(ThreeStateStatusEnum::toArray())
             ->setRequired(true)
             ->renderExpanded(true)
             ->renderAsBadges(true);
-        yield DateTimeField::new('publishDate', "Date de publication")->setFormat('Y-MM-dd HH:mm')
+        yield DateTimeField::new('publishDate', $this->translator->trans("admin.field.publishDate", [], "EasyPageBundle"))->setFormat('Y-MM-dd HH:mm')
             ->setRequired(true)
             ->hideOnIndex()
             ->setColumns(6);
-        yield DateTimeField::new('unpublishDate', "Date de dépublication")->setFormat('Y-MM-dd HH:mm')
+        yield DateTimeField::new('unpublishDate', $this->translator->trans("admin.field.unpublishDate", [], "EasyPageBundle"))->setFormat('Y-MM-dd HH:mm')
             ->setRequired(false)
             ->hideOnIndex()
             ->setColumns(6);

@@ -2,6 +2,7 @@ services:
   Adeliom\EasySeoBundle\Twig\EasySeoExtension:
     arguments:
       - "@twig"
+      - "@event_dispatcher"
       - "@easy_seo.breadcrumb"
       - '%easy_seo.title%'
       - '%easy_seo.breadcrumbs%'
@@ -15,3 +16,8 @@ services:
 
   easy_seo.breadcrumb:
     alias: Adeliom\EasySeoBundle\Services\BreadCrumbCollection
+
+  Adeliom\EasySeoBundle\Form\SeoType:
+    arguments:
+      - "@translator.default"
+    public: true

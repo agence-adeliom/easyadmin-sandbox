@@ -4,7 +4,7 @@ namespace Adeliom\EasyBlogBundle\Entity;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyCommonBundle\Traits\EntityIdTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityNameTrait;
+use Adeliom\EasyCommonBundle\Traits\EntityNameSlugTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityPublishableTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityStatusTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityThreeStateStatusTrait;
@@ -29,7 +29,7 @@ class BaseCategoryEntity {
         EntityTimestampableTrait::__construct as private __TimestampableConstruct;
     }
 
-    use EntityNameTrait;
+    use EntityNameSlugTrait;
     use EntityStatusTrait;
     use EntitySeoTrait {
         EntitySeoTrait::__construct as private __SEOConstruct;

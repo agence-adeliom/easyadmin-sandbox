@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Entity\Block;
 use App\Entity\Category;
 use App\Entity\MediaEntity;
 use App\Entity\Page;
@@ -41,6 +42,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Catégorie', 'fa fa-file-alt', Category::class);
         yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
+        yield MenuItem::section('Settings');
+        yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

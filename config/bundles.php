@@ -26,4 +26,5 @@ return [
     Adeliom\EasySeoBundle\EasySeoBundle::class => ['all' => true],
     Adeliom\EasyBlogBundle\EasyBlogBundle::class => ['all' => true],
     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    Adeliom\EasyBlockBundle\EasyBlockBundle::class => ['all' => true],
 ];

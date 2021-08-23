@@ -1,0 +1,11 @@
+{
+    "name": "adeliom/easy-block-bundle",
+    "type": "symfony-bundle",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\EasyBlockBundle\\": "src/"
+        }
+    }
+}
