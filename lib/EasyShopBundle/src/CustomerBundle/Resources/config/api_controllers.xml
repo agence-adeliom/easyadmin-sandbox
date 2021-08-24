@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.customer.controller.api.address" class="Adeliom\EasyShop\CustomerBundle\Controller\Api\AddressController">
+            <argument type="service" id="easy_shop.address.manager"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+        <service id="Adeliom\EasyShop\CustomerBundle\Controller\Api\AddressController" alias="easy_shop.customer.controller.api.address" public="true"/>
+        <service id="easy_shop.customer.controller.api.customer" class="Adeliom\EasyShop\CustomerBundle\Controller\Api\CustomerController">
+            <argument type="service" id="easy_shop.customer.manager"/>
+            <argument type="service" id="easy_shop.order.manager"/>
+            <argument type="service" id="easy_shop.address.manager"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+        <service id="Adeliom\EasyShop\CustomerBundle\Controller\Api\CustomerController" alias="easy_shop.customer.controller.api.customer" public="true"/>
+    </services>
+</container>

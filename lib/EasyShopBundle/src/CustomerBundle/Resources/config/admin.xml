@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <!-- CUSTOMER -->
+        <parameter key="easy_shop.customer.admin.customer.class">Adeliom\EasyShop\CustomerBundle\Admin\CustomerAdmin</parameter>
+        <parameter key="easy_shop.customer.admin.customer.controller">SonataAdminBundle:CRUD</parameter>
+        <!-- ADDRESS -->
+        <parameter key="easy_shop.customer.admin.address.class">Adeliom\EasyShop\CustomerBundle\Admin\AddressAdmin</parameter>
+        <parameter key="easy_shop.customer.admin.address.controller">SonataAdminBundle:CRUD</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.customer.admin.customer" class="%easy_shop.customer.admin.customer.class%">
+            <tag name="easy_shop.admin" manager_type="orm" group="easy_shop_ecommerce" label="customer" label_translator_strategy="easy_shop.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%easy_shop.customer.admin.customer.entity%</argument>
+            <argument>%easy_shop.customer.admin.customer.controller%</argument>
+            <call method="addChild">
+                <argument type="service" id="easy_shop.customer.admin.address"/>
+            </call>
+            <call method="addChild">
+                <argument type="service" id="easy_shop.order.admin.order"/>
+            </call>
+        </service>
+        <service id="easy_shop.customer.admin.address" class="%easy_shop.customer.admin.address.class%">
+            <tag name="easy_shop.admin" manager_type="orm" show_in_dashboard="false" group="easy_shop_ecommerce" label="address" label_translator_strategy="easy_shop.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%easy_shop.customer.admin.address.entity%</argument>
+            <argument>%easy_shop.customer.admin.address.controller%</argument>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Adeliom\EasyShop\ProductBundle\Entity\BasePackage" exclusion-policy="all" xml-root-name="package">
+        <property name="width" type="double" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="height" type="double" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="length" type="double" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="weight" type="double" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write"/>
+        <property name="product" serialized-name="product_id" type="easy_shop_product_product_id" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_search"/>
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_search"/>
+    </class>
+</serializer>

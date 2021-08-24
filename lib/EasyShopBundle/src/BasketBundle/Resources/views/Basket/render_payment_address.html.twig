@@ -1,0 +1,10 @@
+{% extends '@TwigBundle/form.html.twig' %}
+
+{% block choice_field %}
+    {% for choice, child in field %}
+        {{ form_field(child) }}
+        <label for="{{ child.id }}">{{ field.label(choice) }}</label>
+
+        <br />
+    {% endfor %}
+{% endblock choice_field %}

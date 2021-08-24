@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\ProductBundle\Repository;
+
+use Doctrine\ORM\EntityRepository;
+
+
+class BaseProductRepository extends EntityRepository
+{
+    /**
+     * Returns an array of last products.
+     *
+     * @param int $limit Number max of required results
+     *
+     * @return array
+     */
+    public function findLastActiveProducts($limit = 5)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'i', 'g')
+            ->distinct()
+            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g')
+            ->leftJoin('p.variations', 'pv')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+            ->andWhere('p.stock != 0')
+            ->andWhere('p.price != 0')
+            ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+            ->andWhere('pv.price != 0 or pv.price IS NULL')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameters([
+                'enabled' => true,
+            ])
+            ->getQuery()
+            ->execute();
+    }
+}

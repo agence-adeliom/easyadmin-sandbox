@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Basket type -->
+        <service id="easy_shop.basket.api.form.type.basket.parent" class="Adeliom\EasyShop\BasketBundle\Form\ApiBasketParentType">
+            <tag name="form.type" alias="easy_shop_basket_api_form_basket_parent"/>
+            <argument type="service" id="jms_serializer.metadata_factory"/>
+            <argument type="service" id="doctrine"/>
+            <argument>easy_shop_basket_api_form_basket_parent</argument>
+            <argument>%easy_shop.basket.basket.class%</argument>
+            <argument>easy_shop_api_write</argument>
+        </service>
+        <service id="easy_shop.basket.api.form.type.basket" class="Adeliom\EasyShop\BasketBundle\Form\ApiBasketType">
+            <tag name="form.type" alias="easy_shop_basket_api_form_basket"/>
+            <argument>%easy_shop.basket.basket.class%</argument>
+            <argument type="service" id="easy_shop.price.currency.form_type"/>
+        </service>
+        <!-- Basket element type -->
+        <service id="easy_shop.basket.api.form.type.basket.element.parent" class="Adeliom\EasyShop\BasketBundle\Form\ApiBasketElementParentType">
+            <tag name="form.type" alias="easy_shop_basket_api_form_basket_element_parent"/>
+            <argument type="service" id="jms_serializer.metadata_factory"/>
+            <argument type="service" id="doctrine"/>
+            <argument>easy_shop_basket_api_form_basket_element_parent</argument>
+            <argument>%easy_shop.basket.basket_element.class%</argument>
+            <argument>easy_shop_api_write</argument>
+        </service>
+        <service id="easy_shop.basket.api.form.type.basket_element" class="Adeliom\EasyShop\BasketBundle\Form\ApiBasketElementType">
+            <tag name="form.type" alias="easy_shop_basket_api_form_basket_element"/>
+            <argument>%easy_shop.basket.basket_element.class%</argument>
+        </service>
+    </services>
+</container>

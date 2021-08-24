@@ -1,0 +1,26 @@
+{% block easy_shop_page_breadcrumb %}
+    {% if breadcrumb_context is not defined %}
+        {% set breadcrumb_context = 'user_index' %}
+    {% endif %}
+    <div class="row-fluid clearfix">
+        {{ easy_shop_block_render_event('breadcrumb', { 'context': breadcrumb_context, 'current_uri': app.request.requestUri }) }}
+    </div>
+{% endblock %}
+
+<h2>{% block easy_shop_profile_title %}{% trans from 'SonataCustomerBundle' %}easy_shop_profile_title{% endtrans %}{% endblock %}</h2>
+
+<div class="easy_shop-user-show row row-fluid">
+
+    <div class="span2 col-lg-2" style="padding: 8px 0;">
+        {% block easy_shop_profile_menu %}
+            {{ easy_shop_block_render({'type': 'easy_shop.customer.block.profile_menu'}, {'current_uri': app.request.requestUri}) }}
+        {% endblock %}
+    </div>
+
+    <div class="span10 col-lg-10">
+        {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
+
+        {% block easy_shop_profile_content '' %}
+    </div>
+
+</div>

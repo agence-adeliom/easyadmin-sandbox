@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.order.block.recent_orders" class="Adeliom\EasyShop\OrderBundle\Block\RecentOrdersBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.order.block.recent_orders</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="easy_shop.order.manager"/>
+            <argument type="service" id="easy_shop.customer.manager"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="easy_shop.admin.pool" on-invalid="null"/>
+        </service>
+    </services>
+</container>

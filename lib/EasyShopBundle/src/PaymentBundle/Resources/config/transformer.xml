@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.basket_transformer.class">Adeliom\EasyShop\Component\Transformer\BasketTransformer</parameter>
+        <parameter key="easy_shop.invoice_transformer.class">Adeliom\EasyShop\Component\Transformer\InvoiceTransformer</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.payment.transformer.pool" class="Adeliom\EasyShop\Component\Transformer\Pool"/>
+        <service id="easy_shop.payment.transformer.order" class="Adeliom\EasyShop\Component\Transformer\OrderTransformer">
+            <tag name="easy_shop.payment.transformer"/>
+            <argument type="service" id="easy_shop.product.pool"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+        <service id="easy_shop.payment.transformer.invoice" class="%easy_shop.invoice_transformer.class%" public="true">
+            <tag name="easy_shop.payment.transformer"/>
+            <argument type="service" id="easy_shop.invoice_element.manager"/>
+            <argument type="service" id="easy_shop.delivery.pool"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+        <service id="easy_shop.payment.transformer.basket" class="%easy_shop.basket_transformer.class%" public="true">
+            <tag name="easy_shop.payment.transformer"/>
+            <argument type="service" id="easy_shop.order.manager"/>
+            <argument type="service" id="easy_shop.product.pool"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="logger"/>
+        </service>
+    </services>
+</container>

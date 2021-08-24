@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "916abb3fd5f6cc0cd689233e134f8055",
+    "content-hash": "bd886d576dca0e476d9856443c9a0771",
     "packages": [
         {
-            "name": "adeliom/easy-block-bundle",
+            "name": "agence-adeliom/easy-block-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlockBundle",
-                "reference": "3d5d270b42ed6e3512cbf6c1efd2106e4e9ad696"
+                "reference": "c9ce8bd4ad4930428257e193e87c880613f764b5"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -25,12 +25,12 @@
             }
         },
         {
-            "name": "adeliom/easy-blog-bundle",
+            "name": "agence-adeliom/easy-blog-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlogBundle",
-                "reference": "acc3207df1193acde296ecf18e3ef0c971c68a39"
+                "reference": "ae9f0988fbe3b111d106a326c752af8f08e5acf4"
             },
             "require": {
                 "babdev/pagerfanta-bundle": "^3.3",
@@ -73,29 +73,18 @@
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Tin Benjamin Matuka",
-                    "homepage": "https://tbmatuka.com/"
-                }
-            ],
             "description": "Symfony bundle for EasyAdmin",
-            "homepage": "https://github.com/tbmatuka/EditorjsBundle",
-            "support": {
-                "issues": "https://github.com/tbmatuka/EditorjsBundle/issues",
-                "source": "https://github.com/tbmatuka/EditorjsBundle"
-            },
             "transport-options": {
                 "relative": true
             }
         },
         {
-            "name": "adeliom/easy-common-bundle",
+            "name": "agence-adeliom/easy-common-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyCommonBundle",
-                "reference": "513fe594658c6b3f56f6e3e0bb4ecb4189b0f558"
+                "reference": "5413cf8cb0a290b631c749640004bcdf9bdd768d"
             },
             "require": {
                 "ext-json": "*",
@@ -134,29 +123,18 @@
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Tin Benjamin Matuka",
-                    "homepage": "https://tbmatuka.com/"
-                }
-            ],
             "description": "Symfony bundle for EasyAdmin",
-            "homepage": "https://github.com/tbmatuka/EditorjsBundle",
-            "support": {
-                "issues": "https://github.com/tbmatuka/EditorjsBundle/issues",
-                "source": "https://github.com/tbmatuka/EditorjsBundle"
-            },
             "transport-options": {
                 "relative": true
             }
         },
         {
-            "name": "adeliom/easy-editor-bundle",
+            "name": "agence-adeliom/easy-editor-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyEditorBundle",
-                "reference": "cc9cda691a3fb4428e80adec614da317ba4f0940"
+                "reference": "97f696205cae35d45575e804be3354c4154e7bce"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.5",
@@ -195,29 +173,18 @@
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Tin Benjamin Matuka",
-                    "homepage": "https://tbmatuka.com/"
-                }
-            ],
-            "description": "Symfony bundle for Editor.js",
-            "homepage": "https://github.com/tbmatuka/EditorjsBundle",
-            "support": {
-                "issues": "https://github.com/tbmatuka/EditorjsBundle/issues",
-                "source": "https://github.com/tbmatuka/EditorjsBundle"
-            },
+            "description": "Symfony bundle",
             "transport-options": {
                 "relative": true
             }
         },
         {
-            "name": "adeliom/easy-fields-bundle",
+            "name": "agence-adeliom/easy-fields-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFieldsBundle",
-                "reference": "df982398b293559e74c6f4a1eb3759eb8021ba69"
+                "reference": "458e1e89b1078c2feadce9a0dfe72df441913373"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.5",
@@ -273,12 +240,12 @@
             }
         },
         {
-            "name": "adeliom/easy-media-bundle",
+            "name": "agence-adeliom/easy-media-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyMediaBundle",
-                "reference": "8a18c84e82924a8ac1d4219cc8b0d1f676d832bf"
+                "reference": "6c8c5c1b9ebc8c22ba6494122ff7e7c21c9b80a9"
             },
             "require": {
                 "doctrine/annotations": "^1.0",
@@ -315,12 +282,12 @@
             }
         },
         {
-            "name": "adeliom/easy-page-bundle",
+            "name": "agence-adeliom/easy-page-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyPageBundle",
-                "reference": "56cc8601e52840d46065a4ddd22a321622eb30b2"
+                "reference": "4489961d7f8f0b996bfad908fffc7b0f76bd7ab7"
             },
             "require": {
                 "ext-json": "*",
@@ -378,12 +345,12 @@
             }
         },
         {
-            "name": "adeliom/easy-seo-bundle",
+            "name": "agence-adeliom/easy-seo-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasySeoBundle",
-                "reference": "26284e9393d09e29ae073fcdedee315aef8642b5"
+                "reference": "03c8e42e3b9255d3aa02d7f927f74f4c4e5d039a"
             },
             "require": {
                 "presta/sitemap-bundle": "^3.0"
@@ -1786,16 +1753,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.9.4",
+            "version": "2.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5"
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b19a13f4edfaa5806109cd899f5912a7df1547b5",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
                 "shasum": ""
             },
             "require": {
@@ -1874,9 +1841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.9.4"
+                "source": "https://github.com/doctrine/orm/tree/2.9.5"
             },
-            "time": "2021-08-11T20:53:03+00:00"
+            "time": "2021-08-23T10:20:22+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -12315,14 +12282,14 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "adeliom/easy-media-bundle": 20,
-        "adeliom/easy-editor-bundle": 20,
-        "adeliom/easy-fields-bundle": 20,
-        "adeliom/easy-common-bundle": 20,
-        "adeliom/easy-seo-bundle": 20,
-        "adeliom/easy-page-bundle": 20,
-        "adeliom/easy-blog-bundle": 20,
-        "adeliom/easy-block-bundle": 20
+        "agence-adeliom/easy-media-bundle": 20,
+        "agence-adeliom/easy-editor-bundle": 20,
+        "agence-adeliom/easy-fields-bundle": 20,
+        "agence-adeliom/easy-common-bundle": 20,
+        "agence-adeliom/easy-seo-bundle": 20,
+        "agence-adeliom/easy-page-bundle": 20,
+        "agence-adeliom/easy-blog-bundle": 20,
+        "agence-adeliom/easy-block-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.customer.block.recent_customers" class="Adeliom\EasyShop\CustomerBundle\Block\RecentCustomersBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.customer.block.recent_customers</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="easy_shop.customer.manager"/>
+            <argument type="service" id="easy_shop.admin.pool" on-invalid="ignore"/>
+        </service>
+        <service id="easy_shop.customer.block.profile_menu" class="Adeliom\EasyShop\CustomerBundle\Block\ProfileMenuBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.customer.block.profile_menu</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="knp_menu.menu_provider"/>
+            <argument type="service" id="easy_shop.customer.profile.menu_builder"/>
+        </service>
+    </services>
+</container>

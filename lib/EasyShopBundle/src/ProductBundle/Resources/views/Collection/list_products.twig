@@ -1,0 +1,11 @@
+{% extends '@SonataProduct/Catalog/layout.html.twig' %}
+
+{% block products_heading_title %}
+    {{ collection.name }}
+{% endblock %}
+
+{% block products %}
+
+    {% include '@SonataProduct/Catalog/' ~ display_mode ~ '.html.twig' %}
+
+{% endblock %}

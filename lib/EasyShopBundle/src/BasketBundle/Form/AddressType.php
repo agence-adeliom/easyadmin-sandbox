@@ -1,0 +1,154 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\BasketBundle\Form;
+
+use Adeliom\EasyShop\Component\Basket\BasketInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Intl\Intl;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+/**
+ *
+ * Address form type (used for deliveryAddressStep in Order process)
+ */
+class AddressType extends AbstractType
+{
+    /**
+     * @var string
+     */
+    protected $addressClass;
+
+    /**
+     * @var BasketInterface
+     */
+    protected $basket;
+
+    /**
+     * @param string          $addressClass An address entity class name
+     * @param BasketInterface $basket       EasyShop current basket
+     */
+    public function __construct($addressClass, BasketInterface $basket)
+    {
+        $this->addressClass = $addressClass;
+        $this->basket = $basket;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $addresses = $options['addresses'];
+
+        if (\count($addresses) > 0) {
+            $defaultAddress = current($addresses);
+
+            foreach ($addresses as $address) {
+                if ($address->getCurrent()) {
+                    $defaultAddress = $address;
+
+                    break;
+                }
+            }
+
+            $builder->add('addresses', EntityType::class, [
+                'choices' => $addresses,
+                'preferred_choices' => [$defaultAddress],
+                'class' => $this->addressClass,
+                'expanded' => true,
+                'multiple' => false,
+                'mapped' => false,
+            ])
+            ->add('useSelected', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                    'style' => 'margin-bottom:20px;',
+                ],
+                'translation_domain' => 'EasyShopBasketBundle',
+                'validation_groups' => false,
+            ]);
+        }
+
+        $builder->add('name', null, ['required' => !\count($addresses)]);
+
+        if (isset($options['types'])) {
+            $typeOptions = [
+                'choices' => array_flip($options['types']),
+                'translation_domain' => 'EasyShopCustomerBundle',
+            ];
+
+            $builder->add('type', ChoiceType::class, $typeOptions);
+        }
+
+        $builder
+            ->add('firstname', null, ['required' => !\count($addresses)])
+            ->add('lastname', null, ['required' => !\count($addresses)])
+            ->add('address1', null, ['required' => !\count($addresses)])
+            ->add('address2')
+            ->add('address3')
+            ->add('postcode', null, ['required' => !\count($addresses)])
+            ->add('city', null, ['required' => !\count($addresses)])
+            ->add('phone');
+
+        $countries = $this->getBasketDeliveryCountries();
+
+        $countryOptions = ['required' => !\count($addresses)];
+
+        if (\count($countries) > 0) {
+            $countryOptions['choices'] = array_flip($countries);
+        }
+
+        $builder->add('countryCode', CountryType::class, $countryOptions);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options): void
+    {
+        $view->vars['addresses'] = $options['addresses'];
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->addressClass,
+            'addresses' => [],
+            'validation_groups' => ['front'],
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'easy_shop_basket_address';
+    }
+
+    /**
+     * Returns basket elements delivery countries.
+     *
+     * @return array
+     */
+    protected function getBasketDeliveryCountries()
+    {
+        $countries = [];
+
+        foreach ($this->basket->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
+
+            foreach ($product->getDeliveries() as $delivery) {
+                $code = $delivery->getCountryCode();
+
+                if (!isset($countries[$code])) {
+                    $countries[$code] = Intl::getRegionBundle()->getCountryName($code);
+                }
+            }
+        }
+
+        return $countries;
+    }
+}

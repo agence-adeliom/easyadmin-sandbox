@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.invoice.manager.class">Adeliom\EasyShop\InvoiceBundle\Entity\InvoiceManager</parameter>
+        <parameter key="easy_shop.invoice_element.manager.class">Adeliom\EasyShop\InvoiceBundle\Entity\InvoiceElementManager</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.invoice.manager" class="%easy_shop.invoice.manager.class%" public="true">
+            <argument>%easy_shop.invoice.invoice.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.invoice_element.manager" class="%easy_shop.invoice_element.manager.class%">
+            <argument>%easy_shop.invoice.invoice_element.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+    </services>
+</container>

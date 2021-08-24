@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.basket.validator.basket" class="Adeliom\EasyShop\Component\Form\BasketValidator">
+            <argument type="service" id="easy_shop.product.pool"/>
+            <argument type="service" id="validator.validator_factory"/>
+            <tag name="validator.constraint_validator" alias="easy_shop_basket_validator"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,221 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\ProductBundle\Entity;
+
+use Doctrine\ORM\QueryBuilder;
+use Adeliom\EasyShop\ClassificationBundle\Model\CategoryInterface;
+use Adeliom\EasyShop\Component\Product\ProductInterface;
+use Adeliom\EasyShop\Component\Product\ProductManagerInterface;
+use Adeliom\EasyShop\DatagridBundle\Pager\Doctrine\Pager;
+use Adeliom\EasyShop\DatagridBundle\Pager\PagerInterface;
+use Adeliom\EasyShop\Doctrine\Entity\BaseEntityManager;
+
+class ProductManager extends BaseEntityManager implements ProductManagerInterface
+{
+    public function findInSameCollections($productCollections, $limit = null)
+    {
+        return $this->queryInSameCollections($productCollections, $limit)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findParentsInSameCollections($productCollections, $limit = null)
+    {
+        return $this->queryInSameCollections($productCollections, $limit)
+            ->andWhere('p.parent IS NULL')
+            ->andWhere('p.enabled = :enabled')
+            ->setParameter('enabled', true)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * Returns partial product example (only to get its class) from $category.
+     *
+     * @return ProductInterface|null
+     */
+    public function findProductForCategory(CategoryInterface $category)
+    {
+        return $this->getCategoryProductsQueryBuilder($category)
+            ->select('partial p.{id}')
+            ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * Returns active products for a given category.
+     *
+     * @param CategoryInterface $category
+     * @param string            $filter
+     * @param mixed             $option
+     *
+     * @return QueryBuilder
+     */
+    public function getCategoryActiveProductsQueryBuilder(?CategoryInterface $category = null, $filter = null, $option = null)
+    {
+        $queryBuilder = $this->getCategoryProductsQueryBuilder($category);
+        $queryBuilder->leftJoin('p.variations', 'pv')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere($queryBuilder->expr()->orX('pv.enabled = :enabled', 'pv.enabled IS NULL'))
+            ->setParameter('enabled', true);
+
+        if (null !== $filter) {
+            // TODO manage various filter types
+            $queryBuilder->andWhere(sprintf('p.%s %s :%s', $filter, '>', $filter))
+                ->setParameter(sprintf(':%s', $filter), $option);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Retrieve an active product from its id and its slug.
+     *
+     * @param int    $id
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findEnabledFromIdAndSlug($id, $slug)
+    {
+        return $this->getRepository()
+            ->findOneBy([
+                'id' => $id,
+                'slug' => $slug,
+                'enabled' => true,
+            ]);
+    }
+
+    public function findVariations(ProductInterface $product)
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->where('p.parent = :parent')
+            ->andWhere('p.enabled = :enabled')
+            ->setParameter('parent', $product)
+            ->setParameter('enabled', true);
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
+    public function updateStock($product, $diff): void
+    {
+        if (0 === $diff) {
+            return;
+        }
+
+        $productId = $product instanceof ProductInterface ? $product->getId() : $product;
+
+        $tableName = $this->getTableName();
+
+        $operator = $diff > 0 ? '+' : '-';
+
+        $this->getConnection()->query(sprintf('UPDATE %s SET stock = stock %s %d WHERE id = %d;', $tableName, $operator, abs($diff), $productId));
+    }
+
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
+    {
+        $query = $this->getRepository()
+            ->createQueryBuilder('p')
+            ->select('p');
+
+        $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
+        foreach ($sort as $field => $direction) {
+            if (!\in_array($field, $fields, true)) {
+                unset($sort[$field]);
+            }
+        }
+        if (0 === \count($sort)) {
+            $sort = ['name' => 'ASC'];
+        }
+        foreach ($sort as $field => $direction) {
+            $query->orderBy(sprintf('p.%s', $field), strtoupper($direction));
+        }
+
+        $parameters = [];
+
+        if (isset($criteria['enabled'])) {
+            $query->andWhere('p.enabled = :enabled');
+            $parameters['enabled'] = $criteria['enabled'];
+        }
+
+        $query->setParameters($parameters);
+
+        return Pager::create($query, $limit, $page);
+    }
+
+    final public function queryInCollection($collection, $limit = null): QueryBuilder
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->distinct()
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection = :collection')
+            ->setParameter('collection', $collection->getId());
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Returns QueryBuilder for products.
+     *
+     * @param CategoryInterface $category
+     *
+     * @return QueryBuilder
+     */
+    protected function getCategoryProductsQueryBuilder(?CategoryInterface $category = null)
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g');
+
+        if ($category) {
+            $queryBuilder
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('pc.category = :categoryId')
+                ->setParameter('categoryId', $category->getId());
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array    $productCollections
+     * @param int|null $limit
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function queryInSameCollections($productCollections, $limit = null)
+    {
+        $collections = [];
+        $productIds = [];
+
+        foreach ($productCollections as $pCollection) {
+            $collections[] = $pCollection->getCollection();
+            if (false === array_search($pCollection->getProduct()->getId(), $productIds, true)) {
+                $productIds[] = $pCollection->getProduct()->getId();
+            }
+        }
+
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->distinct()
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection IN (:collections)')
+            ->andWhere('p.id NOT IN (:productIds)')
+            ->setParameter('collections', array_values($collections))
+            ->setParameter('productIds', array_values($productIds));
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder;
+    }
+}

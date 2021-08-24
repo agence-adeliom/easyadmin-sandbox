@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.product.block.breadcrumb" class="Adeliom\EasyShop\ProductBundle\Block\CatalogBreadcrumbBlockService">
+            <tag name="easy_shop.block"/>
+            <tag name="easy_shop.breadcrumb"/>
+            <argument>catalog</argument>
+            <argument>easy_shop.product.block.breadcrumb</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="knp_menu.menu_provider"/>
+            <argument type="service" id="knp_menu.factory"/>
+        </service>
+        <service id="easy_shop.product.block.recent_products" class="Adeliom\EasyShop\ProductBundle\Block\RecentProductsBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.product.block.recent_products</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument>%easy_shop.product.admin.product.entity%</argument>
+        </service>
+        <service id="easy_shop.product.block.similar_products" class="Adeliom\EasyShop\ProductBundle\Block\SimilarProductsBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.product.block.similar_products</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument type="service" id="easy_shop.product.finder"/>
+            <argument>%easy_shop.product.admin.product.entity%</argument>
+        </service>
+        <service id="easy_shop.product.block.categories_menu" class="Adeliom\EasyShop\ProductBundle\Block\CategoriesMenuBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.product.block.categories_menu</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="knp_menu.menu_provider"/>
+            <argument type="service" id="easy_shop.product.menu.product_menu_builder"/>
+        </service>
+        <service id="easy_shop.product.block.filters_menu" class="Adeliom\EasyShop\ProductBundle\Block\FiltersMenuBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.product.block.product_menu</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="knp_menu.menu_provider"/>
+            <argument type="service" id="easy_shop.product.menu.product_menu_builder"/>
+        </service>
+        <service id="easy_shop.product.block.variations_form" class="Adeliom\EasyShop\ProductBundle\Block\VariationsFormBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.product.block.variations_form</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="easy_shop.product.pool"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+    </services>
+</container>

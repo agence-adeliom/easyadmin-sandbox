@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.invoice.admin.invoice.class">Adeliom\EasyShop\InvoiceBundle\Admin\InvoiceAdmin</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.invoice.admin.invoice" class="%easy_shop.invoice.admin.invoice.class%">
+            <tag name="easy_shop.admin" manager_type="orm" group="easy_shop_ecommerce" label="invoice" label_translator_strategy="easy_shop.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%easy_shop.invoice.admin.invoice.entity%</argument>
+            <argument/>
+            <call method="setCurrencyDetector">
+                <argument type="service" id="easy_shop.price.currency.detector"/>
+            </call>
+        </service>
+    </services>
+</container>

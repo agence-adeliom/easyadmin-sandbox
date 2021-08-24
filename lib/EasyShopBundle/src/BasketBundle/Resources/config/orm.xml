@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.basket.manager" class="Adeliom\EasyShop\Component\Basket\BasketManager">
+            <argument>%easy_shop.basket.basket.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.basket_element.manager" class="Adeliom\EasyShop\Component\Basket\BasketElementManager">
+            <argument>%easy_shop.basket.basket_element.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+    </services>
+</container>

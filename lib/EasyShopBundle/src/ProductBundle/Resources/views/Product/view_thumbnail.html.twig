@@ -1,0 +1,33 @@
+{% spaceless %}
+
+    {% set link = url('easy_shop_product_view', {'productId': product.id, 'slug': product.slug}) %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 itemprop="name" class="panel-title truncate"><a href="{{ link }}">{{ product.name }}</a></h5>
+        </div>
+        <div class="panel-body">
+            {% if product.image %}
+                <a href="{{ link }}">{% media product.image, 'small' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}</a>
+            {% else %}
+                {# default product picture goes here #}
+            {% endif %}
+        </div>
+        <div class="panel-footer">
+            <span class="text-left">
+                {% include "@SonataBasket/Basket/add_product_form_button.html.twig" %}
+            </span>
+            <span itemprop="price" class="text-right">
+                {% if not easy_shop_product_has_variations(product) %}
+                    {{ easy_shop_product_price(product, currency, true)|number_format_currency(currency.label) }}
+                {% else %}
+                    {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
+
+                    {% set cheapest_variation = easy_shop_product_cheapest_variation(product) %}
+                    {{ easy_shop_product_price(cheapest_variation, currency, true)|number_format_currency(currency.label) }}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+{% endspaceless %}

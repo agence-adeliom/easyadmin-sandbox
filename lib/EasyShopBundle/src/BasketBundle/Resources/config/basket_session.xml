@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.basket.session.factory" class="Adeliom\EasyShop\Component\Basket\BasketSessionFactory">
+            <argument type="service" id="easy_shop.basket.manager"/>
+            <argument type="service" id="easy_shop.basket.builder"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument type="service" id="session"/>
+        </service>
+    </services>
+</container>

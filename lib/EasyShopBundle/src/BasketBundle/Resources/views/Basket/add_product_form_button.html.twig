@@ -1,0 +1,27 @@
+{% set provider = easy_shop_product_provider(product) %}
+
+{% extends '@SonataBasket/Basket/add_product_form.html.twig' %}
+
+{% block add_product_form_content %}
+    {% if easy_shop_product_has_variations(product) %}
+        <a class="btn btn-primary btn-sm pull-right" href="{{ url('easy_shop_product_view', {'productId': product.id, 'slug': product.slug}) }}">
+            <i class="glyphicon glyphicon-search icon-white"></i> {% trans from 'SonataProductBundle' %}easy_shop.product.btn_see{% endtrans %}
+        </a>
+    {% else %}
+        {% if easy_shop_product_stock(product) == 0 %}
+            <a class="btn btn-primary btn-sm pull-right" href="{{ url('easy_shop_product_view', {'productId': product.id, 'slug': product.slug}) }}">
+                <i class="glyphicon glyphicon-search icon-white"></i> {% trans from 'SonataProductBundle' %}easy_shop.product.btn_see{% endtrans %}
+            </a>
+        {% else %}
+            {% set form = easy_shop_product_form_add_basket(product) %}
+
+            <form id="form_add_basket_button_{{ product.id }}" class="form-horizontal" action="{{ url('easy_shop_basket_add_product') }}" method="POST"{% if provider.getOption('product_add_modal') %} data-target="#add_basket_modal_{{ product.id }}"{% endif %}>
+                <button type="submit" class="btn btn-primary btn-sm pull-right" id="easy_shop_add_basket_submit"{% if easy_shop_product_stock(product) == 0 %} disabled{% endif %}>
+                    <i class="glyphicon glyphicon-shopping-cart icon-white"></i> {% trans from 'SonataProductBundle' %}easy_shop.product.btn_add{% endtrans %}
+                </button>
+
+                {{ form_rest(form) }}
+            </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}

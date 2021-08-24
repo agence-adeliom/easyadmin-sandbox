@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\CustomerBundle\Block;
+
+use Knp\Menu\ItemInterface;
+use Knp\Menu\Provider\MenuProviderInterface;
+use Adeliom\EasyShop\BlockBundle\Block\BlockContextInterface;
+use Adeliom\EasyShop\BlockBundle\Block\Service\MenuBlockService;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
+final class ProfileMenuBlockService extends MenuBlockService
+{
+    private $menuBuilder;
+
+    /**
+     * @param object $menuBuilder
+     */
+    public function __construct(string $name, EngineInterface $templating, MenuProviderInterface $menuProvider, $menuBuilder)
+    {
+        parent::__construct($name, $templating, $menuProvider, []);
+
+        if (!\is_object($menuBuilder) || !method_exists($menuBuilder, 'createProfileMenu')) {
+            throw new \InvalidArgumentException(
+                'Argument 4 should be object with public function "createProfileMenu(array $itemOptions = [])"'
+            );
+        }
+
+        $this->menuBuilder = $menuBuilder;
+    }
+
+    public function getName(): string
+    {
+        return 'Ecommerce Profile Menu';
+    }
+
+    public function configureSettings(OptionsResolver $resolver): void
+    {
+        parent::configureSettings($resolver);
+
+        $resolver->setDefaults([
+            'cache_policy' => 'private',
+            'menu_template' => '@SonataBlock/Block/block_side_menu_template.html.twig',
+        ]);
+    }
+
+    /**
+     * Gets the menu to render.
+     *
+     * @return ItemInterface|string
+     */
+    protected function getMenu(BlockContextInterface $blockContext)
+    {
+        $settings = $blockContext->getSettings();
+
+        $menu = parent::getMenu($blockContext);
+
+        if (null === $menu || '' === $menu) {
+            $menu = $this->menuBuilder->createProfileMenu(
+                [
+                    'childrenAttributes' => ['class' => $settings['menu_class']],
+                    'attributes' => ['class' => $settings['children_class']],
+                ]
+            );
+
+            if (method_exists($menu, 'setCurrentUri')) {
+                $menu->setCurrentUri($settings['current_uri']);
+            }
+        }
+
+        return $menu;
+    }
+}

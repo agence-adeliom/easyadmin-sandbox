@@ -1,0 +1,36 @@
+
+{% extends easy_shop_block.templates.block_base %}
+
+{% block block %}
+    <section>
+        <div class="row">
+            <div class="col-xs-6">
+                {% if settings.title %}
+                    <h3>{{ settings.title }}</h3>
+                {% endif %}
+            </div>
+
+            <div class="col-xs-6" style="text-align: right; margin-top:17px;">
+                <a class="btn btn-default" href="{{ url('easy_shop_catalog_index') }}"><span class="glyphicon glyphicon-list"></span>&nbsp;{{ 'view_all_products'|trans({}, 'SonataProductBundle') }}</a>
+            </div>
+        </div>
+
+        <div class="row product-grid">
+            {% if products|length > 0 %}
+                <ul class="thumbnails list-inline">
+                    {% for product in products %}
+
+                        {% if easy_shop_product_has_enabled_variations(product) or not easy_shop_product_has_variations(product) %}
+                            <li class="col-sm-3" itemscope itemtype="http://schema.org/Product">
+                                {% include '@SonataProduct/Catalog/_product_grid.html.twig' %}
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{{ 'no_product_found'|trans({}, 'SonataProductBundle') }}</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

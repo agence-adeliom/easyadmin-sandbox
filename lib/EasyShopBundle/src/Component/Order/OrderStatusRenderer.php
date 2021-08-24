@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\Component\Order;
+
+use Adeliom\EasyShop\Component\Delivery\BaseServiceDelivery;
+use Adeliom\EasyShop\Component\Payment\TransactionInterface;
+use Adeliom\EasyShop\Twig\Status\StatusClassRendererInterface;
+
+
+class OrderStatusRenderer implements StatusClassRendererInterface
+{
+    public function handlesObject($object, $statusName = null)
+    {
+        return ($object instanceof OrderInterface || $object instanceof OrderElementInterface)
+            && \in_array($statusName, ['delivery', 'payment', null], true);
+    }
+
+    public function getStatusClass($object, $statusName = null, $default = '')
+    {
+        switch ($statusName) {
+            case 'delivery':
+                switch ($object->getDeliveryStatus()) {
+                    case BaseServiceDelivery::STATUS_COMPLETED:
+                    case BaseServiceDelivery::STATUS_SENT:
+                    case BaseServiceDelivery::STATUS_RETURNED:
+                        return 'success';
+                    case BaseServiceDelivery::STATUS_OPEN:
+                    case BaseServiceDelivery::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+
+                break;
+            case 'payment':
+                switch ($object->getPaymentStatus()) {
+                    case TransactionInterface::STATUS_OPEN:
+                    case TransactionInterface::STATUS_VALIDATED:
+                    case TransactionInterface::STATE_OK:
+                        return 'success';
+                    case TransactionInterface::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+
+                break;
+            default:
+                switch ($object->getStatus()) {
+                    case OrderInterface::STATUS_OPEN:
+                    case OrderInterface::STATUS_VALIDATED:
+                        return 'success';
+                    case OrderInterface::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+
+                break;
+        }
+    }
+}

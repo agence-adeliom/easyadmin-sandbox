@@ -1,0 +1,18 @@
+<ul>
+    {% for category in root_category.getChildren() %}
+        <li>
+            <a href="{{ url('easy_shop_catalog_index', {'category_slug': category.slug, 'category_id': category.id}) }}">{{ category.name }}</a>
+
+            {% if category.hasChildren and deep < depth%}
+
+                {{ render(controller('SonataProductBundle:Category:listSideMenuCategories', {
+                    'category': category,
+                    'deep' : deep,
+                    'depth': depth
+                })) }}
+
+            {% endif %}
+
+        </li>
+    {% endfor %}
+</ul>

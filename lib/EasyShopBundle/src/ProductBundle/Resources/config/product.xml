@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.product.pool.class">Adeliom\EasyShop\Component\Product\Pool</parameter>
+        <parameter key="easy_shop.product.subscriber.orm.class">Adeliom\EasyShop\Component\Subscriber\ORMInheritanceSubscriber</parameter>
+        <parameter key="easy_shop.product.seo_iterator.class">Adeliom\EasyShop\Component\Product\SeoProductIterator</parameter>
+        <parameter key="easy_shop.product.finder.class">Adeliom\EasyShop\Component\Product\ProductFinder</parameter>
+        <parameter key="easy_shop.product.seo.twitter.class">Adeliom\EasyShop\ProductBundle\Seo\Services\Twitter</parameter>
+        <parameter key="easy_shop.product.seo.product.site">%easy_shop.product.seo.product.site%</parameter>
+        <parameter key="easy_shop.product.seo.product.creator">%easy_shop.product.seo.product.creator%</parameter>
+        <parameter key="easy_shop.product.seo.product.domain">%easy_shop_media.cdn.host%</parameter>
+        <parameter key="easy_shop.product.seo.product.media_prefix">%easy_shop.product.seo.product.media_prefix%</parameter>
+        <parameter key="easy_shop.product.seo.product.media_format">%easy_shop.product.seo.product.media_format%</parameter>
+        <parameter key="easy_shop.product.seo.facebook.class">Adeliom\EasyShop\ProductBundle\Seo\Services\Facebook</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.product.pool" class="%easy_shop.product.pool.class%" public="true">
+
+        </service>
+        <service id="easy_shop.product.subscriber.orm" class="%easy_shop.product.subscriber.orm.class%">
+            <argument type="collection"/>
+            <tag name="doctrine.event_subscriber"/>
+            <argument>%easy_shop.product.admin.product.entity%</argument>
+        </service>
+        <service id="easy_shop.product.seo_iterator" class="%easy_shop.product.seo_iterator.class%">
+            <argument type="service" id="doctrine"/>
+            <argument>%easy_shop.product.product.class%</argument>
+            <argument type="service" id="router"/>
+            <argument>easy_shop_product_view</argument>
+        </service>
+        <service id="easy_shop.product.finder" class="%easy_shop.product.finder.class%">
+            <argument type="service" id="easy_shop.product.set.manager"/>
+        </service>
+        <!-- SEO -->
+        <service id="easy_shop.product.seo.twitter" class="%easy_shop.product.seo.twitter.class%" public="true">
+            <argument type="service" id="easy_shop.media.pool"/>
+            <argument type="service" id="easy_shop.intl.templating.helper.number"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument>%easy_shop.product.seo.product.site%</argument>
+            <argument>%easy_shop.product.seo.product.creator%</argument>
+            <argument>%easy_shop.product.seo.product.domain%</argument>
+            <argument>%easy_shop.product.seo.product.media_format%</argument>
+        </service>
+        <service id="easy_shop.product.seo.facebook" class="%easy_shop.product.seo.facebook.class%" public="true">
+            <argument type="service" id="router"/>
+            <argument type="service" id="easy_shop.media.pool"/>
+            <argument type="service" id="easy_shop.intl.templating.helper.number"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument>%easy_shop.product.seo.product.domain%</argument>
+            <argument>%easy_shop.product.seo.product.media_format%</argument>
+        </service>
+        <service id="Adeliom\EasyShop\ProductBundle\Controller\CollectionController">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="easy_shop.seo.page"/>
+            <argument type="service" id="easy_shop.price.currency.detector"/>
+            <argument type="service" id="easy_shop.classification.manager.collection"/>
+            <argument type="service" id="easy_shop.product.set.manager"/>
+        </service>
+    </services>
+</container>

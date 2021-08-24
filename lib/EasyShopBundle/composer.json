@@ -1,0 +1,19 @@
+{
+    "name": "agence-adeliom/easy-shop-bundle",
+    "type": "symfony-bundle",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\EasyShop\\Component\\": "src/Component",
+            "Adeliom\\EasyShop\\BasketBundle\\": "src/BasketBundle",
+            "Adeliom\\EasyShop\\CustomerBundle\\": "src/CustomerBundle",
+            "Adeliom\\EasyShop\\DeliveryBundle\\": "src/DeliveryBundle",
+            "Adeliom\\EasyShop\\InvoiceBundle\\": "src/InvoiceBundle",
+            "Adeliom\\EasyShop\\OrderBundle\\": "src/OrderBundle",
+            "Adeliom\\EasyShop\\PaymentBundle\\": "src/PaymentBundle",
+            "Adeliom\\EasyShop\\PriceBundle\\": "src/PriceBundle",
+            "Adeliom\\EasyShop\\ProductBundle\\": "src/ProductBundle"
+        }
+    }
+}

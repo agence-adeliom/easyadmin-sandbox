@@ -1,0 +1,52 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\ProductBundle\Form\Type;
+
+use Adeliom\EasyShop\Component\Product\Pool;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ApiProductType extends AbstractType
+{
+    /**
+     * @var Pool
+     */
+    protected $productPool;
+
+    public function __construct(Pool $productPool)
+    {
+        $this->productPool = $productPool;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        if ($options['provider_name']) {
+            $provider = $this->productPool->getProvider($options['provider_name']);
+            $provider->buildForm($builder, $options);
+        }
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => null,
+            'csrf_protection' => false,
+            'provider_name' => null,
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'easy_shop_product_api_form_product';
+    }
+
+    public function getParent()
+    {
+        return ApiProductParentType::class;
+    }
+}

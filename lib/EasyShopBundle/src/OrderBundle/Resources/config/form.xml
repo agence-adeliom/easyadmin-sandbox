@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.order.form.status_type" class="Adeliom\EasyShop\OrderBundle\Form\Type\OrderStatusType">
+            <argument>%easy_shop.order.order.class%</argument>
+            <argument>getStatusList</argument>
+            <argument>easy_shop_order_status</argument>
+            <tag name="form.type" alias="easy_shop_order_status"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.basket.form.type.basket" class="Adeliom\EasyShop\BasketBundle\Form\BasketType">
+            <tag name="form.type" alias="easy_shop_basket_basket"/>
+        </service>
+        <service id="easy_shop.basket.form.type.address" class="Adeliom\EasyShop\BasketBundle\Form\AddressType">
+            <tag name="form.type" alias="easy_shop_basket_address"/>
+            <argument>%easy_shop.customer.address.class%</argument>
+            <argument type="service" id="easy_shop.basket"/>
+        </service>
+        <service id="easy_shop.basket.form.type.shipping" class="Adeliom\EasyShop\BasketBundle\Form\ShippingType">
+            <tag name="form.type" alias="easy_shop_basket_shipping"/>
+            <argument type="service" id="easy_shop.delivery.pool"/>
+            <argument type="service" id="easy_shop.delivery.selector"/>
+        </service>
+        <service id="easy_shop.basket.form.type.payment" class="Adeliom\EasyShop\BasketBundle\Form\PaymentType">
+            <tag name="form.type" alias="easy_shop_basket_payment"/>
+            <argument type="service" id="easy_shop.address.manager"/>
+            <argument type="service" id="easy_shop.payment.pool"/>
+            <argument type="service" id="easy_shop.payment.selector"/>
+        </service>
+    </services>
+</container>

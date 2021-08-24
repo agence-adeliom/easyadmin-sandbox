@@ -1,0 +1,117 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\Component\Customer;
+
+use Symfony\Component\Security\Core\User\UserInterface;
+
+interface CustomerInterface
+{
+    /**
+     * Set createdAt.
+     */
+    public function setCreatedAt(?\DateTime $createdAt = null);
+
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime createdAt
+     */
+    public function getCreatedAt();
+
+    /**
+     * Set firstname.
+     *
+     * @param string $firstname
+     */
+    public function setFirstname($firstname);
+
+    /**
+     * Get firstname.
+     *
+     * @return string $firstname
+     */
+    public function getFirstname();
+
+    /**
+     * Get full name.
+     *
+     * @return string
+     */
+    public function getFullname();
+
+    /**
+     * Set lastname.
+     *
+     * @param string $lastname
+     */
+    public function setLastname($lastname);
+
+    /**
+     * Get lastname.
+     *
+     * @return string $lastname
+     */
+    public function getLastname();
+
+    /**
+     * Set updatedAt.
+     */
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime $updatedAt
+     */
+    public function getUpdatedAt();
+
+    /**
+     * Set user.
+     */
+    public function setUser(UserInterface $user);
+
+    /**
+     * Get user.
+     *
+     * @return UserInterface $user
+     */
+    public function getUser();
+
+    /**
+     * Get id.
+     *
+     * @return int $id
+     */
+    public function getId();
+
+    /**
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @return string
+     */
+    public function getLocale();
+
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale);
+
+    /**
+     * @param $type
+     *
+     * @return array
+     */
+    public function getAddressesByType($type);
+
+    /**
+     * @return array
+     */
+    public function getAddresses();
+}

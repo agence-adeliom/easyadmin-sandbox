@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="easy_shop.customer.form.address_type" class="Adeliom\EasyShop\CustomerBundle\Form\Type\AddressType">
+            <argument>%easy_shop.customer.address.class%</argument>
+            <argument>getTypesList</argument>
+            <argument>easy_shop_customer_address</argument>
+            <argument type="service" id="easy_shop.basket"/>
+            <tag name="form.type" alias="easy_shop_customer_address"/>
+        </service>
+        <service id="easy_shop.customer.form.address_types_type" class="Adeliom\EasyShop\CustomerBundle\Form\Type\AddressTypeType">
+            <argument>%easy_shop.customer.address.class%</argument>
+            <argument>getTypesList</argument>
+            <argument>easy_shop_customer_address_types</argument>
+            <tag name="form.type" alias="easy_shop_customer_address_types"/>
+        </service>
+    </services>
+</container>

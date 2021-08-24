@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.customer.selector.class">Adeliom\EasyShop\Component\Customer\CustomerSelector</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.basket.builder.standard" class="Adeliom\EasyShop\Component\Basket\BasketBuilder">
+            <argument type="service" id="easy_shop.product.pool"/>
+            <argument type="service" id="easy_shop.address.manager"/>
+            <argument type="service" id="easy_shop.delivery.pool"/>
+            <argument type="service" id="easy_shop.payment.pool"/>
+        </service>
+        <service id="easy_shop.customer.selector" class="%easy_shop.customer.selector.class%" public="true">
+            <argument type="service" id="easy_shop.customer.manager"/>
+            <argument type="service" id="session"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="easy_shop.intl.locale_detector"/>
+        </service>
+        <service id="easy_shop.basket.loader.standard" class="Adeliom\EasyShop\Component\Basket\Loader">
+            <argument type="service" id="easy_shop.basket.factory"/>
+            <argument type="service" id="easy_shop.customer.selector"/>
+        </service>
+        <service id="easy_shop.basket" class="Adeliom\EasyShop\Component\Basket\Basket" public="true">
+            <factory service="easy_shop.basket.loader" method="getBasket"/>
+        </service>
+        <service id="easy_shop.basket.block.nb_items" class="Adeliom\EasyShop\BasketBundle\Block\BasketBlockService">
+            <tag name="easy_shop.block"/>
+            <argument>easy_shop.basket.block.nb_items</argument>
+            <argument type="service" id="templating"/>
+        </service>
+        <service id="Adeliom\EasyShop\BasketBundle\Controller\BasketController">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="easy_shop.basket.factory"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.payment.pool.class">Adeliom\EasyShop\Component\Payment\Pool</parameter>
+        <parameter key="easy_shop.payment.handler.class">Adeliom\EasyShop\Component\Payment\PaymentHandler</parameter>
+        <parameter key="easy_shop.payment.method.paypal.class">Adeliom\EasyShop\Component\Payment\Paypal</parameter>
+        <parameter key="easy_shop.payment.method.check.class">Adeliom\EasyShop\Component\Payment\CheckPayment</parameter>
+        <parameter key="easy_shop.payment.method.pass.class">Adeliom\EasyShop\Component\Payment\PassPayment</parameter>
+        <parameter key="easy_shop.payment.method.scellius.class">Adeliom\EasyShop\Component\Payment\Scellius\ScelliusPayment</parameter>
+        <parameter key="easy_shop.payment.provider.scellius.none_generator.class">Adeliom\EasyShop\Component\Payment\Scellius\NodeScelliusTransactionGenerator</parameter>
+        <parameter key="easy_shop.payment.provider.scellius.order_generator.class">Adeliom\EasyShop\Component\Payment\Scellius\OrderScelliusTransactionGenerator</parameter>
+        <parameter key="easy_shop.payment.method.debug.class">Adeliom\EasyShop\Component\Payment\Debug\DebugPayment</parameter>
+        <parameter key="easy_shop.payment.method.ogone.class">Adeliom\EasyShop\Component\Payment\Ogone\OgonePayment</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.payment.pool" class="%easy_shop.payment.pool.class%"/>
+        <service id="easy_shop.payment.method.paypal" class="%easy_shop.payment.method.paypal.class%">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="translator" on-invalid="null"/>
+        </service>
+        <service id="easy_shop.payment.method.check" class="%easy_shop.payment.method.check.class%">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="logger"/>
+            <argument/>
+        </service>
+        <service id="easy_shop.payment.method.pass" class="%easy_shop.payment.method.pass.class%">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument/>
+        </service>
+        <service id="easy_shop.payment.method.scellius" class="%easy_shop.payment.method.scellius.class%">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="templating"/>
+            <argument/>
+            <argument>%kernel.debug%</argument>
+        </service>
+        <service id="easy_shop.payment.provider.scellius.none_generator" class="%easy_shop.payment.provider.scellius.none_generator.class%"/>
+        <service id="easy_shop.payment.provider.scellius.order_generator" class="%easy_shop.payment.provider.scellius.order_generator.class%"/>
+        <service id="easy_shop.payment.method.debug" class="%easy_shop.payment.method.debug.class%" public="true">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument/>
+        </service>
+        <service id="easy_shop.payment.method.ogone" class="%easy_shop.payment.method.ogone.class%">
+            <tag name="easy_shop.payment.method"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="templating"/>
+            <argument>%kernel.debug%</argument>
+        </service>
+        <service id="easy_shop.payment.handler" class="%easy_shop.payment.handler.class%" public="true">
+            <argument type="service" id="easy_shop.order.manager"/>
+            <argument type="service" id="easy_shop.payment.selector"/>
+            <argument type="service" id="easy_shop.generator"/>
+            <argument type="service" id="easy_shop.transaction.manager"/>
+            <argument type="service" id="easy_shop.notification.backend"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+        <service id="Adeliom\EasyShop\PaymentBundle\Controller\PaymentController">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="easy_shop.basket.factory"/>
+            <argument type="service" id="easy_shop.payment.handler"/>
+            <argument type="service" id="easy_shop.basket"/>
+        </service>
+    </services>
+</container>

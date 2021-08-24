@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Adeliom\EasyShop\CustomerBundle\Entity\BaseCustomer" exclusion-policy="all" xml-root-name="customer">
+        <property name="title" type="integer" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="firstname" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="lastname" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="email" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="birthDate" type="DateTime" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="birthPlace" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="phoneNumber" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="mobileNumber" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="faxNumber" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="locale" type="string" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="isFake" type="boolean" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="user" serialized-name="user_id" type="easy_shop_user_user_id" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_api_write,easy_shop_search"/>
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_search"/>
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="easy_shop_api_read,easy_shop_search"/>
+    </class>
+</serializer>

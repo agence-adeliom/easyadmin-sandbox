@@ -1,0 +1,16 @@
+{% extends '@SonataProduct/Catalog/layout.html.twig' %}
+
+
+{% block products_heading_title %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block products %}
+
+    {% include '@SonataProduct/Catalog/' ~ display_mode ~ '.html.twig' %}
+
+{% endblock %}

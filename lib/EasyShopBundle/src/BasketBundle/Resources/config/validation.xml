@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Adeliom\EasyShop\Component\Basket\Basket">
+        <constraint name="Adeliom\EasyShop\Component\Form\Basket">
+            <option name="groups">
+                <value>elements</value>
+            </option>
+        </constraint>
+        <getter property="deliveryMethod">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="deliveryAddress">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="paymentMethod">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>payment</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="billingAddress">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>payment</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="paymentMethodCode">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="deliveryMethodCode">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="locale">
+            <constraint name="Locale">
+                <option name="groups">
+                    <value>api</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="currency">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+    </class>
+    <class name="Adeliom\EasyShop\CustomerBundle\Entity\BaseAddress">
+        <getter property="firstname">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                    <value>billing</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="lastname">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="address1">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                    <value>billing</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="postcode">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                    <value>billing</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="city">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                    <value>billing</value>
+                </option>
+            </constraint>
+        </getter>
+        <getter property="countrycode">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>delivery</value>
+                    <value>billing</value>
+                </option>
+            </constraint>
+            <constraint name="Country"/>
+        </getter>
+    </class>
+</constraint-mapping>

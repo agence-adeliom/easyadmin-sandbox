@@ -1,0 +1,99 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\Component\Generator;
+
+use Doctrine\Persistence\ManagerRegistry;
+use Adeliom\EasyShop\Component\Invoice\InvoiceInterface;
+use Adeliom\EasyShop\Component\Order\OrderInterface;
+
+final class PostgresReference implements ReferenceInterface
+{
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    public function invoice(InvoiceInterface $invoice): void
+    {
+        if (!$invoice->getId()) {
+            throw new \RuntimeException('The invoice is not persisted into the database');
+        }
+
+        $this->generateReference(
+            $invoice,
+            $this->registry->getManager()->getClassMetadata(\get_class($invoice))->table['name']
+        );
+    }
+
+    public function order(OrderInterface $order): void
+    {
+        if (!$order->getId()) {
+            throw new \RuntimeException('The order is not persisted into the database');
+        }
+
+        $this->generateReference(
+            $order,
+            $this->registry->getManager()->getClassMetadata(\get_class($order))->table['name']
+        );
+    }
+
+    /**
+     * @param mixed  $object
+     * @param string $tableName
+     *
+     * @throws \Exception
+     *
+     * @return string
+     */
+    private function generateReference($object, $tableName)
+    {
+        $date = new \DateTime();
+
+        $sql = sprintf(
+            "SELECT count(id) as counter FROM %s WHERE created_at >= '%s' AND reference IS NOT NULL",
+            $tableName,
+            $date->format('Y-m-d')
+        );
+
+        $this->registry->getConnection()->exec('BEGIN WORK');
+
+        $this->registry->getConnection()->exec(sprintf('LOCK TABLE %s IN EXCLUSIVE MODE', $tableName));
+
+        try {
+            $statement = $this->registry->getConnection()->query($sql);
+            $row = $statement->fetch();
+
+            $reference = sprintf(
+                '%02d%02d%02d%06d',
+                $date->format('y'),
+                $date->format('n'),
+                $date->format('j'),
+                $row['counter'] + 1
+            );
+
+            $this->registry->getConnection()->update(
+                $tableName,
+                ['reference' => $reference],
+                ['id' => $object->getId()]
+            );
+            $object->setReference($reference);
+        } catch (\Exception $e) {
+            $this->registry->getConnection()->exec('ROLLBACK WORK');
+
+            throw $e;
+        }
+
+        $this->registry->getConnection()->exec('COMMIT WORK');
+
+        return $reference;
+    }
+}

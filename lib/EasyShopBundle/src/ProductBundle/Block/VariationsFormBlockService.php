@@ -1,0 +1,129 @@
+<?php
+
+declare(strict_types=1);
+
+
+
+namespace Adeliom\EasyShop\ProductBundle\Block;
+
+use Adeliom\EasyShop\AdminBundle\Form\FormMapper;
+use Adeliom\EasyShop\BlockBundle\Block\BaseBlockService;
+use Adeliom\EasyShop\BlockBundle\Block\BlockContextInterface;
+use Adeliom\EasyShop\BlockBundle\Model\BlockInterface;
+use Adeliom\EasyShop\Component\Form\Type\VariationChoiceType;
+use Adeliom\EasyShop\Component\Product\Pool;
+use Adeliom\EasyShop\Component\Product\ProductInterface;
+use Adeliom\EasyShop\Form\Validator\ErrorElement;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+
+
+class VariationsFormBlockService extends BaseBlockService
+{
+    /**
+     * @var \Adeliom\EasyShop\Component\Product\Pool
+     */
+    protected $pool;
+
+    /**
+     * @var \Symfony\Component\Form\FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
+     * @param string $name
+     */
+    public function __construct($name, EngineInterface $templating, Pool $productPool, FormFactoryInterface $formFactory)
+    {
+        parent::__construct($name, $templating);
+
+        $this->pool = $productPool;
+        $this->formFactory = $formFactory;
+    }
+
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
+    {
+        $product = $blockContext->getSetting('product');
+
+        if (null === $product) {
+            return $this->renderResponse($blockContext->getTemplate(), [
+                    'context' => $blockContext,
+                    'settings' => $blockContext->getSettings(),
+                    'block' => $blockContext->getBlock(),
+                    'choices' => [],
+                    'form' => null,
+                ], $response);
+        }
+
+        $fields = $blockContext->getSetting('variations_properties');
+
+        $choices = $this->pool->getProvider($product)->getVariationsChoices($product, $fields);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        $currentValues = [];
+
+        foreach ($choices as $field => $values) {
+            $currentValues[$field] = array_search($accessor->getValue($product, $field), $values, true);
+        }
+
+        $form = $this->formFactory->createBuilder(VariationChoiceType::class, $currentValues, [
+                'field_options' => $blockContext->getSetting('form_field_options'),
+                'product' => $product,
+                'fields' => $fields,
+            ])->getForm();
+
+        $params = [
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'choices' => $choices,
+            'form' => $form->createView(),
+        ];
+
+        return $this->renderResponse($blockContext->getTemplate(), $params, $response);
+    }
+
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
+    {
+        // TODO: Implement validateBlock() method.
+    }
+
+    public function buildEditForm(FormMapper $form, BlockInterface $block): void
+    {
+        // TODO: Implement buildEditForm() method.
+    }
+
+    public function getName()
+    {
+        return 'Products Variations choice';
+    }
+
+    public function configureSettings(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'product' => null,
+            'variations_properties' => [],
+            'form_route' => 'easy_shop_product_variation_product',
+            'form_route_parameters' => static function (Options $options) {
+                $product = $options->offsetGet('product');
+
+                if (null !== $product && !$product instanceof ProductInterface) {
+                    throw new \RuntimeException("Wrong 'product' parameter");
+                }
+
+                return [
+                        'productId' => $product ? $product->getId() : null,
+                        'slug' => $product ? $product->getSlug() : null,
+                    ];
+            },
+            'form_field_options' => [],
+            'title' => 'Product variations',
+            'template' => '@SonataProduct/Block/variations_choice.html.twig',
+        ]);
+    }
+}

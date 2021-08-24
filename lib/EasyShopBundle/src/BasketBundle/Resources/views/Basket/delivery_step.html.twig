@@ -1,0 +1,53 @@
+{% easy_shop_template_box 'This is the basket delivery address template. Feel free to override it.' %}
+
+{% block easy_shop_flash_messages %}
+    {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
+{% endblock %}
+
+{% include '@SonataBasket/Basket/stepper.html.twig' with {step: 'delivery'} %}
+
+{% block delivery_step %}
+    <form action="{{ url('easy_shop_basket_delivery') }}" method="POST" >
+        <div class="row">
+            {% block selected_delivery_address %}
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <h4>{{ 'easy_shop.basket.title_address_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            {{ easy_shop_address_render(basket.deliveryaddress) }}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block delivery_method_choice %}
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <h4>{{ 'easy_shop.basket.title_delivery_methods'|trans({}, 'SonataBasketBundle') }}</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            {{ form_errors(form.deliveryMethod) }}
+                            {{ form_widget(form.deliveryMethod) }}
+                            {{ form_rest(form) }}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        {% block delivery_submit %}
+            <div class="well">
+                    <a href="{{ url('easy_shop_basket_delivery_address') }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}easy_shop.basket.link_previous_step{% endtrans %}</a>
+
+                    <button type="submit" class="btn btn-primary pull-right">{{ 'easy_shop.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="glyphicon glyphicon-arrow-right icon-white"></i></button>
+            </div>
+        {% endblock %}
+    </form>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
+
+{% block preview %}
+    {% if product is defined and product.id %}
+        <strong>{{ product.name }}</strong> : {{ product.description }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="easy_shop.delivery.manager.class">Adeliom\EasyShop\ProductBundle\Entity\DeliveryManager</parameter>
+        <parameter key="easy_shop.package.manager.class">Adeliom\EasyShop\ProductBundle\Entity\PackageManager</parameter>
+        <parameter key="easy_shop.product.set.manager.class">Adeliom\EasyShop\ProductBundle\Entity\ProductSetManager</parameter>
+        <parameter key="easy_shop.product_category.manager.class">Adeliom\EasyShop\ProductBundle\Entity\ProductCategoryManager</parameter>
+        <parameter key="easy_shop.product_collection.manager.class">Adeliom\EasyShop\ProductBundle\Entity\ProductCollectionManager</parameter>
+    </parameters>
+    <services>
+        <service id="easy_shop.delivery.manager" class="%easy_shop.delivery.manager.class%">
+            <argument>%easy_shop.product.delivery.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.package.manager" class="%easy_shop.package.manager.class%">
+            <argument>%easy_shop.product.package.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.product.set.manager" class="%easy_shop.product.set.manager.class%" public="true">
+            <argument>%easy_shop.product.product.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.product_category.product" class="%easy_shop.product_category.manager.class%">
+            <argument>%easy_shop.product.product_category.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+        <service id="easy_shop.product_collection.product" class="%easy_shop.product_collection.manager.class%">
+            <argument>%easy_shop.product.product_collection.class%</argument>
+            <argument type="service" id="doctrine"/>
+        </service>
+    </services>
+</container>

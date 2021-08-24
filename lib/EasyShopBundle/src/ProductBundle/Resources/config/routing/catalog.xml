@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="easy_shop_catalog_index" path="/">
+        <default key="_controller">SonataProductBundle:Catalog:index</default>
+    </route>
+    <route id="easy_shop_catalog_category" path="/{category_slug}/{category_id}">
+        <requirement key="category_id">\d+</requirement>
+        <default key="_controller">SonataProductBundle:Catalog:index</default>
+        <default key="category_id">0</default>
+        <default key="category_slug">all</default>
+    </route>
+    <route id="easy_shop_catalog_collection" path="/collection/{collection_slug}/{collection_id}">
+        <requirement key="collection_id">\d+</requirement>
+        <default key="_controller">SonataProductBundle:Collection:index</default>
+        <default key="collection_id">0</default>
+        <default key="collection_slug">all</default>
+    </route>
+</routes>
