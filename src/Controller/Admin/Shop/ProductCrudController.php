@@ -77,9 +77,6 @@ class ProductCrudController extends AbstractCrudController
             ],
         ];
 
-        $p = new Product();
-
-
         yield TextField::new('code');
         yield BooleanField::new('enabled');
 

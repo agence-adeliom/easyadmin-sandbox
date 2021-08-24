@@ -29,3 +29,8 @@ services:
     App\Controller\Page\PageController:
         calls:
             - [ 'setRepository', [ '@easy_page.repository' ] ]
+
+    App\Controller\Admin\Shop\ShippingMethodCrudController:
+        arguments:
+            - "@sylius.registry.shipping_calculator"
+            - "@sylius.form_registry.shipping_calculator"
