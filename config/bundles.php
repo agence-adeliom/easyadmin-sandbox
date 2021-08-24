@@ -23,12 +23,12 @@ return [
     Adeliom\EasyBlogBundle\EasyBlogBundle::class => ['all' => true],
     Adeliom\EasyCommonBundle\EasyCommonBundle::class => ['all' => true],
     Adeliom\EasyEditorBundle\EasyEditorBundle::class => ['all' => true],
+    A2lix\AutoFormBundle\A2lixAutoFormBundle::class => ['all' => true],
+    A2lix\TranslationFormBundle\A2lixTranslationFormBundle::class => ['all' => true],
     Adeliom\EasyFieldsBundle\EasyFieldsBundle::class => ['all' => true],
     Adeliom\EasyMediaBundle\EasyMediaBundle::class => ['all' => true],
     Adeliom\EasyPageBundle\EasyPageBundle::class => ['all' => true],
     Adeliom\EasySeoBundle\EasySeoBundle::class => ['all' => true],
-
-
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Sylius\Bundle\OrderBundle\SyliusOrderBundle::class => ['all' => true],
     Sylius\Bundle\MoneyBundle\SyliusMoneyBundle::class => ['all' => true],
@@ -66,7 +66,5 @@ return [
     Sylius\Bundle\ThemeBundle\SyliusThemeBundle::class => ['all' => true],
     SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
-
     Adeliom\EasyShopBundle\EasyShopBundle::class => ['all' => true],
-
 ];

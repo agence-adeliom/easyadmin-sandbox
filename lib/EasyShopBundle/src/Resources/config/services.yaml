@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Adeliom\EasyShopBundle\Locale\SyliusLocalProvider:
+        arguments:
+            - "@sylius.repository.locale"
+        public: true
+

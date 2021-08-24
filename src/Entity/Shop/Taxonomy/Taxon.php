@@ -18,4 +18,9 @@ class Taxon extends BaseTaxon
     {
         return new TaxonTranslation();
     }
+
+    public static function getTranslationClass(): string
+    {
+        return TaxonTranslation::class;
+    }
 }

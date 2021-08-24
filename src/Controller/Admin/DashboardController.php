@@ -8,7 +8,14 @@ use App\Entity\Category;
 use App\Entity\MediaEntity;
 use App\Entity\Page;
 use App\Entity\Post;
+use App\Entity\Shop\Addressing\Country;
+use App\Entity\Shop\Addressing\Zone;
+use App\Entity\Shop\Channel\Channel;
+use App\Entity\Shop\Currency\Currency;
+use App\Entity\Shop\Currency\ExchangeRate;
+use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Product\Product;
+use App\Entity\Shop\Taxonomy\Taxon;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -45,7 +52,17 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
         yield MenuItem::section('Settings');
         yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::section('Catalog');
+        yield MenuItem::linkToCrud('Taxon', 'fa fa-file-alt', Taxon::class);
         yield MenuItem::linkToCrud('Product', 'fa fa-file-alt', Product::class);
+
+        yield MenuItem::section('Shop Settings');
+        yield MenuItem::linkToCrud('Channel', 'fa fa-file-alt', Channel::class);
+        yield MenuItem::linkToCrud('Countries', 'fa fa-file-alt', Country::class);
+        yield MenuItem::linkToCrud('Zones', 'fa fa-file-alt', Zone::class);
+        yield MenuItem::linkToCrud('Currency', 'fa fa-file-alt', Currency::class);
+        yield MenuItem::linkToCrud('ExchangeRate', 'fa fa-file-alt', ExchangeRate::class);
+        yield MenuItem::linkToCrud('Locales', 'fa fa-file-alt', Locale::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

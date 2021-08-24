@@ -48,7 +48,7 @@ abstract class BasePageCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
         yield from $this->metadataFields($pageName, $subject);
-        yield from $this->seoFields($pageName, $subject);
+        //yield from $this->seoFields($pageName, $subject);
         yield from $this->publishFields($pageName, $subject);
     }
 

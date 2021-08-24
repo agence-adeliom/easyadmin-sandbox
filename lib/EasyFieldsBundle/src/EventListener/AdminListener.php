@@ -30,8 +30,16 @@ class AdminListener
                 if ($context->getEntity()->getPrimaryKeyValueAsString()){
                     $response->headers->set("X-CRUD-ENTITY-ID", $context->getEntity()->getPrimaryKeyValueAsString());
                 }
+                dump($context->getEntity()->getInstance());
                 if (method_exists($context->getEntity()->getInstance() , '__toString')){
-                    $response->headers->set("X-CRUD-ENTITY-NAME", (string) $context->getEntity()->getInstance());
+                    $response->headers->set("X-CRUD-ENTITY-NAME", null);
+
+                    try {
+                        if($context->getEntity()->getPrimaryKeyValue()){
+                            $response->headers->set("X-CRUD-ENTITY-NAME", (string) $context->getEntity()->getInstance());
+                        }
+                    }catch (\Exception $e){
+                    }
                 }else{
                     $response->headers->set("X-CRUD-ENTITY-NAME", $context->getEntity()->toString());
                 }
