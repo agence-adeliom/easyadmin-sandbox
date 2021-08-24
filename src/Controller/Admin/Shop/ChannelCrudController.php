@@ -58,7 +58,8 @@ class ChannelCrudController extends AbstractCrudController
 
         yield TextField::new('code', 'sylius.ui.code');
         yield TextField::new('name', 'sylius.form.channel.name');
-        yield TextareaField::new('description', 'sylius.form.channel.description');
+        yield TextareaField::new('description', 'sylius.form.channel.description')
+            ->hideOnIndex();
         yield ColorField::new('color', 'sylius.form.channel.color');
         yield BooleanField::new('enabled', 'sylius.form.channel.enabled');
         yield TextField::new('hostname', 'sylius.form.channel.hostname');
@@ -74,34 +75,40 @@ class ChannelCrudController extends AbstractCrudController
             ->setFormTypeOption("required", true)
             ->setFormTypeOption("placeholder", null)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('currencies', 'sylius.form.channel.currencies', CurrencyChoiceType::class)
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("multiple", true)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('baseCurrency', 'sylius.form.channel.currency_base', CurrencyChoiceType::class)
             ->setFormTypeOption("required", true)
             ->setFormTypeOption("multiple", false)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('countries', 'sylius.form.channel.countries', CountryChoiceType::class)
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("multiple", true)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('defaultTaxZone', 'sylius.form.channel.tax_zone_default', ZoneChoiceType::class)
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("zone_scope", Scope::TAX)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('taxCalculationStrategy', 'sylius.form.channel.tax_calculation_strategy', TaxCalculationStrategyChoiceType::class)
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
         yield FormTypeField::new('themeName', 'sylius.form.channel.theme', ThemeNameChoiceType::class)
@@ -109,17 +116,25 @@ class ChannelCrudController extends AbstractCrudController
             ->setFormTypeOption("empty_data", null)
             ->setFormTypeOption("placeholder", 'sylius.ui.no_theme')
             ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->hideOnIndex()
         ;
 
-        yield EmailField::new('contactEmail');
-        yield TelephoneField::new('contactPhoneNumber');
-        yield BooleanField::new('skippingShippingStepAllowed', 'sylius.form.channel.skipping_shipping_step_allowed');
-        yield BooleanField::new('skippingPaymentStepAllowed', 'sylius.form.channel.skipping_payment_step_allowed');
-        yield BooleanField::new('accountVerificationRequired', 'sylius.form.channel.account_verification_required');
+        yield EmailField::new('contactEmail')
+            ->hideOnIndex();
+        yield TelephoneField::new('contactPhoneNumber')
+            ->hideOnIndex();
+        yield BooleanField::new('skippingShippingStepAllowed', 'sylius.form.channel.skipping_shipping_step_allowed')
+            ->hideOnIndex();
+        yield BooleanField::new('skippingPaymentStepAllowed', 'sylius.form.channel.skipping_payment_step_allowed')
+            ->hideOnIndex();
+        yield BooleanField::new('accountVerificationRequired', 'sylius.form.channel.account_verification_required')
+            ->hideOnIndex();
 
-        yield AssociationField::new('menuTaxon', 'sylius.form.channel.menu_taxon');
+        yield AssociationField::new('menuTaxon', 'sylius.form.channel.menu_taxon')
+            ->hideOnIndex();
 
-        yield FormTypeField::new('shopBillingData', 'sylius.form.channel.shop_billing_data', ShopBillingDataType::class);
+        yield FormTypeField::new('shopBillingData', 'sylius.form.channel.shop_billing_data', ShopBillingDataType::class)
+            ->hideOnIndex();
 
     }
 

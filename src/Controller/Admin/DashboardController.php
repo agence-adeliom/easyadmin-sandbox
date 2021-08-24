@@ -14,6 +14,7 @@ use App\Entity\Shop\Channel\Channel;
 use App\Entity\Shop\Currency\Currency;
 use App\Entity\Shop\Currency\ExchangeRate;
 use App\Entity\Shop\Locale\Locale;
+use App\Entity\Shop\Payment\PaymentMethod;
 use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Shipping\ShippingCategory;
 use App\Entity\Shop\Shipping\ShippingMethod;
@@ -67,6 +68,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Currency', 'fa fa-file-alt', Currency::class);
         yield MenuItem::linkToCrud('ExchangeRate', 'fa fa-file-alt', ExchangeRate::class);
         yield MenuItem::linkToCrud('Locales', 'fa fa-file-alt', Locale::class);
+        yield MenuItem::linkToCrud('Payment methods', 'fa fa-file-alt', PaymentMethod::class);
         yield MenuItem::linkToCrud('Shipping methods', 'fa fa-file-alt', ShippingMethod::class);
         yield MenuItem::linkToCrud('Shipping categories', 'fa fa-file-alt', ShippingCategory::class);
         yield MenuItem::linkToCrud('Tax categories', 'fa fa-file-alt', TaxCategory::class);
