@@ -17,6 +17,8 @@ use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Shipping\ShippingCategory;
 use App\Entity\Shop\Shipping\ShippingMethod;
+use App\Entity\Shop\Taxation\TaxCategory;
+use App\Entity\Shop\Taxation\TaxRate;
 use App\Entity\Shop\Taxonomy\Taxon;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -67,6 +69,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Locales', 'fa fa-file-alt', Locale::class);
         yield MenuItem::linkToCrud('Shipping methods', 'fa fa-file-alt', ShippingMethod::class);
         yield MenuItem::linkToCrud('Shipping categories', 'fa fa-file-alt', ShippingCategory::class);
+        yield MenuItem::linkToCrud('Tax categories', 'fa fa-file-alt', TaxCategory::class);
+        yield MenuItem::linkToCrud('Tax rate', 'fa fa-file-alt', TaxRate::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
