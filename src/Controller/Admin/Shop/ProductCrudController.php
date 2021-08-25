@@ -6,28 +6,56 @@ use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
 use App\Entity\Shop\Product\Product;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
+use Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Product\Factory\ProductFactory;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductCrudController extends AbstractCrudController
 {
+    private AdminUrlGenerator $crudUrlGenerator;
+    private AdminContextProvider $adminContextProvider;
+    private TranslatorInterface $translator;
+    private ProductFactoryInterface $productFactory;
+
+    public function __construct(
+        AdminUrlGenerator $crudUrlGenerator,
+        AdminContextProvider $adminContextProvider,
+        TranslatorInterface $translator,
+        ProductFactoryInterface $productFactory
+    )
+    {
+        $this->crudUrlGenerator = $crudUrlGenerator;
+        $this->adminContextProvider = $adminContextProvider;
+        $this->translator = $translator;
+        $this->productFactory = $productFactory;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Product::class;
@@ -43,13 +71,73 @@ class ProductCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+            ->showEntityActionsAsDropdown();
             //->addFormTheme('@SyliusUi/Form/theme.html.twig')
             ;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        $url = $this->crudUrlGenerator->setController(self::class)->setAction(Action::NEW);
+        $actions = parent::configureActions($actions);
+        $addTypes = [
+            'simple_product' => $this->translator->trans('simple_product'),
+            'configurable_product' => $this->translator->trans('configurable_product'),
+        ];
+        foreach ($addTypes as  $key => $label) {
+            $newAdd = Action::new($key, 'Créer ' . $label)->linkToUrl((clone $url)->set("productType", $key))->createAsGlobalAction()->setCssClass("btn btn-primary");
+            $actions->add(Crud::PAGE_INDEX, $newAdd);
+        }
+        $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+
+        return $actions;
+    }
+
+    public function new(AdminContext $context)
+    {
+        global $productType;
+        $productType = $context->getRequest()->query->get("productType");
+        return parent::new($context);
+    }
+
+    public function createEntity(string $entityFqcn)
+    {
+        return $this->productFactory->createWithVariant();
+    }
 
     public function configureFields(string $pageName): iterable
     {
+
+        if ($this->productIsSimple()) {
+
+            yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed();
+//            yield BooleanField::new('shipping_required')->setLabel('sylius.form.variant.shipping_required');
+            // The product has 1 variant and no options selected and his variant form is added here
+
+            yield FormTypeField::new('variant', '', ProductVariantType::class)
+                ->setFormTypeOptions([
+                    'property_path' => 'variants[0]',
+                    'constraints' => [
+                        new Valid(),
+                    ]
+                ])
+            ;
+        } else {
+
+            yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed();
+
+            yield TextField::new('code');
+            yield BooleanField::new('enabled');
+
+            //
+            yield FormTypeField::new('options', 'sylius.form.product.options', ProductOptionChoiceType::class)
+                ->setFormTypeOptions(['required' => false, 'multiple' => true])
+            ;
+            yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')->setChoices( array_flip(\Sylius\Component\Core\Model\Product::getVariantSelectionMethodLabels()) );
+
+
+        }
+
         $fieldsConfig = [
             'name' => [
                 'field_type' => TextType::class,
@@ -77,9 +165,6 @@ class ProductCrudController extends AbstractCrudController
             ],
         ];
 
-        yield TextField::new('code');
-        yield BooleanField::new('enabled');
-
         yield FormField::addPanel("Taxonomy")->collapsible()->renderCollapsed();
         yield AssociationField::new('mainTaxon')->autocomplete()->listSelector()->listDisplayColumns([1,2])->setCrudController(TaxonCrudController::class);
         yield AssociationField::new('productTaxons')->autocomplete()->listSelector()->listDisplayColumns([1,2])->setCrudController(TaxonCrudController::class);
@@ -97,6 +182,26 @@ class ProductCrudController extends AbstractCrudController
         //yield FormTypeField::new("associations", false, ProductAssociationsType::class);
         yield FormField::addPanel("Contenus")->collapsible()->renderCollapsed();
         yield TranslationField::new("translations", 'Contenus', $fieldsConfig);
+
+    }
+
+    protected function productIsSimple(): bool
+    {
+        global $productType;
+
+        /**
+         * @var Product $entity
+         */
+        $entity = $this->adminContextProvider->getContext()->getEntity()->getInstance();
+
+        if (!empty($productType) && $productType === 'simple_product') {
+            return true;
+        }
+        elseif (!empty($entity) && $entity->getId() && $entity->isSimple()) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 }
