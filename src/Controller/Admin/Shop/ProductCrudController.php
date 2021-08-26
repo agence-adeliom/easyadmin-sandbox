@@ -5,6 +5,8 @@ namespace App\Controller\Admin\Shop;
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use App\Entity\Shop\Channel\Channel;
+use App\Entity\Shop\Channel\ChannelPricing;
 use App\Entity\Shop\Product\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -15,21 +17,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\Scope;
-use Sylius\Component\Product\Factory\ProductFactory;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
+use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -71,8 +72,8 @@ class ProductCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+            //->addFormTheme('@EasyShop/form/admin_product.html.twig')
             ->showEntityActionsAsDropdown();
-            //->addFormTheme('@SyliusUi/Form/theme.html.twig')
             ;
     }
 
@@ -110,17 +111,59 @@ class ProductCrudController extends AbstractCrudController
 
         if ($this->productIsSimple()) {
 
-            yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed();
+            yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed(false);
 //            yield BooleanField::new('shipping_required')->setLabel('sylius.form.variant.shipping_required');
             // The product has 1 variant and no options selected and his variant form is added here
 
-            yield FormTypeField::new('variant', '', ProductVariantType::class)
-                ->setFormTypeOptions([
-                    'property_path' => 'variants[0]',
-                    'constraints' => [
-                        new Valid(),
-                    ]
-                ])
+            yield TextField::new('code')->setLabel('sylius.ui.code');
+            yield BooleanField::new('enabled')->setLabel('sylius.ui.enabled');
+            yield BooleanField::new('variant.shippingRequired')->setLabel('sylius.form.variant.shipping_required');
+
+
+            yield FormTypeField::new('channels', 'sylius.form.product.channels', ChannelChoiceType::class)
+                ->setFormTypeOption("multiple", true)
+                ->setFormTypeOption("expanded", true);
+
+            yield FormField::addPanel("sylius.ui.inventory")->collapsible()->renderCollapsed();
+
+            yield NumberField::new('variant.onHand')->setLabel('sylius.form.variant.on_hand');
+            yield BooleanField::new('variant.tracked')->setLabel('sylius.form.variant.tracked')->setHelp('sylius.form.variant.tracked_help');
+
+            yield FormField::addPanel("sylius.ui.shipping")->collapsible()->renderCollapsed();
+
+            yield FormTypeField::new('variant.shippingCategory', 'sylius.form.product_variant.shipping_category', ShippingCategoryChoiceType::class)
+                ->setFormTypeOptions(["attr" => ["data-ea-widget" => "ea-autocomplete"]]);
+            yield NumberField::new('variant.width')->setLabel('sylius.form.variant.width');
+            yield NumberField::new('variant.height')->setLabel('sylius.form.variant.height');
+            yield NumberField::new('variant.depth')->setLabel('sylius.form.variant.depth');
+            yield NumberField::new('variant.weight')->setLabel('sylius.form.variant.weight');
+
+            yield FormField::addPanel("sylius.ui.taxes")->collapsible()->renderCollapsed();
+
+            yield FormTypeField::new('variant.taxCategory', 'sylius.form.product_variant.tax_category', TaxCategoryChoiceType::class)
+                ->setFormTypeOptions(["attr" => ["data-ea-widget" => "ea-autocomplete"]]);
+
+            yield FormField::addPanel("sylius.ui.pricing")->collapsible()->renderCollapsed(false);
+
+
+//            $channels = $this->container->get('doctrine')->getRepository(Channel::class)->findAll();
+//            foreach ($channels as $channel) {
+//                yield FormTypeField::new('variant.channelPricings', 'sylius.form.product_variant.channel_pricings', ChannelPricingType::class)
+//                    ->setFormTypeOptions(["channel" => $channel, "data_class" => null]);
+//            }
+
+
+            yield FormField::addPanel("Variant")->collapsible()->renderCollapsed();
+
+            
+//            yield FormTypeField::new('variant', '', ProductVariantType::class)
+//                ->setFormTypeOptions([
+//                    'property_path' => 'variants[0]',
+//                    'constraints' => [
+//                        new Valid(),
+//                    ]
+//                ])
+//                ->setTemplatePath("@EasyShop/form/admin_product.html.twig")
             ;
         } else {
 
@@ -170,16 +213,16 @@ class ProductCrudController extends AbstractCrudController
         yield AssociationField::new('productTaxons')->autocomplete()->listSelector()->listDisplayColumns([1,2])->setCrudController(TaxonCrudController::class);
 
         yield FormField::addPanel("Attributes")->collapsible()->renderCollapsed();
-        yield CollectionField::new("attributes", false)->setFormTypeOptions([
-            'entry_type' => ProductAttributeValueType::class,
-            'required' => false,
-            'prototype' => true,
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'label' => false,
-        ]);
-        //yield FormTypeField::new("associations", false, ProductAssociationsType::class);
+//        yield CollectionField::new("attributes", false)->setFormTypeOptions([
+//            'entry_type' => ProductAttributeValueType::class,
+//            'required' => false,
+//            'prototype' => true,
+//            'allow_add' => true,
+//            'allow_delete' => true,
+//            'by_reference' => false,
+//            'label' => false,
+//        ]);
+//        yield FormTypeField::new("associations", false, Prod::class);
         yield FormField::addPanel("Contenus")->collapsible()->renderCollapsed();
         yield TranslationField::new("translations", 'Contenus', $fieldsConfig);
 

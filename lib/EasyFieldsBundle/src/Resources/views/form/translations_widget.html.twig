@@ -1,6 +1,6 @@
 {% block a2lix_translations_widget %}
     {{ form_errors(form) }}
-
+{{ dump(form) }}
     <div class="a2lix_translations">
         <ul class="a2lix_translationsLocales nav nav-pills" role="tablist">
             {% for translationsFields in form %}
@@ -9,7 +9,7 @@
                 <li class="nav-item">
                     <button class="nav-link {% if app.request.locale == locale or form.vars.default_locale == locale %}active{% endif %}" data-bs-toggle="pill" data-bs-target="#{{ translationsFields.vars.id }}_a2lix_translations-fields" type="button" role="tab" aria-selected="true">
                         {{ translationsFields.vars.label|default(locale)|trans }}
-                        {% if form.vars.default_locale == locale %}{{ '[Default]'|trans }}{% endif %}
+{#                        {% if form.vars.default_locale == locale %}{{ '[Default]'|trans }}{% endif %}#}
                         {% if translationsFields.vars.required %}*{% endif %}
                     </button>
                 </li>
