@@ -22,3 +22,9 @@ services:
         arguments:
             - "%sylius.shipping_calculators%"
         tags: [ form.type ]
+
+    sylius.form.type.easy.channel_collection:
+        class: Adeliom\EasyShopBundle\Form\Type\ProductBundle\ChannelCollectionType
+        arguments:
+            - "@sylius.repository.channel"
+        tags: [ form.type ]
