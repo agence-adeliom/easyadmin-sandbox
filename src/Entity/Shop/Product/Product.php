@@ -70,11 +70,31 @@ class Product extends BaseProduct
         $this->variants[0] = $variant;
     }
 
-    public function getChannelPrincingObjects()
+    protected $virtualVariantChannelPricing;
+
+    /**
+     * @return mixed
+     */
+    public function getVirtualVariantChannelPricing()
     {
-        $channelsPricings = new ArrayCollection();
-        foreach ($this->getChannels() as $channel) {
-            //$this->c
-        }
+        return [
+            'channelPricings' => $this->getVariant()->getChannelPricings()
+        ];
     }
+
+    /**
+     * @param mixed $virtualVariantChannelPricing
+     */
+    public function setVirtualVariantChannelPricing($virtualVariantChannelPricing): void
+    {
+        $variant = $this->getVariant();
+        foreach ($variant->getChannelPricings() as $channelPricing) {
+            $variant->removeChannelPricing($channelPricing);
+        }
+        foreach ($virtualVariantChannelPricing['channelPricings'] as $channelPricing) {
+            $variant->addChannelPricing($channelPricing);
+        }
+        $this->variants[0] = $variant;
+    }
+
 }

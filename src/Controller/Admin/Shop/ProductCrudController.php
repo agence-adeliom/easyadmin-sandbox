@@ -27,6 +27,7 @@ use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ChannelCollectionType;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -102,8 +103,6 @@ class ProductCrudController extends AbstractCrudController
         if ($this->productIsSimple()) {
 
             yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed(false);
-//            yield BooleanField::new('shipping_required')->setLabel('sylius.form.variant.shipping_required');
-            // The product has 1 variant and no options selected and his variant form is added here
 
             yield TextField::new('code')->setLabel('sylius.ui.code');
             yield BooleanField::new('enabled')->setLabel('sylius.ui.enabled');
@@ -135,17 +134,10 @@ class ProductCrudController extends AbstractCrudController
 
             yield FormField::addPanel("sylius.ui.pricing")->collapsible()->renderCollapsed(false);
 
+            yield FormTypeField::new('virtualVariantChannelPricing', 'sylius.form.variant.price', ChannelCollectionType::class)
+                ->setFormTypeOptions([]);
 
-//            $channels = $this->container->get('doctrine')->getRepository(Channel::class)->findAll();
-//            foreach ($channels as $channel) {
-//                yield FormTypeField::new('variant.channelPricings', 'sylius.form.product_variant.channel_pricings', ChannelPricingType::class)
-//                    ->setFormTypeOptions(["channel" => $channel, "data_class" => null]);
-//            }
-
-
-            yield FormField::addPanel("Variant")->collapsible()->renderCollapsed();
-
-
+//            yield FormField::addPanel("Variant")->collapsible()->renderCollapsed();
 //            yield FormTypeField::new('variant', '', ProductVariantType::class)
 //                ->setFormTypeOptions([
 //                    'property_path' => 'variants[0]',
@@ -163,8 +155,11 @@ class ProductCrudController extends AbstractCrudController
 
             //
             yield FormTypeField::new('options', 'sylius.form.product.options', ProductOptionChoiceType::class)
-                ->setFormTypeOptions(['required' => false, 'multiple' => true]);
-            yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')->setChoices(array_flip(\Sylius\Component\Core\Model\Product::getVariantSelectionMethodLabels()));
+                ->setFormTypeOptions(['required' => false, 'multiple' => true])
+                ->hideOnIndex();
+            yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')
+                ->setChoices(array_flip(\Sylius\Component\Core\Model\Product::getVariantSelectionMethodLabels()))
+                ->hideOnIndex();
 
 
         }
@@ -197,8 +192,10 @@ class ProductCrudController extends AbstractCrudController
         ];
 
         yield FormField::addPanel("Taxonomy")->collapsible()->renderCollapsed();
-        yield AssociationField::new('mainTaxon')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class);
-        yield AssociationField::new('productTaxons')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class);
+        yield AssociationField::new('mainTaxon')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class)
+            ->hideOnIndex();
+        yield AssociationField::new('productTaxons')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class)
+            ->hideOnIndex();
 
         yield FormField::addPanel("Attributes")->collapsible()->renderCollapsed();
 //        yield CollectionField::new("attributes", false)->setFormTypeOptions([
