@@ -21,6 +21,7 @@ class ChoiceMaskType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
+
         $sanitizedMap = [];
         $allFieldNames = [];
         foreach ($options['map'] as $value => $fieldNames) {
@@ -37,18 +38,13 @@ class ChoiceMaskType extends AbstractType
         $view->vars['map'] = $sanitizedMap;
 
         $options['expanded'] = false;
-
-        parent::buildView($view, $form, $options);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        parent::configureOptions($resolver);
-
         $resolver->setDefaults([
             'map' => [],
         ]);
-
         $resolver->setAllowedTypes('map', 'array');
     }
 

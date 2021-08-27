@@ -13,6 +13,8 @@ use App\Entity\Shop\Addressing\Zone;
 use App\Entity\Shop\Channel\Channel;
 use App\Entity\Shop\Currency\Currency;
 use App\Entity\Shop\Currency\ExchangeRate;
+use App\Entity\Shop\Customer\Customer;
+use App\Entity\Shop\Customer\CustomerGroup;
 use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Payment\PaymentMethod;
 use App\Entity\Shop\Product\Product;
@@ -71,6 +73,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('ProductAttribute', 'fa fa-file-alt', ProductAttribute::class);
         yield MenuItem::linkToCrud('ProductOption', 'fa fa-file-alt', ProductOption::class);
         yield MenuItem::linkToCrud('ProductAssociationType', 'fa fa-file-alt', ProductAssociationType::class);
+
+        yield MenuItem::section('sylius.ui.customer');
+        yield MenuItem::linkToCrud('sylius.ui.customers', 'fas fa-users', Customer::class);
+        yield MenuItem::linkToCrud('sylius.form.user.groups', 'fas fa-archive', CustomerGroup::class);
 
         yield MenuItem::section('sylius.ui.configuration');
         yield MenuItem::linkToCrud('sylius.ui.channels', 'fas fa-random', Channel::class);

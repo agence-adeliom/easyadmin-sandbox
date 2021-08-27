@@ -4,44 +4,47 @@
     {{ block('choice_widget') }}
     {% set main_form_name = id|slice(0, id|length - name|length) %}
     <script>
-        jQuery(document).ready(function() {
-            var allFields = {{ all_fields|json_encode|raw }};
-            var map = {{ map|json_encode|raw }};
+        var allFields = {{ all_fields|json_encode|raw }};
+        var map = {{ map|json_encode|raw }};
+
+        function choice_field_mask_show(val)
+        {
+            var controlGroupIdFunc = function (field) {
+                return '[data-row-id={{ main_form_name }}' + field + "]";
+            };
+
+            if (map[val] == undefined) {
+                allFields.forEach(function (field) {
+                    document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
+                        elm.style.display = 'none';
+                    });
+                });
+                return;
+            }
+            allFields.forEach(function (field) {
+                document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
+                    elm.style.display = 'none';
+                    elm.querySelectorAll('[required="required"]').forEach(function (e){
+                        e.setAttribute("data-required", "required");
+                        e.removeAttribute("required");
+                    })
+                });
+            });
+            map[val].forEach(function (field) {
+                document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
+                    elm.style.display = '';
+                    elm.querySelectorAll('[data-required="required"]').forEach(function (e){
+                        e.setAttribute("required", "required");
+                    })
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
             showMaskChoiceEl = document.querySelector('#{{ main_form_name }}{{ name }}');
             showMaskChoiceEl.addEventListener('change', function (event) {
                 choice_field_mask_show(event.target.value);
             });
-            function choice_field_mask_show(val)
-            {
-                var controlGroupIdFunc = function (field) {
-                    return '[data-row-id={{ main_form_name }}' + field + "]";
-                };
-                if (map[val] == undefined) {
-                    allFields.forEach(function (i, field) {
-                        document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
-                            elm.style.display = 'none';
-                        });
-                    });
-                    return;
-                }
-                allFields.forEach(function (field) {
-                    document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
-                        elm.style.display = 'none';
-                        elm.querySelectorAll('[required="required"]').forEach(function (e){
-                            e.setAttribute("data-required", "required");
-                            e.removeAttribute("required");
-                        })
-                    });
-                });
-                map[val].forEach(function (field) {
-                    document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
-                        elm.style.display = '';
-                        elm.querySelectorAll('[data-required="required"]').forEach(function (e){
-                            e.setAttribute("required", "required");
-                        })
-                    });
-                });
-            }
             choice_field_mask_show(showMaskChoiceEl.value);
         });
     </script>
