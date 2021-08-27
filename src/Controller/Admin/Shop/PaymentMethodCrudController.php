@@ -34,17 +34,16 @@ class PaymentMethodCrudController extends AbstractCrudController
         $this->paymentMethodFactory = $paymentMethodFactory;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
-            //->addFormTheme('@SyliusUi/Form/theme.html.twig')
-            ;
-    }
-
     public static function getEntityFqcn(): string
     {
         return PaymentMethod::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->addFormTheme('@EasyFields/form/translations_widget.html.twig')//->addFormTheme('@SyliusUi/Form/theme.html.twig')
+            ;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -104,8 +103,7 @@ class PaymentMethodCrudController extends AbstractCrudController
 
         yield TextField::new('gatewayConfig.gatewayName')
             ->setLabel('sylius.form.gateway_config.type')
-            ->setFormTypeOption('disabled', 'disabled')
-        ;
+            ->setFormTypeOption('disabled', 'disabled');
 
         yield FormField::addPanel("sylius.ui.translations")->collapsible()->renderCollapsed(false);
 

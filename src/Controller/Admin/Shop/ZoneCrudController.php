@@ -2,53 +2,23 @@
 
 namespace App\Controller\Admin\Shop;
 
-use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
-use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
-use App\Entity\Shop\Addressing\Country;
 use App\Entity\Shop\Addressing\Zone;
-use App\Entity\Shop\Channel\Channel;
-use App\Entity\Shop\Currency\Currency;
-use App\Entity\Shop\Locale\Locale;
-use App\Entity\Shop\Product\Product;
-use App\Entity\Shop\Taxonomy\Taxon;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Dto\ActionConfigDto;
-use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CurrencyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\LocaleField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryCodeChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneCodeChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
-use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Scope;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 
 class ZoneCrudController extends AbstractCrudController
 {
@@ -99,6 +69,43 @@ class ZoneCrudController extends AbstractCrudController
         return $entity;
     }
 
+    public function configureFields(string $pageName): iterable
+    {
+        $context = $this->get(AdminContextProvider::class)->getContext();
+        $subject = $context->getEntity();
+        $zone = $subject->getInstance();
+
+        yield TextField::new('type')->hideOnForm();
+        yield TextField::new('code');
+        yield TextField::new('name');
+        yield ChoiceField::new('scope')->setChoices([
+            "Shipping" => Scope::SHIPPING,
+            "Tax" => Scope::TAX,
+            "All" => Scope::ALL,
+        ]);
+
+        if (in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])) {
+            $entryOptions = [
+                'entry_type' => $this->getZoneMemberEntryType($zone->getType()),
+                'entry_options' => $this->getZoneMemberEntryOptions($zone->getType()),
+            ];
+
+            if ($zone->getType() === ZoneInterface::TYPE_ZONE) {
+                $entryOptions['entry_options']['choice_filter'] = static function (?ZoneInterface $subZone) use ($zone): bool {
+                    return $subZone !== null && $zone->getId() !== $subZone->getId();
+                };
+            }
+
+            yield CollectionField::new("members")
+                ->setEntryType(ZoneMemberType::class)
+                ->setFormTypeOption("entry_options", $entryOptions)
+                ->setFormTypeOption('allow_add', true)
+                ->setFormTypeOption('allow_delete', true)
+                ->setFormTypeOption('by_reference', false)
+                ->setFormTypeOption('delete_empty', true);
+        }
+    }
+
     private function getZoneMemberEntryType(string $zoneMemberType): string
     {
         $zoneMemberEntryTypes = [
@@ -119,43 +126,6 @@ class ZoneCrudController extends AbstractCrudController
         ];
 
         return $zoneMemberEntryOptions[$zoneMemberType];
-    }
-
-    public function configureFields(string $pageName): iterable
-    {
-        $context = $this->get(AdminContextProvider::class)->getContext();
-        $subject = $context->getEntity();
-        $zone = $subject->getInstance();
-
-        yield TextField::new('type')->hideOnForm();
-        yield TextField::new('code');
-        yield TextField::new('name');
-        yield ChoiceField::new('scope')->setChoices([
-            "Shipping" => Scope::SHIPPING,
-            "Tax" => Scope::TAX,
-            "All" => Scope::ALL,
-        ]);
-
-        if (in_array($pageName, [Crud::PAGE_NEW , Crud::PAGE_EDIT])) {
-            $entryOptions = [
-                'entry_type' => $this->getZoneMemberEntryType($zone->getType()),
-                'entry_options' => $this->getZoneMemberEntryOptions($zone->getType()),
-            ];
-
-            if ($zone->getType() === ZoneInterface::TYPE_ZONE) {
-                $entryOptions['entry_options']['choice_filter'] = static function (?ZoneInterface $subZone) use ($zone): bool {
-                    return $subZone !== null && $zone->getId() !== $subZone->getId();
-                };
-            }
-
-            yield CollectionField::new("members")
-                ->setEntryType(ZoneMemberType::class)
-                ->setFormTypeOption("entry_options", $entryOptions)
-                ->setFormTypeOption('allow_add', true)
-                ->setFormTypeOption('allow_delete', true)
-                ->setFormTypeOption('by_reference', false)
-                ->setFormTypeOption('delete_empty', true);
-        }
     }
 
 }

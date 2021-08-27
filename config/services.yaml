@@ -34,3 +34,9 @@ services:
         arguments:
             - "@sylius.registry.shipping_calculator"
             - "@sylius.form_registry.shipping_calculator"
+
+    App\Controller\Admin\Shop\ProductAttributeCrudController:
+        arguments:
+            - "@EasyCorp\\Bundle\\EasyAdminBundle\\Router\\AdminUrlGenerator"
+            - "@parameter_bag"
+            - "@sylius.form_registry.attribute_type"

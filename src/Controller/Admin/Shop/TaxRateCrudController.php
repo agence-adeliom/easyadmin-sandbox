@@ -3,22 +3,17 @@
 namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
-use App\Entity\Shop\Taxation\TaxCategory;
 use App\Entity\Shop\Taxation\TaxRate;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCalculatorChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Core\Model\Scope;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class TaxRateCrudController extends AbstractCrudController
 {
