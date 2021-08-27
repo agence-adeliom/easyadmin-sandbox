@@ -18,4 +18,9 @@ class PaymentMethod extends BasePaymentMethod
     {
         return new PaymentMethodTranslation();
     }
+
+    public static function getTranslationClass(): string
+    {
+        return PaymentMethodTranslation::class;
+    }
 }

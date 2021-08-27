@@ -29,7 +29,7 @@ class TaxRateCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield FormField::addPanel("General Info")->collapsible()->renderCollapsed(false);
+        yield FormField::addPanel("sylius.ui.general_info")->collapsible()->renderCollapsed(false);
 
         yield TextField::new('code')
             ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
@@ -38,7 +38,7 @@ class TaxRateCrudController extends AbstractCrudController
         yield TextField::new('name')
             ->setColumns(6);
 
-        yield FormField::addPanel("Criteria")->collapsible()->renderCollapsed(false);
+        yield FormField::addPanel("sylius.ui.criteria")->collapsible()->renderCollapsed(false);
 
         yield FormTypeField::new('category', 'sylius.form.tax_rate.category', TaxCategoryChoiceType::class)
             ->setFormTypeOption("attr", ["data-ea-widget" => "ea-autocomplete"])
@@ -46,11 +46,11 @@ class TaxRateCrudController extends AbstractCrudController
             ->setRequired(true);
 
         yield FormTypeField::new('zone', 'sylius.form.address.zone', ZoneChoiceType::class)
-            ->setFormTypeOption("attr", ["data-ea-widget" => "ea-autocomplete", 'zone_scope' => Scope::TAX])
+            ->setFormTypeOptions(['zone_scope' => Scope::TAX, "attr" => ["data-ea-widget" => "ea-autocomplete"]])
             ->setColumns(6)
             ->setRequired(true);
 
-        yield FormField::addPanel("Taxes")->collapsible()->renderCollapsed(false);
+        yield FormField::addPanel("sylius.ui.taxes")->collapsible()->renderCollapsed(false);
 
         yield FormTypeField::new('calculator', 'sylius.form.tax_rate.calculator', TaxCalculatorChoiceType::class)
             ->setFormTypeOption("attr", ["data-ea-widget" => "ea-autocomplete"]);
