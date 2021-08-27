@@ -18,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
+use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -27,14 +28,17 @@ class ProductAttributeCrudController extends AbstractCrudController
 {
     /** @var FormTypeRegistryInterface */
     protected $formTypeRegistry;
+    /** @var AttributeFactoryInterface */
+    protected $attributeFactory;
     private AdminUrlGenerator $crudUrlGenerator;
     private ParameterBagInterface $parameterBag;
 
-    public function __construct(AdminUrlGenerator $crudUrlGenerator, ParameterBagInterface $parameterBag, FormTypeRegistryInterface $formTypeRegistry)
+    public function __construct(AdminUrlGenerator $crudUrlGenerator, ParameterBagInterface $parameterBag, FormTypeRegistryInterface $formTypeRegistry, AttributeFactoryInterface $attributeFactory)
     {
         $this->crudUrlGenerator = $crudUrlGenerator;
         $this->parameterBag = $parameterBag;
         $this->formTypeRegistry = $formTypeRegistry;
+        $this->attributeFactory = $attributeFactory;
     }
 
     public static function getEntityFqcn(): string
@@ -64,6 +68,7 @@ class ProductAttributeCrudController extends AbstractCrudController
     {
         global $attributeType;
         $attributeType = $context->getRequest()->query->get("attributeType");
+
         return parent::new($context);
     }
 
@@ -71,8 +76,7 @@ class ProductAttributeCrudController extends AbstractCrudController
     {
         global $attributeType;
         /** @var ProductAttributeInterface $entity */
-        $entity = new $entityFqcn();
-        $entity->setType($attributeType);
+        $entity = $this->attributeFactory->createTyped($attributeType);
         return $entity;
     }
 

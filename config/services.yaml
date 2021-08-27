@@ -40,3 +40,4 @@ services:
             - "@EasyCorp\\Bundle\\EasyAdminBundle\\Router\\AdminUrlGenerator"
             - "@parameter_bag"
             - "@sylius.form_registry.attribute_type"
+            - "@sylius.factory.product_attribute"
