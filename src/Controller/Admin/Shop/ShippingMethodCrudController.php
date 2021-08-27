@@ -4,7 +4,10 @@ namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodCalculatorType;
+use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodRuleType;
 use App\Entity\Shop\Addressing\Country;
 use App\Entity\Shop\Addressing\Zone;
 use App\Entity\Shop\Channel\Channel;
@@ -51,7 +54,6 @@ use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleCollectionType;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -62,6 +64,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -88,6 +91,9 @@ class ShippingMethodCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
+            ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
+            ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
             ;
     }
@@ -106,7 +112,7 @@ class ShippingMethodCrudController extends AbstractCrudController
         ];
         yield TextField::new('code', 'sylius.ui.code');
         yield FormTypeField::new('zone', 'sylius.form.shipping_method.zone', ZoneChoiceType::class)
-            ->setFormTypeOption("zone_scope", Scope::SHIPPING);
+            ->setFormTypeOption("zone_scope", Scope::SHIPPING)->setRequired(true);
         yield NumberField::new('position', 'sylius.form.shipping_method.position')
             ->setNumDecimals(0);
         yield BooleanField::new('enabled', 'sylius.form.locale.enabled');
@@ -123,14 +129,22 @@ class ShippingMethodCrudController extends AbstractCrudController
             'sylius.form.shipping_method.match_any_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
             'sylius.form.shipping_method.match_all_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
         ])->renderExpanded();
-        yield FormTypeField::new('calculator', 'sylius.form.shipping_method.calculator', CalculatorChoiceType::class);
+
+        yield FormTypeField::new('calculator', 'sylius.form.shipping_method.calculator', ShippingMethodCalculatorType::class);
+
 
         yield FormField::addPanel('sylius.form.shipping_method.rules')->setHelp("sylius.form.shipping_method.rules_help");
-        yield CollectionField::new('rules', 'sylius.form.shipping_method.rules')
-            ->setEntryType(ShippingMethodRuleType::class);
+        yield SortableCollectionField::new('rules', 'sylius.form.shipping_method.rules')
+            ->setEntryType(ShippingMethodRuleType::class)->allowDrag(false);
 
         yield FormField::addPanel('sylius.form.shipping_method.translations');
         yield TranslationField::new("translations", false, $fieldsConfig);
+    }
+
+    public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
+    {
+        $formOptions->set("allow_extra_fields", true);
+        return parent::createNewFormBuilder($entityDto, $formOptions, $context);
     }
 
 }

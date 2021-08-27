@@ -71,7 +71,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Shipping categories', 'fa fa-file-alt', ShippingCategory::class);
         yield MenuItem::linkToCrud('Tax categories', 'fa fa-file-alt', TaxCategory::class);
         yield MenuItem::linkToCrud('Tax rate', 'fa fa-file-alt', TaxRate::class);
-
+        
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

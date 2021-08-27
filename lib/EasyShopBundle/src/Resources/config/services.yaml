@@ -8,3 +8,17 @@ services:
             - "@sylius.repository.locale"
         public: true
 
+    sylius.form.type.shipping_method_rule:
+        class: Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodRuleType
+        arguments:
+            - "%sylius.model.shipping_method_rule.class%"
+            - "%sylius.form.type.shipping_method_rule.validation_groups%"
+            - "@sylius.form_registry.shipping_method_rule_checker"
+            - "%sylius.shipping_method_rules%"
+        tags: [ form.type ]
+
+    sylius.form.type.shipping_calculators:
+        class: Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodCalculatorType
+        arguments:
+            - "%sylius.shipping_calculators%"
+        tags: [ form.type ]

@@ -47,6 +47,13 @@ final class SortableCollectionField implements FieldInterface
         return $field;
     }
 
+    public function setEntryType($type): self
+    {
+        $this->setCustomOption(self::OPTION_ENTRY_TYPE, $type);
+
+        return $this;
+    }
+
     public function allowDrag(bool $allow = true): self
     {
         $this->setCustomOption(self::OPTION_ALLOW_DRAG, $allow);

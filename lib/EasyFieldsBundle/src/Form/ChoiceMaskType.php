@@ -2,6 +2,7 @@
 
 namespace Adeliom\EasyFieldsBundle\Form;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -13,7 +14,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChoiceMaskType extends CollectionType
+class ChoiceMaskType extends AbstractType
 {
     /**
      * @param array<string, mixed> $options
