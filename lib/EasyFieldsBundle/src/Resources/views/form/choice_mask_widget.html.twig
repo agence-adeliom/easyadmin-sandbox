@@ -47,6 +47,12 @@
             });
             choice_field_mask_show(showMaskChoiceEl.value);
         });
+
+        showMaskChoiceEl = document.querySelector('#{{ main_form_name }}{{ name }}');
+        showMaskChoiceEl.addEventListener('change', function (event) {
+            choice_field_mask_show(event.target.value);
+        });
+        choice_field_mask_show(showMaskChoiceEl.value);
     </script>
 {% endblock choice_field_mask_widget %}
 

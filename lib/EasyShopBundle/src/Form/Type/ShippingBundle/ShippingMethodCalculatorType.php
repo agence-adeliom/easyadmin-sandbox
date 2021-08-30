@@ -64,9 +64,10 @@ final class ShippingMethodCalculatorType extends AbstractType
             $data = $event->getData();
             $form = $event->getForm();
             $parent = $form->getParent();
-            /** @var ShippingMethod $shipping */
-            $shipping = $parent->getData();
+
             if($data) {
+                /** @var ShippingMethod $shipping */
+                $shipping = $parent->getData();
                 $configurations = $shipping->getConfiguration();
                 $newData = [
                     "type" => $data,

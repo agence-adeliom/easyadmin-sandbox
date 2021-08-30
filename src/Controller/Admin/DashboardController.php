@@ -21,6 +21,7 @@ use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Product\ProductAssociationType;
 use App\Entity\Shop\Product\ProductAttribute;
 use App\Entity\Shop\Product\ProductOption;
+use App\Entity\Shop\Promotion\Promotion;
 use App\Entity\Shop\Shipping\ShippingCategory;
 use App\Entity\Shop\Shipping\ShippingMethod;
 use App\Entity\Shop\Taxation\TaxCategory;
@@ -68,11 +69,14 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
 
         yield MenuItem::section('Catalog');
-        yield MenuItem::linkToCrud('Taxon', 'fa fa-file-alt', Taxon::class);
-        yield MenuItem::linkToCrud('Product', 'fa fa-file-alt', Product::class);
-        yield MenuItem::linkToCrud('ProductAttribute', 'fa fa-file-alt', ProductAttribute::class);
-        yield MenuItem::linkToCrud('ProductOption', 'fa fa-file-alt', ProductOption::class);
-        yield MenuItem::linkToCrud('ProductAssociationType', 'fa fa-file-alt', ProductAssociationType::class);
+        yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);
+        yield MenuItem::linkToCrud('sylius.ui.items', 'fas fa-cube', Product::class);
+        yield MenuItem::linkToCrud('sylius.ui.attributes', 'fas fa-cubes', ProductAttribute::class);
+        yield MenuItem::linkToCrud('sylius.ui.options', 'fas fa-sliders-h', ProductOption::class);
+        yield MenuItem::linkToCrud('sylius.ui.association_types', 'fas fa-tasks', ProductAssociationType::class);
+
+        yield MenuItem::section('sylius.ui.marketing');
+        yield MenuItem::linkToCrud('sylius.ui.promotions', 'fas fa-percentage', Promotion::class);
 
         yield MenuItem::section('sylius.ui.customer');
         yield MenuItem::linkToCrud('sylius.ui.customers', 'fas fa-users', Customer::class);

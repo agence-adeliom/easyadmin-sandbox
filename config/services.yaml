@@ -41,3 +41,11 @@ services:
             - "@parameter_bag"
             - "@sylius.form_registry.attribute_type"
             - "@sylius.factory.product_attribute"
+
+    App\Controller\Admin\Shop\PromotionCrudController:
+        arguments:
+            - "@EasyCorp\\Bundle\\EasyAdminBundle\\Router\\AdminUrlGenerator"
+            - "@parameter_bag"
+            - "@sylius.factory.promotion_coupon"
+            - "@sylius.manager.promotion_coupon"
+            - "@sylius.repository.promotion_coupon"

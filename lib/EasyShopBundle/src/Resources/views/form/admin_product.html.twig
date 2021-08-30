@@ -3,8 +3,6 @@
 {%- block form_rows -%}
     {% for child in form|filter(child => not child.rendered) %}
         {% if child.vars.label %}
-            {{ dump(child.vars.id) }}
-            {{ dump(child.vars.label) }}
             {{- form_row(child) -}}
         {% endif %}
     {% endfor %}
@@ -14,8 +12,6 @@
 
     {% for child in form -%}
         {% if not child.rendered %}
-            {{ dump(child.vars.id) }}
-            {{ dump(child.vars.label) }}
             {{- form_row(child) -}}
         {% endif %}
     {%- endfor -%}
