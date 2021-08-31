@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity\Shop\Product;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\ORMException;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @ORM\Entity
@@ -22,6 +20,11 @@ class Product extends BaseProduct
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
+    }
+
+    public static function getTranslationClass(): string
+    {
+        return ProductTranslation::class;
     }
 
     /**

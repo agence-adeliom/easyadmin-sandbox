@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -20,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
@@ -198,15 +200,15 @@ class ProductCrudController extends AbstractCrudController
             ->hideOnIndex();
 
         yield FormField::addPanel("Attributes")->collapsible()->renderCollapsed();
-//        yield CollectionField::new("attributes", false)->setFormTypeOptions([
-//            'entry_type' => ProductAttributeValueType::class,
-//            'required' => false,
-//            'prototype' => true,
-//            'allow_add' => true,
-//            'allow_delete' => true,
-//            'by_reference' => false,
-//            'label' => false,
-//        ]);
+        yield CollectionField::new("attributes", false)->setFormTypeOptions([
+            'entry_type' => ProductAttributeValueType::class,
+            'prototype' => true,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'label' => false,
+        ])
+        ->hideOnIndex();
 //        yield FormTypeField::new("associations", false, Prod::class);
         yield FormField::addPanel("Contenus")->collapsible()->renderCollapsed();
         yield TranslationField::new("translations", 'Contenus', $fieldsConfig);

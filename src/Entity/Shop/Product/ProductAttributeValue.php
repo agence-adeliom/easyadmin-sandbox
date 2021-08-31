@@ -13,4 +13,8 @@ use Sylius\Component\Product\Model\ProductAttributeValue as BaseProductAttribute
  */
 class ProductAttributeValue extends BaseProductAttributeValue
 {
+    public function __toString()
+    {
+        return $this->getLocaleCode() . ' | ' . $this->getName() . ' : ' . ( !is_array($this->getValue()) ? $this->getValue() : implode(', ', $this->getValue()));
+    }
 }
