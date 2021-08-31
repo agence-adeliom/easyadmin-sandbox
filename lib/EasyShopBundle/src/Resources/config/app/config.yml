@@ -11,6 +11,18 @@ imports:
 parameters:
     sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
 
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                repository: Adeliom\EasyShopBundle\Repository\TaxonRepository
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                repository: Adeliom\EasyShopBundle\Repository\ProductRepository
+
 sylius_grid:
     templates:
         action:
@@ -60,32 +72,32 @@ sonata_block:
 
 sylius_ui:
     events:
-#        sylius.shop.layout.topbar:
-#            blocks:
-#                before_switchers_legacy:
-#                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-#                    priority: 35
-#                    context:
-#                        event: sylius.shop.layout.before_currency_switcher
-#                currency_switcher:
-#                    template: "@EasyShop/front/Layout/Topbar/_currencySwitcher.html.twig"
-#                    priority: 30
-#                locale_switcher:
-#                    template: "@EasyShop/front/Layout/Topbar/_localeSwitcher.html.twig"
-#                    priority: 20
-#                before_security_widget_legacy:
-#                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-#                    priority: 15
-#                    context:
-#                        event: sylius.shop.layout.before_security_widget
-#                security_widget:
-#                    template: "@EasyShop/front/Layout/Topbar/_securityWidget.html.twig"
-#                    priority: 10
-#                after_security_widget_legacy:
-#                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-#                    priority: 5
-#                    context:
-#                        event: sylius.shop.layout.after_security_widget
+        sylius.shop.layout.topbar:
+            blocks:
+                before_switchers_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 35
+                    context:
+                        event: sylius.shop.layout.before_currency_switcher
+                currency_switcher:
+                    template: "@EasyShop/front/Layout/Topbar/_currencySwitcher.html.twig"
+                    priority: 30
+                locale_switcher:
+                    template: "@EasyShop/front/Layout/Topbar/_localeSwitcher.html.twig"
+                    priority: 20
+                before_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: sylius.shop.layout.before_security_widget
+                security_widget:
+                    template: "@EasyShop/front/Layout/Topbar/_securityWidget.html.twig"
+                    priority: 10
+                after_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.after_security_widget
 
         sylius.shop.homepage:
             blocks:
@@ -673,7 +685,7 @@ sylius_ui:
                     context:
                         event: sylius.shop.product.index.after_box
 
-        #sylius.shop.layout.footer:
+        sylius.shop.layout.footer:
 
         sylius.shop.layout.header.grid:
             blocks:

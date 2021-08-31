@@ -70,3 +70,11 @@ services:
             - "@easy_blog.category.repository"
         tags:
             - { name: "kernel.event_subscriber", priority: 100 }
+
+    Adeliom\EasyBlogBundle\EventListener\BlogListener:
+        arguments:
+            - "@easy_blog.post.repository"
+            - "@easy_blog.category.repository"
+            - "%easy_blog.page%"
+        tags:
+            - kernel.event_subscriber

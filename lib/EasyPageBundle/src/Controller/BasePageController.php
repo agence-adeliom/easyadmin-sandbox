@@ -44,7 +44,7 @@ class BasePageController extends AbstractPageController
 
         $slugsArray = preg_split('~/~', $slugs, -1, PREG_SPLIT_NO_EMPTY);
 
-        $pages = $this->getPages($slugsArray);
+        $pages = $this->getPages($this->request->attributes->get("_easy_page_pages"));
 
         $currentPage = $this->getCurrentPage($pages, $slugsArray);
 
@@ -90,20 +90,14 @@ class BasePageController extends AbstractPageController
      * Retrieves the page list based on slugs.
      * Also checks the hierarchy of the different pages.
      *
-     * @param string[] $slugsArray
+     * @param BasePageEntity[]|null $pages
      *
      * @return BasePageEntity[]
      */
-    protected function getPages(array $slugsArray = []): array
+    protected function getPages(?array $pages = []): array
     {
-        /** @var BasePageEntity[] $pages */
-        $pages = $this->pageRepository
-            ->findFrontPages($slugsArray, $this->request->getHost(), $this->request->getLocale());
-
-        if (!count($pages) || (count($slugsArray) && count($pages) !== count($slugsArray))) {
-            throw $this->createNotFoundException(count($slugsArray)
-                ? 'Page not found'
-                : 'No homepage has been configured. Please check your existing pages or create a homepage in your application.');
+        if (empty($pages)) {
+            throw $this->createNotFoundException('Page not found');
         }
 
         return $pages;

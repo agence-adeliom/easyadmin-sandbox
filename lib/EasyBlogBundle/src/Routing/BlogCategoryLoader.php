@@ -45,7 +45,7 @@ class BlogCategoryLoader extends Loader
         $requirements = [
             'category' => "([a-zA-Z0-9_-]+\/?)*",
         ];
-        $route = new Route($path, $defaults, $requirements);
+        $route = new Route($path, $defaults, $requirements, [], '', [], [], "request.attributes.has('_easy_blog_category') || request.attributes.get('_easy_blog_root') === true");
 
         // add the new route to the route collection
         $routeName = 'easy_blog_category_index';

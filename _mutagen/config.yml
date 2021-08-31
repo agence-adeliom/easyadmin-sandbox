@@ -21,3 +21,5 @@ sync:
           paths:
             - "/_*/"
             - "web/app/themes/lumberjack/node_modules"
+            - "var/log"
+            - "var/cache"

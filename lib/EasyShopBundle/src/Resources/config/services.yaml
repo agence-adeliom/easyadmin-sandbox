@@ -52,10 +52,18 @@ services:
             - "@sylius.repository.taxon"
         tags: [ form.type ]
 
-
     sylius.form.type.easy.promotion_action:
         class: Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType
         arguments:
             - "%sylius.promotion_actions%"
             - "@sylius.form_registry.promotion_action"
         tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\EventListener\SeoListener:
+        arguments:
+            - "@sylius.repository.taxon"
+            - "@sylius.repository.product"
+            - '@sylius.context.channel'
+            - '@sylius.context.locale'
+        tags:
+            - kernel.event_subscriber

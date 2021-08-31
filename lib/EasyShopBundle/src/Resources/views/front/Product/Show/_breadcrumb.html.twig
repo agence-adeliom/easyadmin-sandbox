@@ -6,9 +6,7 @@
         {% set ancestors = taxon.ancestors|reverse %}
 
         {% for ancestor in ancestors %}
-            {% if ancestor.isRoot()  or not ancestor.enabled %}
-                <div class="section">{{ ancestor.name }}</div>
-            {% else %}
+            {% if ancestor.enabled  %}
                 <a href="{{ path('easy_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}" class="section">{{ ancestor.name }}</a>
             {% endif %}
             <div class="divider"> / </div>
