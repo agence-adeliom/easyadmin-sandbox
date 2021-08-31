@@ -22,15 +22,31 @@ class TaxRateCrudController extends AbstractCrudController
         return TaxRate::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_tax_rates")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_tax_rate")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_tax_rate")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.tax_rate_details")
+            ->setEntityLabelInSingular('sylius.ui.tax_rates')
+            ->setEntityLabelInPlural('sylius.ui.tax_rates')
+
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addPanel("sylius.ui.general_info")->collapsible()->renderCollapsed(false);
 
-        yield TextField::new('code')
+        yield TextField::new('code', 'sylius.ui.code')
             ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
             ->setColumns(6);
 
-        yield TextField::new('name')
+        yield TextField::new('name', 'sylius.form.tax_rate.name')
             ->setColumns(6);
 
         yield FormField::addPanel("sylius.ui.criteria")->collapsible()->renderCollapsed(false);
@@ -47,13 +63,13 @@ class TaxRateCrudController extends AbstractCrudController
 
         yield FormField::addPanel("sylius.ui.taxes")->collapsible()->renderCollapsed(false);
 
-        yield FormTypeField::new('calculator', 'sylius.form.tax_rate.calculator', TaxCalculatorChoiceType::class)
+        yield FormTypeField::new('calculator', 'sylius.form.tax_rate.calculator', TaxCalculatorChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("attr", ["data-ea-widget" => "ea-autocomplete"]);
 
-        yield PercentField::new('amount')
+        yield PercentField::new('amount', 'sylius.form.tax_rate.amount')
             ->setFormTypeOption("scale", 3);
 
-        yield BooleanField::new('includedInPrice')->setLabel("sylius.form.tax_rate.included_in_price");
+        yield BooleanField::new('includedInPrice',"sylius.form.tax_rate.included_in_price")->hideOnIndex();
     }
 
 }

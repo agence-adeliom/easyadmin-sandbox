@@ -37,7 +37,17 @@ class ProductOptionCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
-            ->addFormTheme('@EasyFields/form/translations_widget.html.twig');
+            ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_configuration_options_of_your_products")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_product_option")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_product_option")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.options")
+            ->setEntityLabelInSingular('sylius.ui.options')
+            ->setEntityLabelInPlural('sylius.ui.options')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -53,7 +63,9 @@ class ProductOptionCrudController extends AbstractCrudController
             ]
         ];
 
-        yield TextField::new('code', 'sylius.ui.code')->setColumns(6);
+        yield TextField::new('code', 'sylius.ui.code')
+            ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
+            ->setColumns(6);
         yield IntegerField::new('position', 'sylius.form.option.position')
             ->setRequired(false)
             ->setColumns(6);
@@ -62,7 +74,7 @@ class ProductOptionCrudController extends AbstractCrudController
         yield TranslationField::new("translations", false, $fieldsConfig);
 
         yield FormField::addPanel('sylius.form.option.values');
-        yield CollectionField::new("values", false)
+        yield CollectionField::new("values", "sylius.form.option.values")
             ->setEntryType(ProductOptionValueType::class)
             ->allowAdd()
             ->setFormTypeOption("by_reference", false)

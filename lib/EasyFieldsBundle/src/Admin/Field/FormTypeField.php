@@ -18,6 +18,6 @@ final class FormTypeField implements FieldInterface
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setFormType($formType)
-            ->hideOnIndex();
+            ;
     }
 }

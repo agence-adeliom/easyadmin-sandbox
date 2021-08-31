@@ -84,7 +84,17 @@ class ProductAttributeCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
-            ->addFormTheme('@EasyFields/form/translations_widget.html.twig');
+            ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_attributes_of_your_products")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.create_product_attribute")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_product_attribute")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.association")
+            ->setEntityLabelInSingular('sylius.ui.attributes')
+            ->setEntityLabelInPlural('sylius.ui.attributes')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -97,18 +107,24 @@ class ProductAttributeCrudController extends AbstractCrudController
             'name' => [
                 'field_type' => TextType::class,
                 'required' => true,
+                'label' => 'sylius.form.attribute.name'
             ]
         ];
 
-        yield TextField::new('code', 'sylius.ui.code')->setColumns(4);
+        yield TextField::new('code', 'sylius.ui.code')
+            ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
+            ->setColumns(4);
         yield IntegerField::new('position', 'sylius.form.product_attribute.position')
+            ->hideOnIndex()
+            ->hideOnDetail()
             ->setRequired(false)
             ->setFormTypeOption('invalid_message', 'sylius.product_attribute.invalid')
             ->setColumns(4);
+
         yield FormTypeField::new('type', 'sylius.form.attribute.type', AttributeTypeChoiceType::class)
             ->setFormTypeOption("disabled", true)
             ->setColumns(4);
-        yield BooleanField::new('translatable', 'sylius.form.attribute.translatable');
+        yield BooleanField::new('translatable', 'sylius.form.attribute.translatable')->renderAsSwitch(in_array($pageName, [Crud::PAGE_EDIT, Crud::PAGE_NEW]));
 
         if (in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])) {
             if (($attribute instanceof AttributeInterface) && $this->formTypeRegistry->has($attribute->getType(), 'configuration')) {

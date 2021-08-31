@@ -105,7 +105,7 @@ class ProductCrudController extends AbstractCrudController
             yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed(false);
 
             yield TextField::new('code')->setLabel('sylius.ui.code');
-            yield BooleanField::new('enabled')->setLabel('sylius.ui.enabled');
+            yield BooleanField::new('enabled')->setLabel('sylius.ui.enabled')->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
             yield BooleanField::new('variant.shippingRequired')->setLabel('sylius.form.variant.shipping_required');
 
 
