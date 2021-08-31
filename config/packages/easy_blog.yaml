@@ -7,3 +7,5 @@ easy_blog:
     class: App\Entity\Category
     repository: App\Repository\CategoryRepository
     crud: App\Controller\Admin\CategoryCrudController
+  page:
+    root_path: '/blog'

@@ -145,6 +145,15 @@ class BasePageRepository extends ServiceEntityRepository {
         }
 
 
+//        $localeWhere = 'page.locale IS NULL';
+//        if (null !== $locale) {
+//            $localeWhere .= ' OR page.locale = :locale';
+//            $qb->setParameter('locale', $locale);
+//            $qb->addOrderBy('page.locale', 'asc');
+//        }
+//        $qb->andWhere($localeWhere);
+
+
         /** @var BasePageEntity[] $results */
         $results = $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)

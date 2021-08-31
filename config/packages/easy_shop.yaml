@@ -1,3 +1,9 @@
 twig:
   form_themes:
     - '@EasyShop/form/admin_product.html.twig'
+
+
+easy_shop:
+  product_grid:
+    include_all_descendants: true
+  locale_switcher: storage

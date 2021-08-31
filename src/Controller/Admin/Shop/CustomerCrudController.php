@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
@@ -40,6 +41,17 @@ class CustomerCrudController extends AbstractCrudController
         return $crud
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
+
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_customers")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_customer")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_customer")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.currency")
+            ->setEntityLabelInSingular('sylius.ui.customer')
+            ->setEntityLabelInPlural('sylius.ui.customers')
+
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
             ;
     }
 
@@ -53,13 +65,13 @@ class CustomerCrudController extends AbstractCrudController
         yield TextField::new("firstName", 'sylius.form.customer.first_name')->setRequired(true);
         yield TextField::new("lastName", 'sylius.form.customer.last_name')->setRequired(true);
         yield EmailField::new("email", 'sylius.form.customer.email')->setRequired(true);
-        yield FormTypeField::new("group", 'sylius.form.customer.group', CustomerGroupChoiceType::class)
+        yield FormTypeField::new("group", 'sylius.form.customer.group', CustomerGroupChoiceType::class)->hideOnIndex()
             ->setRequired(false)
             ->setFormTypeOption("attr", ["data-ea-widget" => "ea-autocomplete"])
         ;
 
         yield FormField::addPanel("sylius.ui.extra_information");
-        yield ChoiceField::new("gender", 'sylius.form.customer.gender')
+        yield ChoiceField::new("gender", 'sylius.form.customer.gender')->hideOnIndex()
             ->setRequired(true)
             ->setFormType(GenderType::class)
             ->setChoices([
@@ -69,14 +81,14 @@ class CustomerCrudController extends AbstractCrudController
             ])
             ->setFormTypeOption('empty_data', CustomerInterface::UNKNOWN_GENDER);
         ;
-        yield DateField::new("birthday", 'sylius.form.customer.birthday')
+        yield DateField::new("birthday", 'sylius.form.customer.birthday')->hideOnIndex()
             ->setFormType(BirthdayType::class)
         ;
-        yield TelephoneField::new("phoneNumber", 'sylius.form.customer.phone_number');
-        yield BooleanField::new("subscribedToNewsletter", 'sylius.form.customer.subscribed_to_newsletter')->renderAsSwitch($pageName !== Crud::PAGE_INDEX);
+        yield TelephoneField::new("phoneNumber", 'sylius.form.customer.phone_number')->hideOnIndex();
+        yield BooleanField::new("subscribedToNewsletter", 'sylius.form.customer.subscribed_to_newsletter')->hideOnIndex()->renderAsSwitch(in_array($pageName, [Crud::PAGE_EDIT, Crud::PAGE_NEW]));
 
         yield FormField::addPanel("sylius.ui.account_credentials");
-        yield ChoiceMaskField::new("createUser", 'sylius.ui.customer_can_login_to_the_store')
+        yield ChoiceMaskField::new("createUser", 'sylius.ui.customer_can_login_to_the_store')->hideOnIndex()
             ->onlyOnForms()
             ->setRequired(true)
             ->setChoices(array_flip([
@@ -94,16 +106,19 @@ class CustomerCrudController extends AbstractCrudController
                 "no" => [],
             ])
         ;
-        yield FormTypeField::new("user", false, ShopUserType::class)
+        yield FormTypeField::new("user", false, ShopUserType::class)->hideOnIndex()
             ->setRequired(false)
             ->setFormTypeOption("label", false)
         ;
+
+        yield DateTimeField::new('user.createdAt', 'sylius.ui.registration_date')->onlyOnIndex();
+        yield BooleanField::new('user.enabled', 'sylius.form.user.enabled')->renderAsSwitch(false)->onlyOnIndex();
+        yield BooleanField::new('user.verifiedAt', 'sylius.form.user.verified')->renderAsSwitch(false)->onlyOnIndex();
     }
 
     protected function processUploadedFiles(FormInterface $form): void
     {
         parent::processUploadedFiles($form);
-
         global $createUser;
         if($form->getData() instanceof Customer){
             $createUser = $form->get("createUser")->getData() == "yes";
@@ -113,7 +128,6 @@ class CustomerCrudController extends AbstractCrudController
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         global $createUser;
-
         parent::updateEntity($entityManager, $entityInstance);
     }
 

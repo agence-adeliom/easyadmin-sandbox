@@ -36,7 +36,7 @@ class PageLoader extends Loader
 
         $routes = new RouteCollection();
 
-        foreach ($this->repository->getAllCustom() as $pageEntity){
+        /*foreach ($this->repository->getAllCustom() as $pageEntity){
             $path = sprintf('/%s', $pageEntity->getTree());
             $defaults = [
                 '_controller' => $pageEntity->getAction(),
@@ -46,7 +46,7 @@ class PageLoader extends Loader
             $route = new Route($path, $defaults, $requirements);
             $routeName = 'easy_page_custom__' . mb_strtolower((new AsciiSlugger())->slug($pageEntity->getTree())->toString());
             $routes->add($routeName, $route, -90);
-        }
+        }*/
 
         // prepare a new route
         $path = '/{slugs}';
@@ -57,7 +57,7 @@ class PageLoader extends Loader
         $requirements = [
             'slugs' => "([a-zA-Z0-9_-]+\/?)*",
         ];
-        $route = new Route($path, $defaults, $requirements);
+        $route = new Route($path, $defaults, $requirements, [], '', [], [], "request.attributes.has('_easy_page_pages')");
 
         // add the new route to the route collection
         $routeName = 'easy_page_index';

@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
@@ -55,7 +56,17 @@ class ShippingMethodCrudController extends AbstractCrudController
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
-            ->addFormTheme('@EasyFields/form/translations_widget.html.twig');
+            ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_shipping_methods")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_shipping_method")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_shipping_method")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.shipping_method_details")
+            ->setEntityLabelInSingular('sylius.ui.shipping_method')
+            ->setEntityLabelInPlural('sylius.ui.shipping_methods')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -63,42 +74,44 @@ class ShippingMethodCrudController extends AbstractCrudController
         $fieldsConfig = [
             'name' => [
                 'field_type' => TextType::class,
+                'label' => 'sylius.form.shipping_method.name',
                 'required' => true,
             ],
             'description' => [
                 'field_type' => TextareaType::class,
+                'label' => 'sylius.form.shipping_method.description',
                 'required' => true,
             ]
         ];
-        yield TextField::new('code', 'sylius.ui.code');
+        yield TextField::new('code', 'sylius.ui.code')
+            ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
+            ->setRequired(true);
         yield FormTypeField::new('zone', 'sylius.form.shipping_method.zone', ZoneChoiceType::class)
             ->setFormTypeOption("zone_scope", Scope::SHIPPING)->setRequired(true);
-        yield NumberField::new('position', 'sylius.form.shipping_method.position')
-            ->setNumDecimals(0);
-        yield BooleanField::new('enabled', 'sylius.form.locale.enabled');
-        yield FormTypeField::new('channels', 'sylius.form.shipping_method.channels', ChannelChoiceType::class)
+        yield IntegerField::new('position', 'sylius.form.shipping_method.position')->setRequired(true);
+        yield BooleanField::new('enabled', 'sylius.form.locale.enabled')->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
+        yield FormTypeField::new('channels', 'sylius.form.shipping_method.channels', ChannelChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("multiple", true)
             ->setFormTypeOption("expanded", true);
-        yield FormTypeField::new('taxCategory', 'sylius.form.shipping_method.tax_category', TaxCategoryChoiceType::class)
+        yield FormTypeField::new('taxCategory', 'sylius.form.shipping_method.tax_category', TaxCategoryChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("placeholder", '---');
-        yield FormTypeField::new('category', 'sylius.form.shipping_method.category', ShippingCategoryChoiceType::class);
-        yield ChoiceField::new("categoryRequirement", 'sylius.form.shipping_method.category_requirement')
+        yield FormTypeField::new('category', 'sylius.form.shipping_method.category', ShippingCategoryChoiceType::class)->hideOnIndex();
+        yield ChoiceField::new("categoryRequirement", 'sylius.form.shipping_method.category_requirement')->hideOnIndex()
             ->setChoices([
                 'sylius.form.shipping_method.match_none_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE,
                 'sylius.form.shipping_method.match_any_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
                 'sylius.form.shipping_method.match_all_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
             ])->renderExpanded();
 
-        yield FormTypeField::new('calculator', 'sylius.form.shipping_method.calculator', ShippingMethodCalculatorType::class);
-
+        yield FormTypeField::new('calculator', 'sylius.form.shipping_method.calculator', ShippingMethodCalculatorType::class)->hideOnIndex();
 
         yield FormField::addPanel('sylius.form.shipping_method.rules')->setHelp("sylius.form.shipping_method.rules_help");
-        yield SortableCollectionField::new('rules', 'sylius.form.shipping_method.rules')
+        yield SortableCollectionField::new('rules', 'sylius.form.shipping_method.rules')->hideOnIndex()
             ->setEntryType(ShippingMethodRuleType::class)->allowDrag(false);
 
         yield FormField::addPanel('sylius.form.shipping_method.translations');
-        yield TranslationField::new("translations", false, $fieldsConfig);
+        yield TranslationField::new("translations", false, $fieldsConfig)->hideOnIndex();
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface

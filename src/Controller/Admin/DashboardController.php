@@ -21,6 +21,7 @@ use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Product\ProductAssociationType;
 use App\Entity\Shop\Product\ProductAttribute;
 use App\Entity\Shop\Product\ProductOption;
+use App\Entity\Shop\Product\ProductReview;
 use App\Entity\Shop\Promotion\Promotion;
 use App\Entity\Shop\Shipping\ShippingCategory;
 use App\Entity\Shop\Shipping\ShippingMethod;
@@ -47,7 +48,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('My Project Name');
+            ->setTitle('My Project Name')
+            ;
     }
 
 
@@ -77,6 +79,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('sylius.ui.marketing');
         yield MenuItem::linkToCrud('sylius.ui.promotions', 'fas fa-percentage', Promotion::class);
+        yield MenuItem::linkToCrud('sylius.ui.product_reviews', 'fas fa-newspaper', ProductReview::class);
 
         yield MenuItem::section('sylius.ui.customer');
         yield MenuItem::linkToCrud('sylius.ui.customers', 'fas fa-users', Customer::class);

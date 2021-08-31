@@ -38,72 +38,82 @@ class ChannelCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
-            ->addFormTheme('@EasyMedia/form/easy-media.html.twig');
+            ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_channels")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_channel")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_channel")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.channel")
+            ->setEntityLabelInSingular('sylius.ui.channel')
+            ->setEntityLabelInPlural('sylius.ui.channels')
+
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
     }
 
 
     public function configureFields(string $pageName): iterable
     {
-        $c = new Channel();
-
-        yield TextField::new('code', 'sylius.ui.code');
-        yield TextField::new('name', 'sylius.form.channel.name');
-        yield TextareaField::new('description', 'sylius.form.channel.description')
+        yield TextField::new('code', 'sylius.ui.code')->setColumns(6)->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''));
+        yield TextField::new('name', 'sylius.form.channel.name')->setColumns(6);
+        yield TextareaField::new('description', 'sylius.form.channel.description')->setColumns(12)
             ->hideOnIndex();
-        yield ColorField::new('color', 'sylius.form.channel.color');
-        yield BooleanField::new('enabled', 'sylius.form.channel.enabled');
-        yield TextField::new('hostname', 'sylius.form.channel.hostname');
+        yield BooleanField::new('enabled', 'sylius.form.channel.enabled')->setColumns(4)->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
+        yield ColorField::new('color', 'sylius.form.channel.color')->setColumns(4)->hideOnIndex();
+        yield TextField::new('hostname', 'sylius.form.channel.hostname')->setColumns(4)->hideOnIndex();
 
 
-        yield FormTypeField::new('locales', 'sylius.form.channel.locales', LocaleChoiceType::class)
+        yield FormTypeField::new('locales', 'sylius.form.channel.locales', LocaleChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("multiple", true)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"]);
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6);
 
-        yield FormTypeField::new('defaultLocale', 'sylius.form.channel.locale_default', LocaleChoiceType::class)
+        yield FormTypeField::new('defaultLocale', 'sylius.form.channel.locale_default', LocaleChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", true)
             ->setFormTypeOption("placeholder", null)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6)
             ->hideOnIndex();
 
-        yield FormTypeField::new('currencies', 'sylius.form.channel.currencies', CurrencyChoiceType::class)
+        yield FormTypeField::new('currencies', 'sylius.form.channel.currencies', CurrencyChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("multiple", true)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6)
             ->hideOnIndex();
 
-        yield FormTypeField::new('baseCurrency', 'sylius.form.channel.currency_base', CurrencyChoiceType::class)
+        yield FormTypeField::new('baseCurrency', 'sylius.form.channel.currency_base', CurrencyChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", true)
             ->setFormTypeOption("multiple", false)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6)
             ->hideOnIndex();
 
-        yield FormTypeField::new('countries', 'sylius.form.channel.countries', CountryChoiceType::class)
+        yield FormTypeField::new('countries', 'sylius.form.channel.countries', CountryChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("multiple", true)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(12)
             ->hideOnIndex();
 
-        yield FormTypeField::new('defaultTaxZone', 'sylius.form.channel.tax_zone_default', ZoneChoiceType::class)
+        yield FormTypeField::new('defaultTaxZone', 'sylius.form.channel.tax_zone_default', ZoneChoiceType::class)->hideOnIndex()
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("zone_scope", Scope::TAX)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6)
             ->hideOnIndex();
 
-        yield FormTypeField::new('taxCalculationStrategy', 'sylius.form.channel.tax_calculation_strategy', TaxCalculationStrategyChoiceType::class)
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+        yield FormTypeField::new('taxCalculationStrategy', 'sylius.form.channel.tax_calculation_strategy', TaxCalculationStrategyChoiceType::class)->hideOnIndex()
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(6)
             ->hideOnIndex();
 
         yield FormTypeField::new('themeName', 'sylius.form.channel.theme', ThemeNameChoiceType::class)
             ->setFormTypeOption("required", false)
             ->setFormTypeOption("empty_data", null)
             ->setFormTypeOption("placeholder", 'sylius.ui.no_theme')
-            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])
+            ->setFormTypeOption('attr', ["data-ea-widget" => "ea-autocomplete"])->setColumns(12)
             ->hideOnIndex();
 
-        yield EmailField::new('contactEmail')
+        yield EmailField::new('contactEmail', "sylius.form.channel.contact_email")->setColumns(6)
             ->hideOnIndex();
-        yield TelephoneField::new('contactPhoneNumber')
+        yield TelephoneField::new('contactPhoneNumber', "sylius.form.channel.contact_phone_number")->setColumns(6)
             ->hideOnIndex();
         yield BooleanField::new('skippingShippingStepAllowed', 'sylius.form.channel.skipping_shipping_step_allowed')
             ->hideOnIndex();

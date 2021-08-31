@@ -35,6 +35,7 @@ services:
         arguments:
             - '%easy_page.layouts%'
             - '@twig'
+            - '@easy_page.repository'
         tags:
             - kernel.event_subscriber
 

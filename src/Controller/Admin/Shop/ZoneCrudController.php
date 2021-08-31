@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Shop;
 
+use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use App\Entity\Shop\Addressing\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -17,6 +18,7 @@ use Sylius\Bundle\AddressingBundle\Form\Type\CountryCodeChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneCodeChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Scope;
 
@@ -34,13 +36,29 @@ class ZoneCrudController extends AbstractCrudController
         return Zone::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_zones")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_zone")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_zone")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.zone_details")
+            ->setEntityLabelInSingular('sylius.ui.zone')
+            ->setEntityLabelInPlural('sylius.ui.zones')
+
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         $url = $this->crudUrlGenerator->setController(self::class)->setAction(Action::NEW);
 
-        $newZoneCountries = Action::new('zoneCountries', 'Zone of countries')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_COUNTRY)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
-        $newZoneProvinces = Action::new('zoneProvinces', 'Zone of provinces')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_PROVINCE)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
-        $newZoneOther = Action::new('zoneOther', 'Zone of other zones')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_ZONE)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
+        $newZoneCountries = Action::new('zoneCountries', 'sylius.ui.zone_consisting_of_countries')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_COUNTRY)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
+        $newZoneProvinces = Action::new('zoneProvinces', 'sylius.ui.zone_consisting_of_provinces')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_PROVINCE)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
+        $newZoneOther = Action::new('zoneOther', 'sylius.ui.zone_consisting_of_other_zones')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_ZONE)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
 
         $actions = parent::configureActions($actions);
 
@@ -75,14 +93,15 @@ class ZoneCrudController extends AbstractCrudController
         $subject = $context->getEntity();
         $zone = $subject->getInstance();
 
-        yield TextField::new('type')->hideOnForm();
-        yield TextField::new('code');
-        yield TextField::new('name');
-        yield ChoiceField::new('scope')->setChoices([
-            "Shipping" => Scope::SHIPPING,
-            "Tax" => Scope::TAX,
-            "All" => Scope::ALL,
-        ]);
+        yield FormTypeField::new("type", 'sylius.form.zone.type', ZoneTypeChoiceType::class)->setColumns(3)
+            ->setFormTypeOption('disabled', 'disabled');
+        yield TextField::new('code', 'sylius.ui.code')->setColumns(3);
+        yield TextField::new('name', 'sylius.form.zone.name')->setColumns(3);
+        yield ChoiceField::new('scope', 'sylius.form.zone.scope')->setColumns(3)->hideOnIndex()->setChoices([
+            "sylius.ui.shipping" => Scope::SHIPPING,
+            "sylius.ui.tax" => Scope::TAX,
+            "sylius.ui.all" => Scope::ALL,
+        ])->setFormTypeOption("placeholder", 'sylius.form.zone.select_scope');
 
         if (in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])) {
             $entryOptions = [
@@ -96,7 +115,7 @@ class ZoneCrudController extends AbstractCrudController
                 };
             }
 
-            yield CollectionField::new("members")
+            yield CollectionField::new("members", "sylius.ui.members")
                 ->setEntryType(ZoneMemberType::class)
                 ->setFormTypeOption("entry_options", $entryOptions)
                 ->setFormTypeOption('allow_add', true)

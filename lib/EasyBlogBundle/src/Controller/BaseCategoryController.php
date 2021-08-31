@@ -60,13 +60,13 @@ class BaseCategoryController extends AbstractController
         $this->breadcrumb->addRouteItem('homepage', ['route' => "easy_page_index"]);
         $this->breadcrumb->addRouteItem('blog', ['route' => "easy_blog_category_index"]);
 
-        if(empty($category)){
+        if($this->request->attributes->get("_easy_blog_root")){
             return $this->blogRoot();
         }
 
         $template = '@EasyBlog/front/category.html.twig';
 
-        $category = $this->categoryRepository->getBySlug($category);
+        $category = $this->request->attributes->get("_easy_blog_category");
         $postsQueryBuilder = $this->postRepository->getByCategory($category, true);
 
         $pagerfanta = new Pagerfanta(

@@ -18,4 +18,9 @@ class ShippingMethod extends BaseShippingMethod
     {
         return new ShippingMethodTranslation();
     }
+
+    public static function getTranslationClass(): string
+    {
+        return ShippingMethodTranslation::class;
+    }
 }

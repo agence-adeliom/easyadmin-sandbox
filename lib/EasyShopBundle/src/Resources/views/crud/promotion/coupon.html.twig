@@ -78,7 +78,7 @@
                     <td>{{ coupon.usageLimit }}</td>
                     <td>{{ coupon.perCustomerUsageLimit }}</td>
                     <td>{{ coupon.used }}</td>
-                    <td>{{ coupon.expiresAt }}</td>
+                    <td>{{ coupon.expiresAt|date('d/m/Y') }}</td>
                     <td class="actions actions-as-dropdown">
                         <div class="dropdown dropdown-actions">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

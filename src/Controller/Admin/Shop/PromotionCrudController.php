@@ -81,6 +81,15 @@ class PromotionCrudController extends AbstractCrudController
         return $crud
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_promotions")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.create_promotion")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_promotion")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.promotions")
+            ->setEntityLabelInSingular('sylius.ui.promotions')
+            ->setEntityLabelInPlural('sylius.ui.promotions')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
             ;
     }
 
@@ -103,24 +112,26 @@ class PromotionCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('code')->setLabel('sylius.ui.code')->setRequired(true)->setColumns(6);
-        yield TextField::new('name')->setLabel('sylius.form.promotion.name')->setRequired(true)->setColumns(6);
-        yield TextareaField::new('description')->setLabel('sylius.form.promotion.description')->setColumns(12);
-        yield IntegerField::new('usageLimit')->setLabel('sylius.form.promotion.usage_limit')->setColumns(6);
-        yield IntegerField::new('priority')->setLabel('sylius.form.promotion.priority')->setColumns(6);
-        yield BooleanField::new('exclusive')->setLabel('sylius.form.promotion.exclusive')->setColumns(6);
-        yield BooleanField::new('couponBased')->setLabel('sylius.form.promotion.coupon_based')->setColumns(6);
+        yield TextField::new('code','sylius.ui.code')
+            ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
+            ->setRequired(true)->setColumns(6);
+        yield TextField::new('name','sylius.form.promotion.name')->setRequired(true)->setColumns(6);
+        yield TextareaField::new('description','sylius.form.promotion.description')->setColumns(12)->hideOnIndex();
+        yield IntegerField::new('usageLimit','sylius.form.promotion.usage_limit')->setColumns(6);
+        yield IntegerField::new('priority','sylius.form.promotion.priority')->setColumns(6);
+        yield BooleanField::new('exclusive','sylius.form.promotion.exclusive')->setColumns(6)->hideOnIndex();
+        yield BooleanField::new('couponBased','sylius.form.promotion.coupon_based')->setColumns(6)->renderAsSwitch(in_array($pageName, [Crud::PAGE_EDIT, Crud::PAGE_NEW]));
 
-        yield FormTypeField::new('channels', 'sylius.form.promotion.channels', ChannelChoiceType::class)
+        yield FormTypeField::new('channels', 'sylius.form.promotion.channels', ChannelChoiceType::class)->hideOnIndex()
             ->setFormTypeOptions(['multiple' => true, 'expanded' => true]);
 
-        yield DateTimeField::new("startsAt", 'sylius.form.promotion.starts_at')->setColumns(6);
-        yield DateTimeField::new("endsAt", 'sylius.form.promotion.ends_at')->setColumns(6);
+        yield DateTimeField::new("startsAt", 'sylius.form.promotion.starts_at')->setColumns(6)->hideOnIndex();
+        yield DateTimeField::new("endsAt", 'sylius.form.promotion.ends_at')->setColumns(6)->hideOnIndex();
 
         yield SortableCollectionField::new('rules', 'sylius.form.promotion.rules')->setColumns(6)
-            ->setEntryType(PromotionRuleType::class)->allowAdd()->allowDrag(false);
+            ->setEntryType(PromotionRuleType::class)->allowAdd()->allowDrag(false)->hideOnIndex();
         yield SortableCollectionField::new('actions', 'sylius.form.promotion.actions')->setColumns(6)
-            ->setEntryType(\Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType::class)->allowAdd()->allowDrag(false);
+            ->setEntryType(\Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType::class)->allowAdd()->allowDrag(false)->hideOnIndex();
     }
 
     public function manageCoupon(AdminContext $context): Response

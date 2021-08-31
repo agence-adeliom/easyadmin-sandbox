@@ -1,0 +1,11 @@
+{% include '@EasyShop/front/Common/Order/_addresses.html.twig' %}
+{% include '@EasyShop/front/Common/Order/_table.html.twig' %}
+
+<div class="ui two column stackable grid">
+    <div class="column" id="sylius-payments">
+        {% include '@EasyShop/front/Common/Order/_payments.html.twig' %}
+    </div>
+    <div class="column" id="sylius-shipments">
+        {% include '@EasyShop/front/Common/Order/_shipments.html.twig' %}
+    </div>
+</div>

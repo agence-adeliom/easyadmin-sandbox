@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -43,6 +44,15 @@ class PaymentMethodCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')//->addFormTheme('@SyliusUi/Form/theme.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_payment_methods_available_to_your_customers")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_payment_method")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_payment_method")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.payment_method")
+            ->setEntityLabelInSingular('sylius.ui.payment_method')
+            ->setEntityLabelInPlural('sylius.ui.payment_methods')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
             ;
     }
 
@@ -86,17 +96,16 @@ class PaymentMethodCrudController extends AbstractCrudController
     {
         yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed(false);
 
-        yield TextField::new('code')
+        yield TextField::new('code', "sylius.ui.code")
             ->setFormTypeOption('disabled', (in_array($pageName, [Crud::PAGE_EDIT]) ? 'disabled' : ''))
             ->setColumns(6);
 
-        yield NumberField::new('position')
-            ->setLabel('sylius.form.payment_method.position')
+        yield IntegerField::new('position','sylius.form.payment_method.position')
             ->setColumns(6);
 
-        yield BooleanField::new('enabled')->setLabel('sylius.form.payment_method.enabled');
+        yield BooleanField::new('enabled','sylius.form.payment_method.enabled')->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
 
-        yield FormTypeField::new('channels', 'sylius.form.payment_method.channels', ChannelChoiceType::class)
+        yield FormTypeField::new('channels', 'sylius.form.payment_method.channels', ChannelChoiceType::class)->hideOnIndex()
             ->setFormTypeOptions(['multiple' => true, 'expanded' => true, "attr" => ["data-ea-widget" => "ea-autocomplete"]]);
 
         yield FormField::addPanel("sylius.ui.gateway_configuration")->collapsible()->renderCollapsed(false);
@@ -125,7 +134,7 @@ class PaymentMethodCrudController extends AbstractCrudController
             ],
         ];
 
-        yield TranslationField::new("translations", 'sylius.ui.content', $fieldsConfig);
+        yield TranslationField::new("translations", 'sylius.ui.content', $fieldsConfig)->hideOnIndex();
 
     }
 

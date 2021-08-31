@@ -23,4 +23,17 @@ class Taxon extends BaseTaxon
     {
         return TaxonTranslation::class;
     }
+
+    public function getTree(string $separator = '/'): string
+    {
+        $tree = '';
+
+        $current = $this;
+        do {
+            $tree    = $current->getSlug().$separator.$tree;
+            $current = $current->getParent();
+        } while ($current);
+
+        return trim($tree, $separator);
+    }
 }
