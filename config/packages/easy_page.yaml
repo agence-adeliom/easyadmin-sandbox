@@ -2,3 +2,11 @@ easy_page:
   page_class: App\Entity\Page
   page_repository: App\Repository\PageRepository
   page_controller: App\Controller\Page\PageController
+  layouts:
+    front:
+      resource: '@EasyPage/default_layout.html.twig'
+      pattern: ''
+      assets_css:
+        - 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'
+      assets_js:
+        - 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js'

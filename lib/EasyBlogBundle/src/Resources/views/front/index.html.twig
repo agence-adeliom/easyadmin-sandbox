@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% block title %}{{- seo_title(page.name) -}}{% endblock %}
+{% block header_title %}Welcome to Easy Blog !{% endblock %}
 
 {% block easy_page_breadcrumbs %}
     {{ seo_breadcrumb() }}
@@ -25,24 +26,28 @@
     <section>
         <article>
             <h1>{{ page.name }}</h1>
-
-            <h2>Categories</h2>
-            <ul>
-                {% for category in categories %}
-                    <li>
-                        <a href="{{ path('easy_blog_category_index', {"category" : category.slug}) }}">{{ category.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <h2>Posts</h2>
-            <ul>
-                {% for post in posts %}
-                    <li>
-                        <a href="{{ path('easy_blog_post_index', {"category" : post.category.slug, "post" : post.slug}) }}">{{ post.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Categories</h4>
+                    <ul class="list-unstyled mb-0">
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ path('easy_blog_category_index', {"category" : category.slug}) }}">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-8">
+                    {% for post in posts %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ post.name }}</h3>
+                                <a href="{{ path('easy_blog_post_index', {"category" : post.category.slug, "post" : post.slug}) }}" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </article>
     </section>
 {% endblock %}

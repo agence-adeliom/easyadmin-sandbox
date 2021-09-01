@@ -99,6 +99,7 @@ class LayoutsListener implements EventSubscriberInterface
         /** @var BasePageEntity[] $pages */
         $slugsArray = preg_split('~/~', $path, -1, PREG_SPLIT_NO_EMPTY);
         $pages = $this->pageRepository->findFrontPages($slugsArray, $event->getRequest()->getHost(), $event->getRequest()->getLocale());
+
         if (count($pages) || (count($slugsArray) && count($pages) == count($slugsArray))) {
             $event->getRequest()->attributes->set('_easy_page_pages', $pages);
         }

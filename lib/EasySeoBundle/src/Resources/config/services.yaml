@@ -18,6 +18,4 @@ services:
     alias: Adeliom\EasySeoBundle\Services\BreadCrumbCollection
 
   Adeliom\EasySeoBundle\Form\SeoType:
-    arguments:
-      - "@translator.default"
     public: true

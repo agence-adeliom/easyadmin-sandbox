@@ -25,15 +25,39 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\GenderType;
+use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormInterface;
 
 class CustomerCrudController extends AbstractCrudController
 {
+    /**
+     * @var FactoryInterface
+     */
+    protected $customerFactory;
+    /**
+     * @var FactoryInterface|UserWithEncoderFactory
+     */
+    protected $userFactory;
+    public function __construct(FactoryInterface $customerFactory, FactoryInterface $userFactory, ParameterBag $bag)
+    {
+        $this->customerFactory = $customerFactory;
+        $this->userFactory = $userFactory;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
+    }
+
+    public function createEntity(string $entityFqcn)
+    {
+        $customer = $this->customerFactory->createNew();
+        $customer->setUser($this->userFactory->createNew());
+        return $customer;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -120,6 +144,7 @@ class CustomerCrudController extends AbstractCrudController
     {
         parent::processUploadedFiles($form);
         global $createUser;
+        $createUser = false;
         if($form->getData() instanceof Customer){
             $createUser = $form->get("createUser")->getData() == "yes";
         }
@@ -128,6 +153,15 @@ class CustomerCrudController extends AbstractCrudController
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         global $createUser;
+        if(!$createUser){
+            if($entityInstance->getUser() && $entityInstance->getUser()->getId()){
+                $user = $entityInstance->getUser();
+                $user->setEnabled(false);
+                $entityInstance->setUser($user);
+            }else{
+                $entityInstance->setUser(null);
+            }
+        }
         parent::updateEntity($entityManager, $entityInstance);
     }
 

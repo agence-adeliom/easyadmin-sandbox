@@ -6,6 +6,7 @@ namespace Adeliom\EasyFieldsBundle\Admin\Field;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 final class TranslationField implements FieldInterface
 {
@@ -20,8 +21,18 @@ final class TranslationField implements FieldInterface
             ->hideOnIndex()
             ->setFormTypeOptions(
                 [
+                    'required' => true,
                     'fields' => $fieldsConfig,
+                    'constraints' => [
+                        new Assert\Valid()
+                    ],
                 ]
             );
+    }
+
+    public function setRequired(bool $isRequired): self
+    {
+        $this->setFormTypeOption('required', $isRequired);
+        return $this;
     }
 }

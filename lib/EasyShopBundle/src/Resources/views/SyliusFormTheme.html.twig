@@ -1,5 +1,97 @@
 {% extends '@!EasyAdmin/crud/form_theme.html.twig' %}
 
+{% block sylius_select_attribute_choices_collection_widget %}
+    <script src='/bundles/easyadmin/form-type-collection.js'></script>
+    {{ block('collection_widget') }}
+    <style>
+        #{{ form.parent.vars.id }} .accordion-button{display: none;}
+        #{{ form.parent.vars.id }} .accordion-collapse{ display: block !important; }
+        #{{ form.parent.vars.id }} .field-collection-delete-button{float: right}
+    </style>
+{% endblock sylius_select_attribute_choices_collection_widget %}
+
+{% block sylius_select_attribute_value_translations_label %}
+{% endblock sylius_select_attribute_value_translations_label %}
+
+{% block _ProductAttribute_configuration_choices_entry_entry_label %}
+    <label>{{ name|sylius_locale_name|capitalize }}</label>
+{% endblock _ProductAttribute_configuration_choices_entry_entry_label %}
+
+
+
+{% block sylius_translations_widget %}
+    {{ form_errors(form) }}
+    <div class="a2lix_translations">
+        {% if form|length > 1 %}
+            <ul class="a2lix_translationsLocales nav nav-pills" role="tablist">
+                {% for translationsFields in form %}
+                    {% set locale = translationsFields.vars.name %}
+                    <li class="nav-item">
+                        <button class="nav-link {% if app.request.locale == locale %}active{% endif %}" data-bs-toggle="pill" data-bs-target="#{{ translationsFields.vars.id }}_a2lix_translations-fields" type="button" role="tab" aria-selected="true">
+                            {{ translationsFields.vars.label|default(locale)|locale_name|capitalize|trans }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="a2lix_translationsFields tab-content">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+                <div id="{{ translationsFields.vars.id }}_a2lix_translations-fields" class="tab-pane {% if app.request.locale == locale %}show active{% endif %} {% if not form.vars.valid %}sonata-ba-field-error{% endif %}" role="tabpanel">
+                    {{ form_errors(translationsFields) }}
+                    {{ form_widget(translationsFields) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock sylius_translations_widget %}
+
+{#{% block collection_entry_row %}#}
+{#    {{ block('form_row') }}#}
+{#{% endblock collection_entry_row %}#}
+
+{#{% block collection_entry_widget %}#}
+{#    {% set is_array_field = 'EasyCorp\\Bundle\\EasyAdminBundle\\Field\\ArrayField' == form_parent(form).vars.ea_crud_form.ea_field.fieldFqcn ?? false %}#}
+{#    {% set is_complex = form_parent(form).vars.ea_crud_form.ea_field.customOptions.get('entryIsComplex') ?? false %}#}
+{#    {% set allows_deleting_items = form_parent(form).vars.allow_delete|default(false) %}#}
+{#    {% set render_expanded = form_parent(form).vars.ea_crud_form.ea_field.customOptions.get('renderExpanded') ?? false %}#}
+{#    {% set delete_item_button %}#}
+{#        <button type="button" class="btn btn-link btn-link-danger field-collection-delete-button"#}
+{#                title="{{ 'action.remove_item'|trans({}, 'EasyAdminBundle') }}">#}
+{#            <i class="far fa-trash-alt"></i>#}
+{#        </button>#}
+{#    {% endset %}#}
+
+{#    <div class="field-collection-item {{ is_complex ? 'field-collection-item-complex' }}">#}
+{#        {% if is_array_field|default(false) %}#}
+{#            {{ form_widget(form) }}#}
+{#            {% if allows_deleting_items %}#}
+{#                {{ delete_item_button }}#}
+{#            {% endif %}#}
+{#        {% else %}#}
+{#            <div class="accordion-item" style="border-radius: 0; box-shadow: none">#}
+{#                <h2 class="accordion-header d-flex p-0 rounded-none" style="--border-radius: 0; box-shadow: none">#}
+{#                    <button class="accordion-button {{ render_expanded ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ id }}-contents">#}
+{#                        <span>{{ value|ea_as_string }}</span>#}
+{#                    </button>#}
+{#                    <div class="accordion-actions d-flex">#}
+{#                        {% if allows_deleting_items %}#}
+{#                            {{ delete_item_button }}#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </h2>#}
+{#                <div id="{{ id }}-contents" class="accordion-collapse collapse {{ render_expanded ? 'show' }} border-top">#}
+{#                    <div class="accordion-body">#}
+{#                        {{ form_widget(form) }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#{% endblock collection_entry_widget %}#}
+
+
 {#{% block form_row -%}#}
 {#    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">#}
 {#        {{- form_label(form) -}}#}

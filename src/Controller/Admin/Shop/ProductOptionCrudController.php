@@ -79,6 +79,7 @@ class ProductOptionCrudController extends AbstractCrudController
             ->allowAdd()
             ->setFormTypeOption("by_reference", false)
             ->setFormTypeOption("label", false)
+            ->setFormTypeOption("required", true)
             ->setFormTypeOption("button_add_label", 'sylius.form.option_value.add_value');
     }
 

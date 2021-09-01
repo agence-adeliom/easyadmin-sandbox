@@ -22,36 +22,38 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoType extends AbstractType
 {
-    protected $translator;
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => $this->translator->trans("form.title", [], "EasySEOBundle"),
+                'label' => "form.title",
+                'translation_domain' => 'EasySeoBundle'
             ])
             ->add('cover', EasyMediaType::class, [
-                'label' => $this->translator->trans("form.cover", [], "EasySEOBundle"),
+                'label' => "form.cover",
+                'translation_domain' => 'EasySeoBundle',
                 "restrictions_uploadTypes" => ["image/*"],
             ])
             ->add('cannonical', UrlType::class, [
-                'label' => $this->translator->trans("form.cannonical", [], "EasySEOBundle"),
+                'label' => "form.cannonical",
+                'translation_domain' => 'EasySeoBundle',
             ])
             ->add('description', TextareaType::class, [
-                'label' => $this->translator->trans("form.description", [], "EasySEOBundle"),
+                'label' => "form.description",
+                'translation_domain' => 'EasySeoBundle',
             ])
             ->add('keywords', TextType::class, [
-                'label' => $this->translator->trans("form.keywords", [], "EasySEOBundle"),
+                'label' => "form.keywords",
+                'translation_domain' => 'EasySeoBundle',
             ])
             ->add('key', TextType::class, [
-                'label' => $this->translator->trans("form.key", [], "EasySEOBundle"),
+                'label' => "form.key",
+                'translation_domain' => 'EasySeoBundle',
             ])
             ->add('robots', ChoiceType::class, [
-                'label' => $this->translator->trans("form.robots", [], "EasySEOBundle"),
+                'label' => "form.robots",
+                'translation_domain' => 'EasySeoBundle',
                 'multiple' => 'true',
                 'attr' => [
                     'data-ea-widget' => 'ea-autocomplete',
@@ -66,7 +68,8 @@ class SeoType extends AbstractType
                 ]
             ])
             ->add('sitemap', CheckboxType::class, [
-                'label' => $this->translator->trans("form.sitemap", [], "EasySEOBundle"),
+                'label' => "form.sitemap",
+                'translation_domain' => 'EasySeoBundle',
             ])
         ;
     }
