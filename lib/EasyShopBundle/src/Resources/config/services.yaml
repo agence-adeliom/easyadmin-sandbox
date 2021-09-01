@@ -29,6 +29,21 @@ services:
             - "@sylius.repository.channel"
         tags: [ form.type ]
 
+    sylius.form.type.sylius_product_associations:
+        class: Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType
+        arguments:
+          - "@sylius.repository.product_association_type"
+          - "@sylius.form.type.data_transformer.products_to_product_associations"
+        tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationEntityType:
+        class: Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationEntityType
+        arguments:
+          - "@sylius.repository.product_association_type"
+          - "@sylius.form.type.data_transformer.products_to_product_associations"
+        tags: [ form.type ]
+
+
     sylius.form.type.easy.promotion_rule:
         class: Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionRuleType
         arguments:

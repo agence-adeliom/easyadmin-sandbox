@@ -4,7 +4,9 @@ namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType;
 use App\Entity\Shop\Product\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -66,7 +68,7 @@ class ProductCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
-            //->addFormTheme('@EasyShop/form/admin_product.html.twig')
+            ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
             ->showEntityActionsAsDropdown();
     }
 
@@ -209,6 +211,15 @@ class ProductCrudController extends AbstractCrudController
             'label' => false,
         ])
         ->hideOnIndex();
+
+        yield FormField::addPanel("Associations")->collapsible()->renderCollapsed();
+
+        yield ProductAssociationsField::new("associations", "test")->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(ProductCrudController::class)
+            ->hideOnIndex();
+//        yield FormTypeField::new("associations", false, ProductAssociationsType::class)
+//            ->setTemplatePath("@EasyShop/field/product/associations.html.twig")
+//            ->hideOnIndex();
+
 //        yield FormTypeField::new("associations", false, Prod::class);
         yield FormField::addPanel("Contenus")->collapsible()->renderCollapsed();
         yield TranslationField::new("translations", 'Contenus', $fieldsConfig);
