@@ -49,3 +49,9 @@ services:
             - "@sylius.factory.promotion_coupon"
             - "@sylius.manager.promotion_coupon"
             - "@sylius.repository.promotion_coupon"
+
+    App\Controller\Admin\Shop\CustomerCrudController:
+        arguments:
+            - "@sylius.factory.customer"
+            - "@sylius.factory.shop_user"
+            - "@parameter_bag"

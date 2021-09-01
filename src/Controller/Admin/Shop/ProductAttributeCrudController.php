@@ -92,6 +92,7 @@ class ProductAttributeCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('sylius.ui.attributes')
             ->setEntityLabelInPlural('sylius.ui.attributes')
             ->setFormOptions([
+                "attr" => ["novalidate" => "novalidate"],
                 'validation_groups' => ['Default', 'sylius']
             ])
             ;

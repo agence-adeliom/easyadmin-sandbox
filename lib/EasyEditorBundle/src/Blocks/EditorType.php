@@ -16,7 +16,7 @@ class EditorType extends AbstractBlock implements BlockInterface
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add("heading", CKEditorType::class, [
+            ->add("content", CKEditorType::class, [
                 "required" => true,
             ]);
     }
@@ -33,6 +33,6 @@ class EditorType extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "@EasyEditor/block/heading.html.twig";
+        return "@EasyEditor/block/editor.html.twig";
     }
 }

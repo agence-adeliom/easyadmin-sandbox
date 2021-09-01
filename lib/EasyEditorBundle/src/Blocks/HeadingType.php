@@ -47,6 +47,6 @@ class HeadingType extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "@EasyEditor/block/media.html.twig";
+        return "@EasyEditor/block/heading.html.twig";
     }
 }

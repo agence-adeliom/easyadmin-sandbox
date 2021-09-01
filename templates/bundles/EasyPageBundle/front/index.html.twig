@@ -3,7 +3,7 @@
 {% block easy_page_page_content %}
     <section>
         <article>
-            <h1>{{ page.name }}</h1>
+            <h1 class="mb-5">{{ page.name }}</h1>
             <div class="content">
                 {% for block in page.content %}
                     {{ render_easy_editor_block(block) }}

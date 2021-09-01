@@ -18,4 +18,9 @@ class ProductOption extends BaseProductOption
     {
         return new ProductOptionTranslation();
     }
+
+    public static function getTranslationClass(): string
+    {
+        return ProductOptionTranslation::class;
+    }
 }

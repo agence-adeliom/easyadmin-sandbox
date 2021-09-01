@@ -144,7 +144,6 @@ class BasePageRepository extends ServiceEntityRepository {
             ;
         }
 
-
 //        $localeWhere = 'page.locale IS NULL';
 //        if (null !== $locale) {
 //            $localeWhere .= ' OR page.locale = :locale';
