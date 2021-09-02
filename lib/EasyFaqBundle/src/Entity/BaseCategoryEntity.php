@@ -1,25 +1,25 @@
 <?php
 
-namespace Adeliom\EasyBlogBundle\Entity;
+namespace Adeliom\EasyFaqBundle\Entity;
 
-use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyCommonBundle\Traits\EntityIdTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityNameSlugTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityPublishableTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityThreeStateStatusTrait;
+use Adeliom\EasyCommonBundle\Traits\EntityStatusTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityTimestampableTrait;
 use Adeliom\EasySeoBundle\Traits\EntitySeoTrait;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @UniqueEntity("slug")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyBlogBundle\Repository\BasePostRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
+ * @ORM\Table(name="faq_category")
  */
-class BasePostEntity {
+class BaseCategoryEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -27,20 +27,19 @@ class BasePostEntity {
     }
 
     use EntityNameSlugTrait;
-    use EntityThreeStateStatusTrait;
-    use EntityPublishableTrait {
-        EntityPublishableTrait::__construct as private __PublishableConstruct;
-    }
-
+    use EntityStatusTrait;
     use EntitySeoTrait {
         EntitySeoTrait::__construct as private __SEOConstruct;
     }
 
     /**
-     * @var null|BaseCategoryEntity
-     * @Assert\Type(BaseCategoryEntity::class)
+     * @ORM\ManyToMany(
+     *     targetEntity="Adeliom\EasyFaqBundle\Entity\BaseEntryEntity",
+     *     mappedBy="categories",s
+     *     orphanRemoval=false, cascade={"persist"}
+     * )
      */
-    protected $category;
+    protected $entries;
 
     /**
      * @var string|null
@@ -61,18 +60,30 @@ class BasePostEntity {
     public function __construct()
     {
         $this->__TimestampableConstruct();
-        $this->__PublishableConstruct();
         $this->__SEOConstruct();
+        $this->entries     = new ArrayCollection();
     }
 
-    public function getCategory(): ?BaseCategoryEntity
+    /**
+     * @return BaseEntryEntity[]|ArrayCollection
+     */
+    public function getEntries()
     {
-        return $this->category;
+        return $this->entries;
     }
 
-    public function setCategory(?BaseCategoryEntity $category): void
+    public function addEntry(BaseEntryEntity $entry): void
     {
-        $this->category = $category;
+        $this->entries->add($entry);
+        if ($entry->getCategory() !== $this) {
+            $entry->setCategory($this);
+        }
+    }
+
+    public function removeEntry(BaseEntryEntity $entry): void
+    {
+        $this->entries->removeElement($entry);
+        $entry->setCategory(null);
     }
 
     /**
@@ -118,13 +129,12 @@ class BasePostEntity {
         }
     }
 
-
     /**
      * @ORM\PreRemove()
      */
     public function onRemove(LifecycleEventArgs $event): void
     {
-        $this->setState(ThreeStateStatusEnum::UNPUBLISHED());
+        $this->setStatus(false);
         $this->setName($this->getName() . '-'.$this->getId().'-deleted');
         $this->setSlug($this->getSlug() . '-'.$this->getId().'-deleted');
     }

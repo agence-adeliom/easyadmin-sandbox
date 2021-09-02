@@ -1,0 +1,22 @@
+{% extends '@EasyFaq/front/index.html.twig' %}
+
+{% block title %}{{- seo_title(category.name) -}}{% endblock %}
+
+{% block easy_page_head_metas %}{{- seo_metas(category.seo) -}}{% endblock %}
+
+{% block easy_page_page_content %}
+    <section>
+        <article>
+            <h1>{{ category.name }}</h1>
+
+            {% for entry in entries %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ entry.name }}</h3>
+                        <a href="{{ path('easy_faq_entry_index', {"category" : entry.category.slug, "entry" : entry.slug}) }}" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </article>
+    </section>
+{% endblock %}

@@ -1,0 +1,14 @@
+admin:
+  panel:
+    information: Informations
+    metadatas: Metadatas
+    seo: SEO
+    publication: PUblication
+  field:
+    name: Name
+    state: Status
+    publishDate: Publish date
+    unpublishDate: Unpublish date
+    slug: Permalink
+    slug_edit: "Are you sure you want to edit this permalink ?"
+    category: Category

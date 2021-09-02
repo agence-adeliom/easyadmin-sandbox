@@ -1,0 +1,11 @@
+easy_blog:
+  post:
+    class: App\Entity\Faq\Entry
+    repository: App\Repository\Faq\EntryRepository
+    crud: App\Controller\Admin\Faq\EntryCrudController
+  category:
+    class: App\Entity\Faq\Category
+    repository: App\Repository\Faq\CategoryRepository
+    crud: App\Controller\Admin\Faq\CategoryCrudController
+  page:
+    root_path: '/faq'

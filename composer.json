@@ -30,6 +30,10 @@
         },
         {
             "type": "path",
+            "url": "lib/EasyFaqBundle"
+        },
+        {
+            "type": "path",
             "url": "lib/EasySeoBundle"
         },
         {
@@ -56,6 +60,7 @@
         "agence-adeliom/easy-blog-bundle": "*@dev",
         "agence-adeliom/easy-block-bundle": "*@dev",
         "agence-adeliom/easy-shop-bundle": "*@dev",
+        "agence-adeliom/easy-faq-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",

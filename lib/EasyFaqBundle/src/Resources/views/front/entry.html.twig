@@ -1,0 +1,13 @@
+{% extends '@EasyFaq/front/index.html.twig' %}
+
+{% block title %}{{- seo_title(entry.name) -}}{% endblock %}
+
+{% block easy_page_head_metas %}{{- seo_metas(entry.seo) -}}{% endblock %}
+
+{% block easy_page_page_content %}
+    <section>
+        <article>
+            <h1>{{ entry.name }}</h1>
+        </article>
+    </section>
+{% endblock %}
