@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin\Faq;
 
-use Adeliom\EasyBlogBundle\Controller\BaseCategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\BaseCategoryCrudController;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use App\Entity\Faq\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
