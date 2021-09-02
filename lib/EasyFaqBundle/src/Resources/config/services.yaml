@@ -71,7 +71,7 @@ services:
         tags:
             - { name: "kernel.event_subscriber", priority: 100 }
 
-    Adeliom\EasyFaqBundle\EventListener\FaqListener:
+    Adeliom\EasyFaqBundle\EventListener\EntryListener:
         arguments:
             - "@easy_faq.entry.repository"
             - "@easy_faq.category.repository"

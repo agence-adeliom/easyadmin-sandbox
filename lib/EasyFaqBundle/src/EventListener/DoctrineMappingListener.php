@@ -40,38 +40,44 @@ class DoctrineMappingListener implements EventSubscriber
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $eventArgs->getClassMetadata();
 
+
         $isEntry     = is_a($classMetadata->getName(), $this->entryClass, true);
         $isCategory = is_a($classMetadata->getName(), $this->categoryClass, true);
 
         if ($isEntry) {
-            $this->processEntryMetadata($classMetadata);
+            $this->processEntriesMetadata($classMetadata);
         }
 
         if ($isCategory) {
-            $this->processCategoryMetadata($classMetadata);
+            $this->processCategoriesMetadata($classMetadata);
         }
     }
 
-    private function processEntryMetadata(ClassMetadata $classMetadata): void
+    private function processEntriesMetadata(ClassMetadata $classMetadata): void
     {
-        if (!$classMetadata->hasAssociation('category')) {
-            $classMetadata->mapManyToOne([
-                'fieldName' => 'category',
+        if (!$classMetadata->hasAssociation('categories')) {
+            $classMetadata->mapManyToMany([
+                'fieldName' => 'categories',
                 'targetEntity' => $this->categoryClass,
                 'inversedBy' => 'entries',
+                'cascade' => ['persist'],
+                'joinTable' => [
+                    'name' => "faq_categories_entries"
+                ]
             ]);
         }
     }
 
-    private function processCategoryMetadata(ClassMetadata $classMetadata): void
+    private function processCategoriesMetadata(ClassMetadata $classMetadata): void
     {
-        if (!$classMetadata->hasAssociation('pages')) {
-            $classMetadata->mapOneToMany([
+        if (!$classMetadata->hasAssociation('entries')) {
+            $classMetadata->mapManyToMany([
                 'fieldName' => 'entries',
                 'targetEntity' => $this->entryClass,
-                'mappedBy' => 'category',
+                'mappedBy' => 'categories',
+                'orphanRemoval' => false,
+                'cascade' => ['persist'],
             ]);
         }
-
     }
 }

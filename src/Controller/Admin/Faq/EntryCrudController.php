@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin\Faq;
 
-use Adeliom\EasyFaqBundle\Controller\BasePostCrudController;
+use Adeliom\EasyFaqBundle\Controller\BaseEntryCrudController;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use App\Entity\Faq\Entry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class EntryCrudController extends BasePostCrudController
+class EntryCrudController extends BaseEntryCrudController
 {
 
     public static function getEntityFqcn(): string

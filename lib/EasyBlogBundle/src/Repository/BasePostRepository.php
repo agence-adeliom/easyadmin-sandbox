@@ -5,7 +5,6 @@ namespace Adeliom\EasyBlogBundle\Repository;
 use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
 use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyBlogBundle\Entity\BasePageEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 

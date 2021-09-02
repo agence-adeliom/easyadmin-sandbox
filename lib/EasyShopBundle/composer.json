@@ -2,7 +2,7 @@
     "name": "agence-adeliom/easy-shop-bundle",
     "type": "symfony-bundle",
     "require": {
-        "sylius/core-bundle": "^1.10"
+        "sylius/core-bundle": "1.10.1"
     },
     "autoload": {
         "psr-4": {

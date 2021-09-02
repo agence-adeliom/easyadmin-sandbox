@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Block;
 use App\Entity\Category;
-use App\Entity\Faq\Entry;
 use App\Entity\MediaEntity;
 use App\Entity\Page;
 use App\Entity\Post;
@@ -73,7 +72,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Faq');
         yield MenuItem::linkToCrud('Catégorie', 'fa fa-folder', \App\Entity\Faq\Category::class);
-        yield MenuItem::linkToCrud('Faq', 'fa fa-file-alt', Entry::class);
+        yield MenuItem::linkToCrud('Faq', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
 
         yield MenuItem::section('Catalog');
         yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);

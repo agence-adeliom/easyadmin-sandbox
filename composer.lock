@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76bcc402422cc8564adf5083472ea0fb",
+    "content-hash": "855b034121f41c8dd0d0acbc80283f7a",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -172,7 +172,7 @@
         },
         {
             "name": "agence-adeliom/easy-block-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlockBundle",
@@ -190,7 +190,7 @@
         },
         {
             "name": "agence-adeliom/easy-blog-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlogBundle",
@@ -244,7 +244,7 @@
         },
         {
             "name": "agence-adeliom/easy-common-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyCommonBundle",
@@ -294,7 +294,7 @@
         },
         {
             "name": "agence-adeliom/easy-editor-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyEditorBundle",
@@ -343,8 +343,62 @@
             }
         },
         {
+            "name": "agence-adeliom/easy-faq-bundle",
+            "version": "dev-ecommerce",
+            "dist": {
+                "type": "path",
+                "url": "lib/EasyFaqBundle",
+                "reference": "1c7eb2d9acc8e7b4e1bd2e6efe7e69a8b8973af7"
+            },
+            "require": {
+                "babdev/pagerfanta-bundle": "^2.10",
+                "ext-json": "*",
+                "pagerfanta/doctrine-orm-adapter": "^2.7",
+                "php": ">=7.2",
+                "ramsey/uuid-doctrine": "^1.7",
+                "symfony/config": "^4.0|^5.0",
+                "symfony/dependency-injection": "^4.0|^5.0",
+                "symfony/form": "^4.0|^5.0",
+                "symfony/framework-bundle": "^4.0|^5.0",
+                "symfony/http-foundation": "^4.0|^5.0",
+                "symfony/http-kernel": "^4.0|^5.0",
+                "symfony/options-resolver": "^4.0|^5.0",
+                "symfony/property-access": "^4.0|^5.0",
+                "symfony/routing": "^4.0|^5.0",
+                "symfony/twig-bundle": "^4.0|^5.0",
+                "symfony/uid": "^5.3",
+                "symfony/webpack-encore-bundle": "^1.12"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "symfony/framework-bundle": "^4.0",
+                "symfony/phpunit-bridge": "^4.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Adeliom\\EasyFaqBundle\\": "src/"
+                }
+            },
+            "scripts": {
+                "cs-fixer": [
+                    "vendor/bin/php-cs-fixer fix -v --dry-run"
+                ],
+                "cs-fixer-fix": [
+                    "vendor/bin/php-cs-fixer fix -v"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony bundle for EasyAdmin",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "agence-adeliom/easy-fields-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFieldsBundle",
@@ -407,7 +461,7 @@
         },
         {
             "name": "agence-adeliom/easy-media-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyMediaBundle",
@@ -449,7 +503,7 @@
         },
         {
             "name": "agence-adeliom/easy-page-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyPageBundle",
@@ -512,7 +566,7 @@
         },
         {
             "name": "agence-adeliom/easy-seo-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasySeoBundle",
@@ -533,14 +587,14 @@
         },
         {
             "name": "agence-adeliom/easy-shop-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyShopBundle",
-                "reference": "e5d89ea614ed63e3a7ada0df700b0e495cdf31a6"
+                "reference": "54cb3ca0c13b031c95c887e39fad91e12c2f06b9"
             },
             "require": {
-                "sylius/core-bundle": "^1.10"
+                "sylius/core-bundle": "1.10.1"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7606,7 +7660,7 @@
         },
         {
             "name": "sylius/addressing",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Addressing.git",
@@ -7666,22 +7720,22 @@
                 "zones"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Addressing/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Addressing/tree/v1.10.2"
             },
             "time": "2021-05-27T10:14:24+00:00"
         },
         {
             "name": "sylius/addressing-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "d5647610d740566ec3bf91a9a1665cd0ced393fa"
+                "reference": "2ae822f987dd2075304884e34f86f940def4daa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/d5647610d740566ec3bf91a9a1665cd0ced393fa",
-                "reference": "d5647610d740566ec3bf91a9a1665cd0ced393fa",
+                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/2ae822f987dd2075304884e34f86f940def4daa0",
+                "reference": "2ae822f987dd2075304884e34f86f940def4daa0",
                 "shasum": ""
             },
             "require": {
@@ -7744,13 +7798,13 @@
                 "zones"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusAddressingBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusAddressingBundle/tree/v1.10.2"
             },
-            "time": "2021-04-22T12:52:20+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/attribute",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Attribute.git",
@@ -7810,13 +7864,13 @@
                 "shop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Attribute/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Attribute/tree/v1.10.2"
             },
             "time": "2021-05-27T10:14:24+00:00"
         },
         {
             "name": "sylius/attribute-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAttributeBundle.git",
@@ -7883,13 +7937,13 @@
                 "shop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusAttributeBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusAttributeBundle/tree/v1.10.2"
             },
             "time": "2021-07-20T14:22:22+00:00"
         },
         {
             "name": "sylius/channel",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Channel.git",
@@ -7951,13 +8005,13 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Channel/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Channel/tree/v1.10.2"
             },
             "time": "2021-05-01T11:55:21+00:00"
         },
         {
             "name": "sylius/channel-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusChannelBundle.git",
@@ -8024,13 +8078,13 @@
                 "currency"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusChannelBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusChannelBundle/tree/v1.10.2"
             },
             "time": "2021-06-10T10:45:21+00:00"
         },
         {
             "name": "sylius/core",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Core.git",
@@ -8114,7 +8168,7 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Core/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Core/tree/v1.10.2"
             },
             "time": "2021-07-26T13:02:45+00:00"
         },
@@ -8234,7 +8288,7 @@
         },
         {
             "name": "sylius/currency",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Currency.git",
@@ -8293,22 +8347,22 @@
                 "money"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Currency/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Currency/tree/v1.10.2"
             },
             "time": "2021-05-27T10:14:24+00:00"
         },
         {
             "name": "sylius/currency-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCurrencyBundle.git",
-                "reference": "d05257150b2a41ccc2f885586648ea200cbd7da8"
+                "reference": "0add7a97f08581bb448ff5a906e848faa7bb3ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCurrencyBundle/zipball/d05257150b2a41ccc2f885586648ea200cbd7da8",
-                "reference": "d05257150b2a41ccc2f885586648ea200cbd7da8",
+                "url": "https://api.github.com/repos/Sylius/SyliusCurrencyBundle/zipball/0add7a97f08581bb448ff5a906e848faa7bb3ccf",
+                "reference": "0add7a97f08581bb448ff5a906e848faa7bb3ccf",
                 "shasum": ""
             },
             "require": {
@@ -8371,13 +8425,13 @@
             ],
             "support": {
                 "issues": "https://github.com/Sylius/SyliusCurrencyBundle/issues",
-                "source": "https://github.com/Sylius/SyliusCurrencyBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusCurrencyBundle/tree/v1.10.2"
             },
-            "time": "2021-04-22T12:52:20+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/customer",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Customer.git",
@@ -8441,13 +8495,13 @@
                 "groups"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Customer/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Customer/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/customer-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCustomerBundle.git",
@@ -8527,7 +8581,7 @@
                 "groups"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusCustomerBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusCustomerBundle/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
@@ -8719,7 +8773,7 @@
         },
         {
             "name": "sylius/inventory",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Inventory.git",
@@ -8778,13 +8832,13 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Inventory/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Inventory/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/inventory-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusInventoryBundle.git",
@@ -8855,13 +8909,13 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusInventoryBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusInventoryBundle/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/locale",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Locale.git",
@@ -8921,22 +8975,22 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Locale/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Locale/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/locale-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusLocaleBundle.git",
-                "reference": "a65fd7881d70484411fcf3d454fbd321c8649354"
+                "reference": "942f9023d9fc9b2113be33eeba966a9fd635fcae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusLocaleBundle/zipball/a65fd7881d70484411fcf3d454fbd321c8649354",
-                "reference": "a65fd7881d70484411fcf3d454fbd321c8649354",
+                "url": "https://api.github.com/repos/Sylius/SyliusLocaleBundle/zipball/942f9023d9fc9b2113be33eeba966a9fd635fcae",
+                "reference": "942f9023d9fc9b2113be33eeba966a9fd635fcae",
                 "shasum": ""
             },
             "require": {
@@ -8999,9 +9053,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Sylius/SyliusLocaleBundle/issues",
-                "source": "https://github.com/Sylius/SyliusLocaleBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusLocaleBundle/tree/v1.10.2"
             },
-            "time": "2021-04-22T12:52:20+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/mailer-bundle",
@@ -9088,7 +9142,7 @@
         },
         {
             "name": "sylius/money-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusMoneyBundle.git",
@@ -9160,13 +9214,13 @@
                 "money"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusMoneyBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusMoneyBundle/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/order",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Order.git",
@@ -9226,13 +9280,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Order/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Order/tree/v1.10.2"
             },
             "time": "2021-05-01T11:55:21+00:00"
         },
         {
             "name": "sylius/order-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusOrderBundle.git",
@@ -9306,13 +9360,13 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusOrderBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusOrderBundle/tree/v1.10.2"
             },
             "time": "2021-06-10T10:45:21+00:00"
         },
         {
             "name": "sylius/payment",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Payment.git",
@@ -9371,13 +9425,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Payment/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Payment/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/payment-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPaymentBundle.git",
@@ -9447,13 +9501,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusPaymentBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusPaymentBundle/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/payum-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPayumBundle.git",
@@ -9521,13 +9575,13 @@
                 "payum"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusPayumBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusPayumBundle/tree/v1.10.2"
             },
             "time": "2021-05-27T10:14:24+00:00"
         },
         {
             "name": "sylius/product",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Product.git",
@@ -9594,22 +9648,22 @@
                 "variants"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Product/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Product/tree/v1.10.2"
             },
             "time": "2021-04-23T13:34:00+00:00"
         },
         {
             "name": "sylius/product-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusProductBundle.git",
-                "reference": "9669fe976d6b4e9fdf2919c7ed86dd3a4baa203c"
+                "reference": "18d2bf71a725f29abb15a3ea7651da548c2ee383"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/9669fe976d6b4e9fdf2919c7ed86dd3a4baa203c",
-                "reference": "9669fe976d6b4e9fdf2919c7ed86dd3a4baa203c",
+                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/18d2bf71a725f29abb15a3ea7651da548c2ee383",
+                "reference": "18d2bf71a725f29abb15a3ea7651da548c2ee383",
                 "shasum": ""
             },
             "require": {
@@ -9670,13 +9724,13 @@
                 "shop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusProductBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusProductBundle/tree/v1.10.2"
             },
-            "time": "2021-05-01T11:55:21+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/promotion",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Promotion.git",
@@ -9735,13 +9789,13 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Promotion/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Promotion/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/promotion-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPromotionBundle.git",
@@ -9816,7 +9870,7 @@
                 "sylius"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusPromotionBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusPromotionBundle/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
@@ -9994,7 +10048,7 @@
         },
         {
             "name": "sylius/review",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Review.git",
@@ -10064,13 +10118,13 @@
                 "shop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Review/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Review/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:19+00:00"
         },
         {
             "name": "sylius/review-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusReviewBundle.git",
@@ -10156,13 +10210,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusReviewBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusReviewBundle/tree/v1.10.2"
             },
             "time": "2021-05-01T11:55:21+00:00"
         },
         {
             "name": "sylius/shipping",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Shipping.git",
@@ -10224,22 +10278,22 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Shipping/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Shipping/tree/v1.10.2"
             },
             "time": "2021-05-27T10:14:24+00:00"
         },
         {
             "name": "sylius/shipping-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "8f73bedef73ca33e2c5af3560eaa1404ba00186d"
+                "reference": "986c3cd0f34206f74f43a188fc70c764971fd210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/8f73bedef73ca33e2c5af3560eaa1404ba00186d",
-                "reference": "8f73bedef73ca33e2c5af3560eaa1404ba00186d",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/986c3cd0f34206f74f43a188fc70c764971fd210",
+                "reference": "986c3cd0f34206f74f43a188fc70c764971fd210",
                 "shasum": ""
             },
             "require": {
@@ -10305,13 +10359,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusShippingBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusShippingBundle/tree/v1.10.2"
             },
-            "time": "2021-05-27T10:14:24+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/taxation",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Taxation.git",
@@ -10372,22 +10426,22 @@
                 "vat"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Taxation/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Taxation/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/taxation-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "163011e41f401335c18d002227a208cd8400e3ff"
+                "reference": "fc81b967cc2b037245a9220dd1c1cb1ca9421d6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/163011e41f401335c18d002227a208cd8400e3ff",
-                "reference": "163011e41f401335c18d002227a208cd8400e3ff",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/fc81b967cc2b037245a9220dd1c1cb1ca9421d6b",
+                "reference": "fc81b967cc2b037245a9220dd1c1cb1ca9421d6b",
                 "shasum": ""
             },
             "require": {
@@ -10451,13 +10505,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusTaxationBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusTaxationBundle/tree/v1.10.2"
             },
-            "time": "2021-04-22T12:52:20+00:00"
+            "time": "2021-08-30T08:34:38+00:00"
         },
         {
             "name": "sylius/taxonomy",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Taxonomy.git",
@@ -10517,13 +10571,13 @@
                 "taxonomy"
             ],
             "support": {
-                "source": "https://github.com/Sylius/Taxonomy/tree/v1.10.1"
+                "source": "https://github.com/Sylius/Taxonomy/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/taxonomy-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxonomyBundle.git",
@@ -10595,7 +10649,7 @@
                 "taxonomy"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusTaxonomyBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusTaxonomyBundle/tree/v1.10.2"
             },
             "time": "2021-06-18T08:57:52+00:00"
         },
@@ -10686,7 +10740,7 @@
         },
         {
             "name": "sylius/ui-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusUiBundle.git",
@@ -10766,13 +10820,13 @@
                 "webshop"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusUiBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusUiBundle/tree/v1.10.2"
             },
             "time": "2021-05-01T11:55:21+00:00"
         },
         {
             "name": "sylius/user",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/User.git",
@@ -10844,13 +10898,13 @@
                 "user"
             ],
             "support": {
-                "source": "https://github.com/Sylius/User/tree/v1.10.1"
+                "source": "https://github.com/Sylius/User/tree/v1.10.2"
             },
             "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/user-bundle",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusUserBundle.git",
@@ -10943,7 +10997,7 @@
                 "user"
             ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusUserBundle/tree/v1.10.1"
+                "source": "https://github.com/Sylius/SyliusUserBundle/tree/v1.10.2"
             },
             "time": "2021-06-10T10:45:21+00:00"
         },
@@ -19810,7 +19864,8 @@
         "agence-adeliom/easy-page-bundle": 20,
         "agence-adeliom/easy-blog-bundle": 20,
         "agence-adeliom/easy-block-bundle": 20,
-        "agence-adeliom/easy-shop-bundle": 20
+        "agence-adeliom/easy-shop-bundle": 20,
+        "agence-adeliom/easy-faq-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -1,5 +1,5 @@
-easy_blog:
-  post:
+easy_faq:
+  entry:
     class: App\Entity\Faq\Entry
     repository: App\Repository\Faq\EntryRepository
     crud: App\Controller\Admin\Faq\EntryCrudController

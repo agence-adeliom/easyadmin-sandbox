@@ -69,12 +69,17 @@ abstract class BaseEntryCrudController extends AbstractCrudController
             ->setTargetFieldName('name')
             ->setUnlockConfirmationMessage($this->translator->trans("admin.field.slug_edit", [], "EasyFaqBundle"))
             ->setColumns(12);
-        yield AssociationField::new("category", $this->translator->trans("admin.field.category", [], "EasyFaqBundle"))
+        yield AssociationField::new("categories", $this->translator->trans("admin.field.categories", [], "EasyFaqBundle"))
             ->autocomplete()
-            ->allowAdd()
             ->listSelector(true)
             ->setCrudController($this->getParameter("easy_faq.category.crud"))
         ;
+        yield TextField::new('question', $this->translator->trans("admin.field.question", [], "EasyFaqBundle"))
+            ->setRequired(true)
+            ->setColumns(12);
+        yield TextField::new('answer', $this->translator->trans("admin.field.answer", [], "EasyFaqBundle"))
+            ->setRequired(true)
+            ->setColumns(12);
     }
 
     public function seoFields(string $pageName, $subject): iterable

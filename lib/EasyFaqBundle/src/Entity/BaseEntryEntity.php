@@ -14,11 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @UniqueEntity("slug")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
- * @ORM\Table(name="faq")
  */
 class BaseEntryEntity {
 
@@ -39,11 +39,6 @@ class BaseEntryEntity {
 
     /**
      * @var BaseCategoryEntity[] | null
-     * @ORM\ManyToMany(targetEntity="Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity", inversedBy="entries", cascade={"persist"})
-     * @ORM\JoinTable(name="faq_categories_entries",
-     *      joinColumns={@ORM\JoinColumn(name="entry_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="categories_id", referencedColumnName="id")}
-     * )
      */
     protected $categories;
 
@@ -86,7 +81,7 @@ class BaseEntryEntity {
     /**
      * @return BaseCategoryEntity[]|null
      */
-    public function getCategories(): ?array
+    public function getCategories()
     {
         return $this->categories;
     }

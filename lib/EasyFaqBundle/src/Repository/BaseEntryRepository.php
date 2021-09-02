@@ -36,10 +36,8 @@ class BaseEntryRepository extends ServiceEntityRepository {
     public function getPublishedQuery(): QueryBuilder
     {
         $qb = $this->createQueryBuilder('entry')
-            ->innerJoin('entry.category', "category")
             ->where('entry.state = :state')
             ->andWhere('entry.publishDate < :publishDate')
-            ->andWhere('category.status = :categoryActive')
         ;
 
         $orModule = $qb->expr()->orx();
@@ -49,8 +47,6 @@ class BaseEntryRepository extends ServiceEntityRepository {
         $qb->andWhere($orModule);
 
 
-        $qb->setParameter('categoryActive', true);
-        $qb->setParameter('state', ThreeStateStatusEnum::PUBLISHED());
         $qb->setParameter('publishDate', new \DateTime());
         $qb->setParameter('unpublishDate', new \DateTime());
 
@@ -77,7 +73,7 @@ class BaseEntryRepository extends ServiceEntityRepository {
     public function getByCategory(BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
-        $qb->andWhere('entry.category = :category')
+        $qb->andWhere(':category MEMBER OF entry.categories')
             ->setParameter('category', $categoryEntity)
         ;
         if ($returnQueryBuilder){
@@ -98,7 +94,7 @@ class BaseEntryRepository extends ServiceEntityRepository {
         $qb->andWhere('entry.slug = :slug')
             ->setParameter('slug', $slug);
         if ($categoryEntity) {
-            $qb->andWhere('entry.category = :category')
+            $qb->andWhere(':category MEMBER OF entry.categories')
                 ->setParameter('category', $categoryEntity);
         }
         $qb->setMaxResults(1);

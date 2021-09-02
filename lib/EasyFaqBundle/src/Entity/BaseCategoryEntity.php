@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @UniqueEntity("slug")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
- * @ORM\Table(name="faq_category")
  */
 class BaseCategoryEntity {
 
@@ -33,11 +32,7 @@ class BaseCategoryEntity {
     }
 
     /**
-     * @ORM\ManyToMany(
-     *     targetEntity="Adeliom\EasyFaqBundle\Entity\BaseEntryEntity",
-     *     mappedBy="categories",s
-     *     orphanRemoval=false, cascade={"persist"}
-     * )
+     * @var BaseEntryEntity[] | null
      */
     protected $entries;
 

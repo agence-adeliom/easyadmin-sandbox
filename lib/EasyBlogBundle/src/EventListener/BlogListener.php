@@ -6,14 +6,9 @@ use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
 use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
 use Adeliom\EasyBlogBundle\Repository\BaseCategoryRepository;
 use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
-use Adeliom\EasyPageBundle\Entity\BasePageEntity;
-use Adeliom\EasyPageBundle\Repository\BasePageRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Source;
 
 class BlogListener implements EventSubscriberInterface
 {
