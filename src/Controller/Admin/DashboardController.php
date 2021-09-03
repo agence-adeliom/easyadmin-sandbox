@@ -77,6 +77,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('sylius.ui.products');
         yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);
         yield MenuItem::linkToCrud('sylius.ui.items', 'fas fa-cube', Product::class);
+        yield MenuItem::linkToCrud('sylius.ui.inventory', 'fas fa-history', Product::class)->setAction("manageStock");
         yield MenuItem::linkToCrud('sylius.ui.attributes', 'fas fa-cubes', ProductAttribute::class);
         yield MenuItem::linkToCrud('sylius.ui.options', 'fas fa-sliders-h', ProductOption::class);
         yield MenuItem::linkToCrud('sylius.ui.association_types', 'fas fa-tasks', ProductAssociationType::class);

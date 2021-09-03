@@ -87,23 +87,25 @@
             </div>
         </div>
     </div>
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <h5 class="card-title">{{ 'sylius.ui.options'|trans }}</h5>
-                        </div>
-                        <div class="col-12">
-                            {{ form_widget(form.optionValues) }}
-                            {{ form_errors(form.optionValues) }}
+    {% if product.hasOptions() %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="card-title">{{ 'sylius.ui.options'|trans }}</h5>
+                            </div>
+                            <div class="col-12">
+                                {{ form_widget(form.optionValues) }}
+                                {{ form_errors(form.optionValues) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="row mb-4">
         <div class="col-12">

@@ -410,4 +410,15 @@ class ProductCrudController extends AbstractCrudController
             'form' => $form->createView()
         ]);
     }
+
+    public function manageStock(AdminContext $context): Response
+    {
+        $tracked =$this->productVariantRepository->findBy([
+            "tracked" => true
+        ]);
+
+        return $this->render('@EasyShop/crud/variant/stocks.html.twig', [
+            'tracked' => $tracked,
+        ]);
+    }
 }

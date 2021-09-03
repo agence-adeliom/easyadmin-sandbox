@@ -84,9 +84,15 @@
                         </span>
                     </td>
                     <td class="text-left field-boolean">
-                        <span class="badge {{ variant.tracked == true ? 'badge-boolean-true' : 'badge-boolean-false' }}">
-                            {{ (variant.tracked == true ? 'label.true' : 'label.false')|trans({}, 'EasyAdminBundle') }}
-                        </span>
+                        {% if variant.tracked == true %}
+                            <span class="badge {{ variant.onHand > 0 ? 'badge-success' : 'badge-danger' }}">
+                                {{ variant.onHand }} {{ 'sylius.ui.available_on_hand'|trans }}
+                            </span>
+                        {% else %}
+                            <span class="badge badge-secondary">
+                                {{ 'sylius.ui.not_tracked'|trans }}
+                            </span>
+                        {% endif %}
                     </td>
                     <td>{{ variant.position }}</td>
                     <td class="actions actions-as-dropdown">
