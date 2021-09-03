@@ -64,11 +64,15 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Medias', 'fa fa-picture-o', MediaEntity::class);
         yield MenuItem::linkToCrud('Article', 'fa fa-file-alt', Article::class);
         yield MenuItem::linkToCrud('Page', 'fa fa-file-alt', Page::class);
-        yield MenuItem::section('Blog');
-        yield MenuItem::linkToCrud('Catégorie', 'fa fa-file-alt', Category::class);
-        yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
-        yield MenuItem::section('Settings');
         yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+
+        yield MenuItem::section('Blog');
+        yield MenuItem::linkToCrud('Catégorie', 'fa fa-folder', Category::class);
+        yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
+
+        yield MenuItem::section('Faq');
+        yield MenuItem::linkToCrud('Catégorie', 'fa fa-folder', \App\Entity\Faq\Category::class);
+        yield MenuItem::linkToCrud('Faq', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
 
         yield MenuItem::section('sylius.ui.products');
         yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);

@@ -67,4 +67,5 @@ return [
     SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
     Adeliom\EasyShopBundle\EasyShopBundle::class => ['all' => true],
+    Adeliom\EasyFaqBundle\EasyFaqBundle::class => ['all' => true],
 ];

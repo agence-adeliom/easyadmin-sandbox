@@ -32,6 +32,9 @@
     "agence-adeliom/easy-shop-bundle": {
         "version": "dev-master"
     },
+    "agence-adeliom/easy-faq-bundle": {
+        "version": "dev-master"
+    },
     "alcohol/iso4217": {
         "version": "4.0.0"
     },

@@ -1,6 +1,6 @@
 <?php
 
-namespace Adeliom\EasyBlogBundle\Entity;
+namespace Adeliom\EasyFaqBundle\Entity;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyCommonBundle\Traits\EntityIdTrait;
@@ -11,15 +11,16 @@ use Adeliom\EasyCommonBundle\Traits\EntityTimestampableTrait;
 use Adeliom\EasySeoBundle\Traits\EntitySeoTrait;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @UniqueEntity("slug")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyBlogBundle\Repository\BasePostRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
  */
-class BasePostEntity {
+class BaseEntryEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -37,10 +38,21 @@ class BasePostEntity {
     }
 
     /**
-     * @var null|BaseCategoryEntity
-     * @Assert\Type(BaseCategoryEntity::class)
+     * @var BaseCategoryEntity[] | null
      */
-    protected $category;
+    protected $categories;
+
+    /**
+     * @var string | null
+     * @ORM\Column(type="string")
+     */
+    protected $question;
+
+    /**
+     * @var string | null
+     * @ORM\Column(type="text")
+     */
+    protected $answer;
 
     /**
      * @var string|null
@@ -63,16 +75,91 @@ class BasePostEntity {
         $this->__TimestampableConstruct();
         $this->__PublishableConstruct();
         $this->__SEOConstruct();
+        $this->categories = new ArrayCollection();
     }
 
-    public function getCategory(): ?BaseCategoryEntity
+    /**
+     * @return BaseCategoryEntity|null
+     */
+    public function getMainCategory()
     {
-        return $this->category;
+        return !empty($this->categories) && isset($this->categories[0]) ? $this->categories[0] : null;
     }
 
-    public function setCategory(?BaseCategoryEntity $category): void
+    /**
+     * @return BaseCategoryEntity[]|null
+     */
+    public function getCategories()
     {
-        $this->category = $category;
+        return $this->categories;
+    }
+
+    /**
+     * @param BaseCategoryEntity[]|null $categories
+     */
+    public function setCategories(?array $categories): void
+    {
+        $this->categories = $categories;
+    }
+
+    /**
+     * @param BaseCategoryEntity $baseCategoryEntity
+     *
+     * @return BaseEntryEntity
+     */
+    public function addCategorie(BaseCategoryEntity $baseCategoryEntity)
+    {
+        if (!$this->categories->contains($baseCategoryEntity)) {
+            $this->categories->add($baseCategoryEntity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param BaseCategoryEntity $baseCategoryEntity
+     *
+     * @return BaseEntryEntity
+     */
+    public function removeCategory(BaseCategoryEntity $baseCategoryEntity)
+    {
+        if ($this->categories->contains($baseCategoryEntity)) {
+            $this->categories->removeElement($baseCategoryEntity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getQuestion(): ?string
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param string|null $question
+     */
+    public function setQuestion(?string $question): void
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAnswer(): ?string
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param string|null $answer
+     */
+    public function setAnswer(?string $answer): void
+    {
+        $this->answer = $answer;
     }
 
     /**

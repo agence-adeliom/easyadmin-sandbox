@@ -1,0 +1,17 @@
+admin:
+  panel:
+    information: Informations
+    metadatas: Métadonnées
+    seo: SEO
+    publication: Publication
+  field:
+    name: Nom
+    question: Question
+    answer: Réponse
+    categories: Catégories
+    state: Status
+    publishDate: Date de publication
+    unpublishDate: Date de dépublication
+    slug: Permalien
+    slug_edit: "Etes-vous sur de vouloir modifier le permalien ?"
+    category: Catégorie

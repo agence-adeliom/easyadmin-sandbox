@@ -1,22 +1,22 @@
 <?php
 
-namespace Adeliom\EasyBlogBundle\EventListener;
+namespace Adeliom\EasyFaqBundle\EventListener;
 
-use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
-use Adeliom\EasyBlogBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
+use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
+use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
+use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class BlogListener implements EventSubscriberInterface
+class EntryListener implements EventSubscriberInterface
 {
 
     /**
-     * @var BasePostRepository
+     * @var BaseEntryRepository
      */
-    private $postRepository;
+    private $entryRepository;
 
     /**
      * @var BaseCategoryRepository
@@ -28,9 +28,9 @@ class BlogListener implements EventSubscriberInterface
      */
     private $config;
 
-    public function __construct(BasePostRepository $postRepository, BaseCategoryRepository $categoryRepository, $config)
+    public function __construct(BaseEntryRepository $entryRepository, BaseCategoryRepository $categoryRepository, $config)
     {
-        $this->postRepository    = $postRepository;
+        $this->entryRepository    = $entryRepository;
         $this->categoryRepository    = $categoryRepository;
         $this->config    = $config;
     }
@@ -58,7 +58,7 @@ class BlogListener implements EventSubscriberInterface
         }
 
         $prefixes = preg_split('~/~', $this->config["root_path"], -1, PREG_SPLIT_NO_EMPTY);
-        /** @var BasePostEntity[] $pages */
+        /** @var BaseEntryEntity[] $pages */
         $slugsArray = preg_split('~/~', $path, -1, PREG_SPLIT_NO_EMPTY);
 
         if($this->config["root_path"] != "/"){
@@ -68,18 +68,18 @@ class BlogListener implements EventSubscriberInterface
         if(!empty($slugsArray)) {
             $category = $this->categoryRepository->getBySlug($slugsArray[0]);
             if ($category instanceof BaseCategoryEntity) {
-                $event->getRequest()->attributes->set('_easy_blog_category', $category);
+                $event->getRequest()->attributes->set('_easy_faq_category', $category);
 
                 if (isset($slugsArray[1])) {
-                    $post = $this->postRepository->getBySlug($slugsArray[1], $category);
-                    if ($post instanceof BasePostEntity) {
-                        $event->getRequest()->attributes->set('_easy_blog_post', $post);
+                    $entry = $this->entryRepository->getBySlug($slugsArray[1], $category);
+                    if ($entry instanceof BaseEntryEntity) {
+                        $event->getRequest()->attributes->set('_easy_faq_entry', $entry);
                     }
                 }
             }
         }else{
             if(!empty($prefixes) && (count($slugsArray) === 0)){
-                $event->getRequest()->attributes->set('_easy_blog_root', true);
+                $event->getRequest()->attributes->set('_easy_faq_root', true);
             }
         }
 

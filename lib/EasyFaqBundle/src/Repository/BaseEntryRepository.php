@@ -1,15 +1,15 @@
 <?php
 
-namespace Adeliom\EasyBlogBundle\Repository;
+namespace Adeliom\EasyFaqBundle\Repository;
 
-use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
+use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 
-class BasePostRepository extends ServiceEntityRepository {
+class BaseEntryRepository extends ServiceEntityRepository {
 
     /**
      * @var bool
@@ -35,21 +35,17 @@ class BasePostRepository extends ServiceEntityRepository {
      */
     public function getPublishedQuery(): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('post')
-            ->innerJoin('post.category', "category")
-            ->where('post.state = :state')
-            ->andWhere('post.publishDate < :publishDate')
-            ->andWhere('category.status = :categoryActive')
+        $qb = $this->createQueryBuilder('entry')
+            ->where('entry.state = :state')
+            ->andWhere('entry.publishDate < :publishDate')
         ;
 
         $orModule = $qb->expr()->orx();
-        $orModule->add($qb->expr()->gt('post.unpublishDate', ':unpublishDate'));
-        $orModule->add($qb->expr()->isNull('post.unpublishDate'));
+        $orModule->add($qb->expr()->gt('entry.unpublishDate', ':unpublishDate'));
+        $orModule->add($qb->expr()->isNull('entry.unpublishDate'));
 
         $qb->andWhere($orModule);
 
-
-        $qb->setParameter('categoryActive', true);
         $qb->setParameter('state', ThreeStateStatusEnum::PUBLISHED());
         $qb->setParameter('publishDate', new \DateTime());
         $qb->setParameter('unpublishDate', new \DateTime());
@@ -58,7 +54,7 @@ class BasePostRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BasePostEntity[]
+     * @return BaseEntryEntity[]
      */
     public function getPublished(bool $returnQueryBuilder = false)
     {
@@ -72,12 +68,12 @@ class BasePostRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BasePostEntity[]
+     * @return BaseEntryEntity[]
      */
     public function getByCategory(BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
-        $qb->andWhere('post.category = :category')
+        $qb->andWhere(':category MEMBER OF entry.categories')
             ->setParameter('category', $categoryEntity)
         ;
         if ($returnQueryBuilder){
@@ -89,16 +85,16 @@ class BasePostRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BasePostEntity
+     * @return BaseEntryEntity
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getBySlug(string $slug, ?BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
-        $qb->andWhere('post.slug = :slug')
+        $qb->andWhere('entry.slug = :slug')
             ->setParameter('slug', $slug);
         if ($categoryEntity) {
-            $qb->andWhere('post.category = :category')
+            $qb->andWhere(':category MEMBER OF entry.categories')
                 ->setParameter('category', $categoryEntity);
         }
         $qb->setMaxResults(1);

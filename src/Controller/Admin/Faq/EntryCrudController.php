@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Faq;
 
-use Adeliom\EasyBlogBundle\Controller\BaseCategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\BaseEntryCrudController;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use App\Entity\Category;
+use App\Entity\Faq\Entry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class CategoryCrudController extends BaseCategoryCrudController
+class EntryCrudController extends BaseEntryCrudController
 {
 
     public static function getEntityFqcn(): string
     {
-        return Category::class;
+        return Entry::class;
     }
 
     public function configureActions(Actions $actions): Actions
