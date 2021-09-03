@@ -100,3 +100,7 @@ services:
             - '@sylius.context.locale'
         tags:
             - kernel.event_subscriber
+
+    Adeliom\EasyShopBundle\AttributeType\EasyMediaAttributeType:
+        tags:
+            - { name: sylius.attribute.type, attribute_type: "easy_media", label: "Media", form_type: Adeliom\EasyShopBundle\Form\Type\AttributeBundle\EasyMediaAttributeType, configuration_form_type: Adeliom\EasyShopBundle\AttributeType\Configuration\EasyMediaAttributeConfigurationType }
