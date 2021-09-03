@@ -14,12 +14,17 @@ declare(strict_types=1);
 namespace Adeliom\EasyShopBundle\Form\Type\ProductBundle;
 
 use App\Entity\Shop\Product\Product;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -36,47 +41,52 @@ final class ProductAssociationsType extends AbstractType
     /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
+    /** @var RepositoryInterface */
+    private $productRepository;
+
     /** @var DataTransformerInterface */
     private $productsToProductAssociationsTransformer;
 
     public function __construct(
         RepositoryInterface $productAssociationTypeRepository,
+        RepositoryInterface $productRepository,
         DataTransformerInterface $productsToProductAssociationsTransformer
     ) {
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;
+        $this->productRepository = $productRepository;
         $this->productsToProductAssociationsTransformer = $productsToProductAssociationsTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $assoc = $this->productAssociationTypeRepository->findAll();
+        foreach ($assoc as $i => $item){
+            $code = $item->getCode();
+            $builder->add($code, EntityType::class, [
+                'property_path' => "[$code]",
+                'label' => $item->getName() ?: $item->getCode(),
+                'class' => $this->productRepository->getClassName(),
+                'choice_value' => 'code',
+                'multiple' => true,
+                'attr' => [
+                    'data-ea-widget' => "ea-autocomplete"
+                ]
+            ]);
+        }
         $builder->addModelTransformer($this->productsToProductAssociationsTransformer);
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-//            dump($event->getForm());
-//            $event->getForm()->add('associatedProducts', ProductAutocompleteChoiceType::class, [
-//                'multiple' => true,
-//            ]);
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+           dump($event);
         });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entries' => $this->productAssociationTypeRepository->findAll(),
-            'entry_type' => ProductAssociationEntityType::class,
-            'entry_name' => function (ProductAssociationTypeInterface $productAssociationType) {
-                return $productAssociationType->getCode();
-            },
-            'entry_options' => function (ProductAssociationTypeInterface $productAssociationType) {
-                return [
-                    'label' => $productAssociationType->getName(),
-                ];
-            }
+            "compound" => true,
+            "by_reference" => false,
+            "allow_extra_fields" => true
         ]);
-    }
-
-    public function getParent(): string
-    {
-        return FixedCollectionType::class;
     }
 
     public function getBlockPrefix(): string

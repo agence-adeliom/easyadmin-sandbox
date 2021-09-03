@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Shop;
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAttributesField;
 use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType;
 use App\Entity\Shop\Product\Product;
@@ -139,7 +140,7 @@ class ProductCrudController extends AbstractCrudController
             yield FormTypeField::new('variant.taxCategory', 'sylius.form.product_variant.tax_category', TaxCategoryChoiceType::class)
                 ->setFormTypeOptions(["attr" => ["data-ea-widget" => "ea-autocomplete"]]);
 
-            yield FormField::addPanel("sylius.ui.pricing")->collapsible()->renderCollapsed(false);
+            yield FormField::addPanel("sylius.ui.pricing")->collapsible()->renderCollapsed();
 
             yield FormTypeField::new('virtualVariantChannelPricing', 'sylius.form.variant.price', ChannelCollectionType::class)
                 ->setFormTypeOptions([]);
@@ -167,8 +168,6 @@ class ProductCrudController extends AbstractCrudController
             yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')
                 ->setChoices(array_flip(\Sylius\Component\Core\Model\Product::getVariantSelectionMethodLabels()))
                 ->hideOnIndex();
-
-
         }
 
         $fieldsConfig = [
@@ -209,9 +208,9 @@ class ProductCrudController extends AbstractCrudController
             ->hideOnIndex();
 
         yield FormField::addPanel("Associations")->collapsible()->renderCollapsed();
+        yield ProductAssociationsField::new("associations", "test")
+            ->hideOnIndex();
 
-//        yield ProductAssociationsField::new("associations", "test")
-//            ->hideOnIndex();
 //        yield FormTypeField::new("associations", false, ProductAssociationsType::class)
 //            ->setTemplatePath("@EasyShop/field/product/associations.html.twig")
 //            ->hideOnIndex();
