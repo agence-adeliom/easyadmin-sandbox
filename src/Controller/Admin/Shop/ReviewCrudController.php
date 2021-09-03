@@ -5,12 +5,20 @@ namespace App\Controller\Admin\Shop;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Product\ProductReview;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\LocaleField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Sylius\Component\Review\Model\Review;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReviewCrudController extends AbstractCrudController
 {
@@ -21,7 +29,40 @@ class ReviewCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud->showEntityActionsAsDropdown(false);
+        return $crud
+            ->showEntityActionsAsDropdown(false)
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_reviews")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.reviews")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.review_details")
+            ->setEntityLabelInSingular('sylius.ui.reviews')
+            ->setEntityLabelInPlural('sylius.ui.reviews')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
+            ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+
+        $actions = parent::configureActions($actions);
+
+        $accept = Action::new('accept', 'sylius.ui.accept')->addCssClass('text-success')
+            ->displayIf(static function ($entity) {
+                return $entity->getStatus() == Review::STATUS_NEW;
+            })->linkToCrudAction("accept");
+
+        $reject = Action::new('reject', 'sylius.ui.reject')->addCssClass('text-warning')
+            ->displayIf(static function ($entity) {
+                return $entity->getStatus() == Review::STATUS_NEW;
+            })->linkToCrudAction("reject");
+
+        $actions
+            ->add(Crud::PAGE_INDEX, $reject)
+            ->add(Crud::PAGE_INDEX, $accept)
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+        ;
+        return $actions;
     }
 
     public function configureFields(string $pageName): iterable
@@ -34,6 +75,38 @@ class ReviewCrudController extends AbstractCrudController
                 'max' => 5
             ])
             ->setRequired(true);
+
+        yield ChoiceField::new('status', 'sylius.form.review.status.label')->setChoices([
+            "sylius.ui.".Review::STATUS_ACCEPTED => Review::STATUS_ACCEPTED,
+            "sylius.ui.".Review::STATUS_NEW => Review::STATUS_NEW,
+            "sylius.ui.".Review::STATUS_REJECTED => Review::STATUS_REJECTED
+        ])->renderAsBadges([
+            Review::STATUS_ACCEPTED => 'success',
+            Review::STATUS_NEW => 'info',
+            Review::STATUS_REJECTED => 'danger'
+        ])->setRequired(true)->onlyOnIndex();
+    }
+
+    public function accept(AdminContext $context): Response
+    {
+        return $this->updateReviewStatus(Review::STATUS_ACCEPTED, $context);
+    }
+
+    public function reject(AdminContext $context): Response
+    {
+        return $this->updateReviewStatus(Review::STATUS_REJECTED, $context);
+    }
+
+    private function updateReviewStatus(string $status, AdminContext $context){
+        $entity = $context->getEntity()->getInstance();
+        $entity->setStatus($status);
+        $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
+
+        if (null !== $referrer = $context->getReferrer()) {
+            return $this->redirect($referrer);
+        }
+
+        return $this->redirect($this->get(AdminUrlGenerator::class)->setAction(Action::INDEX)->unset(EA::ENTITY_ID)->generateUrl());
     }
 
 }

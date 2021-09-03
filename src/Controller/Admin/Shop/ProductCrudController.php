@@ -4,8 +4,8 @@ namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
-use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Form\Admin\ProductAttributesField;
 use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType;
 use App\Entity\Shop\Product\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -69,6 +69,9 @@ class ProductCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
+            ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
+            ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
+
             ->showEntityActionsAsDropdown();
     }
 
@@ -202,25 +205,19 @@ class ProductCrudController extends AbstractCrudController
             ->hideOnIndex();
 
         yield FormField::addPanel("Attributes")->collapsible()->renderCollapsed();
-        yield CollectionField::new("attributes", false)->setFormTypeOptions([
-            'entry_type' => ProductAttributeValueType::class,
-            'prototype' => true,
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'label' => false,
-        ])
-        ->hideOnIndex();
+        yield ProductAttributesField::new("attributes", false)
+            ->hideOnIndex();
 
         yield FormField::addPanel("Associations")->collapsible()->renderCollapsed();
 
-        yield ProductAssociationsField::new("associations", "test")->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(ProductCrudController::class)
-            ->hideOnIndex();
+//        yield ProductAssociationsField::new("associations", "test")
+//            ->hideOnIndex();
 //        yield FormTypeField::new("associations", false, ProductAssociationsType::class)
 //            ->setTemplatePath("@EasyShop/field/product/associations.html.twig")
 //            ->hideOnIndex();
 
 //        yield FormTypeField::new("associations", false, Prod::class);
+        //yield FormTypeField::new("associations", false, \Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType::class);
         yield FormField::addPanel("Contenus")->collapsible()->renderCollapsed();
         yield TranslationField::new("translations", 'Contenus', $fieldsConfig);
 

@@ -36,6 +36,24 @@ services:
           - "@sylius.form.type.data_transformer.products_to_product_associations"
         tags: [ form.type ]
 
+
+    Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAttributesCollectionType:
+        arguments:
+            - "@sylius.repository.product_attribute"
+            - "@sylius.repository.locale"
+            - "@sylius.form_registry.attribute_type"
+            - "@form.factory"
+        tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAttributesCollectionEntryType:
+        arguments:
+            - "@sylius.form_registry.attribute_type"
+            - "@sylius.repository.locale"
+        tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Form\Admin\Configurator\ProductAttributesConfigurator:
+        public: true
+
     Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationEntityType:
         class: Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationEntityType
         arguments:

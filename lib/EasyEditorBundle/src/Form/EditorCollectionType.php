@@ -56,7 +56,6 @@ class EditorCollectionType extends CollectionType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-
         $view->vars = array_replace($view->vars, [
             'allow_drag' => $options['allow_drag'],
             'allow_add' => $options['allow_add'],

@@ -70,7 +70,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Settings');
         yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
 
-        yield MenuItem::section('Catalog');
+        yield MenuItem::section('sylius.ui.products');
         yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);
         yield MenuItem::linkToCrud('sylius.ui.items', 'fas fa-cube', Product::class);
         yield MenuItem::linkToCrud('sylius.ui.attributes', 'fas fa-cubes', ProductAttribute::class);
