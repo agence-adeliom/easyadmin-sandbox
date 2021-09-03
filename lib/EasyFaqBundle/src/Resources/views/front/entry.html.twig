@@ -7,7 +7,16 @@
 {% block easy_page_page_content %}
     <section>
         <article>
-            <h1>{{ entry.name }}</h1>
+            <div class="row">
+                <div class="col-4">
+                    {% include "@EasyFaq/front/categories_menu.html.twig" %}
+                </div>
+                <div class="col-8">
+                    <h1>{{ entry.question }}</h1>
+
+                    {{ entry.answer | raw }}
+                </div>
+            </div>
         </article>
     </section>
 {% endblock %}

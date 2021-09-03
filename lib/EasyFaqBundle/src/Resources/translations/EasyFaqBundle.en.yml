@@ -6,6 +6,9 @@ admin:
     publication: PUblication
   field:
     name: Name
+    question: Question
+    answer: Answer
+    categories: Categories
     state: Status
     publishDate: Publish date
     unpublishDate: Unpublish date

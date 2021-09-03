@@ -79,6 +79,14 @@ class BaseEntryEntity {
     }
 
     /**
+     * @return BaseCategoryEntity|null
+     */
+    public function getMainCategory()
+    {
+        return !empty($this->categories) && isset($this->categories[0]) ? $this->categories[0] : null;
+    }
+
+    /**
      * @return BaseCategoryEntity[]|null
      */
     public function getCategories()

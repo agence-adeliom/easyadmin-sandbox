@@ -67,6 +67,7 @@ class BaseCategoryController extends AbstractController
         $template = '@EasyFaq/front/category.html.twig';
 
         $category = $this->request->attributes->get("_easy_faq_category");
+        $categories = $this->categoryRepository->getPublished();
         $entriesQueryBuilder = $this->entryRepository->getByCategory($category, true);
 
         $pagerfanta = new Pagerfanta(
@@ -76,6 +77,7 @@ class BaseCategoryController extends AbstractController
         $this->breadcrumb->addRouteItem($category->getName(), ['route' => "easy_faq_category_index", 'params' => ['category' => $category->getSlug()]]);
 
         $args = [
+            'categories' => $categories,
             'category' => $category,
             'entries'  => $pagerfanta,
             'breadcrumb' => $breadcrumb

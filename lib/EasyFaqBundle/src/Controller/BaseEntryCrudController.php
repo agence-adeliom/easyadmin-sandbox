@@ -47,15 +47,27 @@ abstract class BaseEntryCrudController extends AbstractCrudController
 
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
-        yield from $this->metadataFields($pageName, $subject);
-        //yield from $this->seoFields($pageName, $subject);
+        yield from $this->seoFields($pageName, $subject);
         yield from $this->publishFields($pageName, $subject);
+        yield from $this->metadataFields($pageName, $subject);
     }
 
     public function informationsFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel($this->translator->trans("admin.panel.information", [], "EasyFaqBundle"))->addCssClass("col-8");
+        yield FormField::addPanel($this->translator->trans("admin.panel.information", [], "EasyFaqBundle"))->addCssClass("col-12");
         yield TextField::new('name', $this->translator->trans("admin.field.name", [], "EasyFaqBundle"))
+            ->setRequired(true)
+            ->setColumns(12);
+
+        yield AssociationField::new("categories", $this->translator->trans("admin.field.categories", [], "EasyFaqBundle"))
+            ->autocomplete()
+            ->listSelector(true)
+            ->setCrudController($this->getParameter("easy_faq.category.crud"))
+        ;
+        yield TextField::new('question', $this->translator->trans("admin.field.question", [], "EasyFaqBundle"))
+            ->setRequired(true)
+            ->setColumns(12);
+        yield TextField::new('answer', $this->translator->trans("admin.field.answer", [], "EasyFaqBundle"))
             ->setRequired(true)
             ->setColumns(12);
     }
@@ -68,17 +80,6 @@ abstract class BaseEntryCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setTargetFieldName('name')
             ->setUnlockConfirmationMessage($this->translator->trans("admin.field.slug_edit", [], "EasyFaqBundle"))
-            ->setColumns(12);
-        yield AssociationField::new("categories", $this->translator->trans("admin.field.categories", [], "EasyFaqBundle"))
-            ->autocomplete()
-            ->listSelector(true)
-            ->setCrudController($this->getParameter("easy_faq.category.crud"))
-        ;
-        yield TextField::new('question', $this->translator->trans("admin.field.question", [], "EasyFaqBundle"))
-            ->setRequired(true)
-            ->setColumns(12);
-        yield TextField::new('answer', $this->translator->trans("admin.field.answer", [], "EasyFaqBundle"))
-            ->setRequired(true)
             ->setColumns(12);
     }
 
