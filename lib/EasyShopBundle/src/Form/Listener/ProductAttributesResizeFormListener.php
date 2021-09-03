@@ -86,7 +86,11 @@ class ProductAttributesResizeFormListener extends \Symfony\Component\Form\Extens
                     'position' => $position,
                 ];
             }
-            $newArray[$entry->getAttribute()->getCode()]["value__".$entry->getLocaleCode()] = $entry->getValue();
+            if ($entry->getAttribute()->isTranslatable()){
+                $newArray[$entry->getAttribute()->getCode()]["value__".$entry->getLocaleCode()] = $entry->getValue();
+            }else{
+                $newArray[$entry->getAttribute()->getCode()]["value"] = $entry->getValue();
+            }
         }
         $data = array_values($newArray);
         // Then add all rows again in the correct order

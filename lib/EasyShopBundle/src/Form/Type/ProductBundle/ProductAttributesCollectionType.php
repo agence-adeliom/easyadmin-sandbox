@@ -123,7 +123,11 @@ final class ProductAttributesCollectionType extends AbstractType
                             'position' => $position,
                         ];
                     }
-                    $newArray[$entry->getAttribute()->getCode()]["value__".$entry->getLocaleCode()] = $entry->getValue();
+                    if ($entry->getAttribute()->isTranslatable()){
+                        $newArray[$entry->getAttribute()->getCode()]["value__".$entry->getLocaleCode()] = $entry->getValue();
+                    }else{
+                        $newArray[$entry->getAttribute()->getCode()]["value"] = $entry->getValue();
+                    }
                 }
                 $newArray = array_values($newArray);
                 return new ArrayCollection($newArray);
@@ -141,10 +145,12 @@ final class ProductAttributesCollectionType extends AbstractType
                     unset($value['position']);
                     if (!is_null($item)) {
                         foreach ($value as $k => $data){
-                            $locale = str_replace("value__", '', $k);
                             $pv = new ProductAttributeValue();
                             $pv->setAttribute($item);
-                            $pv->setLocaleCode($locale);
+                            if($item->isTranslatable()){
+                                $locale = str_replace("value__", '', $k);
+                                $pv->setLocaleCode($locale);
+                            }
                             $pv->setValue($data);
                             $newArray[] = $pv;
                         }
@@ -222,6 +228,16 @@ final class ProductAttributesCollectionType extends AbstractType
 
             break;
         }
+
+        $enabled = $view->vars['attributes'];
+        $codes = array_map(function ($i){return $i->getCode();}, $enabled);
+        foreach ($form->getData() as $v){
+            if(($index = array_search($v->getAttribute()->getCode(), $codes)) !== false){
+                unset($enabled[$index]);
+            }
+        }
+        $disabled = array_diff($view->vars['attributes'], $enabled);
+        $view->vars['disabled_attributes'] = $disabled;
 
         foreach ($view as $entryView) {
             array_splice($entryView->vars['block_prefixes'], $prefixOffset, 0, 'sylius_product_attributes_entry');

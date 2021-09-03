@@ -55,23 +55,37 @@ final class ProductAttributesCollectionEntryType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var ProductAttributeInterface $attribute */
         $attribute = $options['attribute'];
-
         $builder
             ->add('attribute', HiddenType::class, ["data" => $attribute->getCode()])
             ->add('position', HiddenType::class)
         ;
         $required = true;
-        foreach ($this->localeRepository->findAll() as $locale){
-            $builder->add("value__" . $locale->getCode(), $this->formTypeRegistry->get($attribute->getType(), "default"), [
-                'label' => $locale->getName(),
+        if ($attribute->isTranslatable()) {
+            foreach ($this->localeRepository->findAll() as $locale) {
+                $builder->add("value__" . $locale->getCode(), $this->formTypeRegistry->get($attribute->getType(), "default"), [
+                    'label' => $locale->getName(),
+                    'required' => $required,
+                    'auto_initialize' => false,
+                    'locale_code' => $locale->getCode(),
+                    'configuration' => $attribute->getConfiguration(),
+                ]);
+                $required = false;
+            }
+        }else{
+            $builder->add("value", $this->formTypeRegistry->get($attribute->getType(), "default"), [
+                'label' => $attribute->getName(),
                 'required' => $required,
                 'auto_initialize' => false,
-                'locale_code' => $locale->getCode(),
                 'configuration' => $attribute->getConfiguration(),
             ]);
-            $required = false;
         }
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['attribute'] = $options['attribute'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
