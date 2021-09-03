@@ -421,7 +421,7 @@
     {% set is_complex = form_parent(form).vars.ea_crud_form.ea_field.customOptions.get('entryIsComplex') ?? false %}
     {% set allows_deleting_items = form_parent(form).vars.allow_delete|default(false) %}
     {% set allows_drag_items = form_parent(form).vars.allow_drag|default(false) %}
-    {% set render_expanded = true %}
+    {% set render_expanded = form_parent(form).vars.ea_crud_form.ea_field.customOptions.get('renderExpanded') ?? false %}
     {% set error = false %}
 
     {% if form.vars.errors.form.getErrors(true)|length %}
