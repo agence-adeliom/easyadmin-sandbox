@@ -194,8 +194,6 @@ class PromotionCrudController extends AbstractCrudController
         return $this->redirect($url);
     }
 
-
-
     public function editCoupon(AdminContext $context): Response
     {
         $coupon = $this->couponRepository->find($context->getRequest()->query->get("couponId"));

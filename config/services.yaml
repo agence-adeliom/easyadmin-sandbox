@@ -50,6 +50,16 @@ services:
             - "@sylius.manager.promotion_coupon"
             - "@sylius.repository.promotion_coupon"
 
+    App\Controller\Admin\Shop\ProductCrudController:
+        arguments:
+            - "@EasyCorp\\Bundle\\EasyAdminBundle\\Router\\AdminUrlGenerator"
+            - "@EasyCorp\\Bundle\\EasyAdminBundle\\Provider\\AdminContextProvider"
+            - "@sylius.factory.product"
+            - "@sylius.factory.product_variant"
+            - "@sylius.repository.product_variant"
+            - "@sylius.manager.product"
+            - "@sylius.manager.product_variant"
+
     App\Controller\Admin\Shop\CustomerCrudController:
         arguments:
             - "@sylius.factory.customer"
