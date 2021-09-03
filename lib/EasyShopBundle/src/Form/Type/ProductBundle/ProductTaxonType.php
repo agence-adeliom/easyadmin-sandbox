@@ -62,6 +62,9 @@ final class ProductTaxonType extends AbstractType
         $resolver->setDefaults([
             'class' => $this->taxonRepository->getClassName(),
             'choice_name' => 'name',
+            'choice_label' => function ($item) {
+                return $item->getTree(" / ");
+            },
             'choice_value' => 'code',
         ]);
 

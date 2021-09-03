@@ -165,9 +165,13 @@ class ProductCrudController extends AbstractCrudController
 
             //
             yield FormTypeField::new('options', 'sylius.form.product.options', ProductOptionChoiceType::class)
-                ->setFormTypeOptions(['required' => false, 'multiple' => true])
+                ->setFormTypeOptions([
+                    'required' => false,
+                    'multiple' => true,
+                    "attr" => ["data-ea-widget" => "ea-autocomplete"]
+                ])
                 ->hideOnIndex();
-            yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')
+            yield ChoiceField::new('variantSelectionMethod')->setLabel('sylius.form.product.variant_selection_method')->setRequired(true)
                 ->setChoices(array_flip(\Sylius\Component\Core\Model\Product::getVariantSelectionMethodLabels()))
                 ->hideOnIndex();
         }
@@ -182,20 +186,20 @@ class ProductCrudController extends AbstractCrudController
                 'required' => true,
             ],
             'description' => [
-                'field_type' => CKEditorType::class,
-                'required' => true,
+                'field_type' => TextareaType::class,
+                'required' => false,
             ],
             'shortDescription' => [
                 'field_type' => TextareaType::class,
-                'required' => true,
+                'required' => false,
             ],
             'metaKeywords' => [
                 'field_type' => TextType::class,
-                'required' => true,
+                'required' => false,
             ],
             'metaDescription' => [
                 'field_type' => TextareaType::class,
-                'required' => true,
+                'required' => false,
             ],
         ];
 
@@ -203,6 +207,9 @@ class ProductCrudController extends AbstractCrudController
         yield AssociationField::new('mainTaxon')
             ->setFormTypeOption('class', Taxon::class)
             ->setFormTypeOption('choice_value', "code")
+            ->setFormTypeOption('choice_label', function ($item) {
+                return $item->getTree(" / ");
+            })
             ->setCrudController(TaxonCrudController::class)
             ->hideOnIndex();
 
