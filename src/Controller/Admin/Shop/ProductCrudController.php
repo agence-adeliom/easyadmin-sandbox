@@ -8,7 +8,9 @@ use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAttributesField;
 use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType;
+use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductTaxonType;
 use App\Entity\Shop\Product\Product;
+use App\Entity\Shop\Taxonomy\Taxon;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -198,9 +200,17 @@ class ProductCrudController extends AbstractCrudController
         ];
 
         yield FormField::addPanel("Taxonomy")->collapsible()->renderCollapsed();
-        yield AssociationField::new('mainTaxon')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class)
+        yield AssociationField::new('mainTaxon')
+            ->setFormTypeOption('class', Taxon::class)
+            ->setFormTypeOption('choice_value', "code")
+            ->setCrudController(TaxonCrudController::class)
             ->hideOnIndex();
-        yield AssociationField::new('productTaxons')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class)
+
+        yield AssociationField::new('productTaxons')
+            ->setFormType(ProductTaxonType::class)
+            ->setFormTypeOption('class', Taxon::class)
+            ->setFormTypeOption('product', $this->adminContextProvider->getContext()->getEntity()->getInstance())
+            ->setCrudController(TaxonCrudController::class)
             ->hideOnIndex();
 
         yield FormField::addPanel("Attributes")->collapsible()->renderCollapsed();

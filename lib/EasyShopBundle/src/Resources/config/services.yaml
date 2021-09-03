@@ -111,3 +111,10 @@ services:
     Adeliom\EasyShopBundle\AttributeType\EasyMediaAttributeType:
         tags:
             - { name: sylius.attribute.type, attribute_type: "easy_media", label: "Media", form_type: Adeliom\EasyShopBundle\Form\Type\AttributeBundle\EasyMediaAttributeType, configuration_form_type: Adeliom\EasyShopBundle\AttributeType\Configuration\EasyMediaAttributeConfigurationType }
+
+    Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductTaxonType:
+        arguments:
+            - "@sylius.factory.product_taxon"
+            - "@sylius.repository.product_taxon"
+            - "@sylius.repository.taxon"
+        tags: [ form.type ]

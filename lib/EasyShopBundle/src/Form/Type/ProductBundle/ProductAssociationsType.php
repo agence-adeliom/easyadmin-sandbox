@@ -74,10 +74,6 @@ final class ProductAssociationsType extends AbstractType
             ]);
         }
         $builder->addModelTransformer($this->productsToProductAssociationsTransformer);
-
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-           dump($event);
-        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
