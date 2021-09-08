@@ -13,7 +13,10 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="sylius_product")
+ * @ORM\Table(name="sylius_product", indexes={
+ *     @ORM\Index(name="created_at_index", columns={"created_at"}),
+ *     @ORM\Index(name="enabled_index", columns={"enabled"})
+ * })
  */
 class Product extends BaseProduct
 {
