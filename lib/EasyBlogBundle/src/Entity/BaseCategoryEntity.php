@@ -133,4 +133,9 @@ class BaseCategoryEntity {
         $this->setName($this->getName() . '-'.$this->getId().'-deleted');
         $this->setSlug($this->getSlug() . '-'.$this->getId().'-deleted');
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

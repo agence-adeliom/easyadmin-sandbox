@@ -27,33 +27,26 @@ class SeoType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => "form.title",
-                'translation_domain' => 'EasySeoBundle'
+                'label' => "easy.seo.admin.field.title"
             ])
             ->add('cover', EasyMediaType::class, [
-                'label' => "form.cover",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.cover",
                 "restrictions_uploadTypes" => ["image/*"],
             ])
             ->add('cannonical', UrlType::class, [
-                'label' => "form.cannonical",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.cannonical",
             ])
             ->add('description', TextareaType::class, [
-                'label' => "form.description",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.description",
             ])
             ->add('keywords', TextType::class, [
-                'label' => "form.keywords",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.keywords",
             ])
             ->add('key', TextType::class, [
-                'label' => "form.key",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.key",
             ])
             ->add('robots', ChoiceType::class, [
-                'label' => "form.robots",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.robots",
                 'multiple' => 'true',
                 'attr' => [
                     'data-ea-widget' => 'ea-autocomplete',
@@ -68,8 +61,7 @@ class SeoType extends AbstractType
                 ]
             ])
             ->add('sitemap', CheckboxType::class, [
-                'label' => "form.sitemap",
-                'translation_domain' => 'EasySeoBundle',
+                'label' => "easy.seo.admin.field.sitemap",
             ])
         ;
     }

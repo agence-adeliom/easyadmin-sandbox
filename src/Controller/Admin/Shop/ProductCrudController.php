@@ -88,9 +88,9 @@ class ProductCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyFields/form/translations_widget.html.twig')
+            ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
-            ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
 
             ->showEntityActionsAsDropdown();
     }

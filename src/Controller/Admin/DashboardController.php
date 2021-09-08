@@ -59,20 +59,18 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
-        yield MenuItem::section('Contenu');
 
-        yield MenuItem::linkToCrud('Medias', 'fa fa-picture-o', MediaEntity::class);
-        yield MenuItem::linkToCrud('Article', 'fa fa-file-alt', Article::class);
-        yield MenuItem::linkToCrud('Page', 'fa fa-file-alt', Page::class);
-        yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::section('easy.page.admin.menu.contents');
+        yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);
+        yield MenuItem::linkToCrud('easy.block.admin.menu.shared_blocks', 'fa fa-file-alt', Block::class);
 
-        yield MenuItem::section('Blog');
-        yield MenuItem::linkToCrud('Catégorie', 'fa fa-folder', Category::class);
-        yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
+        yield MenuItem::section('easy.blog.blog');
+        yield MenuItem::linkToCrud('easy.blog.admin.menu.categories', 'fa fa-folder', Category::class);
+        yield MenuItem::linkToCrud('easy.blog.admin.menu.articles', 'fa fa-file-alt', Post::class);
 
-        yield MenuItem::section('Faq');
-        yield MenuItem::linkToCrud('Catégorie', 'fa fa-folder', \App\Entity\Faq\Category::class);
-        yield MenuItem::linkToCrud('Faq', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
+        yield MenuItem::section('easy.faq.faq');
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\Faq\Category::class);
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
 
         yield MenuItem::section('sylius.ui.products');
         yield MenuItem::linkToCrud('sylius.ui.taxons', 'fas fa-folder', Taxon::class);

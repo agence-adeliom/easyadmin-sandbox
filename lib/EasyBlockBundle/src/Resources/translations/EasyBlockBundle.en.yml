@@ -1,9 +1,0 @@
-editor:
-  shared_block: "Shared block"
-
-admin:
-  label:
-    name: "Block name"
-    type: "Block type"
-    status: "Status"
-    settings_section: "Block settings"
