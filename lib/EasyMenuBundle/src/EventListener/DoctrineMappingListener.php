@@ -1,0 +1,78 @@
+<?php
+
+namespace Adeliom\EasyMenuBundle\EventListener;
+
+
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\ClassMetadata;
+
+/**
+ * This class adds automatically the ManyToOne and OneToMany relations in Page and Category entities,
+ * because it's normally impossible to do so in a mapped superclass.
+ */
+class DoctrineMappingListener implements EventSubscriber
+{
+    /**
+     * @var string
+     */
+    private $menuClass;
+
+    /**
+     * @var string
+     */
+    private $menuItemClass;
+
+    public function __construct(string $menuClass, string $menuItemClass)
+    {
+        $this->menuClass = $menuClass;
+        $this->menuItemClass = $menuItemClass;
+    }
+
+    public function getSubscribedEvents()
+    {
+        return [Events::loadClassMetadata];
+    }
+
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
+    {
+        /** @var ClassMetadata $classMetadata */
+        $classMetadata = $eventArgs->getClassMetadata();
+
+
+        $isMenuItem  = is_a($classMetadata->getName(), $this->menuItemClass, true);
+        $isMenu = is_a($classMetadata->getName(), $this->menuClass, true);
+
+        if ($isMenuItem) {
+            $this->processMenuItemMetadata($classMetadata);
+        }
+
+        if ($isMenu) {
+            $this->processMenuMetadata($classMetadata);
+        }
+    }
+
+    private function processMenuItemMetadata(ClassMetadata $classMetadata): void
+    {
+        if (!$classMetadata->hasAssociation('menu')) {
+            $classMetadata->mapManyToOne([
+                'fieldName' => 'menu',
+                'targetEntity' => $this->menuClass,
+                'inversedBy' => 'items',
+            ]);
+        }
+    }
+
+    private function processMenuMetadata(ClassMetadata $classMetadata): void
+    {
+        if (!$classMetadata->hasAssociation('items')) {
+            $classMetadata->mapOneToMany([
+                'fieldName' => 'items',
+                'targetEntity' => $this->menuItemClass,
+                'mappedBy' => 'menu',
+            ]);
+        }
+
+    }
+}

@@ -131,6 +131,13 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('cache')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultFalse()->end()
+                        ->integerNode('ttl')->defaultValue(300)->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

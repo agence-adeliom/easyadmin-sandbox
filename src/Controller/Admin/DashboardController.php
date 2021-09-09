@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Block;
 use App\Entity\Category;
 use App\Entity\MediaEntity;
+use App\Entity\Menu\Menu;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\Shop\Addressing\Country;
@@ -66,6 +67,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('easy.page.admin.menu.contents');
         yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);
         yield MenuItem::linkToCrud('easy.block.admin.menu.shared_blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::linkToCrud('easy.menu.admin.menus', 'fa fa-file-alt', Menu::class);
 
         yield MenuItem::section('easy.blog.blog');
         yield MenuItem::linkToCrud('easy.blog.admin.menu.categories', 'fa fa-folder', Category::class);

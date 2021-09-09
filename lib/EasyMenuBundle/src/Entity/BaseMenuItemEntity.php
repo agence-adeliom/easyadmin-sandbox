@@ -2,20 +2,17 @@
 
 namespace Adeliom\EasyMenuBundle\Entity;
 
+use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyCommonBundle\Traits\EntityIdTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityNameSlugTrait;
-use Adeliom\EasyCommonBundle\Traits\EntityStatusTrait;
+use Adeliom\EasyCommonBundle\Traits\EntityPublishableTrait;
+use Adeliom\EasyCommonBundle\Traits\EntityThreeStateStatusTrait;
 use Adeliom\EasyCommonBundle\Traits\EntityTimestampableTrait;
-use Adeliom\EasySeoBundle\Traits\EntitySeoTrait;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\BaseMenuRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\BaseMenuItemRepository")
  */
 class BaseMenuItemEntity {
 
@@ -24,103 +21,52 @@ class BaseMenuItemEntity {
         EntityTimestampableTrait::__construct as private __TimestampableConstruct;
     }
 
-    use EntityNameSlugTrait;
-    use EntityStatusTrait;
-    use EntitySeoTrait {
-        EntitySeoTrait::__construct as private __SEOConstruct;
+    use EntityThreeStateStatusTrait;
+    use EntityPublishableTrait {
+        EntityPublishableTrait::__construct as private __PublishableConstruct;
     }
 
     /**
-     * @var BaseEntryEntity[] | null
+     * @var BaseMenuEntity | null
      */
-    protected $entries;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="css", type="text", nullable=true)
-     * @Assert\Type("string")
-     */
-    protected $css;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="js", type="text", nullable=true)
-     * @Assert\Type("string")
-     */
-    protected $js;
+    protected $menu;
 
     public function __construct()
     {
         $this->__TimestampableConstruct();
-        $this->__SEOConstruct();
-        $this->entries     = new ArrayCollection();
+        $this->__PublishableConstruct();
     }
 
     /**
-     * @return BaseEntryEntity[]|ArrayCollection
+     * @return BaseMenuEntity|null
      */
-    public function getEntries()
+    public function getMenu(): ?BaseMenuEntity
     {
-        return $this->entries;
+        return $this->menu;
     }
 
-    public function addEntry(BaseEntryEntity $entry): void
+    /**
+     * @param BaseMenuEntity|null $menu
+     */
+    public function setMenu(?BaseMenuEntity $menu): void
     {
-        $this->entries->add($entry);
-        if ($entry->getCategory() !== $this) {
-            $entry->setCategory($this);
-        }
-    }
-
-    public function removeEntry(BaseEntryEntity $entry): void
-    {
-        $this->entries->removeElement($entry);
-        $entry->setCategory(null);
+        $this->menu = $menu;
     }
 
     /**
      * @return string|null
      */
-    public function getCss(): ?string
+    public function getState(): string|ThreeStateStatusEnum|null
     {
-        return $this->css;
+        return $this->state;
     }
 
     /**
-     * @param string $css
+     * @param string|null $state
      */
-    public function setCss(string $css): void
+    public function setState(string|ThreeStateStatusEnum|null $state): void
     {
-        $this->css = $css;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getJs(): ?string
-    {
-        return $this->js;
-    }
-
-    /**
-     * @param string $js
-     */
-    public function setJs(string $js): void
-    {
-        $this->js = $js;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function setSeoTitle(LifecycleEventArgs $event): void
-    {
-        if(empty($this->getSEO()->title)){
-            $this->getSEO()->title = $this->getName();
-        }
+        $this->state = $state;
     }
 
     /**
@@ -128,8 +74,6 @@ class BaseMenuItemEntity {
      */
     public function onRemove(LifecycleEventArgs $event): void
     {
-        $this->setStatus(false);
-        $this->setName($this->getName() . '-'.$this->getId().'-deleted');
-        $this->setSlug($this->getSlug() . '-'.$this->getId().'-deleted');
+        $this->setState(ThreeStateStatusEnum::UNPUBLISHED());
     }
 }

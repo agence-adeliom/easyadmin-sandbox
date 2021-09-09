@@ -3,11 +3,15 @@
 namespace Adeliom\EasyMenuBundle\Controller;
 
 
+use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
+use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
+use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -22,17 +26,17 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
+            ->addFormTheme('@EasyFields/form/association_widget.html.twig')
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
             ->addFormTheme('@EasyEditor/form/editor_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
 
-
-            ->setPageTitle(Crud::PAGE_INDEX, "easy.menu.admin.crud.title.category." . Crud::PAGE_INDEX)
-            ->setPageTitle(Crud::PAGE_EDIT, "easy.menu.admin.crud.title.category." . Crud::PAGE_EDIT)
-            ->setPageTitle(Crud::PAGE_NEW, "easy.menu.admin.crud.title.category." . Crud::PAGE_NEW)
-            ->setPageTitle(Crud::PAGE_DETAIL, "easy.menu.admin.crud.title.category." . Crud::PAGE_DETAIL)
-            ->setEntityLabelInSingular("easy.menu.admin.crud.label.category.singular")
-            ->setEntityLabelInPlural("easy.menu.admin.crud.label.category.plural")
+            ->setPageTitle(Crud::PAGE_INDEX, "easy.menu.admin.crud.title.entry." . Crud::PAGE_INDEX)
+            ->setPageTitle(Crud::PAGE_EDIT, "easy.menu.admin.crud.title.entry." . Crud::PAGE_EDIT)
+            ->setPageTitle(Crud::PAGE_NEW, "easy.menu.admin.crud.title.entry." . Crud::PAGE_NEW)
+            ->setPageTitle(Crud::PAGE_DETAIL, "easy.menu.admin.crud.title.entry." . Crud::PAGE_DETAIL)
+            ->setEntityLabelInSingular("easy.menu.admin.crud.label.entry.singular")
+            ->setEntityLabelInPlural("easy.menu.admin.crud.label.entry.plural")
             ;
     }
 
@@ -43,7 +47,7 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
         foreach ($pages as $page) {
             $pageActions = $actions->getAsDto($page)->getActions();
             foreach ($pageActions as $action) {
-                $action->setLabel("easy.menu.admin.crud.label.category." . $action->getName());
+                $action->setLabel("easy.menu.admin.crud.label.entry." . $action->getName());
                 $actions->remove($page, $action->getAsConfigObject());
                 $actions->add($page, $action->getAsConfigObject());
             }
@@ -58,15 +62,27 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
 
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
-        yield from $this->metadataFields($pageName, $subject);
         yield from $this->seoFields($pageName, $subject);
         yield from $this->publishFields($pageName, $subject);
+        yield from $this->metadataFields($pageName, $subject);
     }
 
     public function informationsFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel("easy.menu.admin.panel.information")->addCssClass("col-8");
+        yield FormField::addPanel("easy.menu.admin.panel.information")->addCssClass("col-12");
         yield TextField::new('name', "easy.menu.admin.field.name")
+            ->setRequired(true)
+            ->setColumns(12);
+
+        yield AssociationField::new("categories", "easy.menu.admin.field.categories")
+            ->autocomplete()
+            ->listSelector(true)
+            ->setCrudController($this->getParameter("easy_faq.category.crud"))
+        ;
+        yield TextField::new('question', "easy.menu.admin.field.question")
+            ->setRequired(true)
+            ->setColumns(12);
+        yield TextField::new('answer', "easy.menu.admin.field.answer")
             ->setRequired(true)
             ->setColumns(12);
     }
@@ -91,8 +107,18 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
     public function publishFields(string $pageName, $subject): iterable
     {
         yield FormField::addPanel("easy.menu.admin.panel.publication")->collapsible()->addCssClass("col-4");
-        yield BooleanField::new("status", "easy.menu.admin.field.state")
+        yield EnumField::new("state", 'easy.menu.admin.field.state')
+            ->setEnum(ThreeStateStatusEnum::class)
             ->setRequired(true)
-            ->renderAsSwitch(true);
+            ->renderExpanded(true)
+            ->renderAsBadges(true);
+        yield DateTimeField::new('publishDate', "easy.menu.admin.field.publishDate")->setFormat('Y-MM-dd HH:mm')
+            ->setRequired(true)
+            ->hideOnIndex()
+            ->setColumns(6);
+        yield DateTimeField::new('unpublishDate', "easy.menu.admin.field.unpublishDate")->setFormat('Y-MM-dd HH:mm')
+            ->setRequired(false)
+            ->hideOnIndex()
+            ->setColumns(6);
     }
 }

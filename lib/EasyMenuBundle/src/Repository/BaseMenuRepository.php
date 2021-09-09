@@ -2,9 +2,7 @@
 
 namespace Adeliom\EasyMenuBundle\Repository;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
-use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
+use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -35,75 +33,23 @@ class BaseMenuRepository extends ServiceEntityRepository {
      */
     public function getPublishedQuery(): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('entry')
-            ->where('entry.state = :state')
-            ->andWhere('entry.publishDate < :publishDate')
+        $qb = $this->createQueryBuilder('menu')
+            ->where('menu.status = :status')
         ;
 
-        $orModule = $qb->expr()->orx();
-        $orModule->add($qb->expr()->gt('entry.unpublishDate', ':unpublishDate'));
-        $orModule->add($qb->expr()->isNull('entry.unpublishDate'));
-
-        $qb->andWhere($orModule);
-
-        $qb->setParameter('state', ThreeStateStatusEnum::PUBLISHED());
-        $qb->setParameter('publishDate', new \DateTime());
-        $qb->setParameter('unpublishDate', new \DateTime());
-
+        $qb->setParameter('status', true);
         return $qb;
     }
 
     /**
-     * @return BaseEntryEntity[]
+     * @return BaseMenuEntity[]
      */
-    public function getPublished(bool $returnQueryBuilder = false)
+    public function getPublished()
     {
         $qb = $this->getPublishedQuery();
-        if ($returnQueryBuilder){
-            return $qb;
-        }
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getResult();
-    }
-
-    /**
-     * @return BaseEntryEntity[]
-     */
-    public function getByCategory(BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
-    {
-        $qb = $this->getPublishedQuery();
-        $qb->andWhere(':category MEMBER OF entry.categories')
-            ->setParameter('category', $categoryEntity)
-        ;
-        if ($returnQueryBuilder){
-            return $qb;
-        }
-        return $qb->getQuery()
-            ->useResultCache($this->cacheEnabled, $this->cacheTtl)
-            ->getResult();
-    }
-
-    /**
-     * @return BaseEntryEntity
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getBySlug(string $slug, ?BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
-    {
-        $qb = $this->getPublishedQuery();
-        $qb->andWhere('entry.slug = :slug')
-            ->setParameter('slug', $slug);
-        if ($categoryEntity) {
-            $qb->andWhere(':category MEMBER OF entry.categories')
-                ->setParameter('category', $categoryEntity);
-        }
-        $qb->setMaxResults(1);
-        if ($returnQueryBuilder){
-            return $qb;
-        }
-        return $qb->getQuery()
-            ->useResultCache($this->cacheEnabled, $this->cacheTtl)
-            ->getOneOrNullResult();
     }
 
 }
