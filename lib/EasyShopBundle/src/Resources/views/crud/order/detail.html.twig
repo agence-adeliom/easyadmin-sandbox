@@ -1,6 +1,9 @@
 {# templates/admin/business_stats/index.html.twig #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
+{% block page_title 'sylius.ui.order'|trans ~'#' ~ entity.instance.number  %}
+
+
 {% block content_title %}
     {% set order = entity.instance %}
     {% set customer = order.customer %}

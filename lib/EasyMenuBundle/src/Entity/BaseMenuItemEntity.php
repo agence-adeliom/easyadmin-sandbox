@@ -54,17 +54,17 @@ class BaseMenuItemEntity {
     }
 
     /**
-     * @return string|null
+     * @return string|ThreeStateStatusEnum|null
      */
-    public function getState(): string|ThreeStateStatusEnum|null
+    public function getState()
     {
         return $this->state;
     }
 
     /**
-     * @param string|null $state
+     * @param string|ThreeStateStatusEnum|null $state
      */
-    public function setState(string|ThreeStateStatusEnum|null $state): void
+    public function setState($state): void
     {
         $this->state = $state;
     }

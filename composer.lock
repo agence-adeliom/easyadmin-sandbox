@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f20546de3558f89e514ad8f696a1332d",
+    "content-hash": "534d408e5e9af0acf6ba3d9a2501e82e",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -172,7 +172,7 @@
         },
         {
             "name": "agence-adeliom/easy-block-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlockBundle",
@@ -190,7 +190,7 @@
         },
         {
             "name": "agence-adeliom/easy-blog-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlogBundle",
@@ -244,7 +244,7 @@
         },
         {
             "name": "agence-adeliom/easy-common-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyCommonBundle",
@@ -294,7 +294,7 @@
         },
         {
             "name": "agence-adeliom/easy-editor-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyEditorBundle",
@@ -344,7 +344,7 @@
         },
         {
             "name": "agence-adeliom/easy-faq-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFaqBundle",
@@ -398,7 +398,7 @@
         },
         {
             "name": "agence-adeliom/easy-fields-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFieldsBundle",
@@ -461,7 +461,7 @@
         },
         {
             "name": "agence-adeliom/easy-media-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyMediaBundle",
@@ -503,7 +503,7 @@
         },
         {
             "name": "agence-adeliom/easy-menu-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyMenuBundle",
@@ -525,7 +525,7 @@
         },
         {
             "name": "agence-adeliom/easy-page-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyPageBundle",
@@ -588,7 +588,7 @@
         },
         {
             "name": "agence-adeliom/easy-seo-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasySeoBundle",
@@ -609,7 +609,7 @@
         },
         {
             "name": "agence-adeliom/easy-shop-bundle",
-            "version": "dev-ecommerce",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyShopBundle",
@@ -683,6 +683,85 @@
                 "source": "https://github.com/alcohol/iso4217"
             },
             "time": "2021-01-06T07:58:06+00:00"
+        },
+        {
+            "name": "babdev/pagerfanta",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BabDev/Pagerfanta.git",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/7a5d0d888f77d4af5cf37889bb3ea331675a595c",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.2",
+                "symfony/deprecation-contracts": "^2.1"
+            },
+            "replace": {
+                "pagerfanta/pagerfanta": "*"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.4",
+                "doctrine/dbal": "^2.5",
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-odm": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "jackalope/jackalope-doctrine-dbal": "^1.3",
+                "mandango/mandango": "^1.0@dev",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "propel/propel": "^2.0@dev",
+                "propel/propel1": "^1.7",
+                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0",
+                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "doctrine/collections": "To use the Doctrine Collection and Selectable adapter.",
+                "doctrine/dbal": "To use the Doctrine DBAL adapters.",
+                "doctrine/mongodb-odm": "To use the Doctrine MongoDB ODM Adapter.",
+                "doctrine/orm": "To use the Doctrine ORM Adapter.",
+                "doctrine/phpcr-odm": "To use the Doctrine PHPCR ODM Adapter.",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Pagination for PHP",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "support": {
+                "issues": "https://github.com/BabDev/Pagerfanta/issues",
+                "source": "https://github.com/BabDev/Pagerfanta/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mbabker",
+                    "type": "github"
+                }
+            ],
+            "abandoned": "pagerfanta/pagerfanta",
+            "time": "2020-06-06T19:22:10+00:00"
         },
         {
             "name": "babdev/pagerfanta-bundle",
@@ -2393,16 +2472,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.5.7",
+            "version": "v3.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "3499d3e954f95f3e12bebafbdafb71289f1a1435"
+                "reference": "5a64895ca6a09970fd416c385e7bd65bb7ef13c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/3499d3e954f95f3e12bebafbdafb71289f1a1435",
-                "reference": "3499d3e954f95f3e12bebafbdafb71289f1a1435",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/5a64895ca6a09970fd416c385e7bd65bb7ef13c8",
+                "reference": "5a64895ca6a09970fd416c385e7bd65bb7ef13c8",
                 "shasum": ""
             },
             "require": {
@@ -2476,7 +2555,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.7"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.8"
             },
             "funding": [
                 {
@@ -2484,7 +2563,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-17T10:36:05+00:00"
+            "time": "2021-09-03T18:19:43+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2556,21 +2635,21 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.15.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e"
+                "reference": "271d384d216e5e5c468a6b28feedf95d49f83b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/89c6201c74db25fa759ff16e78a4d8f32547770e",
-                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/271d384d216e5e5c468a6b28feedf95d49f83b35",
+                "reference": "271d384d216e5e5c468a6b28feedf95d49f83b35",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0",
-                "psr/container": "^1.0",
+                "psr/container": "^1.0 || ^2.0",
                 "symfony/deprecation-contracts": "^2.2"
             },
             "conflict": {
@@ -2590,7 +2669,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "v1.15-dev"
+                    "dev-main": "v1.16-dev"
                 }
             },
             "autoload": {
@@ -2615,9 +2694,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.15.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.16.0"
             },
-            "time": "2021-07-06T20:39:40+00:00"
+            "time": "2021-09-06T14:53:37+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
@@ -3190,16 +3269,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.58.0",
+            "version": "v8.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "673d71d9db2827b04c096c4fe9739edddea14ac4"
+                "reference": "18fa841df912ec56849351dd6ca8928e8a98b69d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/673d71d9db2827b04c096c4fe9739edddea14ac4",
-                "reference": "673d71d9db2827b04c096c4fe9739edddea14ac4",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/18fa841df912ec56849351dd6ca8928e8a98b69d",
+                "reference": "18fa841df912ec56849351dd6ca8928e8a98b69d",
                 "shasum": ""
             },
             "require": {
@@ -3240,20 +3319,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-08-25T13:02:21+00:00"
+            "time": "2021-09-08T12:48:16+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.58.0",
+            "version": "v8.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "7354badf7b57eae805a56d1163fb023e0f58a639"
+                "reference": "ab4bb4ec3b36905ccf972c84f9aaa2bdd1153913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/7354badf7b57eae805a56d1163fb023e0f58a639",
-                "reference": "7354badf7b57eae805a56d1163fb023e0f58a639",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/ab4bb4ec3b36905ccf972c84f9aaa2bdd1153913",
+                "reference": "ab4bb4ec3b36905ccf972c84f9aaa2bdd1153913",
                 "shasum": ""
             },
             "require": {
@@ -3288,11 +3367,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-08-24T21:29:28+00:00"
+            "time": "2021-09-08T12:09:40+00:00"
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.58.0",
+            "version": "v8.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -3338,16 +3417,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.58.0",
+            "version": "v8.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "5e8f059a5d1f298324e847822b997778a3472128"
+                "reference": "c0fbc05c4362de423a7a4da137098e9d1affaf54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/5e8f059a5d1f298324e847822b997778a3472128",
-                "reference": "5e8f059a5d1f298324e847822b997778a3472128",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/c0fbc05c4362de423a7a4da137098e9d1affaf54",
+                "reference": "c0fbc05c4362de423a7a4da137098e9d1affaf54",
                 "shasum": ""
             },
             "require": {
@@ -3402,7 +3481,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-08-25T13:04:37+00:00"
+            "time": "2021-09-08T12:48:16+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -4903,16 +4982,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.52.0",
+            "version": "2.53.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "369c0e2737c56a0f39c946dd261855255a6fccbe"
+                "reference": "f4655858a784988f880c1b8c7feabbf02dfdf045"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/369c0e2737c56a0f39c946dd261855255a6fccbe",
-                "reference": "369c0e2737c56a0f39c946dd261855255a6fccbe",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/f4655858a784988f880c1b8c7feabbf02dfdf045",
+                "reference": "f4655858a784988f880c1b8c7feabbf02dfdf045",
                 "shasum": ""
             },
             "require": {
@@ -4924,7 +5003,7 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.14 || ^3.0",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "kylekatarnls/multi-tester": "^2.0",
                 "phpmd/phpmd": "^2.9",
                 "phpstan/extension-installer": "^1.0",
@@ -4993,7 +5072,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-14T19:10:52+00:00"
+            "time": "2021-09-06T09:29:23+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -5052,17 +5131,17 @@
             "time": "2021-07-21T10:44:31+00:00"
         },
         {
-            "name": "pagerfanta/pagerfanta",
+            "name": "pagerfanta/core",
             "version": "v2.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f"
+                "url": "https://github.com/pagerfanta-packages/core.git",
+                "reference": "7fb7cacfb4916c9789e7a5999255214615218560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/911f515ae80898981c07c3d098f2092e97da1a2f",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f",
+                "url": "https://api.github.com/repos/pagerfanta-packages/core/zipball/7fb7cacfb4916c9789e7a5999255214615218560",
+                "reference": "7fb7cacfb4916c9789e7a5999255214615218560",
                 "shasum": ""
             },
             "require": {
@@ -5071,81 +5150,64 @@
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-php80": "^1.15"
             },
-            "conflict": {
-                "twig/twig": "<1.35 || >=2.0,<2.5"
-            },
-            "replace": {
-                "pagerfanta/core": "self.version",
-                "pagerfanta/doctrine-collections-adapter": "self.version",
-                "pagerfanta/doctrine-dbal-adapter": "self.version",
-                "pagerfanta/doctrine-mongodb-odm-adapter": "self.version",
-                "pagerfanta/doctrine-orm-adapter": "self.version",
-                "pagerfanta/doctrine-phpcr-odm-adapter": "self.version",
-                "pagerfanta/elastica-adapter": "self.version",
-                "pagerfanta/solarium-adapter": "self.version",
-                "pagerfanta/twig": "self.version"
-            },
-            "require-dev": {
-                "dg/bypass-finals": "^1.3.1",
-                "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/collections": "^1.4",
-                "doctrine/dbal": "^2.5 || ^3.0",
-                "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.3",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "jackalope/jackalope-doctrine-dbal": "^1.3",
-                "mandango/mandango": "^1.0@dev",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12.93",
-                "phpstan/phpstan-phpunit": "^0.12.21",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "propel/propel": "^2.0@dev",
-                "propel/propel1": "^1.7",
-                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0 || ^7.0",
-                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
-                "symfony/cache": "^4.4 || ^5.2 || ^6.0",
-                "twig/twig": "^1.35 || ^2.5 || ^3.0"
-            },
-            "suggest": {
-                "twig/twig": "To integrate Pagerfanta with Twig"
-            },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Pagerfanta\\": "lib/Core/",
-                    "Pagerfanta\\Adapter\\": "src/Adapter/",
-                    "Pagerfanta\\Doctrine\\Collections\\": "lib/Adapter/Doctrine/Collections/",
-                    "Pagerfanta\\Doctrine\\DBAL\\": "lib/Adapter/Doctrine/DBAL/",
-                    "Pagerfanta\\Doctrine\\MongoDBODM\\": "lib/Adapter/Doctrine/MongoDBODM/",
-                    "Pagerfanta\\Doctrine\\ORM\\": "lib/Adapter/Doctrine/ORM/",
-                    "Pagerfanta\\Doctrine\\PHPCRODM\\": "lib/Adapter/Doctrine/PHPCRODM/",
-                    "Pagerfanta\\Elastica\\": "lib/Adapter/Elastica/",
-                    "Pagerfanta\\Solarium\\": "lib/Adapter/Solarium/",
-                    "Pagerfanta\\Twig\\": "lib/Twig/"
+                    "Pagerfanta\\": "./"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Pagination for PHP",
+            "description": "Core Pagerfanta API",
             "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
+                "pagerfanta"
             ],
             "support": {
-                "issues": "https://github.com/BabDev/Pagerfanta/issues",
-                "source": "https://github.com/BabDev/Pagerfanta/tree/v2.7.2"
+                "source": "https://github.com/pagerfanta-packages/core/tree/v2.7.2"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/mbabker",
-                    "type": "github"
+            "time": "2021-07-25T19:56:13+00:00"
+        },
+        {
+            "name": "pagerfanta/doctrine-orm-adapter",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pagerfanta-packages/doctrine-orm-adapter.git",
+                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pagerfanta-packages/doctrine-orm-adapter/zipball/492d640993375b07ac6d23b2b8d3a724df8cf617",
+                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.5",
+                "pagerfanta/core": "^2.4",
+                "php": "^7.2 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\Doctrine\\ORM\\": "./"
                 }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "time": "2021-08-01T15:53:26+00:00"
+            "description": "Pagerfanta adapter for Doctrine ORM",
+            "keywords": [
+                "doctrine",
+                "orm",
+                "pagerfanta"
+            ],
+            "support": {
+                "source": "https://github.com/pagerfanta-packages/doctrine-orm-adapter/tree/v2.7.2"
+            },
+            "time": "2021-07-25T19:56:13+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -6710,25 +6772,25 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v6.1.5",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "62c5909f49cf74dccdf50a294511cc24be2f969c"
+                "reference": "3f5b6490878f8a70ba702e9692007cf979b42f0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/62c5909f49cf74dccdf50a294511cc24be2f969c",
-                "reference": "62c5909f49cf74dccdf50a294511cc24be2f969c",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/3f5b6490878f8a70ba702e9692007cf979b42f0e",
+                "reference": "3f5b6490878f8a70ba702e9692007cf979b42f0e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "^1.0",
                 "php": ">=7.2.5",
-                "symfony/config": "^4.4|^5.0",
-                "symfony/dependency-injection": "^4.4|^5.0",
-                "symfony/framework-bundle": "^4.4|^5.0",
-                "symfony/http-kernel": "^4.4|^5.0"
+                "symfony/config": "^4.4|^5.0|^6.0",
+                "symfony/dependency-injection": "^4.4|^5.0|^6.0",
+                "symfony/framework-bundle": "^4.4|^5.0|^6.0",
+                "symfony/http-kernel": "^4.4|^5.0|^6.0"
             },
             "conflict": {
                 "doctrine/doctrine-cache-bundle": "<1.3.1",
@@ -6738,17 +6800,17 @@
                 "doctrine/dbal": "^2.10|^3.0",
                 "doctrine/doctrine-bundle": "^1.11|^2.0",
                 "doctrine/orm": "^2.5",
-                "symfony/browser-kit": "^4.4|^5.0",
-                "symfony/doctrine-bridge": "^4.4|^5.0",
-                "symfony/dom-crawler": "^4.4|^5.0",
-                "symfony/expression-language": "^4.4|^5.0",
-                "symfony/finder": "^4.4|^5.0",
-                "symfony/monolog-bridge": "^4.0|^5.0",
+                "symfony/browser-kit": "^4.4|^5.0|^6.0",
+                "symfony/doctrine-bridge": "^4.4|^5.0|^6.0",
+                "symfony/dom-crawler": "^4.4|^5.0|^6.0",
+                "symfony/expression-language": "^4.4|^5.0|^6.0",
+                "symfony/finder": "^4.4|^5.0|^6.0",
+                "symfony/monolog-bridge": "^4.0|^5.0|^6.0",
                 "symfony/monolog-bundle": "^3.2",
-                "symfony/phpunit-bridge": "^4.4.9|^5.0.9",
-                "symfony/security-bundle": "^4.4|^5.0",
-                "symfony/twig-bundle": "^4.4|^5.0",
-                "symfony/yaml": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0",
+                "symfony/security-bundle": "^4.4|^5.0|^6.0",
+                "symfony/twig-bundle": "^4.4|^5.0|^6.0",
+                "symfony/yaml": "^4.4|^5.0|^6.0",
                 "twig/twig": "^1.34|^2.4|^3.0"
             },
             "type": "symfony-bundle",
@@ -6782,9 +6844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/issues",
-                "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.1.5"
+                "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.2.0"
             },
-            "time": "2021-05-31T10:40:46+00:00"
+            "time": "2021-09-06T13:24:35+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -7100,16 +7162,16 @@
         },
         {
             "name": "sonata-project/form-extensions",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/form-extensions.git",
-                "reference": "b0bcc2134802b5a7d4352c6c239ec15149647131"
+                "reference": "b68a6b5d5c3721ee13a6c5fa3f665dbcbbcb9e18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/b0bcc2134802b5a7d4352c6c239ec15149647131",
-                "reference": "b0bcc2134802b5a7d4352c6c239ec15149647131",
+                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/b68a6b5d5c3721ee13a6c5fa3f665dbcbbcb9e18",
+                "reference": "b68a6b5d5c3721ee13a6c5fa3f665dbcbbcb9e18",
                 "shasum": ""
             },
             "require": {
@@ -7117,13 +7179,13 @@
                 "jms/serializer": "^2.0 || ^3.0",
                 "php": "^7.3 || ^8.0",
                 "sonata-project/doctrine-extensions": "^1.10.1",
-                "symfony/event-dispatcher": "^4.4 || ^5.1",
-                "symfony/form": "^4.4 || ^5.1",
-                "symfony/options-resolver": "^4.4 || ^5.1",
-                "symfony/property-access": "^4.4 || ^5.1",
-                "symfony/security-csrf": "^4.4 || ^5.1",
-                "symfony/translation": "^4.4 || ^5.1",
-                "symfony/validator": "^4.4 || ^5.1",
+                "symfony/event-dispatcher": "^4.4 || ^5.3",
+                "symfony/form": "^4.4 || ^5.3",
+                "symfony/options-resolver": "^4.4 || ^5.3",
+                "symfony/property-access": "^4.4 || ^5.3",
+                "symfony/security-csrf": "^4.4 || ^5.3",
+                "symfony/translation": "^4.4 || ^5.3",
+                "symfony/validator": "^4.4 || ^5.3",
                 "twig/twig": "^2.12 || ^3.0"
             },
             "conflict": {
@@ -7134,13 +7196,13 @@
                 "doctrine/persistence": "^1.3 || ^2.0",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-                "symfony/config": "^4.4 || ^5.1",
-                "symfony/dependency-injection": "^4.4 || ^5.1",
-                "symfony/framework-bundle": "^4.4 || ^5.1",
-                "symfony/http-foundation": "^4.4 || ^5.1",
-                "symfony/http-kernel": "^4.4 || ^5.1",
-                "symfony/phpunit-bridge": "^5.1.8",
-                "symfony/twig-bridge": "^4.4 || ^5.1"
+                "symfony/config": "^4.4 || ^5.3",
+                "symfony/dependency-injection": "^4.4 || ^5.3",
+                "symfony/framework-bundle": "^4.4 || ^5.3",
+                "symfony/http-foundation": "^4.4 || ^5.3",
+                "symfony/http-kernel": "^4.4 || ^5.3",
+                "symfony/phpunit-bridge": "^5.3",
+                "symfony/twig-bridge": "^4.4 || ^5.3"
             },
             "suggest": {
                 "doctrine/persistence": "If you want to use BaseDoctrineORMSerializationType"
@@ -7179,7 +7241,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/form-extensions/issues",
-                "source": "https://github.com/sonata-project/form-extensions/tree/1.9.0"
+                "source": "https://github.com/sonata-project/form-extensions/tree/1.10.0"
             },
             "funding": [
                 {
@@ -7195,24 +7257,24 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/wbloszyk",
+                    "url": "https://github.com/greg0ire",
                     "type": "github"
                 }
             ],
-            "time": "2021-02-15T19:31:54+00:00"
+            "time": "2021-09-08T08:27:44+00:00"
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "1e2a771696f950ccf05dd107705f2dc9eed248e4"
+                "reference": "fcb9f69740b6675309af9b948948bd18b8c1be5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/1e2a771696f950ccf05dd107705f2dc9eed248e4",
-                "reference": "1e2a771696f950ccf05dd107705f2dc9eed248e4",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/fcb9f69740b6675309af9b948948bd18b8c1be5c",
+                "reference": "fcb9f69740b6675309af9b948948bd18b8c1be5c",
                 "shasum": ""
             },
             "require": {
@@ -7273,7 +7335,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/1.7.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/1.8.0"
             },
             "funding": [
                 {
@@ -7289,11 +7351,11 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/wbloszyk",
+                    "url": "https://github.com/greg0ire",
                     "type": "github"
                 }
             ],
-            "time": "2021-07-20T12:52:37+00:00"
+            "time": "2021-09-08T08:06:20+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -12379,16 +12441,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.15.1",
+            "version": "v1.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "c2605222ee4984899bdc93b3e56f502fc79bafc6"
+                "reference": "f16f10772422ace36dc76d5d5c7a682c8b925c0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/c2605222ee4984899bdc93b3e56f502fc79bafc6",
-                "reference": "c2605222ee4984899bdc93b3e56f502fc79bafc6",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/f16f10772422ace36dc76d5d5c7a682c8b925c0c",
+                "reference": "f16f10772422ace36dc76d5d5c7a682c8b925c0c",
                 "shasum": ""
             },
             "require": {
@@ -12427,7 +12489,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.15.1"
+                "source": "https://github.com/symfony/flex/tree/v1.15.3"
             },
             "funding": [
                 {
@@ -12443,7 +12505,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-30T14:55:05+00:00"
+            "time": "2021-09-06T12:45:00+00:00"
         },
         {
             "name": "symfony/form",
@@ -19891,10 +19953,10 @@
         "agence-adeliom/easy-seo-bundle": 20,
         "agence-adeliom/easy-shop-bundle": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4",
+        "php": "^7.4 || ^8.0",
         "ext-ctype": "*",
         "ext-exif": "*",
         "ext-iconv": "*",

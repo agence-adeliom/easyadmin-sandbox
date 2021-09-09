@@ -41,6 +41,9 @@
     "alcohol/iso4217": {
         "version": "4.0.0"
     },
+    "babdev/pagerfanta": {
+        "version": "v2.2.1"
+    },
     "babdev/pagerfanta-bundle": {
         "version": "v3.3.0"
     },
@@ -291,6 +294,12 @@
     },
     "nikic/php-parser": {
         "version": "v4.10.5"
+    },
+    "pagerfanta/core": {
+        "version": "2.x-dev"
+    },
+    "pagerfanta/doctrine-orm-adapter": {
+        "version": "2.x-dev"
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.7.2"
