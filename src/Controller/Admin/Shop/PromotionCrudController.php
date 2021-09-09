@@ -85,11 +85,10 @@ class PromotionCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-
         $actions = parent::configureActions($actions);
 
         $viewCoupon = Action::new('manageCoupon', 'sylius.ui.manage_coupons', 'fas fa-ticket-alt')
-            ->displayIf(static function ($entity) {
+            ->displayIf(static function (Promotion $entity) {
                 return $entity->isCouponBased();
             })->linkToCrudAction("manageCoupon");
 
@@ -119,9 +118,13 @@ class PromotionCrudController extends AbstractCrudController
         yield DateTimeField::new("endsAt", 'sylius.form.promotion.ends_at')->setColumns(6)->hideOnIndex();
 
         yield SortableCollectionField::new('rules', 'sylius.form.promotion.rules')->setColumns(6)
-            ->setEntryType(PromotionRuleType::class)->allowAdd()->allowDrag(false)->hideOnIndex();
+            ->setEntryType(PromotionRuleType::class)->allowAdd()->allowDrag(false)
+            ->setFormTypeOption('hide_title', true)
+            ->hideOnIndex();
         yield SortableCollectionField::new('actions', 'sylius.form.promotion.actions')->setColumns(6)
-            ->setEntryType(\Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType::class)->allowAdd()->allowDrag(false)->hideOnIndex();
+            ->setEntryType(\Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType::class)->allowAdd()->allowDrag(false)
+            ->setFormTypeOption('hide_title', true)
+            ->hideOnIndex();
     }
 
     public function manageCoupon(AdminContext $context): Response

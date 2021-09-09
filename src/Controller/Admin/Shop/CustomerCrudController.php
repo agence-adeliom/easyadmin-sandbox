@@ -5,10 +5,12 @@ namespace App\Controller\Admin\Shop;
 use Adeliom\EasyFieldsBundle\Admin\Field\ChoiceMaskField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use App\Entity\Shop\Customer\Customer;
+use App\Entity\Shop\User\ShopUser;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -19,15 +21,25 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
+use Sylius\Bundle\CoreBundle\Security\UserImpersonator;
+use Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\GenderType;
 use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
+use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CustomerCrudController extends AbstractCrudController
 {
@@ -62,7 +74,7 @@ class CustomerCrudController extends AbstractCrudController
         $showOrders = Action::new("show_orders", 'sylius.ui.show_orders')->linkToCrudAction("showOrders");
         $actions->add(Crud::PAGE_INDEX, $showOrders);
 
-        $showOrdersEdit = Action::new("show_orders", 'sylius.ui.show_orders')->linkToCrudAction("manageVariants")->setCssClass("btn btn-secondary");
+        $showOrdersEdit = Action::new("show_orders", 'sylius.ui.show_orders')->linkToCrudAction("showOrders")->setCssClass("btn btn-secondary");
         $actions->add(Crud::PAGE_EDIT, $showOrdersEdit);
         $actions->add(Crud::PAGE_DETAIL, $showOrdersEdit);
 
@@ -80,13 +92,17 @@ class CustomerCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_customers")
             ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_customer")
             ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_customer")
-            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.currency")
+            ->setPageTitle(Crud::PAGE_DETAIL, function ($entity) {
+                return sprintf('%s<br/><small>%s</small>', $entity->getFullName(), $entity->getEmail());
+            })
             ->setEntityLabelInSingular('sylius.ui.customer')
             ->setEntityLabelInPlural('sylius.ui.customers')
 
             ->setFormOptions([
                 'validation_groups' => ['Default', 'sylius']
             ])
+            ->overrideTemplate('crud/detail', '@EasyShop/crud/customer/detail.html.twig')
+
             ;
     }
 
@@ -176,4 +192,57 @@ class CustomerCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
+    public function detail(AdminContext $context)
+    {
+        $request = $context->getRequest();
+        $customerStatistics = $this->get(CustomerStatisticsProviderInterface::class)->getCustomerStatistics($context->getEntity()->getInstance());
+        $request->attributes->set("statistics", $customerStatistics);
+
+        return parent::detail($context);
+    }
+
+    public function impersonate(AdminContext $context)
+    {
+        if (!$this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
+            throw new HttpException(Response::HTTP_UNAUTHORIZED);
+        }
+
+        $customer = $context->getEntity()->getInstance();
+        /** @var ShopUserInterface $user */
+        if($user = $customer->getUser()){
+            $this->get(UserImpersonatorInterface::class)->impersonate($user);
+            $this->addFlash('success', $this->get(TranslatorInterface::class)->trans(
+                'sylius.customer.impersonate',
+                [
+                    '%name%' => $user->getEmailCanonical(),
+                ],
+                'flashes'
+            ));
+        }
+
+        return new RedirectResponse($context->getRequest()->headers->get('referer'));
+    }
+
+    public function showOrders(AdminContext $context){
+        $orderCrud = $context->getCrudControllers()->findCrudFqcnByEntityFqcn($this->get(ParameterBagInterface::class)->get('sylius.model.order.class'));
+        return $this->redirect(
+            $this->get(AdminUrlGenerator::class)
+                ->setController($orderCrud)
+                ->setAction(Action::INDEX)
+                ->set('filters', ['customer' => ['value' => $context->getEntity()->getPrimaryKeyValue(), 'comparison' => '=']])
+                ->generateUrl()
+        );
+    }
+
+
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            CustomerStatisticsProviderInterface::class => '?'.CustomerStatisticsProviderInterface::class,
+            UserImpersonatorInterface::class => '?'.UserImpersonatorInterface::class,
+            TranslatorInterface::class => '?'.TranslatorInterface::class,
+            ParameterBagInterface::class => '?'.ParameterBagInterface::class,
+        ]);
+    }
 }

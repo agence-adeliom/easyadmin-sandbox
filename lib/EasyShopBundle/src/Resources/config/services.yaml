@@ -3,6 +3,13 @@ services:
         autowire: true
         autoconfigure: true
 
+    kernel.listener.admin_exception:
+        class: Adeliom\EasyShopBundle\EventListener\AdminExceptionListener
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
     Adeliom\EasyShopBundle\Locale\SyliusLocalProvider:
         arguments:
             - "@sylius.repository.locale"
@@ -74,6 +81,7 @@ services:
         arguments:
             - "%sylius.promotion_rules%"
             - "@sylius.form_registry.promotion_rule_checker"
+            - "%sylius.model.promotion_rule.class%"
         tags: [ form.type ]
 
     Adeliom\EasyShopBundle\Form\Type\PromotionBundle\ContainsProductConfigurationType:
@@ -97,6 +105,7 @@ services:
         arguments:
             - "%sylius.promotion_actions%"
             - "@sylius.form_registry.promotion_action"
+            - "%sylius.model.promotion_action.class%"
         tags: [ form.type ]
 
     Adeliom\EasyShopBundle\EventListener\SeoListener:
@@ -117,4 +126,16 @@ services:
             - "@sylius.factory.product_taxon"
             - "@sylius.repository.product_taxon"
             - "@sylius.repository.taxon"
+        tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Form\Type\PromotionBundle\Filter\TaxonFilterConfigurationType:
+        arguments:
+            - "@sylius.form.type.data_transformer.taxons_to_codes"
+            - "%sylius.model.taxon.class%"
+        tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Form\Type\PromotionBundle\Filter\ProductFilterConfigurationType:
+        arguments:
+            - "@sylius.form.type.data_transformer.products_to_codes"
+            - "%sylius.model.product.class%"
         tags: [ form.type ]
