@@ -4,6 +4,7 @@ namespace Adeliom\EasyBlockBundle\Controller;
 
 use Adeliom\EasyBlockBundle\Admin\Field\BlockSettingsField;
 use Adeliom\EasyBlockBundle\Block\BlockCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -19,14 +20,36 @@ abstract class BaseBlockCrudController extends AbstractCrudController
     {
         return $crud
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
+
+
+            ->setPageTitle(Crud::PAGE_INDEX, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_INDEX)
+            ->setPageTitle(Crud::PAGE_EDIT, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_EDIT)
+            ->setPageTitle(Crud::PAGE_NEW, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_NEW)
+            ->setPageTitle(Crud::PAGE_DETAIL, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_DETAIL)
+            ->setEntityLabelInSingular("easy.block.admin.crud.label.shared_block.singular")
+            ->setEntityLabelInPlural("easy.block.admin.crud.label.shared_block.plural")
             ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+        $pages = [Crud::PAGE_INDEX, Crud::PAGE_EDIT, Crud::PAGE_NEW, Crud::PAGE_DETAIL];
+        foreach ($pages as $page) {
+            $pageActions = $actions->getAsDto($page)->getActions();
+            foreach ($pageActions as $action) {
+                $action->setLabel("easy.block.admin.crud.label.shared_block." . $action->getName());
+                $actions->remove($page, $action->getAsConfigObject());
+                $actions->add($page, $action->getAsConfigObject());
+            }
+        }
+        return $actions;
     }
 
     public static function getSubscribedServices()
     {
         return array_merge(parent::getSubscribedServices(), [
-            'easy_block.block_collection' => '?'.BlockCollection::class,
-            'translator' => '?'.TranslatorInterface::class
+            'easy_block.block_collection' => '?'.BlockCollection::class
         ]);
     }
 
@@ -59,7 +82,6 @@ abstract class BaseBlockCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         global $blockType;
-        $translator = $this->container->get('translator');
 
         $context = $this->get(AdminContextProvider::class)->getContext();
         $subject = $context->getEntity();
@@ -68,12 +90,12 @@ abstract class BaseBlockCrudController extends AbstractCrudController
             $blockType = $subject->getInstance()->getType();
         }
 
-        yield TextField::new('name', $translator->trans("admin.label.name", [], "EasyBlockBundle"))->setRequired(true)->setColumns(8);
-        yield TextField::new('type', $translator->trans("admin.label.type", [], "EasyBlockBundle"))->setRequired(true)->setColumns(4)->setFormTypeOption('disabled','disabled');
-        yield BooleanField::new('status', $translator->trans("admin.label.status", [], "EasyBlockBundle"))->setColumns(12);
+        yield TextField::new('name', "easy.block.admin.field.name")->setRequired(true)->setColumns(8);
+        yield TextField::new('type', "easy.block.admin.field.type")->setRequired(true)->setColumns(4)->setFormTypeOption('disabled','disabled');
+        yield BooleanField::new('status', "easy.block.admin.field.status")->setColumns(12);
 
         if($blockType && in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])){
-            yield FormField::addPanel($translator->trans("admin.label.settings_section", [], "EasyBlockBundle"));
+            yield FormField::addPanel("easy.block.admin.field.settings_section");
             yield BlockSettingsField::new('settings', false)->setFormType($blockType);
         }
     }

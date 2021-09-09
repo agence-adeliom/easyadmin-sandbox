@@ -64,7 +64,7 @@ class SharedBlockType extends AbstractBlock implements BlockInterface
 
     public function getName(): string
     {
-        return $this->translator->trans("editor.shared_block", [], "EasyBlockBundle");
+        return $this->translator->trans("easy.block.editor.shared_block");
     }
 
     public function getIcon(): string

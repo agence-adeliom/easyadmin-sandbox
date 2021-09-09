@@ -9,7 +9,9 @@ use Sylius\Component\Product\Model\ProductAttributeValue as BaseProductAttribute
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="sylius_product_attribute_value")
+ * @ORM\Table(name="sylius_product_attribute_value", indexes={
+ *     @ORM\Index(name="sylius_product_attribute_value_indexes", columns={"locale_code"})
+ * })
  */
 class ProductAttributeValue extends BaseProductAttributeValue
 {
