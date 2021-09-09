@@ -32,6 +32,3 @@ easy:
         type: "Type"
         status: "Statut"
         settings_section: "Paramètres"
-PENDING: En attente de publication
-UNPUBLISHED: Non publié
-PUBLISHED: Publié

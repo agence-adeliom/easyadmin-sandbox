@@ -5,6 +5,7 @@ namespace Adeliom\EasyFaqBundle\Controller;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
+use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -106,8 +107,8 @@ abstract class BaseEntryCrudController extends AbstractCrudController
     public function publishFields(string $pageName, $subject): iterable
     {
         yield FormField::addPanel("easy.faq.admin.panel.publication")->collapsible()->addCssClass("col-4");
-        yield ChoiceField::new("state", "easy.faq.admin.field.state")
-            ->setChoices(ThreeStateStatusEnum::toArray())
+        yield EnumField::new("state", 'easy.faq.admin.field.state')
+            ->setEnum(ThreeStateStatusEnum::class)
             ->setRequired(true)
             ->renderExpanded(true)
             ->renderAsBadges(true);
