@@ -1,0 +1,9 @@
+easy_menu:
+#  menu:
+#    class: App\Entity\Faq\Entry
+#    repository: App\Repository\Faq\EntryRepository
+#    crud: App\Controller\Admin\Faq\EntryCrudController
+#  menu_item:
+#    class: App\Entity\Menu\Category
+#    repository: App\Repository\Faq\CategoryRepository
+#    crud: App\Controller\Admin\Faq\CategoryCrudController

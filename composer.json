@@ -1,8 +1,8 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "prefer-stable": false,
     "repositories": [
         {
             "type": "path",
@@ -43,24 +43,29 @@
         {
             "type": "path",
             "url": "lib/EasyFaqBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyMenuBundle"
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-exif": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "agence-adeliom/easy-media-bundle": "*@dev",
-        "agence-adeliom/easy-editor-bundle": "*@dev",
-        "agence-adeliom/easy-fields-bundle": "*@dev",
-        "agence-adeliom/easy-common-bundle": "*@dev",
-        "agence-adeliom/easy-seo-bundle": "*@dev",
-        "agence-adeliom/easy-page-bundle": "*@dev",
-        "agence-adeliom/easy-blog-bundle": "*@dev",
         "agence-adeliom/easy-block-bundle": "*@dev",
-        "agence-adeliom/easy-shop-bundle": "*@dev",
+        "agence-adeliom/easy-blog-bundle": "*@dev",
+        "agence-adeliom/easy-common-bundle": "*@dev",
+        "agence-adeliom/easy-editor-bundle": "*@dev",
         "agence-adeliom/easy-faq-bundle": "*@dev",
+        "agence-adeliom/easy-fields-bundle": "*@dev",
+        "agence-adeliom/easy-media-bundle": "*@dev",
+        "agence-adeliom/easy-menu-bundle": "dev-ecommerce",
+        "agence-adeliom/easy-page-bundle": "*@dev",
+        "agence-adeliom/easy-seo-bundle": "*@dev",
+        "agence-adeliom/easy-shop-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",

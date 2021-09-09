@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "855b034121f41c8dd0d0acbc80283f7a",
+    "content-hash": "f20546de3558f89e514ad8f696a1332d",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -172,7 +172,7 @@
         },
         {
             "name": "agence-adeliom/easy-block-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlockBundle",
@@ -190,7 +190,7 @@
         },
         {
             "name": "agence-adeliom/easy-blog-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlogBundle",
@@ -244,7 +244,7 @@
         },
         {
             "name": "agence-adeliom/easy-common-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyCommonBundle",
@@ -294,7 +294,7 @@
         },
         {
             "name": "agence-adeliom/easy-editor-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyEditorBundle",
@@ -344,7 +344,7 @@
         },
         {
             "name": "agence-adeliom/easy-faq-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFaqBundle",
@@ -398,7 +398,7 @@
         },
         {
             "name": "agence-adeliom/easy-fields-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFieldsBundle",
@@ -461,7 +461,7 @@
         },
         {
             "name": "agence-adeliom/easy-media-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyMediaBundle",
@@ -502,8 +502,30 @@
             }
         },
         {
+            "name": "agence-adeliom/easy-menu-bundle",
+            "version": "dev-ecommerce",
+            "dist": {
+                "type": "path",
+                "url": "lib/EasyMenuBundle",
+                "reference": "a13e095748bc22218029b83ea098f030f3c3c815"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Adeliom\\EasyMenuBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony bundle for EasyAdmin",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "agence-adeliom/easy-page-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyPageBundle",
@@ -566,7 +588,7 @@
         },
         {
             "name": "agence-adeliom/easy-seo-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasySeoBundle",
@@ -587,7 +609,7 @@
         },
         {
             "name": "agence-adeliom/easy-shop-bundle",
-            "version": "dev-master",
+            "version": "dev-ecommerce",
             "dist": {
                 "type": "path",
                 "url": "lib/EasyShopBundle",
@@ -19855,20 +19877,21 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
-        "agence-adeliom/easy-media-bundle": 20,
-        "agence-adeliom/easy-editor-bundle": 20,
-        "agence-adeliom/easy-fields-bundle": 20,
-        "agence-adeliom/easy-common-bundle": 20,
-        "agence-adeliom/easy-seo-bundle": 20,
-        "agence-adeliom/easy-page-bundle": 20,
-        "agence-adeliom/easy-blog-bundle": 20,
         "agence-adeliom/easy-block-bundle": 20,
-        "agence-adeliom/easy-shop-bundle": 20,
-        "agence-adeliom/easy-faq-bundle": 20
+        "agence-adeliom/easy-blog-bundle": 20,
+        "agence-adeliom/easy-common-bundle": 20,
+        "agence-adeliom/easy-editor-bundle": 20,
+        "agence-adeliom/easy-faq-bundle": 20,
+        "agence-adeliom/easy-fields-bundle": 20,
+        "agence-adeliom/easy-media-bundle": 20,
+        "agence-adeliom/easy-menu-bundle": 20,
+        "agence-adeliom/easy-page-bundle": 20,
+        "agence-adeliom/easy-seo-bundle": 20,
+        "agence-adeliom/easy-shop-bundle": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4",

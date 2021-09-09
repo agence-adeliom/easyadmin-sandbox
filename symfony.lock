@@ -17,11 +17,17 @@
     "agence-adeliom/easy-editor-bundle": {
         "version": "dev-master"
     },
+    "agence-adeliom/easy-faq-bundle": {
+        "version": "dev-master"
+    },
     "agence-adeliom/easy-fields-bundle": {
         "version": "dev-master"
     },
     "agence-adeliom/easy-media-bundle": {
         "version": "dev-master"
+    },
+    "agence-adeliom/easy-menu-bundle": {
+        "version": "dev-ecommerce"
     },
     "agence-adeliom/easy-page-bundle": {
         "version": "dev-master"
@@ -30,9 +36,6 @@
         "version": "dev-master"
     },
     "agence-adeliom/easy-shop-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-faq-bundle": {
         "version": "dev-master"
     },
     "alcohol/iso4217": {

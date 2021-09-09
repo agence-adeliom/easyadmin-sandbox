@@ -32,6 +32,3 @@ easy:
         type: "Type"
         status: "Status"
         settings_section: "Parameters"
-PENDING: Pending
-UNPUBLISHED: Unpublished
-PUBLISHED: Published
