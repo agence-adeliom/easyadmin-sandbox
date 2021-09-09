@@ -3,6 +3,7 @@
 namespace Adeliom\EasyPageBundle\Controller;
 
 
+use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use Doctrine\ORM\QueryBuilder;
@@ -97,8 +98,8 @@ abstract class BasePageCrudController extends AbstractCrudController
     public function publishFields(string $pageName, $subject): iterable
     {
         yield FormField::addPanel($this->translator->trans("admin.panel.publication", [], "EasyPageBundle"))->collapsible()->addCssClass("col-4");
-        yield ChoiceField::new("state", $this->translator->trans("admin.field.state", [], "EasyPageBundle"))
-            ->setChoices(ThreeStateStatusEnum::toArray())
+        yield EnumField::new("state", $this->translator->trans("admin.field.state", [], "EasyPageBundle"))
+            ->setEnum(ThreeStateStatusEnum::class)
             ->setRequired(true)
             ->renderExpanded(true)
             ->renderAsBadges(true);

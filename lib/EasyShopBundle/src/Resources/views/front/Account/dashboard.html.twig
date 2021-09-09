@@ -3,48 +3,60 @@
 {% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('easy_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
-    </div>
+<nav id="easy_seo-breadcrumbs" style="--bs-breadcrumb-divider: '{{ easy_seo_breadcrumb.separator }}';" aria-label="breadcrumb">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="{{ easy_seo_breadcrumb.class }}">
+        <li itemprop="itemListElement" class="{{ easy_seo_breadcrumb.item_class }}" aria-current="page" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="{{ path('sylius_shop_homepage') }}" class="{{ easy_seo_breadcrumb.link_class }}">
+                <span itemprop="name">{{ 'sylius.ui.home'|trans }}</span>
+            </a>
+        </li>
+
+        <li itemprop="itemListElement" class="{{ easy_seo_breadcrumb.item_class }} {{ easy_seo_breadcrumb.current_class }}" aria-current="page" itemscope itemtype="http://schema.org/ListItem">
+            <span itemprop="item" href="{{ path('sylius_shop_homepage') }}" class="{{ easy_seo_breadcrumb.link_class }}">
+                <span itemprop="name">{{ 'sylius.ui.my_account'|trans }}</span>
+            </span>
+        </li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block subcontent %}
-    <h1 class="ui dividing header">
+    <h1>
         {{ 'sylius.ui.my_account'|trans }}
-        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
     </h1>
+    <p class="fs-5 col-md-8">
+        {{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}
+    </p>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'customer': customer}) }}
 
-    <div class="ui large list" id="customer-information" {{ sylius_test_html_attribute('customer-information') }}>
-        <div class="item">
+    <div id="customer-information" {{ sylius_test_html_attribute('customer-information') }}>
+        <div class="item mb-1">
             {{ customer.fullName }}
         </div>
-        <div class="item">
+        <div class="item mb-3">
             <strong>
                 {{ customer.email }}
             </strong>
         </div>
         <div class="item">
             {% if customer.user.verified %}
-                <span class="ui icon green basic label"><i class="checkmark icon"></i> {{ 'sylius.ui.verified'|trans }}</span>
+                <span class="btn btn-outline-success pe-none">{{ 'sylius.ui.verified'|trans }}</span>
             {% else %}
-                <span class="ui icon red basic label"><i class="remove icon"></i> {{ 'sylius.ui.not_verified'|trans }}</span>
+                <span class="btn btn-outline-danger pe-none">{{ 'sylius.ui.not_verified'|trans }}</span>
             {% endif %}
         </div>
     </div>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
 
-    <div class="ui text menu">
-        <a href="{{ path('easy_shop_account_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
-        <a href="{{ path('easy_shop_account_change_password') }}" class="item"><i class="lock icon"></i> {{ 'sylius.ui.change_password'|trans }}</a>
+    <div class="d-flex mt-3">
+        <a href="{{ path('easy_shop_account_profile_update') }}" class="btn btn-link">{{ 'sylius.ui.edit'|trans }}</a>
+        <a href="{{ path('easy_shop_account_change_password') }}" class="btn btn-link">{{ 'sylius.ui.change_password'|trans }}</a>
         {% if not customer.user.verified %}
             <form class="item" id="verification-form" {{ sylius_test_html_attribute('verification-form') }} action="{{ path('easy_shop_user_request_verification_token') }}" method="post">
-                <button type="submit" class="ui basic icon mini button" {{ sylius_test_html_attribute('verification-button') }}>
-                    <i class="checkmark icon"></i> {{ 'sylius.ui.verify'|trans }}
+                <button type="submit" class="btn btn-link" {{ sylius_test_html_attribute('verification-button') }}>
+                    {{ 'sylius.ui.verify'|trans }}
                 </button>
             </form>
         {% endif %}

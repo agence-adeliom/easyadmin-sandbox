@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class TaxCategoryCrudController extends AbstractCrudController
+class   TaxCategoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {

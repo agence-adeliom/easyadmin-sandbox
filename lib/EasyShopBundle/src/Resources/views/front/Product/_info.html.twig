@@ -1,22 +1,26 @@
 {% set product = variant.product %}
+{% set slug = product.slug %}
+{% if product.mainTaxon %}
+    {% set slug = product.mainTaxon.tree ~ '/' ~ slug %}
+{% endif %}
 
-<div class="ui header">
+<div class="d-flex gap-3 align-items-center mb-2">
     {% if variant.hasImages %}
         {% include '@EasyShop/front/Product/_mainImage.html.twig' with {'product': variant, 'filter': 'easy_shop_product_tiny_thumbnail'} %}
     {% else %}
         {% include '@EasyShop/front/Product/_mainImage.html.twig' with {'product': product, 'filter': 'easy_shop_product_tiny_thumbnail'} %}
     {% endif %}
     <div class="content">
-        <a href="{{ path('easy_shop_product_show', {'slug': product.slug}) }}">
-            <div class="sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>{{ item.productName }}</div>
-            <span class="sub header sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code') }}>
+        <a href="{{ path('easy_shop_product_show', {'slug': slug}) }}" class="link-primary text-decoration-none">
+            <div class="sylius-product-name fw-bolder" {{ sylius_test_html_attribute('product-name', item.productName) }}>{{ item.productName }}</div>
+            <span class="sylius-product-variant-code small text-dark" {{ sylius_test_html_attribute('product-variant-code') }}>
                 {{ variant.code }}
             </span>
         </a>
     </div>
 </div>
 {% if product.hasOptions() %}
-    <div class="ui horizontal divided list sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
+    <div class="d-flex sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
         {% for optionValue in variant.optionValues %}
             <div class="item" data-sylius-option-name="{{ optionValue.name }}" {{ sylius_test_html_attribute('option-name', optionValue.name) }}>
                 {{ optionValue.value }}
@@ -24,7 +28,7 @@
         {% endfor %}
     </div>
 {% elseif item.variantName is not null %}
-    <div class="ui horizontal divided list">
+    <div class="d-flex">
         <div class="item sylius-product-variant-name" {{ sylius_test_html_attribute('product-variant-name') }}>
             {{ item.variantName }}
         </div>

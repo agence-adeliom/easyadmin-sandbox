@@ -4,12 +4,12 @@
 {% set taxIncluded = sylius_order_tax_included(cart) %}
 {% set taxExcluded = sylius_order_tax_excluded(cart) %}
 
-<div class="ui segment">
-    <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
+<div class="d-block">
+    <h2>{{ 'sylius.ui.summary'|trans }}</h2>
 
     {{ sylius_template_event('sylius.shop.cart.summary.totals', {'cart': cart}) }}
 
-    <table class="ui very basic table">
+    <table class="table">
         <tbody>
         <tr>
             <td>{{ 'sylius.ui.items_total'|trans }}:</td>

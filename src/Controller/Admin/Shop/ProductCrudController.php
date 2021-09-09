@@ -4,10 +4,12 @@ namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAttributesField;
-use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationsType;
+use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ChannelCollectionType;
+use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductImageType;
 use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductTaxonType;
 use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Taxonomy\Taxon;
@@ -19,30 +21,25 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
-use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
-use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ChannelCollectionType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductCrudController extends AbstractCrudController
@@ -142,6 +139,19 @@ class ProductCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setFormTypeOption("multiple", true)
             ->setFormTypeOption("expanded", true);
+    }
+
+    public function mediaFields(string $pageName, AdminContext $context): iterable
+    {
+        yield FormField::addPanel("sylius.ui.images")->collapsible()->renderCollapsed();
+        yield SortableCollectionField::new('images', false)->setEntryType(ProductImageType::class)
+            ->setFormTypeOption('hide_title', true)
+            ->setFormTypeOption('entry_options', [
+                'product' => $context->getEntity()->getInstance()
+            ])
+            ->allowAdd()
+            ->allowDrag()
+            ->allowDelete();
     }
 
     public function inventoryFields(string $pageName, AdminContext $context): iterable
@@ -259,6 +269,7 @@ class ProductCrudController extends AbstractCrudController
         $context = $this->adminContextProvider->getContext();
 
         yield from $this->informationFields($pageName, $context);
+        yield from $this->mediaFields($pageName, $context);
         yield from $this->pricingFields($pageName, $context);
         yield from $this->metaFields($pageName, $context);
         yield from $this->inventoryFields($pageName, $context);
@@ -413,9 +424,12 @@ class ProductCrudController extends AbstractCrudController
 
     public function manageStock(AdminContext $context): Response
     {
-        $tracked =$this->productVariantRepository->findBy([
+        /** @var Pagerfanta $tracked */
+        $tracked =$this->productVariantRepository->createPaginator([
             "tracked" => true
         ]);
+        $tracked->setMaxPerPage(25);
+        $tracked->setCurrentPage($context->getRequest()->query->get("page", 1));
 
         return $this->render('@EasyShop/crud/variant/stocks.html.twig', [
             'tracked' => $tracked,

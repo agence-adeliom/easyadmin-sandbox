@@ -90,6 +90,7 @@ final class PromotionRuleType extends AbstractType
             if($rule = $event->getData()) {
                 /** @var PromotionRule $rule */
                 $configurations = $rule->getConfiguration();
+                dump($rule, $form->get($rule->getType()), $configurations);
                 $form->get($rule->getType())->setData($configurations);
             }
         });

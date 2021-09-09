@@ -1,4 +1,4 @@
-<div class="ui unmargined segments">
+<div class="d-block">
     {% for key, shipment in order.shipments %}
         {% include '@EasyShop/front/Checkout/SelectShipping/_shipment.html.twig' with {'form': form.shipments[key]} %}
     {% else %}

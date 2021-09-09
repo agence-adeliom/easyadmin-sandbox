@@ -1,7 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-easy_shop_order_thank_you:
+sylius_shop_order_thank_you:
     path: /thank-you
     methods: [GET]
     defaults:
@@ -24,7 +24,7 @@ easy_shop_order_after_pay:
     defaults:
         _controller: sylius.controller.payum:afterCaptureAction
 
-easy_shop_order_show:
+sylius_shop_order_show:
     path: /{tokenValue}
     methods: [GET, PUT]
     defaults:

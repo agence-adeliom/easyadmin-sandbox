@@ -16,6 +16,8 @@ use App\Entity\Shop\Currency\ExchangeRate;
 use App\Entity\Shop\Customer\Customer;
 use App\Entity\Shop\Customer\CustomerGroup;
 use App\Entity\Shop\Locale\Locale;
+use App\Entity\Shop\Order\Order;
+use App\Entity\Shop\Payment\Payment;
 use App\Entity\Shop\Payment\PaymentMethod;
 use App\Entity\Shop\Product\Product;
 use App\Entity\Shop\Product\ProductAssociationType;
@@ -23,6 +25,7 @@ use App\Entity\Shop\Product\ProductAttribute;
 use App\Entity\Shop\Product\ProductOption;
 use App\Entity\Shop\Product\ProductReview;
 use App\Entity\Shop\Promotion\Promotion;
+use App\Entity\Shop\Shipping\Shipment;
 use App\Entity\Shop\Shipping\ShippingCategory;
 use App\Entity\Shop\Shipping\ShippingMethod;
 use App\Entity\Shop\Taxation\TaxCategory;
@@ -85,6 +88,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('sylius.ui.marketing');
         yield MenuItem::linkToCrud('sylius.ui.promotions', 'fas fa-percentage', Promotion::class);
         yield MenuItem::linkToCrud('sylius.ui.product_reviews', 'fas fa-newspaper', ProductReview::class);
+
+        yield MenuItem::section('sylius.ui.sales');
+        yield MenuItem::linkToCrud('sylius.ui.orders', 'fas fa-shopping-cart', Order::class);
+        yield MenuItem::linkToCrud('sylius.ui.payments', 'fas fa-credit-card', Payment::class);
+        yield MenuItem::linkToCrud('sylius.ui.shipments', 'fas fa-truck', Shipment::class);
 
         yield MenuItem::section('sylius.ui.customer');
         yield MenuItem::linkToCrud('sylius.ui.customers', 'fas fa-users', Customer::class);

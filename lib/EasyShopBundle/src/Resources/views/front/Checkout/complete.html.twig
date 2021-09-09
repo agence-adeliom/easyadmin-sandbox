@@ -7,7 +7,7 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.complete.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'complete', 'orderTotal': order.total})) }}
 
-    <div class="ui padded segment">
+    <div class="d-block">
         {% include '@EasyShop/front/Checkout/Complete/_header.html.twig' %}
 
         {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
@@ -20,12 +20,13 @@
 
             {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
 
-            <div class="ui hidden divider"></div>
             {% include '@EasyShop/front/Checkout/Complete/_form.html.twig' %}
 
             {{ sylius_template_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
 
-            {% include '@EasyShop/front/Checkout/Complete/_navigation.html.twig' %}
+            <div class="text-center">
+                {% include '@EasyShop/front/Checkout/Complete/_navigation.html.twig' %}
+            </div>
 
             {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

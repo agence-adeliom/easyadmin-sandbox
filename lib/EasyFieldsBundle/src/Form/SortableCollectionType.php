@@ -53,6 +53,7 @@ class SortableCollectionType extends CollectionType
             'allow_drag' => $options['allow_drag'],
             'allow_add' => $options['allow_add'],
             'allow_delete' => $options['allow_delete'],
+            'hide_title' => $options['hide_title']
         ]);
 
         if ($form->getConfig()->hasAttribute('prototype')) {
@@ -109,6 +110,7 @@ class SortableCollectionType extends CollectionType
         $resolver->setDefaults([
             'allow_drag' => false,
             'allow_add' => false,
+            'hide_title' => false,
             'allow_delete' => false,
             'prototype' => true,
             'prototype_data' => null,

@@ -9,9 +9,9 @@ easy_shop_account_order_index:
         _sylius:
             section: shop_account
             template: "@EasyShop/front/Account/Order/index.html.twig"
-            grid: easy_shop_account_order
+            grid: sylius_shop_account_order
 
-easy_shop_account_order_show:
+sylius_shop_account_order_show:
     path: /{number}
     methods: [GET]
     defaults:

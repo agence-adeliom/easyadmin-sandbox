@@ -1,5 +1,5 @@
-<div class="ui unmargined segments">
-    {% for payment_form in form.payments %}
+<div class="d-block">
+{% for payment_form in form.payments %}
         {% include '@EasyShop/front/Checkout/SelectPayment/_payment.html.twig' with {'form': payment_form} %}
     {% else %}
         {% include '@EasyShop/front/Checkout/SelectPayment/_unavailable.html.twig' %}

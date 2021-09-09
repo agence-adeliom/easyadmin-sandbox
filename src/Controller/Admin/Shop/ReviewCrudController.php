@@ -3,22 +3,36 @@
 namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
-use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Product\ProductReview;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\LocaleField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use SM\Factory\Factory;
+use SM\Factory\FactoryInterface;
+use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\ProductReviewTransitions;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
+use Sylius\Component\Mailer\Sender\Sender;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Review\Model\Review;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class ReviewCrudController extends AbstractCrudController
 {
@@ -89,24 +103,35 @@ class ReviewCrudController extends AbstractCrudController
 
     public function accept(AdminContext $context): Response
     {
-        return $this->updateReviewStatus(Review::STATUS_ACCEPTED, $context);
+        return $this->updateReviewStatus(ProductReviewTransitions::TRANSITION_ACCEPT, $context);
     }
 
     public function reject(AdminContext $context): Response
     {
-        return $this->updateReviewStatus(Review::STATUS_REJECTED, $context);
+        return $this->updateReviewStatus(ProductReviewTransitions::TRANSITION_REJECT, $context);
     }
 
-    private function updateReviewStatus(string $status, AdminContext $context){
+    private function updateReviewStatus(string $transition, AdminContext $context)
+    {
         $entity = $context->getEntity()->getInstance();
-        $entity->setStatus($status);
-        $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
+
+        $sm = $this->get(Factory::class)->get($entity, "sylius_product_review");
+        if($sm->apply($transition)) {
+            $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
+        }
 
         if (null !== $referrer = $context->getReferrer()) {
             return $this->redirect($referrer);
         }
 
         return $this->redirect($this->get(AdminUrlGenerator::class)->setAction(Action::INDEX)->unset(EA::ENTITY_ID)->generateUrl());
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            Factory::class => '?'.FactoryInterface::class
+        ]);
     }
 
 }

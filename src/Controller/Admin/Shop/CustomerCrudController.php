@@ -4,16 +4,14 @@ namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\ChoiceMaskField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
-use Adeliom\EasyFieldsBundle\Form\ChoiceMaskType;
-use App\Entity\Shop\Addressing\Country;
 use App\Entity\Shop\Customer\Customer;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -21,7 +19,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\GenderType;
@@ -58,6 +55,20 @@ class CustomerCrudController extends AbstractCrudController
         $customer = $this->customerFactory->createNew();
         $customer->setUser($this->userFactory->createNew());
         return $customer;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $showOrders = Action::new("show_orders", 'sylius.ui.show_orders')->linkToCrudAction("showOrders");
+        $actions->add(Crud::PAGE_INDEX, $showOrders);
+
+        $showOrdersEdit = Action::new("show_orders", 'sylius.ui.show_orders')->linkToCrudAction("manageVariants")->setCssClass("btn btn-secondary");
+        $actions->add(Crud::PAGE_EDIT, $showOrdersEdit);
+        $actions->add(Crud::PAGE_DETAIL, $showOrdersEdit);
+
+        $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
+
+        return $actions;
     }
 
     public function configureCrud(Crud $crud): Crud

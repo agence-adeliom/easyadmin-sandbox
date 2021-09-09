@@ -5,19 +5,19 @@
 {% set orderShippingPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderShippingPromotionAdjustment)) %}
 
 {% if not orderShippingPromotions is empty %}
-    <td colspan="4" class="right aligned" id="promotion-shipping-discounts" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
+    <td colspan="4" class="text-end" id="promotion-shipping-discounts" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
         {{ 'sylius.ui.shipping_total'|trans }}:
         <span class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}</span>
         <span>
            <span id="shipping-total" {{ sylius_test_html_attribute('shipping-total') }}>{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment)) }}</span>
-            <i id="shipping-promotion-details" class="question circle icon popup-js"
+            <i id="shipping-promotion-details" data-bs-toggle="tooltip" data-bs-html="true"
                {{ sylius_test_html_attribute('shipping-promotion-details') }}
-               data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}"
-            ></i>
+               title="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}"
+            >Infos</i>
         </span>
     </td>
 {% elseif order.shipments is not empty %}
-    <td colspan="4" class="right aligned" id="shipping-total">
+    <td colspan="4" class="text-end" id="shipping-total">
         {{ 'sylius.ui.shipping_total'|trans }}:
         <span {{ sylius_test_html_attribute('shipping-total') }}>{{ money.convertAndFormat(order.shippingTotal) }}</span>
     </td>

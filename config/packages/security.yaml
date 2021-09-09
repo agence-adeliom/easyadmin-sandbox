@@ -57,7 +57,7 @@ security:
                 login_path: easy_shop_login
                 check_path: easy_shop_login_check
                 failure_path: easy_shop_login
-                default_target_path: easy_shop_homepage
+                default_target_path: sylius_shop_homepage
                 use_forward: false
                 use_referer: true
             remember_me:

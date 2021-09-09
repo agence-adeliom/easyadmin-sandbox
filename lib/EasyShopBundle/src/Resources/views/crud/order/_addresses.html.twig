@@ -1,0 +1,31 @@
+{% if order.billingAddress is not null %}
+<div class="col-12 col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ 'sylius.ui.billing_address'|trans }}</h4>
+            <div id="billing-address mb-0">
+                {% include '@EasyShop/crud/Common/_address.html.twig' with {'address': order.billingAddress} %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if order.shippingAddress is not null %}
+<div class="col-12 col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ 'sylius.ui.shipping_address'|trans }}</h4>
+            <div id="shipping-address mb-0">
+                {% include '@EasyShop/crud/Common/_address.html.twig' with {'address': order.shippingAddress} %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{#<div class="ui attached segment" id="edit-addresses">#}
+{#    <a href="{{ path('sylius_admin_order_update', {'id': order.id}) }}" class="ui icon labeled tiny fluid button">#}
+{#        <i class="pencil icon"></i> {{ 'sylius.ui.edit_addresses'|trans }}#}
+{#    </a>#}
+{#</div>#}

@@ -1,6 +1,6 @@
 {% extends '@EasyShop/front/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@EasyShop/SyliusUiBundle/Macro/messages.html.twig' as messages %}
 
 {% form_theme form '@EasyShop/front/Form/theme.html.twig' %}
 
@@ -11,14 +11,16 @@
         {% include '@EasyShop/front/Order/_summary.html.twig' %}
 
         {% if order.paymentState in ['awaiting_payment'] %}
-            {{ form_start(form, {'action': path('easy_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             <input type="hidden" name="_method" value="PUT" />
 
             {% include '@EasyShop/front/Checkout/SelectPayment/_form.html.twig' %}
-            <div class="ui hidden divider"></div>
-            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
-                <i class="check icon"></i> {{ 'sylius.ui.pay'|trans }}
-            </button>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
+                    {{ 'sylius.ui.pay'|trans }}
+                </button>
+            </div>
 
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}

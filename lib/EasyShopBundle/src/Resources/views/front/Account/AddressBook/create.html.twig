@@ -5,27 +5,26 @@
 {% block title %}{{ 'sylius.ui.add_address'|trans }} | {{ parent() }}{% endblock %}
 
 {% block subcontent %}
-    <div class="ui segment">
-        <h1 class="ui dividing header">
+    <div class="d-block">
+
+        <h1>
             {{ 'sylius.ui.address_book'|trans }}
-            <div class="sub header">{{ 'sylius.ui.add_address'|trans }}</div>
         </h1>
+        <p class="fs-5 col-md-8">
+            {{ 'sylius.ui.add_address'|trans }}
+        </p>
 
         {{ sylius_template_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
 
         {{ form_start(form, {'action': path('easy_shop_account_address_book_create'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {% include '@EasyShop/front/Common/Form/_address.html.twig' with {'form': form} %}
-            <div class="ui two column grid">
-                <div class="column">
-                    <a href="{{ path('easy_shop_account_address_book_index') }}" class="ui large icon labeled button">
-                        <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
-                    </a>
-                </div>
-                <div class="right aligned column">
-                    <button type="submit" class="ui large icon labeled blue button" {{ sylius_test_html_attribute('add-address') }}>
-                        <i class="icon plus"></i> {{ 'sylius.ui.add'|trans }}
-                    </button>
-                </div>
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="{{ path('easy_shop_account_address_book_index') }}" class="btn btn-secondary">
+                    {{ 'sylius.ui.cancel'|trans }}
+                </a>
+                <button type="submit" class="btn btn-success" {{ sylius_test_html_attribute('add-address') }}>
+                    {{ 'sylius.ui.add'|trans }}
+                </button>
             </div>
 
         {{ sylius_template_event('sylius.shop.account.address_book.create.form', {'address': address}) }}

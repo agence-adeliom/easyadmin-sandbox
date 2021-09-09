@@ -1,17 +1,14 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import '@EasyShop/SyliusUiBundle/Macro/buttons.html.twig' as buttons %}
 
-<div class="eight wide column">
-    <div class="ui segment address">
-        <div class="ui stackable two column grid" {{ sylius_test_html_attribute('address', "%s %s"|format(address.firstName, address.lastName)) }}>
-            <div class="column">
-                {% include '@EasyShop/front/Common/_address.html.twig' with {'address': address} %}
-            </div>
-            <div class="right aligned column">
-                <div class="ui vertical small icon labeled buttons">
-                    <div {{ sylius_test_html_attribute('edit-button') }}>{{ buttons.edit(path('easy_shop_account_address_book_update', {'id': address.id})) }}</div>
-                    {{ render(path('easy_shop_account_address_book_set_as_default', {'id': address.id})) }}
-                    {{ buttons.delete(path('easy_shop_account_address_book_delete', {'id': address.id}), null, true, address.id) }}
-                </div>
+<div class="col-12 col-sm-6">
+    <div class="card">
+        <div class="card-body" {{ sylius_test_html_attribute('address', "%s %s"|format(address.firstName, address.lastName)) }}>
+            {% include '@EasyShop/front/Common/_address.html.twig' with {'address': address} %}
+
+            <div class="d-flex gap-2">
+                <div {{ sylius_test_html_attribute('edit-button') }}>{{ buttons.edit(path('easy_shop_account_address_book_update', {'id': address.id})) }}</div>
+                {{ render(path('easy_shop_account_address_book_set_as_default', {'id': address.id})) }}
+                {{ buttons.delete(path('easy_shop_account_address_book_delete', {'id': address.id}), null, true, address.id) }}
             </div>
         </div>
     </div>

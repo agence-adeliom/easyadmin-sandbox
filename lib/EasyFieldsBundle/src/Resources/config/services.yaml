@@ -21,6 +21,9 @@ services:
     Adeliom\EasyFieldsBundle\Admin\Field\Configurator\ChoiceMaskConfigurator:
         public: true
 
+    Adeliom\EasyFieldsBundle\Admin\Field\Configurator\EnumConfigurator:
+        public: true
+
     Adeliom\EasyFieldsBundle\EventListener\AdminListener:
         tags:
             - { name: kernel.event_listener, event: kernel.response }

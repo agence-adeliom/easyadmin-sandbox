@@ -87,6 +87,38 @@
         </tbody>
     </table>
     {% endif %}
+    {% dump(tracked) %}
+    <div class="list-pagination">
+        <div class="list-pagination-counter">
+            {{ 'paginator.results'|trans({'%count%': tracked.nbResults|format}, 'EasyAdminBundle')|raw }}
+        </div>
+
+        <nav class="pager list-pagination-paginator {{ not tracked.hasPreviousPage ? 'first-page' }} {{ not tracked.hasNextPage ? 'last-page' }}">
+            <ul class="pagination">
+                <li class="page-item {{ not tracked.hasPreviousPage ? 'disabled' }}">
+                    <a class="page-link" href="{{ not tracked.hasPreviousPage ? '#' : ea_url({'page': tracked.previousPage}) }}">
+                        <i class="fa fa-angle-left mx-1"></i> <span class="btn-label">{{ 'paginator.previous'|trans({}, 'EasyAdminBundle') }}</span>
+                    </a>
+                </li>
+
+                {% for page in range(1, tracked.nbPages) %}
+                    <li class="page-item {{ page == tracked.currentPage ? 'active' }} {{ page is null ? 'disabled' }}">
+                        {% if page is null %}
+                            <span class="page-link">&hellip;</span>
+                        {% else %}
+                            <a class="page-link" href="{{ ea_url({'page': page}) }}">{{ page }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+
+                <li class="page-item {{ not tracked.hasNextPage ? 'disabled' }}">
+                    <a class="page-link" href="{{ not tracked.hasNextPage ? '#' :  ea_url({'page': tracked.nextPage}) }}">
+                        <span class="btn-label">{{ 'paginator.next'|trans({}, 'EasyAdminBundle') }}</span> <i class="fa fa-angle-right mx-1"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
     {{ include('@EasyAdmin/crud/includes/_batch_action_modal.html.twig', {}, with_context = false) }}
 
