@@ -24,13 +24,17 @@ class Taxon extends BaseTaxon
         return TaxonTranslation::class;
     }
 
-    public function getTree(string $separator = '/'): string
+    public function getTree(string $separator = '/', bool $name = false): string
     {
         $tree = '';
 
         $current = $this;
         do {
-            $tree    = $current->getSlug().$separator.$tree;
+            if ($name){
+                $tree    = ((string) $current).$separator.$tree;
+            }else{
+                $tree    = $current->getSlug().$separator.$tree;
+            }
             $current = $current->getParent();
         } while ($current);
 

@@ -1,7 +1,7 @@
 {% macro default(url, message, id, icon, class) %}
     <a class="btn {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %} {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
-            <i class="icon {{ icon }}"></i>
+            <i class="fa {{ icon }}"></i>
         {% endif %}
         {% if message is not empty %}
             {{ message|trans }}
@@ -16,7 +16,7 @@
         {% set message = 'sylius.ui.show' %}
     {% endif %}
 
-    {{ buttons.default(url, message, id, 'search') }}
+    {{ buttons.default(url, message, id, 'fa-search') }}
 {% endmacro %}
 
 {% macro create(url, message, id, labeled = true) %}
@@ -26,7 +26,7 @@
         {% set message = 'sylius.ui.create' %}
     {% endif %}
 
-    {{ buttons.default(url, message, id, 'plus', 'primary') }}
+    {{ buttons.default(url, message, id, 'fa-plus', 'btn-primary') }}
 {% endmacro %}
 
 {% macro edit(url, message, id, labeled = true) %}

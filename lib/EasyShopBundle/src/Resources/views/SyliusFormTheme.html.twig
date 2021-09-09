@@ -260,3 +260,51 @@
         }
     </style>
 {% endblock sylius_product_attributes_entry_widget %}
+
+
+{% block sylius_address_widget %}
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.lastName) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ form_row(form.company) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ form_row(form.street) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    {{ form_row(form.postcode) }}
+                </div>
+                <div class="col-8">
+                    {{ form_row(form.city) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.countryCode) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.provinceName) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ form_row(form.phoneNumber) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock sylius_address_widget %}

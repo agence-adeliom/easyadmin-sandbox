@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Shop;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
+use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use App\Entity\Shop\Customer\Customer;
 use App\Entity\Shop\Locale\Locale;
 use App\Entity\Shop\Order\Order;
@@ -46,6 +47,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use SM\Factory\Factory;
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository;
 use Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
@@ -87,9 +89,10 @@ class OrderCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
             ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.orders")
             ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_order")
-            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_order")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_addresses")
             ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.order_details")
             ->setEntityLabelInSingular('sylius.ui.order')
             ->setEntityLabelInPlural('sylius.ui.orders')
@@ -169,24 +172,25 @@ class OrderCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield DateTimeField::new('createdAt', 'sylius.ui.date');
-        yield TextField::new('channel', 'sylius.ui.channel');
-        yield TextField::new('number', 'sylius.ui.code')->formatValue(function ($value, $entity){
-            if($value){
-                return "#" . $value;
-            }
-        });
-        yield TextField::new('customer', 'sylius.ui.customer')->formatValue(function ($value, Order $entity){
-            if($value){
-                return '<strong>' . $entity->getCustomer()->getFullName() . "</strong><br>" . $entity->getCustomer()->getEmail();
-            }
-        });
-        yield ChoiceField::new('state', 'sylius.ui.state')
-            ->setChoices([
-                'sylius.ui.'.Order::STATE_CART => Order::STATE_CART,
-                'sylius.ui.'.Order::STATE_CANCELLED => Order::STATE_CANCELLED,
-                'sylius.ui.'.Order::STATE_FULFILLED => Order::STATE_FULFILLED,
-                'sylius.ui.'.Order::STATE_NEW => Order::STATE_NEW
+        if($pageName == Crud::PAGE_INDEX) {
+            yield DateTimeField::new('createdAt', 'sylius.ui.date');
+            yield TextField::new('channel', 'sylius.ui.channel');
+            yield TextField::new('number', 'sylius.ui.code')->formatValue(function ($value, $entity) {
+                if ($value) {
+                    return "#" . $value;
+                }
+            });
+            yield TextField::new('customer', 'sylius.ui.customer')->formatValue(function ($value, Order $entity) {
+                if ($value) {
+                    return '<strong>' . $entity->getCustomer()->getFullName() . "</strong><br>" . $entity->getCustomer()->getEmail();
+                }
+            });
+            yield ChoiceField::new('state', 'sylius.ui.state')
+                ->setChoices([
+                    'sylius.ui.' . Order::STATE_CART => Order::STATE_CART,
+                    'sylius.ui.' . Order::STATE_CANCELLED => Order::STATE_CANCELLED,
+                    'sylius.ui.' . Order::STATE_FULFILLED => Order::STATE_FULFILLED,
+                    'sylius.ui.' . Order::STATE_NEW => Order::STATE_NEW
 //                'sylius.ui.'.OrderCheckoutStates::STATE_CART => OrderCheckoutStates::STATE_CART,
 //                'sylius.ui.'.OrderCheckoutStates::STATE_CART => OrderCheckoutStates::STATE_CART,
 //                'sylius.ui.'.OrderCheckoutStates::STATE_COMPLETED => OrderCheckoutStates::STATE_COMPLETED,
@@ -195,31 +199,37 @@ class OrderCrudController extends AbstractCrudController
 //                'sylius.ui.'.OrderCheckoutStates::STATE_PAYMENT_SKIPPED => OrderCheckoutStates::STATE_PAYMENT_SKIPPED,
 //                'sylius.ui.'.OrderCheckoutStates::STATE_SHIPPING_SELECTED => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
 //                'sylius.ui.'.OrderCheckoutStates::STATE_SHIPPING_SKIPPED => OrderCheckoutStates::STATE_SHIPPING_SKIPPED,
-            ]);
-        yield ChoiceField::new('paymentState', 'sylius.ui.payment_state')
-            ->setChoices([
-                'sylius.ui.'.OrderPaymentStates::STATE_AUTHORIZED => OrderPaymentStates::STATE_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_AWAITING_PAYMENT => OrderPaymentStates::STATE_AWAITING_PAYMENT,
-                'sylius.ui.'.OrderPaymentStates::STATE_CANCELLED => OrderPaymentStates::STATE_CANCELLED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PAID => OrderPaymentStates::STATE_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED => OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_PAID => OrderPaymentStates::STATE_PARTIALLY_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_REFUNDED => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
-                'sylius.ui.'.OrderPaymentStates::STATE_REFUNDED => OrderPaymentStates::STATE_REFUNDED,
-            ]);
-        yield ChoiceField::new('shippingState', 'sylius.ui.shipping_state')
-            ->setChoices([
-                'sylius.ui.'.OrderShippingStates::STATE_CART => OrderShippingStates::STATE_CART,
-                'sylius.ui.'.OrderShippingStates::STATE_CANCELLED => OrderShippingStates::STATE_CANCELLED,
-                'sylius.ui.'.OrderShippingStates::STATE_PARTIALLY_SHIPPED => OrderShippingStates::STATE_PARTIALLY_SHIPPED,
-                'sylius.ui.'.OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
-                'sylius.ui.'.OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
-            ]);
-        yield NumberField::new('total', 'sylius.ui.total')->formatValue(function ($value, Order $entity){
-            $formatter = new \NumberFormatter($entity->getLocaleCode(), \NumberFormatter::CURRENCY);
-            return $formatter->formatCurrency($entity->getTotal() / 100, $entity->getCurrencyCode());
-        })->setCssClass('text-md-right');
-        yield CurrencyField::new('currencyCode', 'sylius.ui.currency');
+                ]);
+            yield ChoiceField::new('paymentState', 'sylius.ui.payment_state')
+                ->setChoices([
+                    'sylius.ui.' . OrderPaymentStates::STATE_AUTHORIZED => OrderPaymentStates::STATE_AUTHORIZED,
+                    'sylius.ui.' . OrderPaymentStates::STATE_AWAITING_PAYMENT => OrderPaymentStates::STATE_AWAITING_PAYMENT,
+                    'sylius.ui.' . OrderPaymentStates::STATE_CANCELLED => OrderPaymentStates::STATE_CANCELLED,
+                    'sylius.ui.' . OrderPaymentStates::STATE_PAID => OrderPaymentStates::STATE_PAID,
+                    'sylius.ui.' . OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED => OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED,
+                    'sylius.ui.' . OrderPaymentStates::STATE_PARTIALLY_PAID => OrderPaymentStates::STATE_PARTIALLY_PAID,
+                    'sylius.ui.' . OrderPaymentStates::STATE_PARTIALLY_REFUNDED => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
+                    'sylius.ui.' . OrderPaymentStates::STATE_REFUNDED => OrderPaymentStates::STATE_REFUNDED,
+                ]);
+            yield ChoiceField::new('shippingState', 'sylius.ui.shipping_state')
+                ->setChoices([
+                    'sylius.ui.' . OrderShippingStates::STATE_CART => OrderShippingStates::STATE_CART,
+                    'sylius.ui.' . OrderShippingStates::STATE_CANCELLED => OrderShippingStates::STATE_CANCELLED,
+                    'sylius.ui.' . OrderShippingStates::STATE_PARTIALLY_SHIPPED => OrderShippingStates::STATE_PARTIALLY_SHIPPED,
+                    'sylius.ui.' . OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
+                    'sylius.ui.' . OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
+                ]);
+            yield NumberField::new('total', 'sylius.ui.total')->formatValue(function ($value, Order $entity) {
+                $formatter = new \NumberFormatter($entity->getLocaleCode(), \NumberFormatter::CURRENCY);
+                return $formatter->formatCurrency($entity->getTotal() / 100, $entity->getCurrencyCode());
+            })->setCssClass('text-md-right');
+            yield CurrencyField::new('currencyCode', 'sylius.ui.currency');
+        }
+
+        if($pageName == Crud::PAGE_EDIT){
+            yield FormTypeField::new('shippingAddress', 'sylius.ui.shipping_address', AddressType::class);
+            yield FormTypeField::new('billingAddress', 'sylius.ui.billing_address', AddressType::class);
+        }
     }
 
     public function showCustomer(AdminContext $context)

@@ -29,6 +29,13 @@
             <argument type="service" id="sylius.storage.cart_session" />
         </service>
 
+        <service id="sylius.security.shop_user_impersonator" class="Sylius\Bundle\CoreBundle\Security\UserImpersonator" public="false">
+            <argument type="service" id="session" />
+            <argument type="string">%sylius_shop.firewall_context_name%</argument>
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface" alias="sylius.security.shop_user_impersonator" />
+
         <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Adeliom\EasyShopBundle\SectionResolver\ShopUriBasedSectionResolver">
             <tag name="sylius.uri_based_section_resolver" priority="-10" />
         </service>

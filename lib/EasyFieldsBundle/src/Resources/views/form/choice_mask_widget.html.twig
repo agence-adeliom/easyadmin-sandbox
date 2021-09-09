@@ -2,26 +2,28 @@
 
 {% block choice_field_mask_widget %}
     {{ block('choice_widget') }}
-    {% set main_form_name = id|slice(0, id|length - name|length) %}
-    <script>
-        var allFields = {{ all_fields|json_encode|raw }};
-        var map = {{ map|json_encode|raw }};
 
-        function choice_field_mask_show(val)
+    {% set main_form_name = id|slice(0, id|length - name|length)|trim('_') %}
+
+    <script>
+        var allFields_{{ main_form_name }} = {{ all_fields|json_encode|raw }};
+        var map_{{ main_form_name }} = {{ map|json_encode|raw }};
+
+        function choice_field_mask_show_{{ main_form_name }}(val)
         {
             var controlGroupIdFunc = function (field) {
-                return '[data-row-id={{ main_form_name }}' + field + "]";
+                return '[data-row-id={{ main_form_name }}_' + field + "]";
             };
 
-            if (map[val] == undefined) {
-                allFields.forEach(function (field) {
+            if (map_{{ main_form_name }}[val] == undefined) {
+                allFields_{{ main_form_name }}.forEach(function (field) {
                     document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
                         elm.style.display = 'none';
                     });
                 });
                 return;
             }
-            allFields.forEach(function (field) {
+            allFields_{{ main_form_name }}.forEach(function (field) {
                 document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
                     elm.style.display = 'none';
                     elm.querySelectorAll('[required="required"]').forEach(function (e){
@@ -30,7 +32,7 @@
                     })
                 });
             });
-            map[val].forEach(function (field) {
+            map_{{ main_form_name }}[val].forEach(function (field) {
                 document.querySelectorAll(controlGroupIdFunc(field)).forEach(function (elm){
                     elm.style.display = '';
                     elm.querySelectorAll('[data-required="required"]').forEach(function (e){
@@ -40,19 +42,27 @@
             });
         }
 
+        showMaskChoiceEl_{{ main_form_name }} = document.querySelector('#{{ id }}');
+        showMaskChoiceEl_{{ main_form_name }}.addEventListener('change', function (event) {
+            choice_field_mask_show_{{ main_form_name }}(event.target.value);
+        });
+        choice_field_mask_show_{{ main_form_name }}(showMaskChoiceEl_{{ main_form_name }}.value);
+
         window.addEventListener('DOMContentLoaded', function() {
-            showMaskChoiceEl = document.querySelector('#{{ main_form_name }}{{ name }}');
-            showMaskChoiceEl.addEventListener('change', function (event) {
-                choice_field_mask_show(event.target.value);
+            showMaskChoiceEl_{{ main_form_name }} = document.querySelector('#{{ id }}');
+            showMaskChoiceEl_{{ main_form_name }}.addEventListener('change', function (event) {
+                choice_field_mask_show_{{ main_form_name }}(event.target.value);
             });
-            choice_field_mask_show(showMaskChoiceEl.value);
+            choice_field_mask_show_{{ main_form_name }}(showMaskChoiceEl_{{ main_form_name }}.value);
         });
 
-        showMaskChoiceEl = document.querySelector('#{{ main_form_name }}{{ name }}');
-        showMaskChoiceEl.addEventListener('change', function (event) {
-            choice_field_mask_show(event.target.value);
+        document.addEventListener('ea.collection.item-added', function () {
+            showMaskChoiceEl_{{ main_form_name }} = document.querySelector('#{{ id }}');
+            showMaskChoiceEl_{{ main_form_name }}.addEventListener('change', function (event) {
+                choice_field_mask_show_{{ main_form_name }}(event.target.value);
+            });
+            choice_field_mask_show_{{ main_form_name }}(showMaskChoiceEl_{{ main_form_name }}.value)
         });
-        choice_field_mask_show(showMaskChoiceEl.value);
     </script>
 {% endblock choice_field_mask_widget %}
 
