@@ -37,6 +37,5 @@ class AdminExceptionListener
             $event->setResponse(new RedirectResponse($request->headers->get('referer')));
         }
 
-        // Send the modified response object to the event
     }
 }

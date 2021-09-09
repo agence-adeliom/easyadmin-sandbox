@@ -91,6 +91,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('sylius.ui.orders', 'fas fa-shopping-cart', Order::class);
         yield MenuItem::linkToCrud('sylius.ui.payments', 'fas fa-credit-card', Payment::class);
         yield MenuItem::linkToCrud('sylius.ui.shipments', 'fas fa-truck', Shipment::class);
+        yield MenuItem::linkToCrud('sylius.ui.orders_statistics', 'far fa-chart-bar', Order::class)->setAction("statistics");
 
         yield MenuItem::section('sylius.ui.customer');
         yield MenuItem::linkToCrud('sylius.ui.customers', 'fas fa-users', Customer::class);

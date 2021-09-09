@@ -34,7 +34,7 @@ final class EnumConfigurator implements FieldConfiguratorInterface
         $isExpanded = $field->getCustomOption(EnumField::OPTION_RENDER_EXPANDED);
 
         $choices = $this->getChoices($field->getCustomOption(EnumField::OPTION_ENUM), $entityDto, $field);
-        dump($choices, $field->getCustomOption(EnumField::OPTION_ENUM));
+
         if (empty($choices)) {
             throw new \InvalidArgumentException(sprintf('The "%s" choice field must define its possible choices using the setEnum() method.', $field->getProperty()));
         }

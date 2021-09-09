@@ -48,17 +48,26 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use SM\Factory\Factory;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
+use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository;
 use Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\DashboardStatistics;
+use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Dashboard\Interval;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
@@ -122,7 +131,6 @@ class OrderCrudController extends AbstractCrudController
         $actions->remove(Crud::PAGE_INDEX, Action::DELETE);
         $actions->remove(Crud::PAGE_DETAIL, Action::DELETE);
         $actions->remove(Crud::PAGE_DETAIL, Action::EDIT);
-
         $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
 
         return $actions;
@@ -413,16 +421,94 @@ class OrderCrudController extends AbstractCrudController
         return new RedirectResponse($request->headers->get('referer'));
     }
 
+    private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
+    {
+        if (null !== $channelCode) {
+            return $this->get('sylius.repository.channel')->findOneByCode($channelCode);
+        }
+
+        return $this->get('sylius.repository.channel')->findOneBy([]);
+    }
+
+    public function statistics(AdminContext $context){
+        $request = $context->getRequest();
+        /** @var ChannelInterface|null $channel */
+        $channel = $this->findChannelByCodeOrFindFirst($request->query->has('channel') ? (string) $request->query->get('channel') : null);
+
+        return $this->renderStatistics($channel, $context);
+    }
+
+    public function renderStatistics(ChannelInterface $channel, AdminContext $context): Response
+    {
+        $request = $context->getRequest();
+
+        return $this->render(
+            '@EasyShop/crud/dashboard/Statistics/_template.html.twig',
+            $this->getRawData(
+                $channel,
+                (new \DateTime((string) $request->query->get('startDate', 'first day of january this year'))),
+                (new \DateTime((string) $request->query->get('endDate', 'tomorrow'))),
+                (string) $request->query->get('interval', 'month')
+            )
+        );
+    }
+
+    public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array
+    {
+        $moneyFormatter = $this->get(MoneyFormatterInterface::class);
+        $statisticsProvider = $this->get(DashboardStatisticsProviderInterface::class);
+        $salesDataProvider = $this->get(SalesDataProviderInterface::class);
+
+        /** @var DashboardStatistics $statistics */
+        $statistics = $statisticsProvider->getStatisticsForChannelInPeriod($channel, $startDate, $endDate);
+
+        $salesSummary = $salesDataProvider->getSalesSummary(
+            $channel,
+            $startDate,
+            $endDate,
+            Interval::{$interval}()
+        );
+
+        /** @var string $currencyCode */
+        $currencyCode = $channel->getBaseCurrency()->getCode();
+
+        return [
+            'sales_summary' => [
+                'intervals' => $salesSummary->getIntervals(),
+                'sales' => $salesSummary->getSales(),
+            ],
+            'channel' => [
+                'base_currency_code' => $currencyCode,
+                'channel_code' => $channel->getCode(),
+            ],
+            'statistics' => [
+                'total_sales' => $moneyFormatter->format($statistics->getTotalSales(), $currencyCode, $channel->getDefaultLocale()),
+                'number_of_new_orders' => $statistics->getNumberOfNewOrders(),
+                'number_of_new_customers' => $statistics->getNumberOfNewCustomers(),
+                'average_order_value' => $moneyFormatter->format($statistics->getAverageOrderValue(), $currencyCode, $channel->getDefaultLocale()),
+            ],
+            'latest' => [
+                "customer" => $this->get('sylius.repository.customer')->findLatest(5),
+                "order" => $this->get('sylius.repository.order')->findLatest(5),
+            ]
+        ];
+    }
+
     public static function getSubscribedServices()
     {
         return array_merge(parent::getSubscribedServices(), [
-            OrderRepository::class => '?'.OrderRepositoryInterface::class,
+            'sylius.repository.order' => '?'.OrderRepositoryInterface::class,
+            'sylius.repository.customer' => '?'.CustomerRepositoryInterface::class,
+            'sylius.repository.channel' => '?'.ChannelRepositoryInterface::class,
             'sylius.repository.shipment' => '?'.ShipmentRepositoryInterface::class,
             'sylius.repository.payment' => '?'.PaymentRepositoryInterface::class,
             Factory::class => '?'.FactoryInterface::class,
             Sender::class => '?'.SenderInterface::class,
             CsrfTokenManager::class => '?'.CsrfTokenManagerInterface::class,
             ParameterBagInterface::class => '?'.ParameterBagInterface::class,
+            DashboardStatisticsProviderInterface::class => '?'.DashboardStatisticsProviderInterface::class,
+            SalesDataProviderInterface::class => '?'.SalesDataProviderInterface::class,
+            MoneyFormatterInterface::class => '?'.MoneyFormatterInterface::class,
         ]);
     }
 

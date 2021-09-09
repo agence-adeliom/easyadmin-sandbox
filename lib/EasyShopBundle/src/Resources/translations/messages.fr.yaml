@@ -1,0 +1,12 @@
+sylius:
+  ui:
+    product:
+      product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
+    sales_summary: Récapitulatif des ventes
+    statistics:
+      day: Jour
+      lifetime: Durée de vie
+      month: Mois
+      week: Semaine
+      2weeks: 2 Semaines
+      year: Année
