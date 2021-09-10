@@ -1,5 +1,5 @@
 {% if app.user is not empty and app.user.customer is not empty and app.user.customer.addresses|length > 0 %}
-    <select class="form-select address-book-select mb-4 mt-3" {{ sylius_test_html_attribute('address-book') }}>
+    <select address-book-select class="form-select address-book-select mb-4 mt-3" {{ sylius_test_html_attribute('address-book') }}>
         <option selected>{{ 'sylius.ui.select_address_from_book'|trans }}</option>
         {% for address in app.user.customer.addresses %}
             <option {{ sylius_test_html_attribute('address-book-item') }}

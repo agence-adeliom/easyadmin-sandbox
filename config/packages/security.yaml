@@ -78,14 +78,17 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
+        - { path: "%sylius.security.shop_regex%", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [ 127.0.0.1, ::1 ] }
         - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
         - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
+        - { path: ^/, role: PUBLIC_ACCESS }
+
         # - { path: ^/profile, roles: ROLE_USER }
