@@ -1,15 +1,15 @@
 {%
     set viewOptions = {
-    cart: { icon: "adjust", color: "grey" } ,
-    cancelled: { icon: "ban", color: "red" } ,
-    shipped: { icon: "plane", color: "green" } ,
-    ready: { icon: "clock", color: "blue" } ,
+    cart: { icon: "adjust", color: "secondary" } ,
+    cancelled: { icon: "ban", color: "danger" } ,
+    shipped: { icon: "plane", color: "success" } ,
+    ready: { icon: "clock", color: "info" } ,
     }
 %}
 
 {% set value = 'sylius.ui.' ~ state %}
 
-<span class="ui {{ viewOptions[state]['color'] }} label">
+<span class="badge bg-{{ viewOptions[state]['color'] }} label">
     <i class="{{ viewOptions[state]['icon'] }} icon"></i>
     {{ value|trans }}
 </span>

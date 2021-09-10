@@ -194,12 +194,13 @@
             "dist": {
                 "type": "path",
                 "url": "lib/EasyBlogBundle",
-                "reference": "0bd42b03360b33155877a2b9316fc1bacbcf6914"
+                "reference": "2be23acaa1df9196140d972ca4c34a0dc5ef7763"
             },
             "require": {
                 "babdev/pagerfanta-bundle": "^2.10",
                 "ext-json": "*",
                 "pagerfanta/doctrine-orm-adapter": "^2.7",
+                "pagerfanta/twig": "^2.7",
                 "php": ">=7.2",
                 "ramsey/uuid-doctrine": "^1.7",
                 "symfony/config": "^4.0|^5.0",
@@ -348,12 +349,13 @@
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFaqBundle",
-                "reference": "1c7eb2d9acc8e7b4e1bd2e6efe7e69a8b8973af7"
+                "reference": "e96818fdf64310ec3a3bc2169ddeeb6ca906df67"
             },
             "require": {
                 "babdev/pagerfanta-bundle": "^2.10",
                 "ext-json": "*",
                 "pagerfanta/doctrine-orm-adapter": "^2.7",
+                "pagerfanta/twig": "^2.7",
                 "php": ">=7.2",
                 "ramsey/uuid-doctrine": "^1.7",
                 "symfony/config": "^4.0|^5.0",
@@ -683,85 +685,6 @@
                 "source": "https://github.com/alcohol/iso4217"
             },
             "time": "2021-01-06T07:58:06+00:00"
-        },
-        {
-            "name": "babdev/pagerfanta",
-            "version": "v2.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/7a5d0d888f77d4af5cf37889bb3ea331675a595c",
-                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.2",
-                "symfony/deprecation-contracts": "^2.1"
-            },
-            "replace": {
-                "pagerfanta/pagerfanta": "*"
-            },
-            "require-dev": {
-                "doctrine/collections": "^1.4",
-                "doctrine/dbal": "^2.5",
-                "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.3",
-                "friendsofphp/php-cs-fixer": "^2.16.3",
-                "jackalope/jackalope-doctrine-dbal": "^1.3",
-                "mandango/mandango": "^1.0@dev",
-                "phpunit/phpunit": "^8.5 || ^9.0",
-                "propel/propel": "^2.0@dev",
-                "propel/propel1": "^1.7",
-                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0",
-                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0"
-            },
-            "suggest": {
-                "doctrine/collections": "To use the Doctrine Collection and Selectable adapter.",
-                "doctrine/dbal": "To use the Doctrine DBAL adapters.",
-                "doctrine/mongodb-odm": "To use the Doctrine MongoDB ODM Adapter.",
-                "doctrine/orm": "To use the Doctrine ORM Adapter.",
-                "doctrine/phpcr-odm": "To use the Doctrine PHPCR ODM Adapter.",
-                "solarium/solarium": "To use the SolariumAdapter."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pagerfanta\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Pagination for PHP",
-            "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
-            ],
-            "support": {
-                "issues": "https://github.com/BabDev/Pagerfanta/issues",
-                "source": "https://github.com/BabDev/Pagerfanta/tree/master"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/mbabker",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "pagerfanta/pagerfanta",
-            "time": "2020-06-06T19:22:10+00:00"
         },
         {
             "name": "babdev/pagerfanta-bundle",
@@ -5131,17 +5054,17 @@
             "time": "2021-07-21T10:44:31+00:00"
         },
         {
-            "name": "pagerfanta/core",
+            "name": "pagerfanta/pagerfanta",
             "version": "v2.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pagerfanta-packages/core.git",
-                "reference": "7fb7cacfb4916c9789e7a5999255214615218560"
+                "url": "https://github.com/BabDev/Pagerfanta.git",
+                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pagerfanta-packages/core/zipball/7fb7cacfb4916c9789e7a5999255214615218560",
-                "reference": "7fb7cacfb4916c9789e7a5999255214615218560",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/911f515ae80898981c07c3d098f2092e97da1a2f",
+                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f",
                 "shasum": ""
             },
             "require": {
@@ -5150,64 +5073,81 @@
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-php80": "^1.15"
             },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Pagerfanta\\": "./"
-                }
+            "conflict": {
+                "twig/twig": "<1.35 || >=2.0,<2.5"
             },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Core Pagerfanta API",
-            "keywords": [
-                "pagerfanta"
-            ],
-            "support": {
-                "source": "https://github.com/pagerfanta-packages/core/tree/v2.7.2"
+            "replace": {
+                "pagerfanta/core": "self.version",
+                "pagerfanta/doctrine-collections-adapter": "self.version",
+                "pagerfanta/doctrine-dbal-adapter": "self.version",
+                "pagerfanta/doctrine-mongodb-odm-adapter": "self.version",
+                "pagerfanta/doctrine-orm-adapter": "self.version",
+                "pagerfanta/doctrine-phpcr-odm-adapter": "self.version",
+                "pagerfanta/elastica-adapter": "self.version",
+                "pagerfanta/solarium-adapter": "self.version",
+                "pagerfanta/twig": "self.version"
             },
-            "time": "2021-07-25T19:56:13+00:00"
-        },
-        {
-            "name": "pagerfanta/doctrine-orm-adapter",
-            "version": "v2.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pagerfanta-packages/doctrine-orm-adapter.git",
-                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pagerfanta-packages/doctrine-orm-adapter/zipball/492d640993375b07ac6d23b2b8d3a724df8cf617",
-                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617",
-                "shasum": ""
-            },
-            "require": {
+            "require-dev": {
+                "dg/bypass-finals": "^1.3.1",
+                "doctrine/cache": "^1.11 || ^2.0",
+                "doctrine/collections": "^1.4",
+                "doctrine/dbal": "^2.5 || ^3.0",
                 "doctrine/orm": "^2.5",
-                "pagerfanta/core": "^2.4",
-                "php": "^7.2 || ^8.0"
+                "doctrine/phpcr-odm": "^1.3",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "jackalope/jackalope-doctrine-dbal": "^1.3",
+                "mandango/mandango": "^1.0@dev",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^0.12.93",
+                "phpstan/phpstan-phpunit": "^0.12.21",
+                "phpunit/phpunit": "^8.5 || ^9.5",
+                "propel/propel": "^2.0@dev",
+                "propel/propel1": "^1.7",
+                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0 || ^7.0",
+                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/cache": "^4.4 || ^5.2 || ^6.0",
+                "twig/twig": "^1.35 || ^2.5 || ^3.0"
+            },
+            "suggest": {
+                "twig/twig": "To integrate Pagerfanta with Twig"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Pagerfanta\\Doctrine\\ORM\\": "./"
+                    "Pagerfanta\\": "lib/Core/",
+                    "Pagerfanta\\Adapter\\": "src/Adapter/",
+                    "Pagerfanta\\Doctrine\\Collections\\": "lib/Adapter/Doctrine/Collections/",
+                    "Pagerfanta\\Doctrine\\DBAL\\": "lib/Adapter/Doctrine/DBAL/",
+                    "Pagerfanta\\Doctrine\\MongoDBODM\\": "lib/Adapter/Doctrine/MongoDBODM/",
+                    "Pagerfanta\\Doctrine\\ORM\\": "lib/Adapter/Doctrine/ORM/",
+                    "Pagerfanta\\Doctrine\\PHPCRODM\\": "lib/Adapter/Doctrine/PHPCRODM/",
+                    "Pagerfanta\\Elastica\\": "lib/Adapter/Elastica/",
+                    "Pagerfanta\\Solarium\\": "lib/Adapter/Solarium/",
+                    "Pagerfanta\\Twig\\": "lib/Twig/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Pagerfanta adapter for Doctrine ORM",
+            "description": "Pagination for PHP",
             "keywords": [
-                "doctrine",
-                "orm",
-                "pagerfanta"
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
             ],
             "support": {
-                "source": "https://github.com/pagerfanta-packages/doctrine-orm-adapter/tree/v2.7.2"
+                "issues": "https://github.com/BabDev/Pagerfanta/issues",
+                "source": "https://github.com/BabDev/Pagerfanta/tree/v2.7.2"
             },
-            "time": "2021-07-25T19:56:13+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/mbabker",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-08-01T15:53:26+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -6153,20 +6093,20 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
+                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
@@ -6186,7 +6126,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -6196,9 +6136,9 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/master"
+                "source": "https://github.com/php-fig/cache/tree/2.0.0"
             },
-            "time": "2016-08-06T20:24:11+00:00"
+            "time": "2021-02-03T23:23:37+00:00"
         },
         {
             "name": "psr/container",
@@ -6405,20 +6345,20 @@
         },
         {
             "name": "psr/link",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/link.git",
-                "reference": "eea8e8662d5cd3ae4517c9b864493f59fca95562"
+                "reference": "846c25f58a1f02b93a00f2404e3626b6bf9b7807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/link/zipball/eea8e8662d5cd3ae4517c9b864493f59fca95562",
-                "reference": "eea8e8662d5cd3ae4517c9b864493f59fca95562",
+                "url": "https://api.github.com/repos/php-fig/link/zipball/846c25f58a1f02b93a00f2404e3626b6bf9b7807",
+                "reference": "846c25f58a1f02b93a00f2404e3626b6bf9b7807",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
@@ -6442,6 +6382,7 @@
                 }
             ],
             "description": "Common interfaces for HTTP links",
+            "homepage": "https://github.com/php-fig/link",
             "keywords": [
                 "http",
                 "http-link",
@@ -6451,9 +6392,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/php-fig/link/tree/master"
+                "source": "https://github.com/php-fig/link/tree/1.1.1"
             },
-            "time": "2016-10-28T16:06:13+00:00"
+            "time": "2021-03-11T22:59:13+00:00"
         },
         {
             "name": "psr/log",

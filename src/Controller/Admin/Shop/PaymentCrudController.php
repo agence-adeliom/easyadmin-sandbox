@@ -69,14 +69,15 @@ class PaymentCrudController extends AbstractCrudController
         $filters
             ->add(DateTimeFilter::new('createdAt','sylius.ui.date'))
             ->add(ChoiceFilter::new('state','sylius.ui.state')->setChoices([
-                'sylius.ui.'.OrderPaymentStates::STATE_AUTHORIZED => OrderPaymentStates::STATE_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_AWAITING_PAYMENT => OrderPaymentStates::STATE_AWAITING_PAYMENT,
-                'sylius.ui.'.OrderPaymentStates::STATE_CANCELLED => OrderPaymentStates::STATE_CANCELLED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PAID => OrderPaymentStates::STATE_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED => OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_PAID => OrderPaymentStates::STATE_PARTIALLY_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_REFUNDED => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
-                'sylius.ui.'.OrderPaymentStates::STATE_REFUNDED => OrderPaymentStates::STATE_REFUNDED,
+                'sylius.ui.'.Payment::STATE_COMPLETED => Payment::STATE_COMPLETED,
+                'sylius.ui.'.Payment::STATE_CANCELLED => Payment::STATE_CANCELLED,
+                'sylius.ui.'.Payment::STATE_AUTHORIZED => Payment::STATE_AUTHORIZED,
+                'sylius.ui.'.Payment::STATE_CART => Payment::STATE_CART,
+                'sylius.ui.'.Payment::STATE_UNKNOWN => Payment::STATE_UNKNOWN,
+                'sylius.ui.'.Payment::STATE_REFUNDED => Payment::STATE_REFUNDED,
+                'sylius.ui.'.Payment::STATE_PROCESSING => Payment::STATE_PROCESSING,
+                'sylius.ui.'.Payment::STATE_FAILED => Payment::STATE_FAILED,
+                'sylius.ui.'.Payment::STATE_NEW => Payment::STATE_NEW,
             ]))
         ;
 
@@ -122,15 +123,17 @@ class PaymentCrudController extends AbstractCrudController
 
         yield ChoiceField::new('state', 'sylius.ui.state')
             ->setChoices([
-                'sylius.ui.'.OrderPaymentStates::STATE_AUTHORIZED => OrderPaymentStates::STATE_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_AWAITING_PAYMENT => OrderPaymentStates::STATE_AWAITING_PAYMENT,
-                'sylius.ui.'.OrderPaymentStates::STATE_CANCELLED => OrderPaymentStates::STATE_CANCELLED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PAID => OrderPaymentStates::STATE_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED => OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_PAID => OrderPaymentStates::STATE_PARTIALLY_PAID,
-                'sylius.ui.'.OrderPaymentStates::STATE_PARTIALLY_REFUNDED => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
-                'sylius.ui.'.OrderPaymentStates::STATE_REFUNDED => OrderPaymentStates::STATE_REFUNDED,
-            ]);
+                'sylius.ui.'.Payment::STATE_COMPLETED => Payment::STATE_COMPLETED,
+                'sylius.ui.'.Payment::STATE_CANCELLED => Payment::STATE_CANCELLED,
+                'sylius.ui.'.Payment::STATE_AUTHORIZED => Payment::STATE_AUTHORIZED,
+                'sylius.ui.'.Payment::STATE_CART => Payment::STATE_CART,
+                'sylius.ui.'.Payment::STATE_UNKNOWN => Payment::STATE_UNKNOWN,
+                'sylius.ui.'.Payment::STATE_REFUNDED => Payment::STATE_REFUNDED,
+                'sylius.ui.'.Payment::STATE_PROCESSING => Payment::STATE_PROCESSING,
+                'sylius.ui.'.Payment::STATE_FAILED => Payment::STATE_FAILED,
+                'sylius.ui.'.Payment::STATE_NEW => Payment::STATE_NEW,
+            ])->setTemplatePath('@EasyShop/crud/Common/Label/paymentState.html.twig')
+        ;
     }
 
     public function showOrder(AdminContext $context)

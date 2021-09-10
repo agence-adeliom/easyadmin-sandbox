@@ -1,11 +1,10 @@
 {% import '@EasyShop/SyliusUiBundle/Macro/buttons.html.twig' as buttons %}
-{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
 <h1 class="ui header">
     {{ 'sylius.ui.order'|trans }} #{{ order.number }}
 </h1>
 
-<div class="d-flex justify-content-around mb-3 mt-3">
+<div class="d-flex gap-4 mb-3 mt-3">
     <div class="item border-bottom pb-2 px-4">
         {{ order.checkoutCompletedAt|format_date }}
     </div>
@@ -16,7 +15,7 @@
         {{ order.currencyCode }}
     </div>
     <div class="item border-bottom pb-2 px-4">
-        {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|sylius_locale_name }}
+        {{ order.localeCode|sylius_locale_name|capitalize }}
     </div>
 </div>
 

@@ -22,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
@@ -117,9 +118,10 @@ class ProductCrudController extends AbstractCrudController
     public function informationFields(string $pageName, AdminContext $context): iterable
     {
         yield FormField::addPanel("sylius.ui.details")->collapsible()->renderCollapsed(false);
+        yield TextField::new('thumbnail')->setLabel('sylius.ui.image')->setVirtual(true)->onlyOnIndex()->setTemplatePath("@EasyShop/crud/Common/thumbnail.html.twig");
         yield TextField::new('code')->setLabel('sylius.ui.code');
+        yield TextField::new('name')->setLabel('sylius.ui.name')->onlyOnIndex();
         yield BooleanField::new('enabled')->setLabel('sylius.ui.enabled')->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
-
         if ($this->isSimpleProduct()) {
             yield BooleanField::new('variant.shippingRequired')->setLabel('sylius.form.variant.shipping_required');
         }else {
@@ -144,7 +146,9 @@ class ProductCrudController extends AbstractCrudController
     public function mediaFields(string $pageName, AdminContext $context): iterable
     {
         yield FormField::addPanel("sylius.ui.images")->collapsible()->renderCollapsed();
-        yield SortableCollectionField::new('images', false)->setEntryType(ProductImageType::class)
+        yield SortableCollectionField::new('images', false)
+            ->hideOnIndex()
+            ->setEntryType(ProductImageType::class)
             ->setFormTypeOption('hide_title', true)
             ->setFormTypeOption('entry_options', [
                 'product' => $context->getEntity()->getInstance()
@@ -233,14 +237,14 @@ class ProductCrudController extends AbstractCrudController
     public function taxonomyFields(string $pageName, AdminContext $context): iterable
     {
         yield FormField::addPanel("Taxonomy")->collapsible()->renderCollapsed();
-        yield AssociationField::new('mainTaxon')
+        yield AssociationField::new('mainTaxon', 'sylius.ui.main_taxon')
             ->setFormTypeOption('class', Taxon::class)
             ->setFormTypeOption('choice_value', "code")
             ->setFormTypeOption('choice_label', function ($item) {
                 return $item->getTree(" / ");
             })
             ->setCrudController(TaxonCrudController::class)
-            ->hideOnIndex();
+            ;
 
         yield AssociationField::new('productTaxons')
             ->setFormType(ProductTaxonType::class)

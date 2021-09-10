@@ -2,18 +2,20 @@
 {% if state != 'cart' %}
     {% include "@EasyShop/front/Common/Order/Label/ShipmentState/orderShipmentState.html.twig" %}
 {% endif %}
-{% for shipment in order.shipments %}
-    {% set state = shipment.state %}
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-title" id="sylius-shipping-method" {{ sylius_test_html_attribute('shipping-method') }}>
-                {{ shipment.method }}
-            </h6>
-            {% if state != 'cart' %}
-            <p id="shipment-status" class="mb-0" {{ sylius_test_html_attribute('shipment-state') }}>
-                {% include "@EasyShop/front/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}
-            </p>
-            {% endif %}
-        </div>
-    </div>
-{% endfor %}
+<div class="card-body">
+    <ul class="list-group">
+    {% for shipment in order.shipments %}
+        {% set state = shipment.state %}
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <h6 class="mb-0" id="sylius-shipping-method" {{ sylius_test_html_attribute('shipping-method') }}>
+                    {{ shipment.method }}
+                </h6>
+                {% if state != 'cart' %}
+                    <p id="shipment-status" class="mb-0" {{ sylius_test_html_attribute('shipment-state') }}>
+                        {% include "@EasyShop/front/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}
+                    </p>
+                {% endif %}
+            </li>
+    {% endfor %}
+    </ul>
+</div>

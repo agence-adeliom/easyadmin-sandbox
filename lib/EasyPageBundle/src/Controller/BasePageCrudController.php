@@ -7,9 +7,13 @@ use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -45,6 +49,18 @@ abstract class BasePageCrudController extends AbstractCrudController
             ;
     }
 
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $qb
+            ->orderBy("entity.root", "ASC")
+            ->addOrderBy("entity.level", "ASC")
+        ;
+
+        dump($qb->getQuery()->getSQL());
+        return $qb;
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -65,7 +81,7 @@ abstract class BasePageCrudController extends AbstractCrudController
         $context = $this->get(AdminContextProvider::class)->getContext();
         $subject = $context->getEntity();
 
-        yield IdField::new('id')->hideOnForm();
+        yield IdField::new('id')->onlyOnDetail();
         yield from $this->informationsFields($pageName, $subject);
         yield from $this->seoFields($pageName, $subject);
         yield from $this->publishFields($pageName, $subject);
@@ -77,7 +93,8 @@ abstract class BasePageCrudController extends AbstractCrudController
         yield FormField::addPanel("easy.page.admin.panel.information")->addCssClass("col-12");
         yield TextField::new('name', "easy.page.admin.field.name")
             ->setRequired(true)
-            ->setColumns(12);
+            ->setColumns(12)
+            ;
     }
 
     public function metadataFields(string $pageName, $subject): iterable
