@@ -40,8 +40,14 @@ easy:
         information: Informations
         publication: Publication
       field:
-        name: Name
+        name: Nom
+        title: Title
         code: Code
         state: Status
+        parent: Parent
+        url: Url
+        position: Position
+        flattenParents: Tree
+        classAttribute: Class attribute
         publishDate: Publish date
         unpublishDate: Unpublish date
