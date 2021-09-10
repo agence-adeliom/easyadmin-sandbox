@@ -60,6 +60,35 @@ class DoctrineMappingListener implements EventSubscriber
                 'fieldName' => 'menu',
                 'targetEntity' => $this->menuClass,
                 'inversedBy' => 'items',
+                'orderBy' => [
+                    "position" => "ASC"
+                ]
+            ]);
+        }
+
+        if (!$classMetadata->hasAssociation('parent')) {
+            $classMetadata->mapManyToOne([
+                'fieldName' => 'parent',
+                'targetEntity' => $this->menuItemClass,
+                'inversedBy' => 'children',
+                'cascade' => ['persist'],
+                'isOnDeleteCascade' => false,
+                'nullable' => true,
+                'orderBy' => [
+                    "position" => "ASC"
+                ]
+            ]);
+        }
+
+        if (!$classMetadata->hasAssociation('children')) {
+            $classMetadata->mapOneToMany([
+                'fieldName' => 'children',
+                'targetEntity' => $this->menuItemClass,
+                'mappedBy' => 'parent',
+                'cascade' => ['all'],
+                'orderBy' => [
+                    "position" => "ASC"
+                ]
             ]);
         }
     }

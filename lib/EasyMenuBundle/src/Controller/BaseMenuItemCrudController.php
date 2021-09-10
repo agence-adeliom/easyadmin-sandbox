@@ -2,25 +2,30 @@
 
 namespace Adeliom\EasyMenuBundle\Controller;
 
-
-use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
-use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
-use Adeliom\EasySeoBundle\Admin\Field\SEOField;
+use App\Controller\Admin\Menu\MenuCrudController;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 abstract class BaseMenuItemCrudController extends AbstractCrudController
 {
+    private $adminUrlGenerator;
+
+    public function __construct(AdminUrlGenerator $adminUrlGenerator)
+    {
+        $this->adminUrlGenerator = $adminUrlGenerator;
+    }
 
     public function configureCrud(Crud $crud): Crud
     {
@@ -31,12 +36,12 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             ->addFormTheme('@EasyEditor/form/editor_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
 
-            ->setPageTitle(Crud::PAGE_INDEX, "easy.menu.admin.crud.title.entry." . Crud::PAGE_INDEX)
-            ->setPageTitle(Crud::PAGE_EDIT, "easy.menu.admin.crud.title.entry." . Crud::PAGE_EDIT)
-            ->setPageTitle(Crud::PAGE_NEW, "easy.menu.admin.crud.title.entry." . Crud::PAGE_NEW)
-            ->setPageTitle(Crud::PAGE_DETAIL, "easy.menu.admin.crud.title.entry." . Crud::PAGE_DETAIL)
-            ->setEntityLabelInSingular("easy.menu.admin.crud.label.entry.singular")
-            ->setEntityLabelInPlural("easy.menu.admin.crud.label.entry.plural")
+            ->setPageTitle(Crud::PAGE_INDEX, "easy.menu.admin.crud.title.menu_item." . Crud::PAGE_INDEX)
+            ->setPageTitle(Crud::PAGE_EDIT, "easy.menu.admin.crud.title.menu_item." . Crud::PAGE_EDIT)
+            ->setPageTitle(Crud::PAGE_NEW, "easy.menu.admin.crud.title.menu_item." . Crud::PAGE_NEW)
+            ->setPageTitle(Crud::PAGE_DETAIL, "easy.menu.admin.crud.title.menu_item." . Crud::PAGE_DETAIL)
+            ->setEntityLabelInSingular("easy.menu.admin.crud.label.menu_item.singular")
+            ->setEntityLabelInPlural("easy.menu.admin.crud.label.menu_item.plural")
             ;
     }
 
@@ -47,12 +52,47 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
         foreach ($pages as $page) {
             $pageActions = $actions->getAsDto($page)->getActions();
             foreach ($pageActions as $action) {
-                $action->setLabel("easy.menu.admin.crud.label.entry." . $action->getName());
+                $action->setLabel("easy.menu.admin.crud.label.menu_item." . $action->getName());
                 $actions->remove($page, $action->getAsConfigObject());
                 $actions->add($page, $action->getAsConfigObject());
             }
         }
+
+        $url = $this->adminUrlGenerator
+            ->unsetAll()
+            ->setController(MenuCrudController::class)
+            ->setAction(Action::INDEX)
+            ->generateUrl();
+        $goBack = Action::new('goBack', 'easy.menu.admin.crud.label.menu_item.go_back')
+            ->linkToUrl($url)
+            ->addCssClass("btn btn-secondary")
+            ->createAsGlobalAction();
+
+        $actions
+            ->add(Crud::PAGE_INDEX, $goBack);
         return $actions;
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        if (!empty($this->container->get("request_stack")->getCurrentRequest()->query->get('fromMenuId'))) {
+            $menu = $this->getDoctrine()->getRepository( $this->container->get("parameter_bag")->get("easy_menu.menu.class") )->find( $this->container->get("request_stack")->getCurrentRequest()->query->get('fromMenuId') );
+            $queryBuilder->andWhere('entity.menu = :menu');
+            $queryBuilder->setParameter('menu', $menu);
+        }
+        return $queryBuilder;
+    }
+
+    public function createEntity(string $entityFqcn)
+    {
+        parse_str(parse_url( $this->container->get("request_stack")->getCurrentRequest()->query->get('referrer'))['query'], $params);
+        $entity = new $entityFqcn();
+        if (!empty($params['fromMenuId'])) {
+            $menu = $this->getDoctrine()->getRepository( $this->container->get("parameter_bag")->get("easy_menu.menu.class") )->find( $params['fromMenuId'] );
+            $entity->setMenu( $menu );
+        }
+        return $entity;
     }
 
     public function configureFields(string $pageName): iterable
@@ -62,9 +102,7 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
 
         yield IdField::new('id')->hideOnForm();
         yield from $this->informationsFields($pageName, $subject);
-        yield from $this->seoFields($pageName, $subject);
-        yield from $this->publishFields($pageName, $subject);
-        yield from $this->metadataFields($pageName, $subject);
+//        yield from $this->publishFields($pageName, $subject);
     }
 
     public function informationsFields(string $pageName, $subject): iterable
@@ -74,51 +112,6 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             ->setRequired(true)
             ->setColumns(12);
 
-        yield AssociationField::new("categories", "easy.menu.admin.field.categories")
-            ->autocomplete()
-            ->listSelector(true)
-            ->setCrudController($this->getParameter("easy_faq.category.crud"))
-        ;
-        yield TextField::new('question', "easy.menu.admin.field.question")
-            ->setRequired(true)
-            ->setColumns(12);
-        yield TextField::new('answer', "easy.menu.admin.field.answer")
-            ->setRequired(true)
-            ->setColumns(12);
     }
 
-    public function metadataFields(string $pageName, $subject): iterable
-    {
-        yield FormField::addPanel("easy.menu.admin.panel.metadatas")->collapsible()->addCssClass("col-4");
-        yield SlugField::new('slug', "easy.menu.admin.field.slug")
-            ->setRequired(true)
-            ->hideOnIndex()
-            ->setTargetFieldName('name')
-            ->setUnlockConfirmationMessage("easy.menu.admin.field.slug_edit")
-            ->setColumns(12);
-    }
-
-    public function seoFields(string $pageName, $subject): iterable
-    {
-        yield FormField::addPanel("easy.menu.admin.panel.seo")->collapsible()->addCssClass("col-4");
-        yield SEOField::new("seo");
-    }
-
-    public function publishFields(string $pageName, $subject): iterable
-    {
-        yield FormField::addPanel("easy.menu.admin.panel.publication")->collapsible()->addCssClass("col-4");
-        yield EnumField::new("state", 'easy.menu.admin.field.state')
-            ->setEnum(ThreeStateStatusEnum::class)
-            ->setRequired(true)
-            ->renderExpanded(true)
-            ->renderAsBadges(true);
-        yield DateTimeField::new('publishDate', "easy.menu.admin.field.publishDate")->setFormat('Y-MM-dd HH:mm')
-            ->setRequired(true)
-            ->hideOnIndex()
-            ->setColumns(6);
-        yield DateTimeField::new('unpublishDate', "easy.menu.admin.field.unpublishDate")->setFormat('Y-MM-dd HH:mm')
-            ->setRequired(false)
-            ->hideOnIndex()
-            ->setColumns(6);
-    }
 }

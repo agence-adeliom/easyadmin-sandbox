@@ -6,7 +6,7 @@ use Adeliom\EasyMenuBundle\Entity\BaseMenuItemEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\Menu\MenuItemRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="menus_items")
  */
