@@ -1,1 +1,5 @@
-{% extends '@SyliusUi/Grid/Action/show.html.twig' %}
+{% import '@EasyShop/SyliusUiBundle/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
+
+{{ buttons.show(path, action.label, null, 'btn-primary btn-sm') }}

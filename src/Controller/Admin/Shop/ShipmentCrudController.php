@@ -85,11 +85,10 @@ class ShipmentCrudController extends AbstractCrudController
         $filters
             ->add(DateTimeFilter::new('createdAt','sylius.ui.date'))
             ->add(ChoiceFilter::new('state','sylius.ui.state')->setChoices([
-                'sylius.ui.'.OrderShippingStates::STATE_CART => OrderShippingStates::STATE_CART,
-                'sylius.ui.'.OrderShippingStates::STATE_CANCELLED => OrderShippingStates::STATE_CANCELLED,
-                'sylius.ui.'.OrderShippingStates::STATE_PARTIALLY_SHIPPED => OrderShippingStates::STATE_PARTIALLY_SHIPPED,
-                'sylius.ui.'.OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
-                'sylius.ui.'.OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
+                'sylius.ui.' . Shipment::STATE_CART => Shipment::STATE_CART,
+                'sylius.ui.' . Shipment::STATE_CANCELLED => Shipment::STATE_CANCELLED,
+                'sylius.ui.' . Shipment::STATE_SHIPPED => Shipment::STATE_SHIPPED,
+                'sylius.ui.' . Shipment::STATE_READY => Shipment::STATE_READY,
             ]))
         ;
 
@@ -127,12 +126,11 @@ class ShipmentCrudController extends AbstractCrudController
         });
         yield ChoiceField::new('state', 'sylius.ui.state')
             ->setChoices([
-                'sylius.ui.' . OrderShippingStates::STATE_CART => OrderShippingStates::STATE_CART,
-                'sylius.ui.' . OrderShippingStates::STATE_CANCELLED => OrderShippingStates::STATE_CANCELLED,
-                'sylius.ui.' . OrderShippingStates::STATE_PARTIALLY_SHIPPED => OrderShippingStates::STATE_PARTIALLY_SHIPPED,
-                'sylius.ui.' . OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
-                'sylius.ui.' . OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
-            ]);
+                'sylius.ui.' . Shipment::STATE_CART => Shipment::STATE_CART,
+                'sylius.ui.' . Shipment::STATE_CANCELLED => Shipment::STATE_CANCELLED,
+                'sylius.ui.' . Shipment::STATE_SHIPPED => Shipment::STATE_SHIPPED,
+                'sylius.ui.' . Shipment::STATE_READY => Shipment::STATE_READY,
+            ])->setTemplatePath('@EasyShop/crud/Common/Label/shipmentState.html.twig');
     }
 
     public function shipmentTracking(AdminContext $context)

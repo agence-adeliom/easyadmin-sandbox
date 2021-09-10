@@ -124,7 +124,6 @@
 
             {% if labels and values %}
                 <div class="stats-graph position-relative mb-3 mt-3">
-                    {% set endDate = startDate %}
                     <a id="navigation-prev"
                             class="navigation navigation-prev position-absolute top-50" style="left: 1rem; margin-top: -1em"
                            href="{{ ea_url()
@@ -133,8 +132,8 @@
                                .set("interval", interval)
                                .set("type", type)
                                .set("navigation", 'prev')
-                               .set("startDate", endDate|date_modify("-" ~ jumps[type])|date('Y-m-d'))
-                               .set("endDate", endDate|date('Y-m-d'))
+                               .set("startDate", startDate|date_modify("-" ~ jumps[type])|date('Y-m-d'))
+                               .set("endDate", startDate|date('Y-m-d'))
                                .set("channelCode", channel.channel_code)}}"
                     >
                         <i class="fa fa-angle-left fa-2x"></i>
@@ -155,8 +154,8 @@
                                .set("interval", interval)
                                .set("type", type)
                                .set("navigation", 'next')
-                               .set("startDate", endDate|date('Y-m-d')|date_modify("+" ~ jumps[type])|date('Y-m-d'))
-                               .set("endDate", endDate|date_modify("+" ~ jumps[type])|date('Y-m-d')|date_modify("+" ~ jumps[type])|date('Y-m-d'))
+                               .set("startDate", endDate|date('Y-m-d'))
+                               .set("endDate", endDate|date_modify("+" ~ jumps[type])|date('Y-m-d'))
                                .set("channelCode", channel.channel_code)}}"
                     >
                         <i class="fa fa-angle-right fa-2x"></i>
@@ -198,27 +197,27 @@
                         <span class="fs-4">{{ 'sylius.ui.new_orders'|trans }}</span>
                     </div>
                     <div class="card-body p-0">
-                        <table class="table mb-0 border-bottom-0">
+                        <table class="table table-borderless mb-0 border-bottom-0">
                             <thead>
-                            <th>{{ 'sylius.ui.order'|trans }}</th>
-                            <th class="text-end">{{ 'sylius.ui.items'|trans }}</th>
-                            <th class="text-end">{{ 'sylius.ui.total'|trans }}</th>
-                            <th></th>
+                            <th class="border-bottom">{{ 'sylius.ui.order'|trans }}</th>
+                            <th class="border-bottom text-end">{{ 'sylius.ui.items'|trans }}</th>
+                            <th class="border-bottom text-end">{{ 'sylius.ui.total'|trans }}</th>
+                            <th class="border-bottom"></th>
                             </thead>
                             <tbody>
                             {% for order in latest.order %}
                                 <tr class="align-middle">
-                                    <td class="{{ loop.last ? 'border-bottom-0' : '' }}">
+                                    <td class="{{ loop.last ? 'border-bottom-0' : 'border-bottom' }}">
                                         <strong>{{ order.customer.fullName }}</strong><br>
                                         <div class="text-muted">{{ order.customer.email }}</div>
                                     </td>
-                                    <td class="{{ loop.last ? 'border-bottom-0' : '' }} text-end">
+                                    <td class="{{ loop.last ? 'border-bottom-0' : 'border-bottom' }} text-end">
                                         {{ order.totalQuantity }}
                                     </td>
-                                    <td class="{{ loop.last ? 'border-bottom-0' : '' }} text-end">
+                                    <td class="{{ loop.last ? 'border-bottom-0' : 'border-bottom' }} text-end">
                                         {{ money.format(order.total, order.currencyCode) }}
                                     </td>
-                                    <td class="{{ loop.last ? 'border-bottom-0' : '' }}">
+                                    <td class="{{ loop.last ? 'border-bottom-0' : 'border-bottom' }}">
                                         <a href="{{ ea_url()
                                             .setController(ea.crud.controllerFqcn)
                                             .setEntityId(order.id)

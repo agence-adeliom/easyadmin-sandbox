@@ -24,7 +24,7 @@
             {% else %}
                 {% set path = '//placehold.it/50x50' %}
             {% endif %}
-            <img src="{{ path }}" alt="" class="ui bordered image sylius-grid-image" />
+            <img src="{{ path }}" alt="" class="img-fluid sylius-grid-image" style="width: 4rem" />
             <div class="content">
                 <div class="sylius-product-name" title="{{ item.productName }}">{{ item.productName }}</div>
                 <span class="sub header sylius-product-variant-code" title="{{ variant.code }}">

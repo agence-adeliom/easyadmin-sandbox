@@ -199,15 +199,7 @@ class OrderCrudController extends AbstractCrudController
                     'sylius.ui.' . Order::STATE_CANCELLED => Order::STATE_CANCELLED,
                     'sylius.ui.' . Order::STATE_FULFILLED => Order::STATE_FULFILLED,
                     'sylius.ui.' . Order::STATE_NEW => Order::STATE_NEW
-//                'sylius.ui.'.OrderCheckoutStates::STATE_CART => OrderCheckoutStates::STATE_CART,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_CART => OrderCheckoutStates::STATE_CART,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_COMPLETED => OrderCheckoutStates::STATE_COMPLETED,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_ADDRESSED => OrderCheckoutStates::STATE_ADDRESSED,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_PAYMENT_SELECTED => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_PAYMENT_SKIPPED => OrderCheckoutStates::STATE_PAYMENT_SKIPPED,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_SHIPPING_SELECTED => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
-//                'sylius.ui.'.OrderCheckoutStates::STATE_SHIPPING_SKIPPED => OrderCheckoutStates::STATE_SHIPPING_SKIPPED,
-                ]);
+                ])->setTemplatePath('@EasyShop/crud/Common/Label/orderStates.html.twig');
             yield ChoiceField::new('paymentState', 'sylius.ui.payment_state')
                 ->setChoices([
                     'sylius.ui.' . OrderPaymentStates::STATE_AUTHORIZED => OrderPaymentStates::STATE_AUTHORIZED,
@@ -218,7 +210,7 @@ class OrderCrudController extends AbstractCrudController
                     'sylius.ui.' . OrderPaymentStates::STATE_PARTIALLY_PAID => OrderPaymentStates::STATE_PARTIALLY_PAID,
                     'sylius.ui.' . OrderPaymentStates::STATE_PARTIALLY_REFUNDED => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
                     'sylius.ui.' . OrderPaymentStates::STATE_REFUNDED => OrderPaymentStates::STATE_REFUNDED,
-                ]);
+                ])->setTemplatePath('@EasyShop/crud/Common/Label/paymentStates.html.twig');
             yield ChoiceField::new('shippingState', 'sylius.ui.shipping_state')
                 ->setChoices([
                     'sylius.ui.' . OrderShippingStates::STATE_CART => OrderShippingStates::STATE_CART,
@@ -226,11 +218,11 @@ class OrderCrudController extends AbstractCrudController
                     'sylius.ui.' . OrderShippingStates::STATE_PARTIALLY_SHIPPED => OrderShippingStates::STATE_PARTIALLY_SHIPPED,
                     'sylius.ui.' . OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
                     'sylius.ui.' . OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
-                ]);
+                ])->setTemplatePath('@EasyShop/crud/Common/Label/shipmentStates.html.twig');
             yield NumberField::new('total', 'sylius.ui.total')->formatValue(function ($value, Order $entity) {
                 $formatter = new \NumberFormatter($entity->getLocaleCode(), \NumberFormatter::CURRENCY);
                 return $formatter->formatCurrency($entity->getTotal() / 100, $entity->getCurrencyCode());
-            })->setCssClass('text-md-right');
+            })->setCssClass('text-md-end');
             yield CurrencyField::new('currencyCode', 'sylius.ui.currency');
         }
 

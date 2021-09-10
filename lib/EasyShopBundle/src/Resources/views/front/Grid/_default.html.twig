@@ -1,7 +1,7 @@
-{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import '@EasyShop/SyliusUiBundle/Macro/pagination.html.twig' as pagination %}
+{% import '@EasyShop/SyliusUiBundle/Macro/buttons.html.twig' as buttons %}
 {% import '@EasyShop/SyliusUiBundle/Macro/messages.html.twig' as messages %}
-{% import '@SyliusUi/Macro/table.html.twig' as table %}
+{% import '@EasyShop/SyliusUiBundle/Macro/table.html.twig' as table %}
 
 {% set definition = grid.definition %}
 {% set data = grid.data %}
@@ -56,8 +56,8 @@
     </div>
 
     {% if data|length > 0 %}
-        <div class="ui segment spaceless sylius-grid-table-wrapper">
-            <table class="ui sortable stackable very basic celled table" {{ sylius_test_html_attribute('grid-table') }}>
+        <div class="sylius-grid-table-wrapper">
+            <table class="sortable table table-responsive" {{ sylius_test_html_attribute('grid-table') }}>
                 <thead>
                 <tr>
                     {{ table.headers(grid, definition, app.request.attributes) }}

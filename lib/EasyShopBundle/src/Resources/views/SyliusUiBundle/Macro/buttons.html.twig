@@ -16,7 +16,7 @@
         {% set message = 'sylius.ui.show' %}
     {% endif %}
 
-    {{ buttons.default(url, message, id, 'fa-search') }}
+    {{ buttons.default(url, message, id, 'fa-search', class) }}
 {% endmacro %}
 
 {% macro create(url, message, id, labeled = true) %}
