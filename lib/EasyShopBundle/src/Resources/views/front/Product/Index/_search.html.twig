@@ -1,5 +1,5 @@
 <div class="search-bar mb-3">
-    <form method="get" action="{{ path('easy_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui loadable form">
+    <form method="get" action="{{ path('easy_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="loadable form">
         <div class="input-group d-flex">
             <div class="form-outline flex-grow-1" id="searchbarTextField">
                 {% for filter in products.definition.enabledFilters %}

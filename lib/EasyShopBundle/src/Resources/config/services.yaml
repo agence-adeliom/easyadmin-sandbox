@@ -3,6 +3,15 @@ services:
         autowire: true
         autoconfigure: true
 
+    Adeliom\EasyShopBundle\Validators\UniqueReviewerEmailValidator:
+        decorates: 'sylius.validator.unique_reviewer_email'
+        arguments:
+            - '@sylius.repository.shop_user'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+        tags:
+            - { name: validator.constraint_validator, alias: sylius_unique_reviewer_email_validator }
+
     kernel.listener.admin_exception:
         class: Adeliom\EasyShopBundle\EventListener\AdminExceptionListener
         arguments:

@@ -1,7 +1,7 @@
 <h4>{{ 'sylius.ui.registered_customers'|trans }}</h4>
 <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
 
-{{ form_start(form, {'action': path('easy_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('easy_shop_login_check'), 'attr': {'class': 'loadable form', 'novalidate': 'novalidate'}}) }}
     {% include '@EasyShop/front/Login/_form.html.twig' %}
 
     {{ sylius_template_event('sylius.shop.login.form', {'form': form}) }}
