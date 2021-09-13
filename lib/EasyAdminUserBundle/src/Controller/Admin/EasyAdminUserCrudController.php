@@ -96,7 +96,7 @@ abstract class EasyAdminUserCrudController extends AbstractCrudController
         yield TextField::new("plainPassword", 'easy_admin_user.form.password')->setRequired($pageName == Crud::PAGE_NEW)->setColumns('col-12 col-sm-6')->onlyOnForms();
 
         if(!$subject || ($pageName == Crud::PAGE_DETAIL) || ($pageName == Crud::PAGE_NEW) || ($pageName == Crud::PAGE_EDIT && $currentUser->getUserIdentifier() !== $subject->getEmail())){
-            yield BooleanField::new("enabled", 'easy_admin_user.form.enabled')->setColumns('col-12 col-sm-6');
+            yield BooleanField::new("enabled", 'easy_admin_user.form.enabled')->renderAsSwitch($pageName != Crud::PAGE_INDEX)->setColumns('col-12 col-sm-6');
             yield ChoiceField::new("roles", 'easy_admin_user.form.roles')->setColumns('col-12 col-sm-6')
                 ->setRequired(true)
                 ->allowMultipleChoices()

@@ -39,7 +39,7 @@ class EasyAdminSecurityController extends AbstractController
             'forgot_password_enabled' => true,
             'forgot_password_path' => $this->generateUrl('easy_admin_forgot_password_request'),
             'forgot_password_label' => 'easy_admin_user.login.forgot_password',
-            'remember_me_enabled' => true,
+            'remember_me_enabled' => false,
             'remember_me_parameter' => '_admin_remember_me',
             'remember_me_checked' => true,
             'remember_me_label' => 'easy_admin_user.login.remember_me',

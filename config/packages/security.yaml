@@ -39,6 +39,7 @@ security:
                 secret: "%env(APP_SECRET)%"
                 name: ADMIN_REMEMBER_ME
                 lifetime: 31536000
+                path: /admin
                 remember_me_parameter: _admin_remember_me
             logout:
                 path: easy_admin_logout
