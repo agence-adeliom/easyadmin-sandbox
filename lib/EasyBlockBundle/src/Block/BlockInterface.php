@@ -3,8 +3,6 @@
 
 namespace Adeliom\EasyBlockBundle\Block;
 
-use Symfony\Component\Form\FormBuilderInterface;
-
 interface BlockInterface
 {
     public function getName(): string;

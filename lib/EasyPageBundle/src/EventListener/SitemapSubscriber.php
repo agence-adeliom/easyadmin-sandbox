@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyPageBundle\EventListener;
 
-use Adeliom\EasyPageBundle\Repository\BasePageRepository;
+use Adeliom\EasyPageBundle\Repository\PageRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
@@ -17,15 +17,15 @@ class SitemapSubscriber implements EventSubscriberInterface
     private $urlGenerator;
 
     /**
-     * @var BasePageRepository
+     * @var PageRepository
      */
     private $repository;
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
-     * @param BasePageRepository    $repository
+     * @param PageRepository    $repository
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, BasePageRepository $repository)
+    public function __construct(UrlGeneratorInterface $urlGenerator, PageRepository $repository)
     {
         $this->urlGenerator = $urlGenerator;
         $this->repository = $repository;

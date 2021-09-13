@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyPageBundle\Controller;
 
-use Adeliom\EasyPageBundle\Entity\BasePageEntity;
+use Adeliom\EasyPageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class AbstractPageController extends AbstractController
@@ -15,9 +15,9 @@ abstract class AbstractPageController extends AbstractController
      * as it should be /parent/children.
      *
      * @param array             $slugs
-     * @param BasePageEntity[] $elements
+     * @param Page[] $elements
      *
-     * @return BasePageEntity
+     * @return Page
      */
     protected function getFinalTreeElement(array $slugs, array $elements)
     {
@@ -31,9 +31,9 @@ abstract class AbstractPageController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        /** @var BasePageEntity $element */
+        /** @var Page $element */
         $element = null;
-        /** @var BasePageEntity $previousElement */
+        /** @var Page $previousElement */
         $previousElement = null;
 
         foreach ($slugs as $slug) {

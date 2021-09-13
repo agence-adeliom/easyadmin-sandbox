@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyBlogBundle\Event;
 
-use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
+use Adeliom\EasyBlogBundle\Entity\CategoryEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class EasyBlogCategoryEvent extends Event
@@ -14,7 +14,7 @@ class EasyBlogCategoryEvent extends Event
     protected $args;
     protected $template;
 
-    public function __construct(?BaseCategoryEntity $category, $args, $template)
+    public function __construct(?CategoryEntity $category, $args, $template)
     {
         $this->category = $category;
         $this->args = $args;
@@ -22,9 +22,9 @@ class EasyBlogCategoryEvent extends Event
     }
 
     /**
-     * @return BaseCategoryEntity|null
+     * @return CategoryEntity|null
      */
-    public function getPost(): ?BaseCategoryEntity
+    public function getPost(): ?CategoryEntity
     {
         return $this->category;
     }

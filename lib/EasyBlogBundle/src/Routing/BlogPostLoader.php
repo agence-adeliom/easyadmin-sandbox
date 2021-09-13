@@ -3,8 +3,7 @@
 namespace Adeliom\EasyBlogBundle\Routing;
 
 
-use Adeliom\EasyBlogBundle\Repository\BasePageRepository;
-use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
+use Adeliom\EasyBlogBundle\Repository\PostRepository;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -20,7 +19,7 @@ class BlogPostLoader extends Loader
     private $config;
 
 
-    public function __construct(string $controller, string $entity, BasePostRepository $repository, array $config, string $env = null)
+    public function __construct(string $controller, string $entity, PostRepository $repository, array $config, string $env = null)
     {
         parent::__construct($env);
 

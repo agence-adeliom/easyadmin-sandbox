@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyBlogBundle\Event;
 
-use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
+use Adeliom\EasyBlogBundle\Entity\PostEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class EasyBlogPostEvent extends Event
@@ -14,7 +14,7 @@ class EasyBlogPostEvent extends Event
     protected $args;
     protected $template;
 
-    public function __construct(BasePostEntity $post, $args, $template)
+    public function __construct(PostEntity $post, $args, $template)
     {
         $this->post = $post;
         $this->args = $args;
@@ -22,9 +22,9 @@ class EasyBlogPostEvent extends Event
     }
 
     /**
-     * @return BasePostEntity
+     * @return PostEntity
      */
-    public function getPost(): BasePostEntity
+    public function getPost(): PostEntity
     {
         return $this->post;
     }

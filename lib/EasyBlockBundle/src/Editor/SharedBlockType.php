@@ -3,14 +3,12 @@ namespace Adeliom\EasyBlockBundle\Editor;
 
 use Adeliom\EasyEditorBundle\Block\AbstractBlock;
 use Adeliom\EasyEditorBundle\Block\BlockInterface;
-use App\Entity\Block;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SharedBlockType extends AbstractBlock implements BlockInterface
 {

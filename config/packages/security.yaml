@@ -1,14 +1,10 @@
 security:
     encoders:
-        App\Entity\User:
-            algorithm: auto
-
+        Adeliom\EasyAdminUserBundle\Entity\User: argon2i
         Sylius\Component\User\Model\UserInterface: argon2i
-
 
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
-
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -17,10 +13,8 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_admin_user_provider:
-            entity:
-                class: App\Entity\User
-                property: email
+        easy_admin_user_provider:
+            id: easy_admin_user.user_provider
 
         easy_shop_user_provider:
             id: sylius.shop_user_provider.email_or_name_based
@@ -37,18 +31,18 @@ security:
         admin:
             lazy: true
             pattern: ^/admin
-            provider: app_admin_user_provider
-            custom_authenticator: App\Security\AdminAuthenticator
-            logout:
-                path: app_admin_logout
-                # where to redirect after logout
-                # target: app_any_route
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
+            provider: easy_admin_user_provider
+            custom_authenticator: easy_admin_user.authenticator
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
+            remember_me:
+                secret: "%env(APP_SECRET)%"
+                name: ADMIN_REMEMBER_ME
+                lifetime: 31536000
+                remember_me_parameter: _admin_remember_me
+            logout:
+                path: easy_admin_logout
+                target: easy_admin_login
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
@@ -80,6 +74,7 @@ security:
     access_control:
         - { path: ^/admin/login$, roles: PUBLIC_ACCESS }
         - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/reset-password, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
         - { path: "%sylius.security.shop_regex%", role: PUBLIC_ACCESS }
@@ -90,5 +85,3 @@ security:
         - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
         - { path: ^/, role: PUBLIC_ACCESS }
-
-        # - { path: ^/profile, roles: ROLE_USER }

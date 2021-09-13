@@ -2,8 +2,11 @@
 
 namespace Adeliom\EasyMediaBundle\DependencyInjection;
 
+use Adeliom\EasyMediaBundle\Entity\Lock;
+use Adeliom\EasyMediaBundle\Entity\Metas;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class Configuration implements ConfigurationInterface
 {
@@ -21,10 +24,34 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('/upload/')
             ->end()
             ->scalarNode('lock_entity')
-                ->defaultValue('App\Entity\EasyMediaLock')
+                ->isRequired()
+                ->validate()
+                ->ifString()
+                ->then(function($value) {
+                    if (!class_exists($value) || !is_a($value, Lock::class, true)) {
+                        throw new InvalidConfigurationException(sprintf(
+                            'Media lock class must be a valid class extending %s. "%s" given.',
+                            Lock::class, $value
+                        ));
+                    }
+                    return $value;
+                })
+                ->end()
             ->end()
             ->scalarNode('metas_entity')
-                ->defaultValue('App\Entity\EasyMediaMetas')
+                ->isRequired()
+                ->validate()
+                ->ifString()
+                ->then(function($value) {
+                    if (!class_exists($value) || !is_a($value, Metas::class, true)) {
+                        throw new InvalidConfigurationException(sprintf(
+                            'Media metas class must be a valid class extending %s. "%s" given.',
+                            Metas::class, $value
+                        ));
+                    }
+                    return $value;
+                })
+                ->end()
             ->end()
             ->scalarNode('ignore_files')
                 ->defaultValue('/^\..*/')

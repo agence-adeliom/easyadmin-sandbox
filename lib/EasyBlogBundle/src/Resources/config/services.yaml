@@ -9,14 +9,6 @@ services:
         autoconfigure: true
         tags: [ 'controller.service_arguments' ]
 
-    Adeliom\EasyBlogBundle\Controller\BasePostController:
-        calls:
-            - [ 'setRepositories', [ '@easy_blog.category.repository', '@easy_blog.post.repository' ] ]
-
-    Adeliom\EasyBlogBundle\Controller\BaseCategoryController:
-        calls:
-            - [ 'setRepositories', [ '@easy_blog.category.repository', '@easy_blog.post.repository' ] ]
-
     easy_blog.post.route_loader:
         class: Adeliom\EasyBlogBundle\Routing\BlogPostLoader
         arguments:
@@ -38,6 +30,7 @@ services:
         tags: [ routing.loader ]
 
     easy_blog.post.repository:
+        public: true
         class: '%easy_blog.post.repository%'
         arguments:
             - '@Doctrine\Persistence\ManagerRegistry'
@@ -47,6 +40,7 @@ services:
         tags: [ doctrine.repository_service ]
 
     easy_blog.category.repository:
+        public: true
         class: '%easy_blog.category.repository%'
         arguments:
             - '@Doctrine\Persistence\ManagerRegistry'

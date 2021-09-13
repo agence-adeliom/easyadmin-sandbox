@@ -47,6 +47,10 @@
         {
             "type": "path",
             "url": "lib/EasyMenuBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyAdminUserBundle"
         }
     ],
     "require": {
@@ -66,6 +70,7 @@
         "agence-adeliom/easy-page-bundle": "*@dev",
         "agence-adeliom/easy-seo-bundle": "*@dev",
         "agence-adeliom/easy-shop-bundle": "*@dev",
+        "agence-adeliom/easy-admin-user-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
@@ -102,7 +107,6 @@
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
-        "symfonycasts/reset-password-bundle": "^1.8",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },

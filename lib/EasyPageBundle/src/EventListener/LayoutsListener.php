@@ -2,8 +2,8 @@
 
 namespace Adeliom\EasyPageBundle\EventListener;
 
-use Adeliom\EasyPageBundle\Entity\BasePageEntity;
-use Adeliom\EasyPageBundle\Repository\BasePageRepository;
+use Adeliom\EasyPageBundle\Entity\Page;
+use Adeliom\EasyPageBundle\Repository\PageRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -24,11 +24,11 @@ class LayoutsListener implements EventSubscriberInterface
     private $twig;
 
     /**
-     * @var BasePageRepository
+     * @var PageRepository
      */
     private $pageRepository;
 
-    public function __construct(array $layouts, Environment $twig, BasePageRepository $pageRepository)
+    public function __construct(array $layouts, Environment $twig, PageRepository $pageRepository)
     {
         $this->layouts = $layouts;
         $this->twig    = $twig;
@@ -96,7 +96,7 @@ class LayoutsListener implements EventSubscriberInterface
             ), 0, $source);
         }
 
-        /** @var BasePageEntity[] $pages */
+        /** @var Page[] $pages */
         $slugsArray = preg_split('~/~', $path, -1, PREG_SPLIT_NO_EMPTY);
         $pages = $this->pageRepository->findFrontPages($slugsArray, $event->getRequest()->getHost(), $event->getRequest()->getLocale());
 

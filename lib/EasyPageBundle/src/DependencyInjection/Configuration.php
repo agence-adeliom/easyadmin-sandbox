@@ -3,9 +3,9 @@
 namespace Adeliom\EasyPageBundle\DependencyInjection;
 
 
-use Adeliom\EasyPageBundle\Controller\BasePageController;
-use Adeliom\EasyPageBundle\Entity\BasePageEntity;
-use Adeliom\EasyPageBundle\Repository\BasePageRepository;
+use Adeliom\EasyPageBundle\Controller\PageController;
+use Adeliom\EasyPageBundle\Entity\Page;
+use Adeliom\EasyPageBundle\Repository\PageRepository;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -34,10 +34,10 @@ class Configuration implements ConfigurationInterface
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!class_exists($value) || !is_a($value, BasePageEntity::class, true)) {
+                            if (!class_exists($value) || !is_a($value, Page::class, true)) {
                                 throw new InvalidConfigurationException(sprintf(
                                     'Page class must be a valid class extending %s. "%s" given.',
-                                    BasePageEntity::class, $value
+                                    Page::class, $value
                                 ));
                             }
                             return $value;
@@ -45,14 +45,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('page_repository')
-                    ->defaultValue(BasePageRepository::class)
+                    ->defaultValue(PageRepository::class)
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!class_exists($value) || !is_a($value, BasePageRepository::class, true)) {
+                            if (!class_exists($value) || !is_a($value, PageRepository::class, true)) {
                                 throw new InvalidConfigurationException(sprintf(
                                     'Page repository must be a valid class extending %s. "%s" given.',
-                                    BasePageRepository::class, $value
+                                    PageRepository::class, $value
                                 ));
                             }
                             return $value;
@@ -60,14 +60,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('page_controller')
-                    ->defaultValue(BasePageController::class)
+                    ->defaultValue(PageController::class)
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!class_exists($value) || !is_a($value, BasePageController::class, true)) {
+                            if (!class_exists($value) || !is_a($value, PageController::class, true)) {
                                 throw new InvalidConfigurationException(sprintf(
                                     'Page controller must be a valid class extending %s. "%s" given.',
-                                    BasePageController::class, $value
+                                    PageController::class, $value
                                 ));
                             }
                             return $value;
