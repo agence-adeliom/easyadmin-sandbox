@@ -8,7 +8,7 @@ sync:
                 - .idea
     mutagen:
         alpha: ".."
-        beta: "docker://sf5_mutagen/var/www/html"
+        beta: "docker://sfbundles_mutagen/var/www/html"
         mode: "two-way-resolved"
         configurationBeta:
             permissions:

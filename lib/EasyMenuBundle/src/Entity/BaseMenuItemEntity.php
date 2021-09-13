@@ -10,6 +10,7 @@ use Adeliom\EasyCommonBundle\Traits\EntityTimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Prodigious\Sonata\MenuBundle\Model\MenuItem;
 
 /**
@@ -56,7 +57,7 @@ class BaseMenuItemEntity {
 
     /**
      * @var integer
-     *
+     * @Gedmo\SortablePosition()
      * @ORM\Column(name="position", type="smallint", options={"unsigned"=true}, nullable=true)
      */
     protected $position;
