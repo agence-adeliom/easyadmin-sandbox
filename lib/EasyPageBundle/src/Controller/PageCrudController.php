@@ -52,10 +52,6 @@ abstract class PageCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        $qb
-            ->orderBy("entity.root", "ASC")
-            ->addOrderBy("entity.level", "ASC")
-        ;
 
         return $qb;
     }

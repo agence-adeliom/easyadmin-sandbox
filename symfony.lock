@@ -17,6 +17,9 @@
     "agence-adeliom/easy-common-bundle": {
         "version": "dev-master"
     },
+    "agence-adeliom/easy-config-bundle": {
+        "version": "dev-master"
+    },
     "agence-adeliom/easy-editor-bundle": {
         "version": "dev-master"
     },

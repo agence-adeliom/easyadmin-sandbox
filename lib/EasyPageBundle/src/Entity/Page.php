@@ -54,20 +54,6 @@ class Page {
     protected $children;
 
     /**
-     * @var int
-     * @ORM\Column(name="root", type="integer")
-     * @Assert\Type("integer")
-     */
-    public $root = 0;
-
-    /**
-     * @var int
-     * @ORM\Column(name="level", type="integer")
-     * @Assert\Type("integer")
-     */
-    public $level = 0;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="action", type="string", nullable=true)
@@ -251,38 +237,6 @@ class Page {
     }
 
     /**
-     * @param int $level
-     */
-    public function setLevel(int $level): void
-    {
-        $this->level = $level;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLevel(): int
-    {
-        return $this->level;
-    }
-
-    /**
-     * @param int $root
-     */
-    public function setRoot(int $root): void
-    {
-        $this->root = $root;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRoot(): int
-    {
-        return $this->root;
-    }
-
-    /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
@@ -291,27 +245,6 @@ class Page {
         if(empty($this->getSEO()->title)){
             $this->getSEO()->title = $this->getName();
         }
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function setTreeData(LifecycleEventArgs $event): void
-    {
-        $i = -1;
-        $root = $this;
-        $current = $this;
-        do {
-            $i++;
-            if($current->getParent()){
-                $root = $current->getParent();
-            }
-            $current = $current->getParent();
-        } while ($current);
-
-        $this->setLevel($i);
-        $this->setRoot($root->getId());
     }
 
 

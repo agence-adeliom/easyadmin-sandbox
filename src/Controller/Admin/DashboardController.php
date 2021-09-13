@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
+use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
 use Adeliom\EasyShopBundle\Admin\EasyShopDashboardTrait;
 use App\Entity\EasyAdmin\User;
 use App\Entity\EasyBlock\Block;
@@ -21,6 +22,7 @@ class DashboardController extends AbstractDashboardController
 {
     use EasyShopDashboardTrait;
     use EasyAdminUserTrait;
+    use EasyConfigTrait;
 
     /**
      * @Route("/admin", name="admin")
@@ -44,6 +46,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
         yield from $this->administratorMenuEntry();
+        yield from $this->configMenuEntry();
 
         yield MenuItem::section('easy.page.admin.menu.contents');
         yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);

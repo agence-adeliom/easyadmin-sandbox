@@ -21,7 +21,9 @@
 
 
 <div class="{{ form.vars.ea_crud_form.ea_field.columns ?? form.vars.ea_crud_form.ea_field.defaultColumns ?? '' }}">
-    <div {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}>
+    <div {% with { attr: row_attr|merge({
+        'data-row-id': id
+    }) } %}{{ block('attributes') }}{% endwith %}>
         {{- form_label(form) -}}
 
         <div class="form-widget easy-media-widget" data-widget="{{ form.vars.id }}">

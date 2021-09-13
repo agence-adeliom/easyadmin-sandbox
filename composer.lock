@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3285687a5b164f62492fe461c15a7cd",
+    "content-hash": "61bb4cdaa97bc300373ab56bb8ec9364",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -353,6 +353,46 @@
                 "MIT"
             ],
             "description": "Symfony bundle for EasyAdmin",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "agence-adeliom/easy-config-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "lib/EasyConfigBundle",
+                "reference": "0970c4ac6c2c3363184a25845ec05a228f87409a"
+            },
+            "require": {
+                "agence-adeliom/easy-common-bundle": "*@dev",
+                "doctrine/annotations": "^1.0",
+                "doctrine/doctrine-bundle": "^2.4",
+                "doctrine/doctrine-migrations-bundle": "^3.1",
+                "doctrine/orm": "^2.9",
+                "easycorp/easyadmin-bundle": "^3.4",
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "symfony/config": "^4.0|^5.0",
+                "symfony/dependency-injection": "^4.0|^5.0",
+                "symfony/form": "^4.0|^5.0",
+                "symfony/framework-bundle": "^4.0|^5.0",
+                "symfony/http-foundation": "^4.0|^5.0",
+                "symfony/http-kernel": "^4.0|^5.0",
+                "symfony/options-resolver": "^4.0|^5.0",
+                "symfony/property-access": "^4.0|^5.0",
+                "symfony/routing": "^4.0|^5.0",
+                "symfony/twig-bundle": "^4.0|^5.0",
+                "twig/extra-bundle": "^2.12|^3.0",
+                "twig/twig": "^2.12|^3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Adeliom\\EasyConfigBundle\\": "src/"
+                }
+            },
             "transport-options": {
                 "relative": true
             }
@@ -1430,16 +1470,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.13.2",
+            "version": "2.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "8dd39d2ead4409ce652fd4f02621060f009ea5e4"
+                "reference": "0d7adf4cadfee6f70850e5b163e6cdd706417838"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/8dd39d2ead4409ce652fd4f02621060f009ea5e4",
-                "reference": "8dd39d2ead4409ce652fd4f02621060f009ea5e4",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0d7adf4cadfee6f70850e5b163e6cdd706417838",
+                "reference": "0d7adf4cadfee6f70850e5b163e6cdd706417838",
                 "shasum": ""
             },
             "require": {
@@ -1451,13 +1491,14 @@
             },
             "require-dev": {
                 "doctrine/coding-standard": "9.0.0",
-                "jetbrains/phpstorm-stubs": "2020.2",
-                "phpstan/phpstan": "0.12.81",
+                "jetbrains/phpstorm-stubs": "2021.1",
+                "phpstan/phpstan": "0.12.96",
                 "phpunit/phpunit": "^7.5.20|^8.5|9.5.5",
+                "psalm/plugin-phpunit": "0.16.1",
                 "squizlabs/php_codesniffer": "3.6.0",
                 "symfony/cache": "^4.4",
                 "symfony/console": "^2.0.5|^3.0|^4.0|^5.0",
-                "vimeo/psalm": "4.6.4"
+                "vimeo/psalm": "4.10.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -1518,7 +1559,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/2.13.2"
+                "source": "https://github.com/doctrine/dbal/tree/2.13.3"
             },
             "funding": [
                 {
@@ -1534,7 +1575,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-18T21:48:39+00:00"
+            "time": "2021-09-12T19:11:48+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -19957,7 +19998,8 @@
         "agence-adeliom/easy-page-bundle": 20,
         "agence-adeliom/easy-seo-bundle": 20,
         "agence-adeliom/easy-shop-bundle": 20,
-        "agence-adeliom/easy-admin-user-bundle": 20
+        "agence-adeliom/easy-admin-user-bundle": 20,
+        "agence-adeliom/easy-config-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
