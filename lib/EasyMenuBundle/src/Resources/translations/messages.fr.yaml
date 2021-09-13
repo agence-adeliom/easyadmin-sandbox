@@ -41,7 +41,13 @@ easy:
         publication: Publication
       field:
         name: Nom
+        title: Titre
         code: Code
         state: Status
+        parent: Parent
+        url: Url
+        position: Position
+        flattenParents: Arborescence
+        classAttribute: Attribut class
         publishDate: Date de publication
         unpublishDate: Date de dépublication

@@ -2,6 +2,9 @@
 
 namespace Adeliom\EasyMenuBundle\Controller;
 
+use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
+use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
+use Adeliom\EasyFieldsBundle\Admin\Field\PositionSortableField;
 use App\Controller\Admin\Menu\MenuCrudController;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -12,9 +15,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
@@ -81,6 +86,10 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             $queryBuilder->andWhere('entity.menu = :menu');
             $queryBuilder->setParameter('menu', $menu);
         }
+        $queryBuilder
+            ->orderBy("entity.parent", "ASC")
+            ->addOrderBy("entity.position", "ASC")
+        ;
         return $queryBuilder;
     }
 
@@ -108,9 +117,48 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
     public function informationsFields(string $pageName, $subject): iterable
     {
         yield FormField::addPanel("easy.menu.admin.panel.information")->addCssClass("col-12");
-        yield TextField::new('name', "easy.menu.admin.field.name")
+
+        yield TextField::new('flattenParents', "easy.menu.admin.field.flattenParents")
+            ->onlyOnIndex();
+
+        yield TextField::new('name', "easy.menu.admin.field.title")
+            ->hideOnIndex()
             ->setRequired(true)
             ->setColumns(12);
+
+        yield AssociationField::new("parent", "easy.menu.admin.field.parent")
+            ->setQueryBuilder(function (QueryBuilder $queryBuilder) use ($subject) {
+                $rootAllias = $queryBuilder->getAllAliases()[0];
+                if($subject->getPrimaryKeyValue()){
+                    $queryBuilder->andWhere(sprintf("%s.id != :currentID", $rootAllias))
+                        ->setParameter("currentID", $subject->getPrimaryKeyValue());
+                }
+                $queryBuilder->andWhere(sprintf("%s.menu = :menu", $rootAllias))
+                    ->setParameter("menu", $subject->getInstance()->getMenu());
+                return $queryBuilder;
+            })
+            ->setColumns(12);
+
+
+        yield UrlField::new('url', "easy.menu.admin.field.url")
+            ->setRequired(true)
+            ->setColumns(12);
+
+        yield TextField::new('classAttribute', "easy.menu.admin.field.classAttribute")
+            ->hideOnIndex()
+            ->setRequired(false)
+            ->setColumns(12);
+
+        yield PositionSortableField::new('position', "easy.menu.admin.field.position")
+            ->setRequired(true)
+            ->setColumns(6);
+
+        yield EnumField::new("state", 'easy.page.admin.field.state')
+            ->setEnum(ThreeStateStatusEnum::class)
+            ->setRequired(true)
+            ->renderExpanded(true)
+            ->renderAsBadges(true)
+            ->setColumns(6);
 
     }
 

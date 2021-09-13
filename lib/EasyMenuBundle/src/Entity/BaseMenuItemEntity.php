@@ -41,14 +41,14 @@ class BaseMenuItemEntity {
     protected $name;
 
     /**
-     * @var string
+     * @var string | null
      *
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
     protected $url;
 
     /**
-     * @var string
+     * @var string | null
      *
      * @ORM\Column(name="class_attribute", type="string", length=255, nullable=true)
      */
@@ -101,6 +101,70 @@ class BaseMenuItemEntity {
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string | null
+     */
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string | null $url
+     */
+    public function setUrl(?string $url): void
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string | null
+     */
+    public function getClassAttribute(): ?string
+    {
+        return $this->classAttribute;
+    }
+
+    /**
+     * @param string | null $classAttribute
+     */
+    public function setClassAttribute(?string $classAttribute): void
+    {
+        $this->classAttribute = $classAttribute;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition(int $position): void
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTarget(): bool
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param bool $target
+     */
+    public function setTarget(bool $target): void
+    {
+        $this->target = $target;
     }
 
     /**
@@ -227,6 +291,25 @@ class BaseMenuItemEntity {
         }
 
         return $children;
+    }
+
+    public function getParents($parents = [], $parent = null)
+    {
+        if (empty($parent)) {
+            $parents[] = (string) $this;
+            $parent = $this;
+        }
+        if (!empty($parent->getParent())) {
+            $parentParent = $parent->getParent();
+            $parents[] = (string) $parentParent;
+            $parents = $this->getParents($parents, $parentParent);
+        }
+        return $parents;
+    }
+
+    public function getFlattenParents() : string
+    {
+        return implode(' / ', array_reverse($this->getParents()) );
     }
 
     public function __toString()

@@ -56,8 +56,6 @@ abstract class BasePageCrudController extends AbstractCrudController
             ->orderBy("entity.root", "ASC")
             ->addOrderBy("entity.level", "ASC")
         ;
-
-        dump($qb->getQuery()->getSQL());
         return $qb;
     }
 
