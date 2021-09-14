@@ -7,7 +7,7 @@ easy_redirect:
   manage_redirects: Gérer les redirections
   create_redirection: Créer une redirection
   form:
-    count: Utilisé
+    count: Utilisation
     lastAccessed: Dernier accès
     source: Source
     destination: Destination
