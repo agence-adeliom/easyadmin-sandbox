@@ -9,10 +9,6 @@ services:
         autoconfigure: true
         tags: [ 'controller.service_arguments' ]
 
-    Adeliom\EasyPageBundle\Controller\BasePageController:
-        calls:
-            - [ 'setRepository', [ '@easy_page.repository' ] ]
-
     easy_page.route_loader:
         class: Adeliom\EasyPageBundle\Routing\PageLoader
         arguments:
@@ -39,13 +35,11 @@ services:
         tags:
             - kernel.event_subscriber
 
-
     Adeliom\EasyPageBundle\EventListener\DoctrineMappingListener:
         arguments:
             - '%easy_page.page_class%'
         tags:
             - doctrine.event_subscriber
-
 
     easy_page.sitemap.page_subscriber:
         class: Adeliom\EasyPageBundle\EventListener\SitemapSubscriber

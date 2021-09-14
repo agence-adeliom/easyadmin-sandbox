@@ -1,3 +1,7 @@
 twig:
   form_themes:
     - '@EasyMedia/form/easy-media.html.twig'
+
+easy_media:
+  lock_entity: App\Entity\EasyMedia\Lock
+  metas_entity: App\Entity\EasyMedia\Metas

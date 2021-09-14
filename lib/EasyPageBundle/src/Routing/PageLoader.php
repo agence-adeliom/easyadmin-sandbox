@@ -3,7 +3,7 @@
 namespace Adeliom\EasyPageBundle\Routing;
 
 
-use Adeliom\EasyPageBundle\Repository\BasePageRepository;
+use Adeliom\EasyPageBundle\Repository\PageRepository;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -18,7 +18,7 @@ class PageLoader extends Loader
     private $repository;
 
 
-    public function __construct(string $controller, string $entity, BasePageRepository $repository, string $env = null)
+    public function __construct(string $controller, string $entity, PageRepository $repository, string $env = null)
     {
         parent::__construct($env);
 

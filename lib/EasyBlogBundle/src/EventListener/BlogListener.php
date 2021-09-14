@@ -2,10 +2,10 @@
 
 namespace Adeliom\EasyBlogBundle\EventListener;
 
-use Adeliom\EasyBlogBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyBlogBundle\Entity\BasePostEntity;
-use Adeliom\EasyBlogBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
+use Adeliom\EasyBlogBundle\Entity\CategoryEntity;
+use Adeliom\EasyBlogBundle\Entity\PostEntity;
+use Adeliom\EasyBlogBundle\Repository\CategoryRepository;
+use Adeliom\EasyBlogBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -14,12 +14,12 @@ class BlogListener implements EventSubscriberInterface
 {
 
     /**
-     * @var BasePostRepository
+     * @var PostRepository
      */
     private $postRepository;
 
     /**
-     * @var BaseCategoryRepository
+     * @var CategoryRepository
      */
     private $categoryRepository;
 
@@ -28,7 +28,7 @@ class BlogListener implements EventSubscriberInterface
      */
     private $config;
 
-    public function __construct(BasePostRepository $postRepository, BaseCategoryRepository $categoryRepository, $config)
+    public function __construct(PostRepository $postRepository, CategoryRepository $categoryRepository, $config)
     {
         $this->postRepository    = $postRepository;
         $this->categoryRepository    = $categoryRepository;
@@ -58,7 +58,7 @@ class BlogListener implements EventSubscriberInterface
         }
 
         $prefixes = preg_split('~/~', $this->config["root_path"], -1, PREG_SPLIT_NO_EMPTY);
-        /** @var BasePostEntity[] $pages */
+        /** @var PostEntity[] $pages */
         $slugsArray = preg_split('~/~', $path, -1, PREG_SPLIT_NO_EMPTY);
 
         if($this->config["root_path"] != "/"){
@@ -67,12 +67,12 @@ class BlogListener implements EventSubscriberInterface
 
         if(!empty($slugsArray)) {
             $category = $this->categoryRepository->getBySlug($slugsArray[0]);
-            if ($category instanceof BaseCategoryEntity) {
+            if ($category instanceof CategoryEntity) {
                 $event->getRequest()->attributes->set('_easy_blog_category', $category);
 
                 if (isset($slugsArray[1])) {
                     $post = $this->postRepository->getBySlug($slugsArray[1], $category);
-                    if ($post instanceof BasePostEntity) {
+                    if ($post instanceof PostEntity) {
                         $event->getRequest()->attributes->set('_easy_blog_post', $post);
                     }
                 }

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class HeadingType extends AbstractBlock implements BlockInterface
+class HeadingType extends AbstractBlock
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

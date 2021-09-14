@@ -2,7 +2,7 @@
 namespace Adeliom\EasyMediaBundle\Service;
 
 
-use Adeliom\EasyMediaBundle\Entity\BaseEasyMediaMetas;
+use Adeliom\EasyMediaBundle\Entity\Metas;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -46,7 +46,7 @@ class EasyMediaMetaService
 
         $newMetas = [];
         foreach ($metas as $key => $value){
-            /** @var BaseEasyMediaMetas $meta */
+            /** @var Metas $meta */
             if($key == "dimensions"){
                 $value = json_encode($value);
                 $meta = $this->setMeta($key, $value, $this->getMeta($path, $key));

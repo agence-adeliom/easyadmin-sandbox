@@ -5,6 +5,9 @@
     "a2lix/translation-form-bundle": {
         "version": "3.0.7"
     },
+    "agence-adeliom/easy-admin-user-bundle": {
+        "version": "dev-master"
+    },
     "agence-adeliom/easy-block-bundle": {
         "version": "dev-master"
     },
@@ -12,6 +15,9 @@
         "version": "dev-master"
     },
     "agence-adeliom/easy-common-bundle": {
+        "version": "dev-master"
+    },
+    "agence-adeliom/easy-config-bundle": {
         "version": "dev-master"
     },
     "agence-adeliom/easy-editor-bundle": {

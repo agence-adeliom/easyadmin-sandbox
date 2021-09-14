@@ -2,8 +2,8 @@
 
 namespace Adeliom\EasyBlockBundle\DependencyInjection;
 
-use Adeliom\EasyBlockBundle\Entity\BaseBlockEntity;
-use Adeliom\EasyBlockBundle\Repository\BaseBlockRepository;
+use Adeliom\EasyBlockBundle\Entity\Block;
+use Adeliom\EasyBlockBundle\Repository\BlockRepository;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -32,10 +32,10 @@ class Configuration implements ConfigurationInterface
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!class_exists($value) || !is_a($value, BaseBlockEntity::class, true)) {
+                            if (!class_exists($value) || !is_a($value, Block::class, true)) {
                                 throw new InvalidConfigurationException(sprintf(
                                     'Block class must be a valid class extending %s. "%s" given.',
-                                    BaseBlockEntity::class, $value
+                                    Block::class, $value
                                 ));
                             }
                             return $value;
@@ -43,14 +43,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('block_repository')
-                    ->defaultValue(BaseBlockRepository::class)
+                    ->defaultValue(BlockRepository::class)
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!class_exists($value) || !is_a($value, BaseBlockRepository::class, true)) {
+                            if (!class_exists($value) || !is_a($value, BlockRepository::class, true)) {
                                 throw new InvalidConfigurationException(sprintf(
                                     'Block repository must be a valid class extending %s. "%s" given.',
-                                    BaseBlockRepository::class, $value
+                                    BlockRepository::class, $value
                                 ));
                             }
                             return $value;

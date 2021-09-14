@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ListType extends AbstractBlock implements BlockInterface
+class ListType extends AbstractBlock
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

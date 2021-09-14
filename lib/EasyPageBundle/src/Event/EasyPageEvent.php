@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyPageBundle\Event;
 
-use Adeliom\EasyPageBundle\Entity\BasePageEntity;
+use Adeliom\EasyPageBundle\Entity\Page;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class EasyPageEvent extends Event
@@ -14,7 +14,7 @@ class EasyPageEvent extends Event
     protected $args;
     protected $template;
 
-    public function __construct(BasePageEntity $page, $args, $template)
+    public function __construct(Page $page, $args, $template)
     {
         $this->page = $page;
         $this->args = $args;
@@ -22,9 +22,9 @@ class EasyPageEvent extends Event
     }
 
     /**
-     * @return BasePageEntity
+     * @return Page
      */
-    public function getPage(): BasePageEntity
+    public function getPage(): Page
     {
         return $this->page;
     }

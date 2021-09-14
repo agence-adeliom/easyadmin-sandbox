@@ -2,8 +2,8 @@
 
 namespace Adeliom\EasyBlogBundle\EventListener;
 
-use Adeliom\EasyBlogBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyBlogBundle\Repository\BasePostRepository;
+use Adeliom\EasyBlogBundle\Repository\CategoryRepository;
+use Adeliom\EasyBlogBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
@@ -18,21 +18,21 @@ class SitemapSubscriber implements EventSubscriberInterface
     private $urlGenerator;
 
     /**
-     * @var BasePostRepository
+     * @var PostRepository
      */
     private $postRepository;
 
     /**
-     * @var BaseCategoryRepository
+     * @var CategoryRepository
      */
     private $categoryRepository;
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
-     * @param BasePostRepository  $postRepository
-     * @param BaseCategoryRepository  $categoryRepository
+     * @param PostRepository  $postRepository
+     * @param CategoryRepository  $categoryRepository
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, BasePostRepository $postRepository, BaseCategoryRepository $categoryRepository)
+    public function __construct(UrlGeneratorInterface $urlGenerator, PostRepository $postRepository, CategoryRepository $categoryRepository)
     {
         $this->urlGenerator = $urlGenerator;
         $this->postRepository = $postRepository;
