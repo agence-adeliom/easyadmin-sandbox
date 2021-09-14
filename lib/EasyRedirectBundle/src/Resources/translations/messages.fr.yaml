@@ -4,6 +4,7 @@ easy_redirect:
   not_found: Lien non trouvé
   not_founds: Liens non trouvés
   edit_redirect: Modifier la redirection
+  new_redirect: Nouvelle redirection
   manage_redirects: Gérer les redirections
   create_redirection: Créer une redirection
   form:
