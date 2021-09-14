@@ -41,7 +41,7 @@ abstract class ZoneCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $url = $this->get(AdminUrlGenerator::class)->setController(self::class)->setAction(Action::NEW);
+        $url = $this->get(AdminUrlGenerator::class)->setController(get_class($this))->setAction(Action::NEW);
 
         $newZoneCountries = Action::new('zoneCountries', 'sylius.ui.zone_consisting_of_countries')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_COUNTRY)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");
         $newZoneProvinces = Action::new('zoneProvinces', 'sylius.ui.zone_consisting_of_provinces')->linkToUrl((clone $url)->set("zoneType", ZoneInterface::TYPE_PROVINCE)->generateUrl())->createAsGlobalAction()->setCssClass("btn btn-primary");

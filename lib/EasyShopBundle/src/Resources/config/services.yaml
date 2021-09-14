@@ -77,10 +77,17 @@ services:
 
     Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAttributesCollectionType:
         arguments:
+            - "@parameter_bag"
             - "@sylius.repository.product_attribute"
             - "@sylius.repository.locale"
             - "@sylius.form_registry.attribute_type"
             - "@form.factory"
+        tags: [ form.type ]
+
+
+    Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductImageType:
+        arguments:
+            - "@parameter_bag"
         tags: [ form.type ]
 
     Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAttributesCollectionEntryType:

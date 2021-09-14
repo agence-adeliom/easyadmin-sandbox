@@ -12,6 +12,7 @@
             {{ sylius_template_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
 
             {{ form_start(form, {'action': path('easy_shop_checkout_select_payment'), 'attr': {'class': 'loadable form', 'novalidate': 'novalidate'}}) }}
+
             {{ form_errors(form) }}
             <input type="hidden" name="_method" value="PUT" />
 
@@ -23,6 +24,8 @@
 
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
+
+
         </div>
         <div class="col-12 col-md-4">
             <div class="card">
@@ -33,3 +36,4 @@
         </div>
     </div>
 {% endblock %}
+

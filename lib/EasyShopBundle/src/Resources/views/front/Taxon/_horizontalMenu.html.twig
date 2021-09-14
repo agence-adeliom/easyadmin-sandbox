@@ -1,6 +1,5 @@
 {% macro item(taxon) %}
     {% import _self as macros %}
-
     {% if taxon.enabledChildren|length > 0 %}
         <div class="ui dropdown item" {{ sylius_test_html_attribute('menu-item') }}>
             <span class="text">{{ taxon.name }}</span>

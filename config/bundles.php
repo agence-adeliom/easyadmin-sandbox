@@ -34,9 +34,6 @@ return [
     Adeliom\EasyMenuBundle\EasyMenuBundle::class => ['all' => true],
     Adeliom\EasyConfigBundle\EasyConfigBundle::class => ['all' => true],
     Adeliom\EasyRedirectBundle\EasyRedirectBundle::class => ['all' => true],
-
-
-
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Sylius\Bundle\OrderBundle\SyliusOrderBundle::class => ['all' => true],
     Sylius\Bundle\MoneyBundle\SyliusMoneyBundle::class => ['all' => true],
@@ -81,4 +78,5 @@ return [
     SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
     Adeliom\EasyShopBundle\EasyShopBundle::class => ['all' => true],
+    FluxSE\SyliusPayumMoneticoPlugin\FluxSESyliusPayumMoneticoPlugin::class => ['all' => true],
 ];

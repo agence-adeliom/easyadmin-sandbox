@@ -171,11 +171,17 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
+    "ekyna/payum-monetico": {
+        "version": "1.6.1"
+    },
     "fakerphp/faker": {
         "version": "v1.15.0"
     },
     "fig/link-util": {
         "version": "1.2.0"
+    },
+    "flux-se/sylius-payum-monetico-plugin": {
+        "version": "v1.1.0"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
@@ -547,6 +553,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "sokil/php-isocodes": {
+        "version": "3.3.11"
     },
     "sonata-project/block-bundle": {
         "version": "4.7.0"
