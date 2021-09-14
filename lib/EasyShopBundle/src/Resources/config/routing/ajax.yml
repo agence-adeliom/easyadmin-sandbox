@@ -15,4 +15,4 @@ easy_shop_ajax_render_province_form:
     defaults:
         _controller: sylius.controller.province:choiceOrTextFieldFormAction
         _sylius:
-            template: "@EasyShop/front/Common/Form/_province.html.twig"
+            template: "@EasyShop/SyliusShop/Common/Form/_province.html.twig"

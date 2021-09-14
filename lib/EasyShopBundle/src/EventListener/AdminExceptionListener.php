@@ -2,10 +2,15 @@
 
 namespace Adeliom\EasyShopBundle\EventListener;
 
+use App\Controller\Admin\DashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Exception\EntityRemoveException;
+use EasyCorp\Bundle\EasyAdminBundle\Factory\AdminContextFactory;
+use http\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -15,10 +20,16 @@ class AdminExceptionListener
      * @var TranslatorInterface
      */
     private $translator;
+    private $contextFactory;
 
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, AdminContextFactory $contextFactory)
     {
         $this->translator = $translator;
+        $this->contextFactory = $contextFactory;
+    }
+
+    public function onKernelRequest(RequestEvent $event){
+        $request = $event->getRequest();
     }
 
     public function onKernelException(ExceptionEvent $event)

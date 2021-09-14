@@ -1,0 +1,28 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+{% trans_default_domain 'EasyMediaBundle' %}
+
+{% block page_title %}{{ 'title'|trans|striptags|raw }}{% endblock %}
+
+{% block flash_messages %}
+    {% include '@SyliusAdmin/_flashes.html.twig' %}
+{% endblock %}
+
+{% block content_header_wrapper %}{% endblock %}
+
+{% block main %}
+    <div id="media-holder">
+        {% include '@EasyMedia/manager.html.twig' %}
+    </div>
+{% endblock %}
+
+{# styles #}
+{% block head_stylesheets %}
+    {{ parent() }}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
+{% endblock %}
+
+{# scripts #}
+{% block body_javascript %}
+    {{ parent() }}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
+{% endblock %}

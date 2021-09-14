@@ -66,7 +66,7 @@ final class CurrencySwitchController
             $channel->getCurrencies()->toArray()
         );
 
-        return new Response($this->templatingEngine->render('@EasyShop/front/Menu/_currencySwitch.html.twig', [
+        return new Response($this->templatingEngine->render('@EasyShop/SyliusShop/Menu/_currencySwitch.html.twig', [
             'active' => $this->currencyContext->getCurrencyCode(),
             'currencies' => $availableCurrencies,
         ]));

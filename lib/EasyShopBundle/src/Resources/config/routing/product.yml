@@ -7,7 +7,7 @@ easy_shop_product_show:
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
-            template: "@EasyShop/front/Product/show.html.twig"
+            template: "@EasyShop/SyliusShop/Product/show.html.twig"
             repository:
                 method: findOneByChannelAndSlug
                 arguments:
@@ -21,7 +21,7 @@ easy_shop_product_index:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
-            template: "@EasyShop/front/Product/index.html.twig"
+            template: "@EasyShop/SyliusShop/Product/index.html.twig"
             grid: easy_shop_product
     requirements:
         slug: .+

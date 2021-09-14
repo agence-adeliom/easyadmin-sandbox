@@ -7,7 +7,7 @@ easy_shop_cart_summary:
     defaults:
         _controller: sylius.controller.order:summaryAction
         _sylius:
-            template: "@EasyShop/front/Cart/summary.html.twig"
+            template: "@EasyShop/SyliusShop/Cart/summary.html.twig"
             form: Sylius\Bundle\OrderBundle\Form\Type\CartType
 
 easy_shop_cart_save:
@@ -16,7 +16,7 @@ easy_shop_cart_save:
     defaults:
         _controller: sylius.controller.order:saveAction
         _sylius:
-            template: "@EasyShop/front/Cart/summary.html.twig"
+            template: "@EasyShop/SyliusShop/Cart/summary.html.twig"
             redirect: easy_shop_cart_summary
             form: Sylius\Bundle\OrderBundle\Form\Type\CartType
             flash: sylius.cart.save

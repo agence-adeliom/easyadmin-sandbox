@@ -54,7 +54,7 @@ final class LocaleSwitchController
 
     public function renderAction(): Response
     {
-        return new Response($this->templatingEngine->render('@EasyShop/front/Menu/_localeSwitch.html.twig', [
+        return new Response($this->templatingEngine->render('@EasyShop/SyliusShop/Menu/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
             'locales' => $this->localeProvider->getAvailableLocalesCodes(),
         ]));

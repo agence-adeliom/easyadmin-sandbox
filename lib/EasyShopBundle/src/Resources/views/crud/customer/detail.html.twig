@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block statistics %}
-    {% import "@EasyShop/front/Common/Macro/money.html.twig" as money %}
+    {% import "@EasyShop/SyliusShop/Common/Macro/money.html.twig" as money %}
 
     {% set statistics = app.request().get('statistics') %}
 
@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block statistics_per_hannel %}
-    {% import "@EasyShop/front/Common/Macro/money.html.twig" as money %}
+    {% import "@EasyShop/SyliusShop/Common/Macro/money.html.twig" as money %}
 
     <div class="accordion-item">
         <h2 class="accordion-header" id="ch_{{ loop.index }}">

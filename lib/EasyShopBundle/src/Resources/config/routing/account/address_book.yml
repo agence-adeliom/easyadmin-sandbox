@@ -8,7 +8,7 @@ easy_shop_account_address_book_index:
         _controller: sylius.controller.address:indexAction
         _sylius:
             section: shop_account
-            template: "@EasyShop/front/Account/AddressBook/index.html.twig"
+            template: "@EasyShop/SyliusShop/Account/AddressBook/index.html.twig"
             paginate: false
             repository:
                 method: findByCustomer
@@ -22,7 +22,7 @@ easy_shop_account_address_book_create:
         _controller: sylius.controller.address:createAction
         _sylius:
             section: shop_account
-            template: "@EasyShop/front/Account/AddressBook/create.html.twig"
+            template: "@EasyShop/SyliusShop/Account/AddressBook/create.html.twig"
             factory:
                 method: createForCustomer
                 arguments:
@@ -39,7 +39,7 @@ easy_shop_account_address_book_update:
         _controller: sylius.controller.address:updateAction
         _sylius:
             section: shop_account
-            template: "@EasyShop/front/Account/AddressBook/update.html.twig"
+            template: "@EasyShop/SyliusShop/Account/AddressBook/update.html.twig"
             repository:
                 method: findOneByCustomer
                 arguments:
@@ -70,7 +70,7 @@ easy_shop_account_address_book_set_as_default:
         _controller: sylius.controller.customer:updateAction
         _sylius:
             section: shop_account
-            template: "@EasyShop/front/Account/AddressBook/_defaultAddressForm.html.twig"
+            template: "@EasyShop/SyliusShop/Account/AddressBook/_defaultAddressForm.html.twig"
             form:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType
                 options:

@@ -33,6 +33,6 @@ final class SecurityWidgetController
 
     public function renderAction(): Response
     {
-        return new Response($this->templatingEngine->render('@EasyShop/front/Menu/_security.html.twig'));
+        return new Response($this->templatingEngine->render('@EasyShop/SyliusShop/Menu/_security.html.twig'));
     }
 }

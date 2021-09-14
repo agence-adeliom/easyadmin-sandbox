@@ -1,0 +1,5 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(sylius_route(options.link.route|default(grid.requestConfiguration.getRouteName('create')), options.link.parameters|default([]))) %}
+
+{{ buttons.create(path, action.label) }}

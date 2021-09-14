@@ -27,11 +27,21 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: sylius_unique_reviewer_email_validator }
 
+    Adeliom\EasyShopBundle\Router\ResourceLoader:
+        decorates: 'sylius.routing.loader.resource'
+        arguments:
+            - '@sylius.resource_registry'
+            - '@router'
+        tags:
+            - { name: routing.loader }
+
     kernel.listener.admin_exception:
         class: Adeliom\EasyShopBundle\EventListener\AdminExceptionListener
         arguments:
             - "@translator.default"
+            - "@EasyCorp\\Bundle\\EasyAdminBundle\\Factory\\AdminContextFactory"
         tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     Adeliom\EasyShopBundle\Locale\SyliusLocalProvider:
@@ -163,3 +173,9 @@ services:
             - "@sylius.form.type.data_transformer.products_to_codes"
             - "%sylius.model.product.class%"
         tags: [ form.type ]
+
+    Adeliom\EasyShopBundle\Twig\SyliusRouteExtension:
+        arguments:
+            - '@EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator'
+            - '@router'
+        tags: [ twig.extension ]

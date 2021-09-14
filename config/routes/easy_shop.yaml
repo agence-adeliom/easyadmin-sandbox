@@ -20,6 +20,9 @@
 #    prefix: /{_locale}
 #    resource: "@SyliusSeoUrlPlugin/Resources/config/shop_routing.yml"
 
+sylius_admin:
+    resource: "@SyliusAdminBundle/Resources/config/routing.yml"
+    prefix: '/%sylius_admin.path_name%'
 
 easy_shop:
     resource: "@EasyShopBundle/Resources/config/routing.yml"

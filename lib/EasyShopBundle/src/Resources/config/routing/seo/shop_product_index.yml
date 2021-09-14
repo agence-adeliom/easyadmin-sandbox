@@ -4,7 +4,7 @@ easy_shop_product_index:
   defaults:
     _controller: sylius.controller.product:indexAction
     _sylius:
-      template: "@EasyShop/front/Product/index.html.twig"
+      template: "@EasyShop/SyliusShop/Product/index.html.twig"
       grid: sylius_shop_product
       repository:
         method: findOneBySlug

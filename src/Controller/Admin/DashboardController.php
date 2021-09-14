@@ -18,6 +18,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,6 +43,11 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('My Project Name')
             ;
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), self::SYLIUS_SERVICES());
     }
 
 
@@ -67,11 +74,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
 
         // Shop Dashboard
-        yield from $this->productItems();
-        yield from $this->salesItems();
-        yield from $this->marketingItems();
-        yield from $this->customerItems();
-        yield from $this->configurationItems();
-
+        yield from $this->syliusItems();
     }
 }
