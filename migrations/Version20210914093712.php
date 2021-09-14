@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210913134638 extends AbstractMigration
+final class Version20210914093712 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,18 +20,14 @@ final class Version20210913134638 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX UNIQ_E1ABDC0F8A90ABA9 ON easy_config__config');
-        $this->addSql('ALTER TABLE easy_config__config CHANGE `key` config VARCHAR(255) NOT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_E1ABDC0FD48A2F7C ON easy_config__config (config)');
         $this->addSql('ALTER TABLE media_entity CHANGE file file TEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE menus_items DROP path');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX UNIQ_E1ABDC0FD48A2F7C ON easy_config__config');
-        $this->addSql('ALTER TABLE easy_config__config CHANGE config `key` VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_E1ABDC0F8A90ABA9 ON easy_config__config (`key`)');
         $this->addSql('ALTER TABLE media_entity CHANGE file file TEXT CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE menus_items ADD path VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

@@ -1,9 +1,14 @@
 {% set sortablePositionAssets = false %}
 
 {% block form_easy_field_position_sortable_widget %}
-    <button class="btn btn-sm btn-secondary sortable-position"><i class="fa fa-arrows-alt-v"></i></button>
-    <input type="hidden" value="{{ entity.primaryKeyName ~ ":" ~ entity.primaryKeyValue ~ ":" ~ field.customOptions.get('parentProperty')  ~ ":" ~ field.customOptions.get('positionProperty') }}" class="sortable-position-datas" />
-    <input type="hidden" value="{{ field.customOptions.get('actionUrl') }}" class="sortable-position-url" />
+    {% set parent = entity.instance.parent ? entity.instance.getTreeField(field.customOptions.get('parentProperty')).getTreeField(entity.primaryKeyName) : 0 %}
+    {% if parent %}
+        <button class="btn btn-sm btn-secondary sortable-position"><i class="fa fa-arrows-alt-v"></i></button>
+    {% endif %}
+        <input type="hidden" value="{{ entity.primaryKeyName ~ ":" ~ entity.primaryKeyValue ~ ":" ~ field.customOptions.get('parentProperty')  ~ ":" ~ field.customOptions.get('positionProperty') }}" class="sortable-position-datas" />
+        <input type="hidden" value="{{ field.customOptions.get('actionUrl') }}" class="sortable-position-url" />
+        <input type="hidden" value="{{ parent }}" class="sortable-parent-id" />
+        <input type="hidden" value="{{ entity.primaryKeyValue }}" class="sortable-id" />
 
     {% if not sortablePositionAssets %}
         {% set sortablePositionAssets = true %}
@@ -46,6 +51,7 @@
                         mouseDownY = 0,
                         mouseX = 0,
                         mouseY = 0,
+                        startIndex = 0,
                         mouseDrag = false;
 
                     function init() {
@@ -58,9 +64,11 @@
 
                             let target = getTargetRow(event.target);
                             if(target) {
+
                                 currRow = target;
                                 addDraggableRow(target);
                                 currRow.classList.add('is-dragging');
+                                startIndex = Array.from(tbody.children).indexOf(currRow);
 
                                 let coords = getMouseCoords(event);
                                 mouseDownX = coords.x;
@@ -89,32 +97,34 @@
                             setTimeout(() => {
                                 const tbody = table.querySelector('tbody');
                                 const currIndex = Array.from(tbody.children).indexOf(currRow);
-                                newPosition = {
-                                    left: currIndex > 0 ? tbody.children[currIndex-1] : null,
-                                    right: (currIndex < (tbody.children.length - 1) ? tbody.children[currIndex+1] : null),
-                                    current: tbody.children[currIndex]
-                                }
-                                fetch(newPosition.current.querySelector('.sortable-position-url').value, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({
-                                        l: newPosition.left ? newPosition.left.querySelector('.sortable-position-datas').value : null,
-                                        r: newPosition.right ? newPosition.right.querySelector('.sortable-position-datas').value : null,
-                                        c: newPosition.current.querySelector('.sortable-position-datas').value,
-                                    }),
-                                })
-                                    .then((response) => response.json())
-                                    //Then with the data from the response in JSON...
-                                    .then((data) => {
-                                        console.log('Success:', data);
+                                if (startIndex !== currIndex) {
+                                    newPosition = {
+                                        left: currIndex > 0 ? tbody.children[currIndex-1] : null,
+                                        right: (currIndex < (tbody.children.length - 1) ? tbody.children[currIndex+1] : null),
+                                        current: tbody.children[currIndex]
+                                    }
+                                    fetch(newPosition.current.querySelector('.sortable-position-url').value, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            l: newPosition.left ? newPosition.left.querySelector('.sortable-position-datas').value : null,
+                                            r: newPosition.right ? newPosition.right.querySelector('.sortable-position-datas').value : null,
+                                            c: newPosition.current.querySelector('.sortable-position-datas').value,
+                                        }),
                                     })
-                                    //Then with the error genereted...
-                                    .catch((error) => {
-                                        console.error('Error:', error);
-                                    });
-                                console.log(newPosition);
+                                        .then((response) => response.json())
+                                        //Then with the data from the response in JSON...
+                                        .then((data) => {
+                                            location.reload();
+                                        })
+                                        //Then with the error genereted...
+                                        .catch((error) => {
+                                            location.reload();
+                                        });
+                                    console.log(newPosition);
+                                }
                             }, 100);
 
                             dragElem = null;
@@ -144,7 +154,9 @@
                                 rowSize = rowElem.getBoundingClientRect(),
                                 rowStartY = rowSize.y, rowEndY = rowStartY + rowSize.height;
 
-                            if(currRow !== rowElem && isIntersecting(currStartY, currEndY, rowStartY, rowEndY)) {
+                            if(currRow !== rowElem
+                                && currRow.querySelector('.sortable-parent-id').value === rowElem.querySelector('.sortable-parent-id').value
+                                && isIntersecting(currStartY, currEndY, rowStartY, rowEndY)) {
                                 if(Math.abs(currStartY - rowStartY) < rowSize.height / 2)
                                     swapRow(rowElem, i);
                             }

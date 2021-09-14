@@ -2,16 +2,15 @@
 
 namespace Adeliom\EasyMenuBundle\Repository;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
 use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
 use Adeliom\EasyMenuBundle\Entity\BaseMenuItemEntity;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 
-class BaseMenuItemRepository extends ServiceEntityRepository {
+class BaseMenuItemRepository extends NestedTreeRepository {
 
     /**
      * @var bool

@@ -2,11 +2,14 @@
 
 namespace Adeliom\EasyMenuBundle\Controller;
 
+use Adeliom\EasyAdminUserBundle\Entity\User;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasyFieldsBundle\Admin\Field\PositionSortableField;
 use Adeliom\EasyFieldsBundle\Admin\Trait\PositionSortableActionTrait;
 use App\Controller\Admin\Menu\MenuCrudController;
+use App\Controller\Admin\Menu\MenuItemCrudController;
+use App\Entity\Menu\Menu;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -53,6 +56,8 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_DETAIL, "easy.menu.admin.crud.title.menu_item." . Crud::PAGE_DETAIL)
             ->setEntityLabelInSingular("easy.menu.admin.crud.label.menu_item.singular")
             ->setEntityLabelInPlural("easy.menu.admin.crud.label.menu_item.plural")
+
+//            ->overrideTemplate('crud/index', '@EasyFields/crud/tree.html.twig')
             ;
     }
 
@@ -69,6 +74,21 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             }
         }
 
+        $actions->disable(Action::DETAIL);
+
+        $actions->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+            $action->displayIf(function($entity) {
+                return !empty($entity->getParent());
+            });
+            return $action;
+        });
+        $actions->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+            $action->displayIf(function($entity) {
+                return !empty($entity->getParent());
+            });
+            return $action;
+        });
+
         $url = $this->adminUrlGenerator
             ->unsetAll()
             ->setController(MenuCrudController::class)
@@ -78,6 +98,7 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             ->linkToUrl($url)
             ->addCssClass("btn btn-secondary")
             ->createAsGlobalAction();
+
 
         $actions
             ->add(Crud::PAGE_INDEX, $goBack);
@@ -93,11 +114,12 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
             $queryBuilder->setParameter('menu', $menu);
         }
         $queryBuilder
-            ->orderBy("entity.parent", "ASC")
-            ->addOrderBy("entity.position", "ASC")
+            ->orderBy("entity.menu", "ASC")
+            ->addOrderBy("entity.lft", "ASC")
         ;
         return $queryBuilder;
     }
+
 
     public function createEntity(string $entityFqcn)
     {
@@ -143,7 +165,9 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
                     ->setParameter("menu", $subject->getInstance()->getMenu());
                 return $queryBuilder;
             })
-            ->setColumns(12);
+            ->setColumns(12)
+            ->setRequired(true)
+            ->onlyOnForms();
 
 
         yield UrlField::new('url', "easy.menu.admin.field.url")
@@ -157,7 +181,8 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
 
         yield PositionSortableField::new('position', "easy.menu.admin.field.position")
             ->setRequired(true)
-            ->setColumns(6);
+            ->setColumns(6)
+            ->onlyOnIndex();
 
         yield EnumField::new("state", 'easy.page.admin.field.state')
             ->setEnum(ThreeStateStatusEnum::class)

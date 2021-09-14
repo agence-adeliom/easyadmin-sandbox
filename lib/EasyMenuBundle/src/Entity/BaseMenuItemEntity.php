@@ -16,6 +16,7 @@ use Prodigious\Sonata\MenuBundle\Model\MenuItem;
 /**
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\BaseMenuItemRepository")
+ * @Gedmo\Tree(type="nested")
  */
 class BaseMenuItemEntity {
 
@@ -50,32 +51,58 @@ class BaseMenuItemEntity {
 
     /**
      * @var string | null
-     *
      * @ORM\Column(name="class_attribute", type="string", length=255, nullable=true)
      */
     protected $classAttribute;
 
     /**
      * @var integer
-     * @Gedmo\SortablePosition()
      * @ORM\Column(name="position", type="smallint", options={"unsigned"=true}, nullable=true)
      */
     protected $position;
 
     /**
      * @var bool
-     *
      * @ORM\Column(name="target", type="boolean", nullable=true, options={"default":false})
      */
     protected $target;
 
     /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    protected $lft;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    protected $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    protected $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(name="root", type="integer", nullable=true)
+     */
+    protected $root;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="App\Entity\Menu\MenuItem", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      * @var BaseMenuItemEntity | null
      */
     protected $parent;
 
     /**
      * @var BaseMenuItemEntity[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Menu\MenuItem", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
 
@@ -84,7 +111,6 @@ class BaseMenuItemEntity {
         $this->__TimestampableConstruct();
         $this->__PublishableConstruct();
         $this->children = new ArrayCollection();
-        $this->position = 999;
         $this->state = ThreeStateStatusEnum::PENDING();
     }
 
@@ -137,9 +163,73 @@ class BaseMenuItemEntity {
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getPosition(): int
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * @param mixed $lft
+     */
+    public function setLft($lft): void
+    {
+        $this->lft = $lft;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * @param mixed $lvl
+     */
+    public function setLvl($lvl): void
+    {
+        $this->lvl = $lvl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * @param mixed $rgt
+     */
+    public function setRgt($rgt): void
+    {
+        $this->rgt = $rgt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * @param mixed $root
+     */
+    public function setRoot($root): void
+    {
+        $this->root = $root;
+    }
+
+    /**
+     * @return int | null
+     */
+    public function getPosition(): int | null
     {
         return $this->position;
     }
@@ -316,5 +406,10 @@ class BaseMenuItemEntity {
     public function __toString()
     {
         return isset($this->name) ? $this->name : "";
+    }
+
+    public function getTreeField($name)
+    {
+        return $this->{$name};
     }
 }
