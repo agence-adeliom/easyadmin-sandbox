@@ -71,4 +71,5 @@ return [
     Adeliom\EasyFaqBundle\EasyFaqBundle::class => ['all' => true],
     Adeliom\EasyMenuBundle\EasyMenuBundle::class => ['all' => true],
     Adeliom\EasyConfigBundle\EasyConfigBundle::class => ['all' => true],
+    Adeliom\EasyRedirectBundle\EasyRedirectBundle::class => ['all' => true],
 ];

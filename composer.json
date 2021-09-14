@@ -55,6 +55,10 @@
         {
             "type": "path",
             "url": "lib/EasyConfigBundle"
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyRedirectBundle"
         }
     ],
     "require": {
@@ -76,6 +80,7 @@
         "agence-adeliom/easy-shop-bundle": "*@dev",
         "agence-adeliom/easy-admin-user-bundle": "*@dev",
         "agence-adeliom/easy-config-bundle": "*@dev",
+        "agence-adeliom/easy-redirect-bundle": "*@dev",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",

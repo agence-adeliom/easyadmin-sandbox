@@ -38,6 +38,9 @@
     "agence-adeliom/easy-page-bundle": {
         "version": "dev-master"
     },
+    "agence-adeliom/easy-redirect-bundle": {
+        "version": "dev-master"
+    },
     "agence-adeliom/easy-seo-bundle": {
         "version": "dev-master"
     },
