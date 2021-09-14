@@ -144,7 +144,7 @@ abstract class OrderCrudController extends AbstractCrudController
                     return "#" . $value;
                 }
             });
-            yield TextField::new('customer', 'sylius.ui.customer')->formatValue(function ($value, Order $entity) {
+            yield TextField::new('customer', 'sylius.ui.customer')->formatValue(function ($value, $entity) {
                 if ($value) {
                     return '<strong>' . $entity->getCustomer()->getFullName() . "</strong><br>" . $entity->getCustomer()->getEmail();
                 }
@@ -175,7 +175,7 @@ abstract class OrderCrudController extends AbstractCrudController
                     'sylius.ui.' . OrderShippingStates::STATE_READY => OrderShippingStates::STATE_READY,
                     'sylius.ui.' . OrderShippingStates::STATE_SHIPPED => OrderShippingStates::STATE_SHIPPED,
                 ])->setTemplatePath('@EasyShop/crud/Common/Label/shipmentStates.html.twig');
-            yield NumberField::new('total', 'sylius.ui.total')->formatValue(function ($value, Order $entity) {
+            yield NumberField::new('total', 'sylius.ui.total')->formatValue(function ($value, $entity) {
                 $formatter = new \NumberFormatter($entity->getLocaleCode(), \NumberFormatter::CURRENCY);
                 return $formatter->formatCurrency($entity->getTotal() / 100, $entity->getCurrencyCode());
             })->setCssClass('text-md-end');

@@ -65,7 +65,7 @@ abstract class PromotionCrudController extends AbstractCrudController
         $actions = parent::configureActions($actions);
 
         $viewCoupon = Action::new('manageCoupon', 'sylius.ui.manage_coupons', 'fas fa-ticket-alt')
-            ->displayIf(static function (Promotion $entity) {
+            ->displayIf(static function ($entity) {
                 return $entity->isCouponBased();
             })->linkToCrudAction("manageCoupon");
 
