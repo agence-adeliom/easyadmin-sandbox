@@ -4,7 +4,7 @@ namespace Adeliom\EasySeoBundle\Services;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class BreadcrumbCollection
+class BreadCrumbCollection
 {
     /**
      * @var array

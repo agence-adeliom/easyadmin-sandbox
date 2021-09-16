@@ -10,12 +10,12 @@ services:
       - twig.extension
 
   easy_seo.breadcrumb:
-    class: Adeliom\EasySeoBundle\Services\BreadcrumbCollection
+    class: Adeliom\EasySeoBundle\Services\BreadCrumbCollection
     public: true
     calls:
       - [ 'setGenerator', [ '@router.default' ] ]
 
-  Adeliom\EasySeoBundle\Services\BreadcrumbCollection:
+  Adeliom\EasySeoBundle\Services\BreadCrumbCollection:
     alias: easy_seo.breadcrumb
 
   Adeliom\EasySeoBundle\Form\SeoType:

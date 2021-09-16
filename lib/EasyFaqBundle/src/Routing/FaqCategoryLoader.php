@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyFaqBundle\Routing;
 
-use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
+use Adeliom\EasyFaqBundle\Repository\CategoryRepository;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -16,7 +16,7 @@ class FaqCategoryLoader extends Loader
     private $repository;
     private $config;
 
-    public function __construct(string $controller, string $entity, BaseCategoryRepository $repository, array $config, string $env = null)
+    public function __construct(string $controller, string $entity, CategoryRepository $repository, array $config, string $env = null)
     {
         parent::__construct($env);
 

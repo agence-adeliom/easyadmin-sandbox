@@ -1,9 +1,9 @@
 easy_menu:
   menu:
-    class: App\Entity\Menu\Menu
-    repository: App\Repository\Menu\MenuRepository
-    crud: App\Controller\Admin\Menu\MenuCrudController
+    class: App\Entity\EasyMenu\Menu
+    repository: App\Repository\EasyMenu\MenuRepository
+    crud: App\Controller\Admin\EasyMenu\MenuCrudController
   menu_item:
-    class: App\Entity\Menu\MenuItem
-    repository: App\Repository\Menu\MenuItemRepository
-    crud: App\Controller\Admin\Menu\MenuItemCrudController
+    class: App\Entity\EasyMenu\MenuItem
+    repository: App\Repository\EasyMenu\MenuItemRepository
+    crud: App\Controller\Admin\EasyMenu\MenuItemCrudController

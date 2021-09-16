@@ -22,14 +22,14 @@ class NotFound
     /**
      * @var string
      * @Groups("main")
-     * @ORM\Column(name="path", type="string", length="255")
+     * @ORM\Column(name="path", type="string", length="500")
      */
     protected $path;
 
     /**
      * @var string
      * @Groups("main")
-     * @ORM\Column(name="full_url", type="string", length="255")
+     * @ORM\Column(name="full_url", type="string", length="500")
      */
     protected $fullUrl;
 
@@ -43,7 +43,7 @@ class NotFound
     /**
      * @var string
      * @Groups("main")
-     * @ORM\Column(name="referer", type="string", length="255", nullable=true)
+     * @ORM\Column(name="referer", type="string", length="1000", nullable=true)
      */
     protected $referer;
 

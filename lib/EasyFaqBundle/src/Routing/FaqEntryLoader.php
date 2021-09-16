@@ -3,8 +3,8 @@
 namespace Adeliom\EasyFaqBundle\Routing;
 
 
-use Adeliom\EasyFaqBundle\Repository\BasePageRepository;
-use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
+use Adeliom\EasyFaqBundle\Repository\PageRepository;
+use Adeliom\EasyFaqBundle\Repository\EntryRepository;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -20,7 +20,7 @@ class FaqEntryLoader extends Loader
     private $config;
 
 
-    public function __construct(string $controller, string $entity, BaseEntryRepository $repository, array $config, string $env = null)
+    public function __construct(string $controller, string $entity, EntryRepository $repository, array $config, string $env = null)
     {
         parent::__construct($env);
 

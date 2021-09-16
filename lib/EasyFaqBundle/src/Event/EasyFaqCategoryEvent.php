@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyFaqBundle\Event;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class EasyFaqCategoryEvent extends Event
@@ -14,7 +14,7 @@ class EasyFaqCategoryEvent extends Event
     protected $args;
     protected $template;
 
-    public function __construct(?BaseCategoryEntity $category, $args, $template)
+    public function __construct(?CategoryEntity $category, $args, $template)
     {
         $this->category = $category;
         $this->args = $args;
@@ -22,9 +22,9 @@ class EasyFaqCategoryEvent extends Event
     }
 
     /**
-     * @return BaseCategoryEntity|null
+     * @return CategoryEntity|null
      */
-    public function getEntry(): ?BaseCategoryEntity
+    public function getEntry(): ?CategoryEntity
     {
         return $this->category;
     }

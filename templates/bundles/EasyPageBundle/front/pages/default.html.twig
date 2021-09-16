@@ -1,0 +1,14 @@
+{% extends "@!EasyPage/front/pages/default.html.twig" %}
+
+{% block easy_page_page_content %}
+    <section>
+        <article>
+            <h1 class="mb-5">{{ page.name }}</h1>
+            <div class="content">
+                {% for block in page.content %}
+                    {{ render_easy_editor_block(block) }}
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+{% endblock %}

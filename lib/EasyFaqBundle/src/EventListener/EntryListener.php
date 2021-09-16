@@ -2,10 +2,10 @@
 
 namespace Adeliom\EasyFaqBundle\EventListener;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
-use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
+use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\EntryEntity;
+use Adeliom\EasyFaqBundle\Repository\CategoryRepository;
+use Adeliom\EasyFaqBundle\Repository\EntryRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -14,12 +14,12 @@ class EntryListener implements EventSubscriberInterface
 {
 
     /**
-     * @var BaseEntryRepository
+     * @var EntryRepository
      */
     private $entryRepository;
 
     /**
-     * @var BaseCategoryRepository
+     * @var CategoryRepository
      */
     private $categoryRepository;
 
@@ -28,7 +28,7 @@ class EntryListener implements EventSubscriberInterface
      */
     private $config;
 
-    public function __construct(BaseEntryRepository $entryRepository, BaseCategoryRepository $categoryRepository, $config)
+    public function __construct(EntryRepository $entryRepository, CategoryRepository $categoryRepository, $config)
     {
         $this->entryRepository    = $entryRepository;
         $this->categoryRepository    = $categoryRepository;
@@ -58,7 +58,7 @@ class EntryListener implements EventSubscriberInterface
         }
 
         $prefixes = preg_split('~/~', $this->config["root_path"], -1, PREG_SPLIT_NO_EMPTY);
-        /** @var BaseEntryEntity[] $pages */
+        /** @var EntryEntity[] $pages */
         $slugsArray = preg_split('~/~', $path, -1, PREG_SPLIT_NO_EMPTY);
 
         if($this->config["root_path"] != "/"){
@@ -67,12 +67,12 @@ class EntryListener implements EventSubscriberInterface
 
         if(!empty($slugsArray)) {
             $category = $this->categoryRepository->getBySlug($slugsArray[0]);
-            if ($category instanceof BaseCategoryEntity) {
+            if ($category instanceof CategoryEntity) {
                 $event->getRequest()->attributes->set('_easy_faq_category', $category);
 
                 if (isset($slugsArray[1])) {
                     $entry = $this->entryRepository->getBySlug($slugsArray[1], $category);
-                    if ($entry instanceof BaseEntryEntity) {
+                    if ($entry instanceof EntryEntity) {
                         $event->getRequest()->attributes->set('_easy_faq_entry', $entry);
                     }
                 }
