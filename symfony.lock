@@ -38,6 +38,9 @@
     "agence-adeliom/easy-page-bundle": {
         "version": "dev-master"
     },
+    "agence-adeliom/easy-redirect-bundle": {
+        "version": "dev-master"
+    },
     "agence-adeliom/easy-seo-bundle": {
         "version": "dev-master"
     },
@@ -46,6 +49,20 @@
     },
     "alcohol/iso4217": {
         "version": "4.0.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
     },
     "babdev/pagerfanta-bundle": {
         "version": "v3.3.0"
@@ -154,8 +171,17 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
+    "ekyna/payum-monetico": {
+        "version": "1.6.1"
+    },
     "fakerphp/faker": {
         "version": "v1.15.0"
+    },
+    "fig/link-util": {
+        "version": "1.2.0"
+    },
+    "flux-se/sylius-payum-monetico-plugin": {
+        "version": "v1.1.0"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
@@ -195,6 +221,9 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.8.2"
+    },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.1"
     },
     "illuminate/collections": {
         "version": "v8.49.1"
@@ -246,8 +275,20 @@
     "laminas/laminas-code": {
         "version": "4.4.0"
     },
+    "laminas/laminas-eventmanager": {
+        "version": "3.4.0"
+    },
     "laminas/laminas-stdlib": {
         "version": "3.5.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.4.0"
+    },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
+    "lcobucci/jwt": {
+        "version": "4.1.4"
     },
     "league/flysystem": {
         "version": "2.1.1"
@@ -263,6 +304,18 @@
     },
     "league/uri-interfaces": {
         "version": "2.3.0"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
     },
     "liip/imagine-bundle": {
         "version": "1.8",
@@ -283,6 +336,9 @@
     "marcj/topsort": {
         "version": "1.1.0"
     },
+    "mockery/mockery": {
+        "version": "1.4.4"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
@@ -291,6 +347,9 @@
     },
     "myclabs/php-enum": {
         "version": "1.8.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nesbot/carbon": {
         "version": "2.50.0"
@@ -386,6 +445,9 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
+    },
+    "polishsymfonycommunity/symfony-mocker-container": {
+        "version": "v1.0.4"
     },
     "presta/sitemap-bundle": {
         "version": "v3.0.0"
@@ -492,6 +554,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "sokil/php-isocodes": {
+        "version": "3.3.11"
+    },
     "sonata-project/block-bundle": {
         "version": "4.7.0"
     },
@@ -546,92 +611,14 @@
     "sylius-labs/polyfill-symfony-security": {
         "version": "v1.0.0"
     },
-    "sylius/addressing": {
-        "version": "v1.10.1"
-    },
-    "sylius/addressing-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/attribute": {
-        "version": "v1.10.1"
-    },
-    "sylius/attribute-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/channel": {
-        "version": "v1.10.1"
-    },
-    "sylius/channel-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/core": {
-        "version": "v1.10.1"
-    },
-    "sylius/core-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/currency": {
-        "version": "v1.10.1"
-    },
-    "sylius/currency-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/customer": {
-        "version": "v1.10.1"
-    },
-    "sylius/customer-bundle": {
-        "version": "v1.10.1"
-    },
     "sylius/fixtures-bundle": {
         "version": "v1.7.0"
     },
     "sylius/grid-bundle": {
         "version": "v1.10.0"
     },
-    "sylius/inventory": {
-        "version": "v1.10.1"
-    },
-    "sylius/inventory-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/locale": {
-        "version": "v1.10.1"
-    },
-    "sylius/locale-bundle": {
-        "version": "v1.10.1"
-    },
     "sylius/mailer-bundle": {
         "version": "v1.6.0"
-    },
-    "sylius/money-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/order": {
-        "version": "v1.10.1"
-    },
-    "sylius/order-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/payment": {
-        "version": "v1.10.1"
-    },
-    "sylius/payment-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/payum-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/product": {
-        "version": "v1.10.1"
-    },
-    "sylius/product-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/promotion": {
-        "version": "v1.10.1"
-    },
-    "sylius/promotion-bundle": {
-        "version": "v1.10.1"
     },
     "sylius/registry": {
         "version": "v1.6.0"
@@ -648,41 +635,11 @@
             "config/packages/sylius_resource.yaml"
         ]
     },
-    "sylius/review": {
-        "version": "v1.10.1"
-    },
-    "sylius/review-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/shipping": {
-        "version": "v1.10.1"
-    },
-    "sylius/shipping-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/taxation": {
-        "version": "v1.10.1"
-    },
-    "sylius/taxation-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/taxonomy": {
-        "version": "v1.10.1"
-    },
-    "sylius/taxonomy-bundle": {
+    "sylius/sylius": {
         "version": "v1.10.1"
     },
     "sylius/theme-bundle": {
         "version": "v2.2.0"
-    },
-    "sylius/ui-bundle": {
-        "version": "v1.10.1"
-    },
-    "sylius/user": {
-        "version": "v1.10.1"
-    },
-    "sylius/user-bundle": {
-        "version": "v1.10.1"
     },
     "symfony/amqp-messenger": {
         "version": "v5.3.4"
@@ -934,6 +891,9 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.23.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
+    },
     "symfony/polyfill-php73": {
         "version": "v1.23.0"
     },
@@ -1038,6 +998,9 @@
     },
     "symfony/test-pack": {
         "version": "v1.0.8"
+    },
+    "symfony/thanks": {
+        "version": "v1.2.10"
     },
     "symfony/translation": {
         "version": "5.3",

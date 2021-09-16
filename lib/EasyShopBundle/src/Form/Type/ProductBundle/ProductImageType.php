@@ -3,16 +3,12 @@
 namespace Adeliom\EasyShopBundle\Form\Type\ProductBundle;
 
 use Adeliom\EasyMediaBundle\Form\EasyMediaType;
-use App\Entity\Shop\Product\ProductVariant;
-use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -20,6 +16,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductImageType extends AbstractType
 {
+    protected $parameterBag;
+    public function __construct(ParameterBag $parameterBag)
+    {
+        $this->parameterBag = $parameterBag;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('path', EasyMediaType::class, [
@@ -28,6 +30,7 @@ final class ProductImageType extends AbstractType
                 "restrictions_uploadTypes" => ["image/*"],
             ]);
 
+        $class = $this->parameterBag->get("sylius.model.product_image.class");
         if (isset($options['product']) && $options['product'] instanceof ProductInterface) {
             $builder
                 ->add('productVariants', ChoiceType::class, [
@@ -68,9 +71,9 @@ final class ProductImageType extends AbstractType
                 }
                 return $value;
             },
-            function ($value){
+            function ($value) use ($class){
                 if($value){
-                    $image = new \App\Entity\Shop\Product\ProductImage();
+                    $image = new $class();
                     $image->setType($value["type"]);
                     $image->setPath($value["path"]);
                     if(isset($value["productVariants"])){

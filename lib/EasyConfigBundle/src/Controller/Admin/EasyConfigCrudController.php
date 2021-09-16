@@ -115,6 +115,7 @@ abstract class EasyConfigCrudController extends AbstractCrudController
         yield TextField::new("name", 'easy_config.form.name')->setColumns('col-12 col-sm-6');
         yield TextareaField::new("description", 'easy_config.form.description');
         yield ChoiceMaskField::new("type", 'easy_config.form.type')
+            ->setFormTypeOption('disabled', $pageName == Crud::PAGE_EDIT)
             ->setChoices([
                 'easy_config.types.code' => "code",
                 'easy_config.types.email' => "email",

@@ -98,12 +98,12 @@ abstract class PaymentCrudController extends AbstractCrudController
                 return "#" . $value;
             }
         });
-        yield TextField::new('order.customer', 'sylius.ui.customer')->formatValue(function ($value, Payment $entity){
+        yield TextField::new('order.customer', 'sylius.ui.customer')->formatValue(function ($value, $entity){
             if($value){
                 return '<strong>' . $entity->getOrder()->getCustomer()->getFullName() . "</strong><br>" . $entity->getOrder()->getCustomer()->getEmail();
             }
         });
-        yield NumberField::new('amount', 'sylius.ui.amount')->formatValue(function ($value, Payment $entity){
+        yield NumberField::new('amount', 'sylius.ui.amount')->formatValue(function ($value, $entity){
             $formatter = new \NumberFormatter($entity->getOrder()->getLocaleCode(), \NumberFormatter::CURRENCY);
             return $formatter->formatCurrency($entity->getAmount() / 100, $entity->getCurrencyCode());
         })->setCssClass('text-md-right');

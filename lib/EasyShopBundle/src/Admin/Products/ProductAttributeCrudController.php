@@ -38,7 +38,7 @@ abstract class ProductAttributeCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $url = $this->get(AdminUrlGenerator::class)->setController(self::class)->setAction(Action::NEW);
+        $url = $this->get(AdminUrlGenerator::class)->setController(get_class($this))->setAction(Action::NEW);
 
         $actions = parent::configureActions($actions);
         $actions->remove(Crud::PAGE_INDEX, Action::NEW);

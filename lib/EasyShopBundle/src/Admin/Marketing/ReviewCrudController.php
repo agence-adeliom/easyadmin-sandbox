@@ -54,7 +54,7 @@ abstract class ReviewCrudController extends AbstractCrudController
         $actions
             ->add(Crud::PAGE_INDEX, $reject)
             ->add(Crud::PAGE_INDEX, $accept)
-            ->disable(Crud::PAGE_INDEX, Action::NEW)
+            ->disable(Action::NEW)
         ;
         return $actions;
     }

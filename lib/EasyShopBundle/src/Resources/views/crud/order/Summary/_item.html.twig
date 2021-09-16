@@ -26,7 +26,7 @@
             {% endif %}
             <img src="{{ path }}" alt="" class="img-fluid sylius-grid-image" style="width: 4rem" />
             <div class="content">
-                <div class="sylius-product-name" title="{{ item.productName }}">{{ item.productName }}</div>
+                <div class="sylius-product-name fw-bold" title="{{ item.productName }}">{{ item.productName }}</div>
                 <span class="sub header sylius-product-variant-code" title="{{ variant.code }}">
                     {{ variant.code }}
                 </span>
@@ -35,7 +35,7 @@
         {% if product.hasOptions() %}
             <div class="ui horizontal divided list sylius-product-options">
                 {% for optionValue in variant.optionValues %}
-                    <div class="item" data-sylius-option-name="{{ optionValue.name }}">
+                    <div class="badge badge-pill badge-secondary" data-sylius-option-name="{{ optionValue.name }}">
                         {{ optionValue.value }}
                     </div>
                 {% endfor %}

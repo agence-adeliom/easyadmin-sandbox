@@ -816,9 +816,9 @@ sylius_ui:
                     priority: 15
                     context:
                         event: sylius.shop.layout.after_header
-                menu:
-                    template: "@EasyShop/front/Layout/Header/_menu.html.twig"
-                    priority: 10
+#                menu:
+#                    template: "@EasyShop/front/Layout/Header/_menu.html.twig"
+#                    priority: 10
 
         sylius.shop.layout.before_body:
             blocks:
@@ -922,9 +922,9 @@ sylius_ui:
                 summary:
                     template: "@EasyShop/front/Checkout/_summary.html.twig"
                     priority: 20
-                support:
-                    template: "@EasyShop/front/Checkout/_support.html.twig"
-                    priority: 10
+#                support:
+#                    template: "@EasyShop/front/Checkout/_support.html.twig"
+#                    priority: 10
 
         sylius.shop.checkout.address.sidebar:
             blocks:

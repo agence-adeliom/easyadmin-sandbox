@@ -28,6 +28,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -58,12 +59,16 @@ final class ProductAttributesCollectionType extends AbstractType
     /** @var FormFactoryInterface */
     private $formFactory;
 
+    protected $parameterBag;
+
     public function __construct(
+        ParameterBag $parameterBag,
         RepositoryInterface $productAttributesTypeRepository,
         RepositoryInterface $localeRepository,
         FormTypeRegistryInterface $formTypeRegistry,
         FormFactoryInterface $formFactory
     ) {
+        $this->parameterBag = $parameterBag;
         $this->productAttributesTypeRepository = $productAttributesTypeRepository;
         $this->localeRepository = $localeRepository;
         $this->formTypeRegistry = $formTypeRegistry;
@@ -106,7 +111,7 @@ final class ProductAttributesCollectionType extends AbstractType
         );
 
         $builder->addEventSubscriber($resizeListener);
-
+        $class = $this->parameterBag->get("sylius.model.product_attribute_value.class");
         $builder->addModelTransformer(new CallbackTransformer(
             function ($array) {
                 $newArray = array();
@@ -132,7 +137,7 @@ final class ProductAttributesCollectionType extends AbstractType
                 $newArray = array_values($newArray);
                 return new ArrayCollection($newArray);
             },
-            function ($array) {
+            function ($array) use ($class) {
                 $newArray = array();
 
                 if (!$array) {
@@ -145,7 +150,7 @@ final class ProductAttributesCollectionType extends AbstractType
                     unset($value['position']);
                     if (!is_null($item)) {
                         foreach ($value as $k => $data){
-                            $pv = new ProductAttributeValue();
+                            $pv = new $class();
                             $pv->setAttribute($item);
                             if($item->isTranslatable()){
                                 $locale = str_replace("value__", '', $k);

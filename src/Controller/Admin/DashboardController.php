@@ -4,12 +4,15 @@ namespace App\Controller\Admin;
 
 use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
 use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
+use Adeliom\EasyRedirectBundle\Admin\EasyRedirectTrait;
 use Adeliom\EasyShopBundle\Admin\EasyShopDashboardTrait;
 use App\Entity\EasyAdmin\User;
 use App\Entity\EasyBlock\Block;
 use App\Entity\EasyBlog\Category;
 use App\Entity\EasyBlog\Post;
 use App\Entity\EasyPage\Page;
+use App\Entity\EasyRedirect\NotFound;
+use App\Entity\EasyRedirect\Redirect;
 use App\Entity\Menu\Menu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -23,6 +26,7 @@ class DashboardController extends AbstractDashboardController
     use EasyShopDashboardTrait;
     use EasyAdminUserTrait;
     use EasyConfigTrait;
+    use EasyRedirectTrait;
 
     /**
      * @Route("/admin", name="admin")
@@ -47,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
         yield from $this->administratorMenuEntry();
         yield from $this->configMenuEntry();
+        yield from $this->configRedirectEntry();
 
         yield MenuItem::section('easy.page.admin.menu.contents');
         yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);

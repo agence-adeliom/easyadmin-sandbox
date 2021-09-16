@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61bb4cdaa97bc300373ab56bb8ec9364",
+    "content-hash": "5eba681ece4e8c2c4a30f253c51eb746",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -508,7 +508,7 @@
             "dist": {
                 "type": "path",
                 "url": "lib/EasyFieldsBundle",
-                "reference": "0b9655dcd99ac698d60c790f9830fd3565222930"
+                "reference": "5a999745e80cee1a947e1160d989fb57b154857e"
             },
             "require": {
                 "a2lix/translation-form-bundle": "^3.0",
@@ -525,7 +525,7 @@
                 "symfony/property-access": "^4.0|^5.0",
                 "symfony/routing": "^4.0|^5.0",
                 "symfony/twig-bundle": "^4.0|^5.0",
-                "twig/intl-extra": "^3.0"
+                "twig/intl-extra": "^2.14"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14",
@@ -693,6 +693,43 @@
             }
         },
         {
+            "name": "agence-adeliom/easy-redirect-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "lib/EasyRedirectBundle",
+                "reference": "d8ba5ac9fc940c9d2430c89d0c7cae7ed6e6f85c"
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^1.3|^2.0",
+                "doctrine/orm": "^2.6",
+                "php": "^7.2 | ^8.0",
+                "symfony/framework-bundle": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "symfony/browser-kit": "^4.4|^5.0",
+                "symfony/form": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^5.1",
+                "symfony/translation": "^4.4|^5.0",
+                "symfony/validator": "^4.4|^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Adeliom\\EasyRedirectBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony bundle for EasyAdmin",
+            "homepage": "https://github.com/tbmatuka/EditorjsBundle",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "agence-adeliom/easy-seo-bundle",
             "version": "dev-master",
             "dist": {
@@ -719,10 +756,10 @@
             "dist": {
                 "type": "path",
                 "url": "lib/EasyShopBundle",
-                "reference": "54cb3ca0c13b031c95c887e39fad91e12c2f06b9"
+                "reference": "e6d7aa469b63bed02b0f36748caa5fa3f3253824"
             },
             "require": {
-                "sylius/core-bundle": "1.10.1"
+                "sylius/sylius": "1.10.1"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -789,6 +826,165 @@
                 "source": "https://github.com/alcohol/iso4217"
             },
             "time": "2021-01-06T07:58:06+00:00"
+        },
+        {
+            "name": "api-platform/core",
+            "version": "v2.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/api-platform/core.git",
+                "reference": "4e22a289e474db454480020ff37d20472668c11c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/4e22a289e474db454480020ff37d20472668c11c",
+                "reference": "4e22a289e474db454480020ff37d20472668c11c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "^1.0 || ^2.0",
+                "fig/link-util": "^1.0",
+                "php": ">=7.1",
+                "psr/cache": "^1.0 || ^2.0 || ^3.0",
+                "psr/container": "^1.0",
+                "symfony/http-foundation": "^4.4 || ^5.1",
+                "symfony/http-kernel": "^4.4 || ^5.1",
+                "symfony/property-access": "^3.4.19 || ^4.4 || ^5.1",
+                "symfony/property-info": "^3.4 || ^4.4 || ^5.2.1",
+                "symfony/serializer": "^4.4 || ^5.1",
+                "symfony/web-link": "^4.4 || ^5.1",
+                "willdurand/negotiation": "^2.0.3 || ^3.0"
+            },
+            "conflict": {
+                "doctrine/common": "<2.7",
+                "doctrine/mongodb-odm": "<2.2",
+                "doctrine/persistence": "<1.3"
+            },
+            "require-dev": {
+                "behat/behat": "^3.1",
+                "behat/mink": "^1.7",
+                "doctrine/annotations": "^1.7",
+                "doctrine/cache": "^1.11",
+                "doctrine/common": "^2.11 || ^3.0",
+                "doctrine/data-fixtures": "^1.2.2",
+                "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+                "doctrine/mongodb-odm": "^2.2",
+                "doctrine/mongodb-odm-bundle": "^4.0",
+                "doctrine/orm": "^2.6.4 || ^3.0",
+                "elasticsearch/elasticsearch": "^6.0 || ^7.0",
+                "friends-of-behat/mink-browserkit-driver": "^1.3.1",
+                "friends-of-behat/mink-extension": "^2.2",
+                "friends-of-behat/symfony-extension": "^2.1",
+                "guzzlehttp/guzzle": "^6.0 || ^7.0",
+                "jangregor/phpstan-prophecy": "^0.8",
+                "justinrainbow/json-schema": "^5.2.1",
+                "phpdocumentor/reflection-docblock": "^3.0 || ^4.0 || ^5.1",
+                "phpdocumentor/type-resolver": "^0.3 || ^0.4 || ^1.4",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.65",
+                "phpstan/phpstan-doctrine": "^0.12.7",
+                "phpstan/phpstan-phpunit": "^0.12.4",
+                "phpstan/phpstan-symfony": "^0.12.4",
+                "psr/log": "^1.0",
+                "ramsey/uuid": "^3.7 || ^4.0",
+                "ramsey/uuid-doctrine": "^1.4",
+                "soyuka/contexts": "^3.3.1",
+                "soyuka/stubs-mongodb": "^1.0",
+                "symfony/asset": "^3.4 || ^4.4 || ^5.1",
+                "symfony/browser-kit": "^4.4 || ^5.1",
+                "symfony/cache": "^3.4 || ^4.4 || ^5.1",
+                "symfony/config": "^3.4 || ^4.4 || ^5.1",
+                "symfony/console": "^3.4 || ^4.4 || ^5.1",
+                "symfony/css-selector": "^3.4 || ^4.4 || ^5.1",
+                "symfony/debug": "^3.4 || ^4.4 || ^5.1",
+                "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.1",
+                "symfony/doctrine-bridge": "^3.4 || ^4.4 || ^5.1",
+                "symfony/dom-crawler": "^3.4 || ^4.4 || ^5.1",
+                "symfony/event-dispatcher": "^3.4 || ^4.4 || ^5.1",
+                "symfony/expression-language": "^3.4 || ^4.4 || ^5.1",
+                "symfony/finder": "^3.4 || ^4.4 || ^5.1",
+                "symfony/form": "^3.4 || ^4.4 || ^5.1",
+                "symfony/framework-bundle": "^4.4 || ^5.1",
+                "symfony/http-client": "^4.4 || ^5.1",
+                "symfony/mercure-bundle": "*",
+                "symfony/messenger": "^4.4 || ^5.1",
+                "symfony/phpunit-bridge": "^5.1.7",
+                "symfony/routing": "^3.4 || ^4.4 || ^5.1",
+                "symfony/security-bundle": "^3.4 || ^4.4 || ^5.1",
+                "symfony/security-core": "^4.4 || ^5.1",
+                "symfony/twig-bundle": "^3.4 || ^4.4 || ^5.1",
+                "symfony/validator": "^3.4 || ^4.4 || ^5.1",
+                "symfony/web-profiler-bundle": "^4.4 || ^5.1",
+                "symfony/yaml": "^3.4 || ^4.4 || ^5.1",
+                "twig/twig": "^1.42.3 || ^2.12 || ^3.0",
+                "webonyx/graphql-php": "^14.0"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm-bundle": "To support MongoDB. Only versions 4.0 and later are supported.",
+                "elasticsearch/elasticsearch": "To support Elasticsearch.",
+                "guzzlehttp/guzzle": "To use the HTTP cache invalidation system.",
+                "ocramius/package-versions": "To display the API Platform's version in the debug bar.",
+                "phpdocumentor/reflection-docblock": "To support extracting metadata from PHPDoc.",
+                "psr/cache-implementation": "To use metadata caching.",
+                "ramsey/uuid": "To support Ramsey's UUID identifiers.",
+                "symfony/cache": "To have metadata caching when using Symfony integration.",
+                "symfony/config": "To load XML configuration files.",
+                "symfony/expression-language": "To use authorization features.",
+                "symfony/security": "To use authorization features.",
+                "symfony/twig-bundle": "To use the Swagger UI integration.",
+                "symfony/uid": "To support Symfony UUID/ULID identifiers.",
+                "symfony/web-profiler-bundle": "To use the data collector.",
+                "webonyx/graphql-php": "To support GraphQL."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.7.x-dev"
+                },
+                "symfony": {
+                    "require": "^3.4 || ^4.4 || ^5.1"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ApiPlatform\\Core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Dunglas",
+                    "email": "kevin@dunglas.fr",
+                    "homepage": "https://dunglas.fr"
+                }
+            ],
+            "description": "Build a fully-featured hypermedia or GraphQL API in minutes!",
+            "homepage": "https://api-platform.com",
+            "keywords": [
+                "Hydra",
+                "JSON-LD",
+                "api",
+                "graphql",
+                "hal",
+                "jsonapi",
+                "openapi",
+                "rest",
+                "swagger"
+            ],
+            "support": {
+                "issues": "https://github.com/api-platform/core/issues",
+                "source": "https://github.com/api-platform/core/tree/v2.6.5"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/api-platform/core",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-06-15T16:53:33+00:00"
         },
         {
             "name": "babdev/pagerfanta-bundle",
@@ -2662,6 +2858,68 @@
             "time": "2021-04-01T18:37:14+00:00"
         },
         {
+            "name": "ekyna/payum-monetico",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekyna/PayumMonetico.git",
+                "reference": "c6fd677bd7a0697fc14d67ab237047a0beb999f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekyna/PayumMonetico/zipball/c6fd677bd7a0697fc14d67ab237047a0beb999f3",
+                "reference": "c6fd677bd7a0697fc14d67ab237047a0beb999f3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "payum/core": "^1.5",
+                "php": "^7.1|^8.0",
+                "psr/log": "~1.0",
+                "sokil/php-isocodes": "~2.0|~3.0",
+                "symfony/options-resolver": "~3.0|~4.0|~5.0"
+            },
+            "require-dev": {
+                "php-http/guzzle6-adapter": "^1.1|^2.0",
+                "phpunit/phpunit": "^7|^8|^9"
+            },
+            "type": "component",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ekyna\\Component\\Payum\\Monetico\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Etienne Dauvergne",
+                    "homepage": "http://ekyna.com"
+                }
+            ],
+            "description": "Payum Monetico (Credit Mutuel/CIC) gateway",
+            "homepage": "https://github.com/ekyna/PayumMonetico",
+            "keywords": [
+                "CIC",
+                "Crédit Mutuel",
+                "monetico",
+                "payum",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/ekyna/PayumMonetico/issues",
+                "source": "https://github.com/ekyna/PayumMonetico/tree/1.6.1"
+            },
+            "time": "2021-08-26T16:59:30+00:00"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.16.0",
             "source": {
@@ -2727,23 +2985,160 @@
             "time": "2021-09-06T14:53:37+00:00"
         },
         {
-            "name": "friendsofphp/proxy-manager-lts",
-            "version": "v1.0.5",
+            "name": "fig/link-util",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
-                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f"
+                "url": "https://github.com/php-fig/link-util.git",
+                "reference": "10e52348a2e9ad4581f2bf3e16458f0861a88c6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/006aa5d32f887a4db4353b13b5b5095613e0611f",
-                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f",
+                "url": "https://api.github.com/repos/php-fig/link-util/zipball/10e52348a2e9ad4581f2bf3e16458f0861a88c6a",
+                "reference": "10e52348a2e9ad4581f2bf3e16458f0861a88c6a",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-code": "~3.4.1|^4.0",
+                "php": ">=8.0.0",
+                "psr/link": "^1.1.0 | ^2.0.0"
+            },
+            "provide": {
+                "psr/link-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9",
+                "squizlabs/php_codesniffer": "^2.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fig\\Link\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common utility implementations for HTTP links",
+            "keywords": [
+                "http",
+                "http-link",
+                "link",
+                "psr",
+                "psr-13",
+                "rest"
+            ],
+            "support": {
+                "issues": "https://github.com/php-fig/link-util/issues",
+                "source": "https://github.com/php-fig/link-util/tree/1.2.0"
+            },
+            "time": "2021-03-11T23:09:19+00:00"
+        },
+        {
+            "name": "flux-se/sylius-payum-monetico-plugin",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FLUX-SE/SyliusPayumMoneticoPlugin.git",
+                "reference": "b14ab64ed0d5dd845c6889a6930e8def74ad31dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FLUX-SE/SyliusPayumMoneticoPlugin/zipball/b14ab64ed0d5dd845c6889a6930e8def74ad31dc",
+                "reference": "b14ab64ed0d5dd845c6889a6930e8def74ad31dc",
+                "shasum": ""
+            },
+            "require": {
+                "ekyna/payum-monetico": "^1.5",
+                "sylius/sylius": "^1.5"
+            },
+            "require-dev": {
+                "behat/behat": "^3.7",
+                "behat/mink-selenium2-driver": "^1.4",
+                "dmore/behat-chrome-extension": "^1.3",
+                "dmore/chrome-mink-driver": "^2.7",
+                "ext-json": "*",
+                "friends-of-behat/mink": "^1.8",
+                "friends-of-behat/mink-browserkit-driver": "^1.4",
+                "friends-of-behat/mink-extension": "^2.4",
+                "friends-of-behat/page-object-extension": "^0.3",
+                "friends-of-behat/suite-settings-extension": "^1.0",
+                "friends-of-behat/symfony-extension": "^2.1",
+                "friends-of-behat/variadic-extension": "^1.3",
+                "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
+                "lakion/mink-debug-extension": "^2.0.0",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-doctrine": "^0.12.26",
+                "phpstan/phpstan-strict-rules": "^0.12.0",
+                "phpstan/phpstan-webmozart-assert": "^0.12.7",
+                "phpunit/phpunit": "^9.5",
+                "sensiolabs/security-checker": "^6.0",
+                "sylius-labs/coding-standard": "^3.2",
+                "symfony/browser-kit": "^4.4 || ^5.2",
+                "symfony/debug-bundle": "^4.4 || ^5.2",
+                "symfony/dotenv": "^4.4 || ^5.2",
+                "symfony/intl": "^4.4 || ^5.2",
+                "symfony/web-profiler-bundle": "^4.4 || ^5.2",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "sylius-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FluxSE\\SyliusPayumMoneticoPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Francis HILAIRE",
+                    "email": "Prometee@users.noreply.github.com"
+                }
+            ],
+            "description": "Payum Monetico gateway plugin for Sylius",
+            "support": {
+                "issues": "https://github.com/FLUX-SE/SyliusPayumMoneticoPlugin/issues",
+                "source": "https://github.com/FLUX-SE/SyliusPayumMoneticoPlugin/tree/v1.1.0"
+            },
+            "time": "2021-03-04T11:35:58+00:00"
+        },
+        {
+            "name": "friendsofphp/proxy-manager-lts",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
+                "reference": "aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9",
+                "reference": "aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-code": "^3.4.1|^4.0",
                 "php": ">=7.1",
-                "symfony/filesystem": "^4.4.17|^5.0|^6.0"
+                "symfony/filesystem": "^4.4.17|^5.0"
             },
             "conflict": {
                 "laminas/laminas-stdlib": "<3.2.1",
@@ -2754,7 +3149,7 @@
             },
             "require-dev": {
                 "ext-phar": "*",
-                "symfony/phpunit-bridge": "^5.2|^6.0"
+                "symfony/phpunit-bridge": "^5.2"
             },
             "type": "library",
             "extra": {
@@ -2794,7 +3189,7 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.5"
+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -2806,7 +3201,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-22T16:11:15+00:00"
+            "time": "2020-12-28T10:50:10+00:00"
         },
         {
             "name": "friendsofsymfony/ckeditor-bundle",
@@ -3296,8 +3691,59 @@
             "time": "2021-04-26T09:17:50+00:00"
         },
         {
+            "name": "hamcrest/hamcrest-php",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamcrest/hamcrest-php.git",
+                "reference": "8c3d0a3f6af734494ad8f6fbbee0ba92422859f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/8c3d0a3f6af734494ad8f6fbbee0ba92422859f3",
+                "reference": "8c3d0a3f6af734494ad8f6fbbee0ba92422859f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3|^7.0|^8.0"
+            },
+            "replace": {
+                "cordoval/hamcrest-php": "*",
+                "davedevelopment/hamcrest-php": "*",
+                "kodova/hamcrest-php": "*"
+            },
+            "require-dev": {
+                "phpunit/php-file-iterator": "^1.4 || ^2.0",
+                "phpunit/phpunit": "^4.8.36 || ^5.7 || ^6.5 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "hamcrest"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "This is the PHP port of Hamcrest Matchers",
+            "keywords": [
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/hamcrest/hamcrest-php/issues",
+                "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
+            },
+            "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
             "name": "illuminate/collections",
-            "version": "v8.60.0",
+            "version": "v8.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -3351,7 +3797,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.60.0",
+            "version": "v8.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -3399,7 +3845,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.60.0",
+            "version": "v8.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -3445,16 +3891,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.60.0",
+            "version": "v8.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "c0fbc05c4362de423a7a4da137098e9d1affaf54"
+                "reference": "b0a21c41163381dd9a5abbd68fe85ed7b4247d30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/c0fbc05c4362de423a7a4da137098e9d1affaf54",
-                "reference": "c0fbc05c4362de423a7a4da137098e9d1affaf54",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b0a21c41163381dd9a5abbd68fe85ed7b4247d30",
+                "reference": "b0a21c41163381dd9a5abbd68fe85ed7b4247d30",
                 "shasum": ""
             },
             "require": {
@@ -3509,7 +3955,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-09-08T12:48:16+00:00"
+            "time": "2021-09-13T18:43:43+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -4113,37 +4559,39 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "4.4.2",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b"
+                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/54251ab2b16c41c6980387839496b235f5f6e10b",
-                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/b549b70c0bb6e935d497f84f750c82653326ac77",
+                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ~8.0.0"
+                "laminas/laminas-eventmanager": "^3.3",
+                "laminas/laminas-zendframework-bridge": "^1.1",
+                "php": "^7.3 || ~8.0.0"
             },
             "conflict": {
                 "phpspec/prophecy": "<1.9.0"
             },
+            "replace": {
+                "zendframework/zend-code": "^3.4.1"
+            },
             "require-dev": {
                 "doctrine/annotations": "^1.10.4",
                 "ext-phar": "*",
-                "laminas/laminas-coding-standard": "^2.1.4",
+                "laminas/laminas-coding-standard": "^1.0.0",
                 "laminas/laminas-stdlib": "^3.3.0",
-                "phpunit/phpunit": "^9.4.2",
-                "psalm/plugin-phpunit": "^0.14.0",
-                "vimeo/psalm": "^4.3.1"
+                "phpunit/phpunit": "^9.4.2"
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
-                "laminas/laminas-stdlib": "Laminas\\Stdlib component",
-                "laminas/laminas-zendframework-bridge": "A bridge with Zend Framework"
+                "laminas/laminas-stdlib": "Laminas\\Stdlib component"
             },
             "type": "library",
             "autoload": {
@@ -4159,8 +4607,7 @@
             "homepage": "https://laminas.dev",
             "keywords": [
                 "code",
-                "laminas",
-                "laminasframework"
+                "laminas"
             ],
             "support": {
                 "chat": "https://laminas.dev/chat",
@@ -4176,7 +4623,73 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-07-09T11:58:40+00:00"
+            "time": "2020-11-30T20:16:31+00:00"
+        },
+        {
+            "name": "laminas/laminas-eventmanager",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-eventmanager.git",
+                "reference": "a93fd278c97b2d41ebbce5ba048a24e3e6f580ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/a93fd278c97b2d41ebbce5ba048a24e3e6f580ba",
+                "reference": "a93fd278c97b2d41ebbce5ba048a24e3e6f580ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ~8.0.0 || ~8.1.0"
+            },
+            "conflict": {
+                "zendframework/zend-eventmanager": "*"
+            },
+            "require-dev": {
+                "container-interop/container-interop": "^1.1",
+                "laminas/laminas-coding-standard": "~2.2.1",
+                "laminas/laminas-stdlib": "^3.6",
+                "phpbench/phpbench": "^1.1",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5.5"
+            },
+            "suggest": {
+                "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
+                "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\EventManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Trigger and listen to events within a PHP application",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "event",
+                "eventmanager",
+                "events",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-eventmanager/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-eventmanager/issues",
+                "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
+                "source": "https://github.com/laminas/laminas-eventmanager"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-09-07T22:35:32+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -4236,6 +4749,203 @@
                 }
             ],
             "time": "2021-09-02T16:11:32+00:00"
+        },
+        {
+            "name": "laminas/laminas-zendframework-bridge",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
+                "reference": "bf180a382393e7db5c1e8d0f2ec0c4af9c724baf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/bf180a382393e7db5c1e8d0f2ec0c4af9c724baf",
+                "reference": "bf180a382393e7db5c1e8d0f2ec0c4af9c724baf",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ~8.0.0 || ~8.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "module": "Laminas\\ZendFrameworkBridge"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/autoload.php"
+                ],
+                "psr-4": {
+                    "Laminas\\ZendFrameworkBridge\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Alias legacy ZF class names to Laminas Project equivalents.",
+            "keywords": [
+                "ZendFramework",
+                "autoloading",
+                "laminas",
+                "zf"
+            ],
+            "support": {
+                "forum": "https://discourse.laminas.dev/",
+                "issues": "https://github.com/laminas/laminas-zendframework-bridge/issues",
+                "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
+                "source": "https://github.com/laminas/laminas-zendframework-bridge"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-09-03T17:53:30+00:00"
+        },
+        {
+            "name": "lcobucci/clock",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/clock.git",
+                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/clock/zipball/353d83fe2e6ae95745b16b3d911813df6a05bfb3",
+                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.17",
+                "lcobucci/coding-standard": "^6.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/php-code-coverage": "9.1.4",
+                "phpunit/phpunit": "9.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\Clock\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Cobucci",
+                    "email": "lcobucci@gmail.com"
+                }
+            ],
+            "description": "Yet another clock abstraction",
+            "support": {
+                "issues": "https://github.com/lcobucci/clock/issues",
+                "source": "https://github.com/lcobucci/clock/tree/2.0.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-08-27T18:56:02+00:00"
+        },
+        {
+            "name": "lcobucci/jwt",
+            "version": "4.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "71cf170102c8371ccd933fa4df6252086d144de6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/71cf170102c8371ccd933fa4df6252086d144de6",
+                "reference": "71cf170102c8371ccd933fa4df6252086d144de6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-sodium": "*",
+                "lcobucci/clock": "^2.0",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.21",
+                "lcobucci/coding-standard": "^6.0",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpbench/phpbench": "^1.0@alpha",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/php-invoker": "^3.1",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Cobucci",
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "support": {
+                "issues": "https://github.com/lcobucci/jwt/issues",
+                "source": "https://github.com/lcobucci/jwt/tree/4.1.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-03-23T23:53:08+00:00"
         },
         {
             "name": "league/flysystem",
@@ -4635,6 +5345,117 @@
             "time": "2021-06-28T04:27:21+00:00"
         },
         {
+            "name": "lexik/jwt-authentication-bundle",
+            "version": "v2.12.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
+                "reference": "f2df9f7a371a99a05e5bfe65c634a7e0cdf1c539"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/f2df9f7a371a99a05e5bfe65c634a7e0cdf1c539",
+                "reference": "f2df9f7a371a99a05e5bfe65c634a7e0cdf1c539",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "lcobucci/jwt": "^3.4|^4.0",
+                "namshi/jose": "^7.2",
+                "php": ">=7.1",
+                "symfony/deprecation-contracts": "^2.4",
+                "symfony/framework-bundle": "^4.4|^5.1",
+                "symfony/security-bundle": "^4.4|^5.1"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "^4.4|^5.1",
+                "symfony/console": "^4.4|^5.1",
+                "symfony/dom-crawler": "^4.4|^5.1",
+                "symfony/phpunit-bridge": "^4.4|^5.1",
+                "symfony/var-dumper": "^4.4|^5.1",
+                "symfony/yaml": "^4.4|^5.1"
+            },
+            "suggest": {
+                "gesdinet/jwt-refresh-token-bundle": "Implements a refresh token system over Json Web Tokens in Symfony",
+                "spomky-labs/lexik-jose-bridge": "Provides a JWT Token encoder with encryption support"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lexik\\Bundle\\JWTAuthenticationBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Barthe",
+                    "email": "j.barthe@lexik.fr",
+                    "homepage": "https://github.com/jeremyb"
+                },
+                {
+                    "name": "Nicolas Cabot",
+                    "email": "n.cabot@lexik.fr",
+                    "homepage": "https://github.com/slashfan"
+                },
+                {
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr",
+                    "homepage": "https://github.com/cedric-g"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr",
+                    "homepage": "https://github.com/lexik"
+                },
+                {
+                    "name": "Robin Chalas",
+                    "email": "robin.chalas@gmail.com",
+                    "homepage": "https://github.com/chalasr"
+                },
+                {
+                    "name": "Lexik Community",
+                    "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle/graphs/contributors"
+                }
+            ],
+            "description": "This bundle provides JWT authentication for your Symfony REST API",
+            "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
+            "keywords": [
+                "Authentication",
+                "JWS",
+                "api",
+                "bundle",
+                "jwt",
+                "rest",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.12.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/chalasr",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/lexik/jwt-authentication-bundle",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-07-29T11:25:22+00:00"
+        },
+        {
             "name": "liip/imagine-bundle",
             "version": "2.6.1",
             "source": {
@@ -4853,6 +5674,78 @@
             "time": "2016-11-19T14:58:11+00:00"
         },
         {
+            "name": "mockery/mockery",
+            "version": "1.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mockery/mockery.git",
+                "reference": "e01123a0e847d52d186c5eb4b9bf58b0c6d00346"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/e01123a0e847d52d186c5eb4b9bf58b0c6d00346",
+                "reference": "e01123a0e847d52d186c5eb4b9bf58b0c6d00346",
+                "shasum": ""
+            },
+            "require": {
+                "hamcrest/hamcrest-php": "^2.0.1",
+                "lib-pcre": ">=7.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                },
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework",
+            "homepage": "https://github.com/mockery/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/mockery/mockery/issues",
+                "source": "https://github.com/mockery/mockery/tree/1.4.4"
+            },
+            "time": "2021-09-13T15:28:59+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.3.2",
             "source": {
@@ -5007,6 +5900,73 @@
                 }
             ],
             "time": "2021-07-05T08:18:36+00:00"
+        },
+        {
+            "name": "namshi/jose",
+            "version": "7.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namshi/jose.git",
+                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namshi/jose/zipball/89a24d7eb3040e285dd5925fcad992378b82bcff",
+                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-date": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-spl": "*",
+                "php": ">=5.5",
+                "symfony/polyfill-php56": "^1.0"
+            },
+            "require-dev": {
+                "phpseclib/phpseclib": "^2.0",
+                "phpunit/phpunit": "^4.5|^5.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "ext-openssl": "Allows to use OpenSSL as crypto engine.",
+                "phpseclib/phpseclib": "Allows to use Phpseclib as crypto engine, use version ^2.0."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Namshi\\JOSE\\": "src/Namshi/JOSE/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Nadalin",
+                    "email": "alessandro.nadalin@gmail.com"
+                },
+                {
+                    "name": "Alessandro Cinelli (cirpo)",
+                    "email": "alessandro.cinelli@gmail.com"
+                }
+            ],
+            "description": "JSON Object Signing and Encryption library for PHP.",
+            "keywords": [
+                "JSON Web Signature",
+                "JSON Web Token",
+                "JWS",
+                "json",
+                "jwt",
+                "token"
+            ],
+            "support": {
+                "issues": "https://github.com/namshi/jose/issues",
+                "source": "https://github.com/namshi/jose/tree/master"
+            },
+            "time": "2016-12-05T07:27:31+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -6130,6 +7090,65 @@
             "time": "2021-09-12T11:52:00+00:00"
         },
         {
+            "name": "polishsymfonycommunity/symfony-mocker-container",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer.git",
+                "reference": "93e3a77a61e73a688b393da56fe126a5e46f4d8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PolishSymfonyCommunity/SymfonyMockerContainer/zipball/93e3a77a61e73a688b393da56fe126a5e46f4d8e",
+                "reference": "93e3a77a61e73a688b393da56fe126a5e46f4d8e",
+                "shasum": ""
+            },
+            "require": {
+                "mockery/mockery": "^1.3",
+                "php": "^7.2 || ^8.0",
+                "symfony/dependency-injection": "^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PSS\\SymfonyMockerContainer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Zalas",
+                    "email": "jakub@zalas.pl",
+                    "homepage": "http://www.zalas.eu"
+                },
+                {
+                    "name": "Polish Symfony Community",
+                    "homepage": "http://symfonylab.pl"
+                }
+            ],
+            "description": "Provides base Symfony dependency injection container enabling service mocking.",
+            "homepage": "http://symfonylab.pl",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "TDD",
+                "mock",
+                "mockery",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/issues",
+                "source": "https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/tree/v1.0.4"
+            },
+            "time": "2021-03-19T14:50:55+00:00"
+        },
+        {
             "name": "presta/sitemap-bundle",
             "version": "v3.0.0",
             "source": {
@@ -6893,6 +7912,64 @@
                 "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.2.0"
             },
             "time": "2021-09-06T13:24:35+00:00"
+        },
+        {
+            "name": "sokil/php-isocodes",
+            "version": "3.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sokil/php-isocodes.git",
+                "reference": "ee00948cfb852971379c90e7078e5a959e4d2a21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sokil/php-isocodes/zipball/ee00948cfb852971379c90e7078e5a959e4d2a21",
+                "reference": "ee00948cfb852971379c90e7078e5a959e4d2a21",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ext-gettext": "*",
+                "infection/infection": ">=0.11.5",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": ">=7.5.20",
+                "squizlabs/php_codesniffer": "^3.4",
+                "symfony/translation": "^4.4.17|^5.2",
+                "vimeo/psalm": "^4.3"
+            },
+            "suggest": {
+                "ext-gettext": "Required for gettext translation driver",
+                "phpbench/phpbench": "Required to run benchmarks",
+                "symfony/translation": "Translation driver by Symfont project"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sokil\\IsoCodes\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmytro Sokil",
+                    "email": "dmytro.sokil@gmail.com"
+                }
+            ],
+            "description": "ISO country, subdivision, language, currency and script definitions and their translations. Based on pythons pycountry and Debian's iso-codes.",
+            "support": {
+                "issues": "https://github.com/sokil/php-isocodes/issues",
+                "source": "https://github.com/sokil/php-isocodes/tree/3.3.11"
+            },
+            "time": "2021-08-10T19:06:38+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -7789,933 +8866,6 @@
             "time": "2021-01-12T19:16:58+00:00"
         },
         {
-            "name": "sylius/addressing",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Addressing.git",
-                "reference": "01d904523e3b3bcdc6293de3af0e6b49a348908b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Addressing/zipball/01d904523e3b3bcdc6293de3af0e6b49a348908b",
-                "reference": "01d904523e3b3bcdc6293de3af0e6b49a348908b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7",
-                "symfony/intl": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Addressing\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Addressing and zone management for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "address",
-                "addressing",
-                "ecommerce",
-                "shop",
-                "zones"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Addressing/tree/v1.10.2"
-            },
-            "time": "2021-05-27T10:14:24+00:00"
-        },
-        {
-            "name": "sylius/addressing-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "2ae822f987dd2075304884e34f86f940def4daa0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/2ae822f987dd2075304884e34f86f940def4daa0",
-                "reference": "2ae822f987dd2075304884e34f86f940def4daa0",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/addressing": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/intl": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0 || ^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\AddressingBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Addressing and zone management for Symfony applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "address",
-                "addressing",
-                "ecommerce",
-                "shop",
-                "zones"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusAddressingBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
-            "name": "sylius/attribute",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Attribute.git",
-                "reference": "6d1b3bce51c45c56e71797bf0e18277287ad583d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Attribute/zipball/6d1b3bce51c45c56e71797bf0e18277287ad583d",
-                "reference": "6d1b3bce51c45c56e71797bf0e18277287ad583d",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/collections": "^1.6",
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Attribute\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Component for handling object attributes in PHP projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "attribute",
-                "ecommerce",
-                "feature",
-                "shop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Attribute/tree/v1.10.2"
-            },
-            "time": "2021-05-27T10:14:24+00:00"
-        },
-        {
-            "name": "sylius/attribute-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusAttributeBundle.git",
-                "reference": "31be5eb1d6c1b79adb81eed6b59dff7ed88af045"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAttributeBundle/zipball/31be5eb1d6c1b79adb81eed6b59dff7ed88af045",
-                "reference": "31be5eb1d6c1b79adb81eed6b59dff7ed88af045",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "ramsey/uuid": "^3.9",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/attribute": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\AttributeBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Managing object attributes for Symfony applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "assortment",
-                "ecommerce",
-                "product",
-                "products",
-                "shop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusAttributeBundle/tree/v1.10.2"
-            },
-            "time": "2021-07-20T14:22:22+00:00"
-        },
-        {
-            "name": "sylius/channel",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Channel.git",
-                "reference": "1a4042b23e9a0249cdf6b243c727b0a749bbc019"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Channel/zipball/1a4042b23e9a0249cdf6b243c727b0a749bbc019",
-                "reference": "1a4042b23e9a0249cdf6b243c727b0a749bbc019",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/http-foundation": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Channel\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "E-Commerce PHP component for managing different sales channels.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "channel",
-                "ecommerce",
-                "multichannel",
-                "multistore",
-                "stores",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Channel/tree/v1.10.2"
-            },
-            "time": "2021-05-01T11:55:21+00:00"
-        },
-        {
-            "name": "sylius/channel-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusChannelBundle.git",
-                "reference": "534caaa26f5b03b88b5619e602c33a26732e7756"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusChannelBundle/zipball/534caaa26f5b03b88b5619e602c33a26732e7756",
-                "reference": "534caaa26f5b03b88b5619e602c33a26732e7756",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/channel": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\ChannelBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Currencies and channel formatting engine bundle for Symfony.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "cash",
-                "channel",
-                "currencies",
-                "currency"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusChannelBundle/tree/v1.10.2"
-            },
-            "time": "2021-06-10T10:45:21+00:00"
-        },
-        {
-            "name": "sylius/core",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Core.git",
-                "reference": "27406279e0e63b279bf71481d9a5a5c8a3b10f8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Core/zipball/27406279e0e63b279bf71481d9a5a5c8a3b10f8f",
-                "reference": "27406279e0e63b279bf71481d9a5a5c8a3b10f8f",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/gaufrette": "^0.8",
-                "laminas/laminas-stdlib": "^3.2",
-                "payum/payum": "^1.6",
-                "php": "^7.4 || ^8.0",
-                "php-http/guzzle6-adapter": "^2.0",
-                "sylius/addressing": "^1.6",
-                "sylius/attribute": "^1.6",
-                "sylius/channel": "^1.6",
-                "sylius/currency": "^1.6",
-                "sylius/customer": "^1.6",
-                "sylius/inventory": "^1.6",
-                "sylius/locale": "^1.6",
-                "sylius/order": "^1.6",
-                "sylius/payment": "^1.6",
-                "sylius/product": "^1.6",
-                "sylius/promotion": "^1.6",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7",
-                "sylius/review": "^1.6",
-                "sylius/shipping": "^1.6",
-                "sylius/taxation": "^1.6",
-                "sylius/taxonomy": "^1.6",
-                "sylius/user": "^1.6",
-                "symfony/http-foundation": "^4.4 || ^5.2",
-                "symfony/mime": "^4.4 || ^5.2",
-                "symfony/string": "^5.2",
-                "webmozart/assert": "^1.8"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0",
-                "symfony/property-access": "^4.4 || ^5.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Core\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Sylius e-commerce core. It integrates all components.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "core",
-                "ecommerce",
-                "shop",
-                "store",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Core/tree/v1.10.2"
-            },
-            "time": "2021-07-26T13:02:45+00:00"
-        },
-        {
-            "name": "sylius/core-bundle",
-            "version": "v1.10.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "a54d39062f7acf2143fb527dee1d254f33925b17"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/a54d39062f7acf2143fb527dee1d254f33925b17",
-                "reference": "a54d39062f7acf2143fb527dee1d254f33925b17",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-migrations-bundle": "^3.0",
-                "egulias/email-validator": "^3.0",
-                "fakerphp/faker": "^1.10",
-                "jms/serializer-bundle": "^3.5",
-                "knplabs/gaufrette": "^0.8",
-                "knplabs/knp-gaufrette-bundle": "^0.7",
-                "liip/imagine-bundle": "^2.3",
-                "php": "^7.4 || ^8.0",
-                "sonata-project/block-bundle": "^4.2",
-                "swiftmailer/swiftmailer": "^6.2",
-                "sylius-labs/association-hydrator": "^1.1",
-                "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3",
-                "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-                "sylius/addressing-bundle": "^1.6",
-                "sylius/attribute-bundle": "^1.6",
-                "sylius/channel-bundle": "^1.6",
-                "sylius/core": "^1.6",
-                "sylius/currency-bundle": "^1.6",
-                "sylius/customer-bundle": "^1.6",
-                "sylius/fixtures-bundle": "^1.6.1",
-                "sylius/grid-bundle": "^1.8",
-                "sylius/inventory-bundle": "^1.6",
-                "sylius/locale-bundle": "^1.6",
-                "sylius/money-bundle": "^1.6",
-                "sylius/order-bundle": "^1.6",
-                "sylius/payment-bundle": "^1.6",
-                "sylius/payum-bundle": "^1.6",
-                "sylius/product-bundle": "^1.6",
-                "sylius/promotion-bundle": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/review-bundle": "^1.6",
-                "sylius/shipping-bundle": "^1.6",
-                "sylius/taxation-bundle": "^1.6",
-                "sylius/taxonomy-bundle": "^1.6",
-                "sylius/theme-bundle": "^2.1.1",
-                "sylius/ui-bundle": "^1.6",
-                "sylius/user-bundle": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/intl": "^4.4 || ^5.2",
-                "symfony/messenger": "^4.4 || ^5.2",
-                "symfony/swiftmailer-bundle": "^3.4",
-                "symfony/templating": "^4.4 || ^5.2",
-                "winzou/state-machine-bundle": "^0.5"
-            },
-            "conflict": {
-                "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^1.12 || ^2.0",
-                "hwi/oauth-bundle": "^1.1",
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/dependency-injection": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\CoreBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Sylius core bundle. It integrates all other bundles into full stack Symfony ecommerce solution.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "shop",
-                "store",
-                "sylius",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusCoreBundle/tree/v1.10.1"
-            },
-            "time": "2021-07-30T12:06:24+00:00"
-        },
-        {
-            "name": "sylius/currency",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Currency.git",
-                "reference": "2085905ccf8d40e1c92e25ea5d8863294cb95100"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Currency/zipball/2085905ccf8d40e1c92e25ea5d8863294cb95100",
-                "reference": "2085905ccf8d40e1c92e25ea5d8863294cb95100",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7",
-                "symfony/intl": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Currency\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Currency handling for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "cash",
-                "currencies",
-                "currency",
-                "money"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Currency/tree/v1.10.2"
-            },
-            "time": "2021-05-27T10:14:24+00:00"
-        },
-        {
-            "name": "sylius/currency-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusCurrencyBundle.git",
-                "reference": "0add7a97f08581bb448ff5a906e848faa7bb3ccf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCurrencyBundle/zipball/0add7a97f08581bb448ff5a906e848faa7bb3ccf",
-                "reference": "0add7a97f08581bb448ff5a906e848faa7bb3ccf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/currency": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/intl": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\CurrencyBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Currencies processing for Symfony.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "cash",
-                "currencies",
-                "currency",
-                "money"
-            ],
-            "support": {
-                "issues": "https://github.com/Sylius/SyliusCurrencyBundle/issues",
-                "source": "https://github.com/Sylius/SyliusCurrencyBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
-            "name": "sylius/customer",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Customer.git",
-                "reference": "fedc0f8960fb08e44188adaadb591ecbe8feb23b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Customer/zipball/fedc0f8960fb08e44188adaadb591ecbe8feb23b",
-                "reference": "fedc0f8960fb08e44188adaadb591ecbe8feb23b",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/collections": "^1.6",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Customer\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Michał Marcinkowski",
-                    "email": "michal.marcinkowski@lakion.com"
-                },
-                {
-                    "name": "Łukasz Chruściel",
-                    "email": "lukasz.chrusciel@lakion.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Customer handling for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "customer",
-                "groups"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Customer/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/customer-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusCustomerBundle.git",
-                "reference": "9aaf8c853bc933112715693eb84005b739fb75a6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCustomerBundle/zipball/9aaf8c853bc933112715693eb84005b739fb75a6",
-                "reference": "9aaf8c853bc933112715693eb84005b739fb75a6",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.7",
-                "egulias/email-validator": "^3.0",
-                "php": "^7.4 || ^8.0",
-                "sylius/customer": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "webmozart/assert": "^1.8"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\CustomerBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Michał Marcinkowski",
-                    "email": "michal.marcinkowski@lakion.com"
-                },
-                {
-                    "name": "Łukasz Chruściel",
-                    "email": "lukasz.chrusciel@lakion.com"
-                },
-                {
-                    "name": "Bartosz Siejka",
-                    "homepage": "http://bsiejka.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Customers management for Symfony projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "customer",
-                "groups"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusCustomerBundle/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
             "name": "sylius/fixtures-bundle",
             "version": "v1.7.0",
             "source": {
@@ -8902,292 +9052,6 @@
             "time": "2021-08-18T10:52:16+00:00"
         },
         {
-            "name": "sylius/inventory",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Inventory.git",
-                "reference": "c0a4e4cd22240a638ff06b37f7f3cb9cce8f40b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Inventory/zipball/c0a4e4cd22240a638ff06b37f7f3cb9cce8f40b0",
-                "reference": "c0a4e4cd22240a638ff06b37f7f3cb9cce8f40b0",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7",
-                "webmozart/assert": "^1.8"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Inventory\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible inventory management for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "inventory",
-                "shop",
-                "stock",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Inventory/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/inventory-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusInventoryBundle.git",
-                "reference": "1269c6db90cf19a19383ce0df0a7b636779277db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusInventoryBundle/zipball/1269c6db90cf19a19383ce0df0a7b636779277db",
-                "reference": "1269c6db90cf19a19383ce0df0a7b636779277db",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/inventory": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\InventoryBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible inventory management for Symfony applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "inventory",
-                "shop",
-                "stock",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusInventoryBundle/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/locale",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Locale.git",
-                "reference": "7cfc3b8bb81be7738c9086a409d27b0c89446731"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Locale/zipball/7cfc3b8bb81be7738c9086a409d27b0c89446731",
-                "reference": "7cfc3b8bb81be7738c9086a409d27b0c89446731",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7",
-                "symfony/intl": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Locale\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Locale handling for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "i18n",
-                "internationalization",
-                "language",
-                "locale",
-                "localization"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Locale/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/locale-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusLocaleBundle.git",
-                "reference": "942f9023d9fc9b2113be33eeba966a9fd635fcae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusLocaleBundle/zipball/942f9023d9fc9b2113be33eeba966a9fd635fcae",
-                "reference": "942f9023d9fc9b2113be33eeba966a9fd635fcae",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/locale": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "ocramius/proxy-manager": "^2.2",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\LocaleBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Locales management for Symfony projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "i18n",
-                "internationalization",
-                "language",
-                "locale",
-                "localization"
-            ],
-            "support": {
-                "issues": "https://github.com/Sylius/SyliusLocaleBundle/issues",
-                "source": "https://github.com/Sylius/SyliusLocaleBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
             "name": "sylius/mailer-bundle",
             "version": "v1.6.0",
             "source": {
@@ -9269,740 +9133,6 @@
                 "source": "https://github.com/Sylius/SyliusMailerBundle/tree/v1.6.0"
             },
             "time": "2020-11-10T09:53:22+00:00"
-        },
-        {
-            "name": "sylius/money-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusMoneyBundle.git",
-                "reference": "b8c0217a8958d964389cd4369dc867258b129800"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/b8c0217a8958d964389cd4369dc867258b129800",
-                "reference": "b8c0217a8958d964389cd4369dc867258b129800",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/intl": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2",
-                "webmozart/assert": "^1.8"
-            },
-            "conflict": {
-                "twig/twig": "^1.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "sylius/currency-bundle": "^1.6",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\MoneyBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Currencies and money formatting engine bundle for Symfony.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "cash",
-                "currencies",
-                "currency",
-                "money"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusMoneyBundle/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/order",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Order.git",
-                "reference": "6bc56520186d61d45c8e2acc4b15a8047887ab63"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Order/zipball/6bc56520186d61d45c8e2acc4b15a8047887ab63",
-                "reference": "6bc56520186d61d45c8e2acc4b15a8047887ab63",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7",
-                "webmozart/assert": "^1.8"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Order\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Orders management library for PHP.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "order",
-                "sales",
-                "shop",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Order/tree/v1.10.2"
-            },
-            "time": "2021-05-01T11:55:21+00:00"
-        },
-        {
-            "name": "sylius/order-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusOrderBundle.git",
-                "reference": "71de63c2d21a20b3bd52d33a0f520df74fe2115e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusOrderBundle/zipball/71de63c2d21a20b3bd52d33a0f520df74fe2115e",
-                "reference": "71de63c2d21a20b3bd52d33a0f520df74fe2115e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-                "sylius/money-bundle": "^1.6",
-                "sylius/order": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0 || ^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\OrderBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Sales order management for Symfony applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "order",
-                "orders",
-                "sales",
-                "shop",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusOrderBundle/tree/v1.10.2"
-            },
-            "time": "2021-06-10T10:45:21+00:00"
-        },
-        {
-            "name": "sylius/payment",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Payment.git",
-                "reference": "eced274f115bfdadbcfc2c385ed3c1d6a615f8a2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Payment/zipball/eced274f115bfdadbcfc2c385ed3c1d6a615f8a2",
-                "reference": "eced274f115bfdadbcfc2c385ed3c1d6a615f8a2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Payment\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible payments system for PHP e-commerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "payment",
-                "payments",
-                "shop",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Payment/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/payment-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusPaymentBundle.git",
-                "reference": "c57bc15fa562fcd28a05432c4eee94797f9916b1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPaymentBundle/zipball/c57bc15fa562fcd28a05432c4eee94797f9916b1",
-                "reference": "c57bc15fa562fcd28a05432c4eee94797f9916b1",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/payment": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "sylius/locale-bundle": "^1.6",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\PaymentBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible payments system for Symfony e-commerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "payment",
-                "payments",
-                "shop",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusPaymentBundle/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/payum-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusPayumBundle.git",
-                "reference": "1c88350e7d6019d0e494228d15279797cd50a789"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPayumBundle/zipball/1c88350e7d6019d0e494228d15279797cd50a789",
-                "reference": "1c88350e7d6019d0e494228d15279797cd50a789",
-                "shasum": ""
-            },
-            "require": {
-                "payum/payum": "^1.6",
-                "payum/payum-bundle": "^2.4",
-                "php": "^7.4 || ^8.0",
-                "php-http/guzzle6-adapter": "^2.0",
-                "sylius/core": "^1.6",
-                "sylius/currency": "^1.6",
-                "sylius/order-bundle": "^1.6",
-                "sylius/payment-bundle": "^1.6",
-                "sylius/resource-bundle": "^1.7"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0",
-                "symfony/dependency-injection": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\PayumBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Kotlyar Maksim",
-                    "email": "kotlyar.maksim@gmail.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Payum integration for Symfony e-commerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "payment",
-                "payments",
-                "payum"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusPayumBundle/tree/v1.10.2"
-            },
-            "time": "2021-05-27T10:14:24+00:00"
-        },
-        {
-            "name": "sylius/product",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Product.git",
-                "reference": "ec3244aa278a6356fb65921127dec1a9f543e89b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Product/zipball/ec3244aa278a6356fb65921127dec1a9f543e89b",
-                "reference": "ec3244aa278a6356fb65921127dec1a9f543e89b",
-                "shasum": ""
-            },
-            "require": {
-                "behat/transliterator": "^1.1",
-                "php": "^7.4 || ^8.0",
-                "sylius/attribute": "^1.6",
-                "sylius/resource": "^1.7",
-                "symfony/polyfill-iconv": "^1.6",
-                "webmozart/assert": "^1.8"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "suggest": {
-                "ext-iconv": "For better performance than using Symfony Polyfill Component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Product\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Product catalog system with support for product options and variants.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "assortment",
-                "ecommerce",
-                "options",
-                "product",
-                "products",
-                "shop",
-                "variants"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Product/tree/v1.10.2"
-            },
-            "time": "2021-04-23T13:34:00+00:00"
-        },
-        {
-            "name": "sylius/product-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusProductBundle.git",
-                "reference": "18d2bf71a725f29abb15a3ea7651da548c2ee383"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/18d2bf71a725f29abb15a3ea7651da548c2ee383",
-                "reference": "18d2bf71a725f29abb15a3ea7651da548c2ee383",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/attribute-bundle": "^1.6",
-                "sylius/locale-bundle": "^1.6",
-                "sylius/product": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "mockery/mockery": "^1.4",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\ProductBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Product catalog for your Symfony applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "assortment",
-                "ecommerce",
-                "product",
-                "products",
-                "shop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusProductBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
-            "name": "sylius/promotion",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Promotion.git",
-                "reference": "e2837a68afa2d956790756c066e9284f90d7e41a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Promotion/zipball/e2837a68afa2d956790756c066e9284f90d7e41a",
-                "reference": "e2837a68afa2d956790756c066e9284f90d7e41a",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.5",
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Promotion\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible promotion management for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "promotion",
-                "shop",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Promotion/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/promotion-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusPromotionBundle.git",
-                "reference": "2c099f57f5c16563f32f32e142828c47735d61d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPromotionBundle/zipball/2c099f57f5c16563f32f32e142828c47735d61d1",
-                "reference": "2c099f57f5c16563f32f32e142828c47735d61d1",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/money-bundle": "^1.6",
-                "sylius/promotion": "^1.6",
-                "sylius/registry": "^1.5",
-                "sylius/resource-bundle": "^1.7",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\PromotionBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Manage ecommerce promotions system in your Symfony application.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "coupons",
-                "discounts",
-                "ecommerce",
-                "promotions",
-                "shop",
-                "sylius"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusPromotionBundle/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
         },
         {
             "name": "sylius/registry",
@@ -10177,576 +9307,221 @@
             "time": "2021-04-08T10:52:00+00:00"
         },
         {
-            "name": "sylius/review",
-            "version": "v1.10.2",
+            "name": "sylius/sylius",
+            "version": "v1.10.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Sylius/Review.git",
-                "reference": "7de72670bd89505a400e513fd474019f2666268c"
+                "url": "https://github.com/Sylius/Sylius.git",
+                "reference": "ff8e8c3b5cc75971d697ca1c6836bcaf13133579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Review/zipball/7de72670bd89505a400e513fd474019f2666268c",
-                "reference": "7de72670bd89505a400e513fd474019f2666268c",
+                "url": "https://api.github.com/repos/Sylius/Sylius/zipball/ff8e8c3b5cc75971d697ca1c6836bcaf13133579",
+                "reference": "ff8e8c3b5cc75971d697ca1c6836bcaf13133579",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "^1.6",
-                "php": "^7.4 || ^8.0",
-                "sylius/resource": "^1.7"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Review\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Mateusz Zalewski",
-                    "email": "mateusz.zalewski@lakion.com"
-                },
-                {
-                    "name": "Grzegorz Sadowski",
-                    "email": "grzegorz.sadowski@lakion.com"
-                },
-                {
-                    "name": "Daniel Richter",
-                    "email": "nexyz9@gmail.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Review system, for commenting and rating shop components.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "Rating",
-                "ecommerce",
-                "review",
-                "shop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Review/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:19+00:00"
-        },
-        {
-            "name": "sylius/review-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusReviewBundle.git",
-                "reference": "aa24ef1c46e58891bc620c059dc0cf6f37821a2d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusReviewBundle/zipball/aa24ef1c46e58891bc620c059dc0cf6f37821a2d",
-                "reference": "aa24ef1c46e58891bc620c059dc0cf6f37821a2d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/mailer-bundle": "^1.4",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/review": "^1.6",
-                "sylius/user-bundle": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/security-bundle": "^4.4 || ^5.2",
-                "symfony/swiftmailer-bundle": "^3.1",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\ReviewBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Mateusz Zalewski",
-                    "email": "mateusz.zalewski@lakion.com"
-                },
-                {
-                    "name": "Grzegorz Sadowski",
-                    "email": "grzegorz.sadowski@lakion.com"
-                },
-                {
-                    "name": "Daniel Richter",
-                    "email": "nexyz9@gmail.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Review system for Symfony ecommerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "review",
-                "shop",
-                "sylius",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusReviewBundle/tree/v1.10.2"
-            },
-            "time": "2021-05-01T11:55:21+00:00"
-        },
-        {
-            "name": "sylius/shipping",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Shipping.git",
-                "reference": "794a45089868f0bdb9d28bb8ca33e3ebe5e7d636"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Shipping/zipball/794a45089868f0bdb9d28bb8ca33e3ebe5e7d636",
-                "reference": "794a45089868f0bdb9d28bb8ca33e3ebe5e7d636",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7",
-                "symfony/options-resolver": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Shipping\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible shipping component for PHP e-commerce projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "delivery",
-                "ecommerce",
-                "shipments",
-                "shipping",
-                "shop",
-                "sylius",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Shipping/tree/v1.10.2"
-            },
-            "time": "2021-05-27T10:14:24+00:00"
-        },
-        {
-            "name": "sylius/shipping-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "986c3cd0f34206f74f43a188fc70c764971fd210"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/986c3cd0f34206f74f43a188fc70c764971fd210",
-                "reference": "986c3cd0f34206f74f43a188fc70c764971fd210",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/money-bundle": "^1.6",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/shipping": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/validator": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\ShippingBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible shipping system for Symfony ecommerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "delivery",
-                "ecommerce",
-                "shipments",
-                "shipping",
-                "shop",
-                "sylius",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusShippingBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
-            "name": "sylius/taxation",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Taxation.git",
-                "reference": "5e4ab316bcb8096bcf34a932e00fa34c0f8146c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Taxation/zipball/5e4ab316bcb8096bcf34a932e00fa34c0f8146c6",
-                "reference": "5e4ab316bcb8096bcf34a932e00fa34c0f8146c6",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "sylius/registry": "^1.5",
-                "sylius/resource": "^1.7"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Taxation\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible taxation system for PHP ecommerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "shop",
-                "sylius",
-                "tax",
-                "taxation",
-                "taxes",
-                "vat"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Taxation/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/taxation-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "fc81b967cc2b037245a9220dd1c1cb1ca9421d6b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/fc81b967cc2b037245a9220dd1c1cb1ca9421d6b",
-                "reference": "fc81b967cc2b037245a9220dd1c1cb1ca9421d6b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/registry": "^1.5",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/taxation": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^4.4 || ^5.2",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\TaxationBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Flexible taxation system for Symfony ecommerce applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "shop",
-                "tax",
-                "taxation",
-                "taxes",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusTaxationBundle/tree/v1.10.2"
-            },
-            "time": "2021-08-30T08:34:38+00:00"
-        },
-        {
-            "name": "sylius/taxonomy",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Taxonomy.git",
-                "reference": "a181487ccf20086e1fc33d2726d3f4e5867a9270"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Taxonomy/zipball/a181487ccf20086e1fc33d2726d3f4e5867a9270",
-                "reference": "a181487ccf20086e1fc33d2726d3f4e5867a9270",
-                "shasum": ""
-            },
-            "require": {
+                "api-platform/core": "^2.6",
+                "babdev/pagerfanta-bundle": "^2.5",
                 "behat/transliterator": "^1.3",
+                "doctrine/collections": "^1.6",
+                "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+                "doctrine/doctrine-migrations-bundle": "^3.0.1",
+                "doctrine/inflector": "^1.4 || ^2.0",
+                "doctrine/migrations": "^3.0",
+                "doctrine/orm": "^2.7",
+                "egulias/email-validator": "^3.1",
+                "ext-exif": "*",
+                "ext-fileinfo": "*",
+                "ext-gd": "*",
+                "fakerphp/faker": "^1.9",
+                "friendsofphp/proxy-manager-lts": "^1.0",
+                "friendsofsymfony/rest-bundle": "^3.0",
+                "gedmo/doctrine-extensions": "^2.4.12 || ^3.0",
+                "jms/serializer-bundle": "^3.5",
+                "knplabs/gaufrette": "^0.8",
+                "knplabs/knp-gaufrette-bundle": "^0.7",
+                "knplabs/knp-menu": "^3.1",
+                "knplabs/knp-menu-bundle": "^3.0",
+                "laminas/laminas-stdlib": "^3.3.1",
+                "lexik/jwt-authentication-bundle": "^2.6",
+                "liip/imagine-bundle": "^2.3",
+                "payum/payum": "^1.6",
+                "payum/payum-bundle": "^2.4",
                 "php": "^7.4 || ^8.0",
+                "php-http/guzzle6-adapter": "^2.0",
+                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+                "ramsey/uuid": "^3.9",
+                "sonata-project/block-bundle": "^4.2",
+                "stof/doctrine-extensions-bundle": "^1.4",
+                "swiftmailer/swiftmailer": "^6.2",
+                "sylius-labs/association-hydrator": "^1.1.3",
+                "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4",
+                "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
+                "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
+                "sylius-labs/polyfill-symfony-security": "^1.0",
+                "sylius/fixtures-bundle": "^1.6.1",
+                "sylius/grid": "^1.8",
+                "sylius/grid-bundle": "^1.8",
+                "sylius/mailer": "^1.5",
+                "sylius/mailer-bundle": "^1.5",
+                "sylius/registry": "^1.5",
                 "sylius/resource": "^1.7",
-                "webmozart/assert": "^1.8"
+                "sylius/resource-bundle": "^1.7",
+                "sylius/theme-bundle": "^2.1.1",
+                "symfony/asset": "^4.4 || ^5.2",
+                "symfony/config": "^4.4 || ^5.2",
+                "symfony/console": "^4.4 || ^5.2",
+                "symfony/dependency-injection": "^4.4 || ^5.2",
+                "symfony/doctrine-bridge": "^4.4 || ^5.2",
+                "symfony/event-dispatcher": "^4.4 || ^5.2",
+                "symfony/expression-language": "^4.4 || ^5.2",
+                "symfony/filesystem": "^4.4 || ^5.2",
+                "symfony/finder": "^4.4 || ^5.2",
+                "symfony/form": "^4.4 || ^5.2",
+                "symfony/framework-bundle": "^4.4 || ^5.2",
+                "symfony/http-foundation": "^4.4 || ^5.2",
+                "symfony/http-kernel": "^4.4 || ^5.2",
+                "symfony/intl": "^4.4 || ^5.2",
+                "symfony/messenger": "^4.4 || ^5.2",
+                "symfony/monolog-bundle": "^3.5",
+                "symfony/options-resolver": "^4.4 || ^5.2",
+                "symfony/polyfill-iconv": "^1.17",
+                "symfony/polyfill-intl-icu": "^1.22",
+                "symfony/polyfill-mbstring": "^1.17",
+                "symfony/polyfill-php80": "^1.17",
+                "symfony/process": "^4.4 || ^5.2",
+                "symfony/property-access": "^4.4 || ^5.2",
+                "symfony/property-info": "^4.4 || ^5.2",
+                "symfony/proxy-manager-bridge": "^4.4 || ^5.2",
+                "symfony/routing": "^4.4 || ^5.2",
+                "symfony/security-bundle": "^4.4 || ^5.2",
+                "symfony/security-core": "^4.4 || ^5.2",
+                "symfony/security-csrf": "^4.4 || ^5.2",
+                "symfony/security-guard": "^4.4 || ^5.2",
+                "symfony/security-http": "^4.4 || ^5.2",
+                "symfony/serializer": "^4.4 || ^5.2",
+                "symfony/string": "^5.2",
+                "symfony/swiftmailer-bundle": "^3.4",
+                "symfony/templating": "^4.4 || ^5.2",
+                "symfony/thanks": "^1.2",
+                "symfony/translation": "^4.4 || ^5.2",
+                "symfony/twig-bundle": "^4.4 || ^5.2",
+                "symfony/validator": "^4.4 || ^5.2",
+                "symfony/yaml": "^4.4 || ^5.2",
+                "twig/intl-extra": "^2.12",
+                "twig/twig": "^2.12",
+                "webmozart/assert": "^1.9",
+                "willdurand/hateoas": "^3.0",
+                "willdurand/hateoas-bundle": "^2.0",
+                "winzou/state-machine-bundle": "^0.5"
+            },
+            "conflict": {
+                "doctrine/doctrine-bundle": "2.3.0",
+                "jms/serializer-bundle": "3.9.0",
+                "laminas/laminas-code": "^4.0",
+                "symfony/doctrine-bridge": "4.4.16",
+                "symfony/property-info": "4.4.22 || 5.2.7",
+                "symfony/serializer": "4.4.19 || 5.2.2"
+            },
+            "replace": {
+                "sylius/addressing": "self.version",
+                "sylius/addressing-bundle": "self.version",
+                "sylius/admin-bundle": "self.version",
+                "sylius/api-bundle": "self.version",
+                "sylius/attribute": "self.version",
+                "sylius/attribute-bundle": "self.version",
+                "sylius/channel": "self.version",
+                "sylius/channel-bundle": "self.version",
+                "sylius/core": "self.version",
+                "sylius/core-bundle": "self.version",
+                "sylius/currency": "self.version",
+                "sylius/currency-bundle": "self.version",
+                "sylius/customer": "self.version",
+                "sylius/customer-bundle": "self.version",
+                "sylius/inventory": "self.version",
+                "sylius/inventory-bundle": "self.version",
+                "sylius/locale": "self.version",
+                "sylius/locale-bundle": "self.version",
+                "sylius/money-bundle": "self.version",
+                "sylius/order": "self.version",
+                "sylius/order-bundle": "self.version",
+                "sylius/payment": "self.version",
+                "sylius/payment-bundle": "self.version",
+                "sylius/payum-bundle": "self.version",
+                "sylius/product": "self.version",
+                "sylius/product-bundle": "self.version",
+                "sylius/promotion": "self.version",
+                "sylius/promotion-bundle": "self.version",
+                "sylius/review": "self.version",
+                "sylius/review-bundle": "self.version",
+                "sylius/shipping": "self.version",
+                "sylius/shipping-bundle": "self.version",
+                "sylius/shop-bundle": "self.version",
+                "sylius/taxation": "self.version",
+                "sylius/taxation-bundle": "self.version",
+                "sylius/taxonomy": "self.version",
+                "sylius/taxonomy-bundle": "self.version",
+                "sylius/ui-bundle": "self.version",
+                "sylius/user": "self.version",
+                "sylius/user-bundle": "self.version"
             },
             "require-dev": {
-                "phpspec/phpspec": "^7.0"
+                "behat/behat": "^3.6.1",
+                "behat/mink-selenium2-driver": "^1.4",
+                "dmore/behat-chrome-extension": "^1.3",
+                "dmore/chrome-mink-driver": "^2.7",
+                "doctrine/data-fixtures": "^1.4",
+                "friends-of-behat/mink": "^1.8",
+                "friends-of-behat/mink-browserkit-driver": "^1.4",
+                "friends-of-behat/mink-debug-extension": "^2.0",
+                "friends-of-behat/mink-extension": "^2.4",
+                "friends-of-behat/page-object-extension": "^0.3",
+                "friends-of-behat/symfony-extension": "^2.1",
+                "friends-of-behat/variadic-extension": "^1.3",
+                "hwi/oauth-bundle": "^1.1",
+                "lchrusciel/api-test-case": "^5.0",
+                "matthiasnoback/symfony-config-test": "^4.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "mikey179/vfsstream": "^1.6",
+                "mockery/mockery": "^1.4",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/phpstan": "0.12.82",
+                "phpstan/phpstan-doctrine": "0.12.33",
+                "phpunit/phpunit": "^8.5",
+                "psalm/plugin-mockery": "0.7.0",
+                "psr/event-dispatcher": "^1.0",
+                "stripe/stripe-php": "^6.43",
+                "sylius-labs/coding-standard": "^4.0",
+                "symfony/browser-kit": "^4.4 || ^5.2",
+                "symfony/debug-bundle": "^4.4 || ^5.2",
+                "symfony/dotenv": "^4.4 || ^5.2",
+                "symfony/flex": "^1.7",
+                "symfony/web-profiler-bundle": "^4.4 || ^5.2",
+                "vimeo/psalm": "4.7.2"
+            },
+            "suggest": {
+                "ext-iconv": "For better performance than using Symfony Polyfill Component",
+                "ext-intl": "For better performance than using Symfony Polyfill Component",
+                "ext-mbstring": "For better performance than using Symfony Polyfill Component"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9-dev"
+                    "dev-master": "1.10-dev"
+                },
+                "symfony": {
+                    "allow-contrib": false
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Sylius\\Component\\Taxonomy\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Taxonomies - categorization of domain models in PHP projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "categorization",
-                "classification",
-                "ecommerce",
-                "taxon",
-                "taxonomy"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/Taxonomy/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/taxonomy-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusTaxonomyBundle.git",
-                "reference": "a917c17c89c2eff3063f372d14322a2aaf2e36a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomyBundle/zipball/a917c17c89c2eff3063f372d14322a2aaf2e36a4",
-                "reference": "a917c17c89c2eff3063f372d14322a2aaf2e36a4",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "stof/doctrine-extensions-bundle": "^1.4",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/taxonomy": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/dependency-injection": "^4.4 || ^5.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\TaxonomyBundle\\": ""
+                    "Sylius\\Behat\\": "src/Sylius/Behat/",
+                    "Sylius\\Bundle\\": "src/Sylius/Bundle/",
+                    "Sylius\\Component\\": "src/Sylius/Component/"
                 },
                 "exclude-from-classmap": [
-                    "/Tests/"
+                    "src/Sylius/*/*/Tests/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -10767,21 +9542,13 @@
                     "homepage": "https://github.com/Sylius/Sylius/contributors"
                 }
             ],
-            "description": "Flexible categorization system for Symfony.",
+            "description": "E-Commerce platform for PHP, based on Symfony framework.",
             "homepage": "https://sylius.com",
-            "keywords": [
-                "categorization",
-                "category",
-                "ecommerce",
-                "shop",
-                "sylius",
-                "taxonomies",
-                "taxonomy"
-            ],
             "support": {
-                "source": "https://github.com/Sylius/SyliusTaxonomyBundle/tree/v1.10.2"
+                "issues": "https://github.com/Sylius/Sylius/issues",
+                "source": "https://github.com/Sylius/Sylius/tree/v1.10.1"
             },
-            "time": "2021-06-18T08:57:52+00:00"
+            "time": "2021-07-30T12:07:08+00:00"
         },
         {
             "name": "sylius/theme-bundle",
@@ -10867,269 +9634,6 @@
                 "source": "https://github.com/Sylius/SyliusThemeBundle/tree/v2.2.0"
             },
             "time": "2021-03-19T13:32:06+00:00"
-        },
-        {
-            "name": "sylius/ui-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusUiBundle.git",
-                "reference": "f84cb1d127ca1bb5765bf152e5e0ef7516848fea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusUiBundle/zipball/f84cb1d127ca1bb5765bf152e5e0ef7516848fea",
-                "reference": "f84cb1d127ca1bb5765bf152e5e0ef7516848fea",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/collections": "^1.6",
-                "knplabs/knp-menu": "^3.1",
-                "knplabs/knp-menu-bundle": "^3.0",
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^7.4 || ^8.0",
-                "sonata-project/block-bundle": "^3.20|^4.0",
-                "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-                "sylius/grid-bundle": "^1.8",
-                "symfony/config": "^4.4 || ^5.2",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "symfony/security-bundle": "^4.4 || ^5.2",
-                "symfony/security-core": "^4.4 || ^5.2",
-                "symfony/templating": "^4.4 || ^5.2"
-            },
-            "conflict": {
-                "twig/twig": "^1.0"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "twig/twig": "^2.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\UiBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Generic UI bundle for Sylius eCommerce components.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "ecommerce",
-                "shop",
-                "store",
-                "sylius",
-                "ui",
-                "user interface",
-                "webshop"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusUiBundle/tree/v1.10.2"
-            },
-            "time": "2021-05-01T11:55:21+00:00"
-        },
-        {
-            "name": "sylius/user",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/User.git",
-                "reference": "51c25c893660ee2f40fdfea9fb8b041f43ead7b1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/User/zipball/51c25c893660ee2f40fdfea9fb8b041f43ead7b1",
-                "reference": "51c25c893660ee2f40fdfea9fb8b041f43ead7b1",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/collections": "^1.6",
-                "php": "^7.4 || ^8.0",
-                "sylius-labs/polyfill-symfony-security": "^1.0",
-                "sylius/resource": "^1.7",
-                "symfony/polyfill-mbstring": "^1.17",
-                "symfony/security-core": "^4.4 || ^5.2"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^7.0"
-            },
-            "suggest": {
-                "ext-mbstring": "For better performance than using Symfony Polyfill Component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\User\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Michał Marcinkowski",
-                    "email": "michal.marcinkowski@lakion.com"
-                },
-                {
-                    "name": "Łukasz Chruściel",
-                    "email": "lukasz.chrusciel@lakion.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "User handling for PHP applications.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "groups",
-                "login",
-                "registration",
-                "user"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/User/tree/v1.10.2"
-            },
-            "time": "2021-04-22T12:52:20+00:00"
-        },
-        {
-            "name": "sylius/user-bundle",
-            "version": "v1.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusUserBundle.git",
-                "reference": "c3875fb46835bacce47264473b79a9abeb3fb432"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusUserBundle/zipball/c3875fb46835bacce47264473b79a9abeb3fb432",
-                "reference": "c3875fb46835bacce47264473b79a9abeb3fb432",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.7",
-                "egulias/email-validator": "^3.0",
-                "php": "^7.4 || ^8.0",
-                "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-                "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-                "sylius/mailer-bundle": "^1.4",
-                "sylius/resource-bundle": "^1.7",
-                "sylius/user": "^1.6",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
-                "webmozart/assert": "^1.8"
-            },
-            "conflict": {
-                "twig/twig": "^3.0"
-            },
-            "require-dev": {
-                "hwi/oauth-bundle": "^1.1",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-                "php-http/guzzle6-adapter": "^2.0",
-                "phpspec/phpspec": "^7.0",
-                "phpunit/phpunit": "^8.5",
-                "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/security-bundle": "^4.4 || ^5.2",
-                "symfony/swiftmailer-bundle": "^3.1"
-            },
-            "suggest": {
-                "hwi/oauth-bundle": "For OAuth integration"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\UserBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "https://pjedrzejewski.com"
-                },
-                {
-                    "name": "Michał Marcinkowski",
-                    "email": "michal.marcinkowski@lakion.com"
-                },
-                {
-                    "name": "Łukasz Chruściel",
-                    "email": "lukasz.chrusciel@lakion.com"
-                },
-                {
-                    "name": "Bartosz Siejka",
-                    "homepage": "http://bsiejka.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "https://sylius.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Users management for Symfony projects.",
-            "homepage": "https://sylius.com",
-            "keywords": [
-                "groups",
-                "login",
-                "registration",
-                "user"
-            ],
-            "support": {
-                "source": "https://github.com/Sylius/SyliusUserBundle/tree/v1.10.2"
-            },
-            "time": "2021-06-10T10:45:21+00:00"
         },
         {
             "name": "symfony/amqp-messenger",
@@ -12487,16 +10991,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.15.3",
+            "version": "v1.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "f16f10772422ace36dc76d5d5c7a682c8b925c0c"
+                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/f16f10772422ace36dc76d5d5c7a682c8b925c0c",
-                "reference": "f16f10772422ace36dc76d5d5c7a682c8b925c0c",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/9a22ef2a75609a4d3717db784d923a7a6b347bc5",
+                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5",
                 "shasum": ""
             },
             "require": {
@@ -12535,7 +11039,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.15.3"
+                "source": "https://github.com/symfony/flex/tree/v1.15.4"
             },
             "funding": [
                 {
@@ -12551,7 +11055,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-06T12:45:00+00:00"
+            "time": "2021-09-13T14:49:33+00:00"
         },
         {
             "name": "symfony/form",
@@ -14313,6 +12817,74 @@
             "time": "2021-05-27T12:26:48+00:00"
         },
         {
+            "name": "symfony/polyfill-php56",
+            "version": "v1.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php56.git",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.20-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php56/tree/v1.20.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-23T14:02:19+00:00"
+        },
+        {
             "name": "symfony/polyfill-php73",
             "version": "v1.23.0",
             "source": {
@@ -14867,24 +13439,26 @@
         },
         {
             "name": "symfony/proxy-manager-bridge",
-            "version": "v5.3.4",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/proxy-manager-bridge.git",
-                "reference": "76e61f33f6a34a340bf6e02211214f466e8e1dba"
+                "reference": "fba051ee1cb00d1d40672ee2da842ba23c572576"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/76e61f33f6a34a340bf6e02211214f466e8e1dba",
-                "reference": "76e61f33f6a34a340bf6e02211214f466e8e1dba",
+                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/fba051ee1cb00d1d40672ee2da842ba23c572576",
+                "reference": "fba051ee1cb00d1d40672ee2da842ba23c572576",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8",
-                "friendsofphp/proxy-manager-lts": "^1.0.2",
+                "ocramius/proxy-manager": "~2.1",
                 "php": ">=7.2.5",
-                "symfony/dependency-injection": "^5.0",
-                "symfony/polyfill-php80": "^1.16"
+                "symfony/dependency-injection": "^5.0"
+            },
+            "conflict": {
+                "zendframework/zend-eventmanager": "2.6.0"
             },
             "require-dev": {
                 "symfony/config": "^4.4|^5.0"
@@ -14912,10 +13486,10 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Provides integration for ProxyManager with various Symfony components",
+            "description": "Symfony ProxyManager Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v5.3.4"
+                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v5.2.1"
             },
             "funding": [
                 {
@@ -14931,7 +13505,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-21T12:38:00+00:00"
+            "time": "2020-11-12T22:25:33+00:00"
         },
         {
             "name": "symfony/redis-messenger",
@@ -16061,6 +14635,67 @@
             "time": "2021-08-04T21:20:46+00:00"
         },
         {
+            "name": "symfony/thanks",
+            "version": "v1.2.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/thanks.git",
+                "reference": "e9c4709560296acbd4fe9e12b8d57a925aa7eae8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/thanks/zipball/e9c4709560296acbd4fe9e12b8d57a925aa7eae8",
+                "reference": "e9c4709560296acbd4fe9e12b8d57a925aa7eae8",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": ">=5.5.9"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.2-dev"
+                },
+                "class": "Symfony\\Thanks\\Thanks"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Thanks\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                }
+            ],
+            "description": "Encourages sending ⭐ and 💵 to fellow PHP package maintainers (not limited to Symfony components)!",
+            "support": {
+                "issues": "https://github.com/symfony/thanks/issues",
+                "source": "https://github.com/symfony/thanks/tree/v1.2.10"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-14T17:47:37+00:00"
+        },
+        {
             "name": "symfony/translation",
             "version": "v5.3.7",
             "source": {
@@ -17150,16 +15785,16 @@
         },
         {
             "name": "twig/intl-extra",
-            "version": "v3.3.0",
+            "version": "v2.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/intl-extra.git",
-                "reference": "919e8f945c30bd3efeb6a4d79722cda538116658"
+                "reference": "b108161f50d31fcadabf9f11f761ccc58b433319"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/intl-extra/zipball/919e8f945c30bd3efeb6a4d79722cda538116658",
-                "reference": "919e8f945c30bd3efeb6a4d79722cda538116658",
+                "url": "https://api.github.com/repos/twigphp/intl-extra/zipball/b108161f50d31fcadabf9f11f761ccc58b433319",
+                "reference": "b108161f50d31fcadabf9f11f761ccc58b433319",
                 "shasum": ""
             },
             "require": {
@@ -17173,7 +15808,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "2.14-dev"
                 }
             },
             "autoload": {
@@ -17203,7 +15838,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/intl-extra/tree/v3.3.0"
+                "source": "https://github.com/twigphp/intl-extra/tree/v2.14.3"
             },
             "funding": [
                 {
@@ -17215,7 +15850,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-01T14:58:18+00:00"
+            "time": "2021-01-01T14:53:48+00:00"
         },
         {
             "name": "twig/twig",
@@ -19987,19 +18622,20 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "agence-adeliom/easy-admin-user-bundle": 20,
         "agence-adeliom/easy-block-bundle": 20,
         "agence-adeliom/easy-blog-bundle": 20,
         "agence-adeliom/easy-common-bundle": 20,
+        "agence-adeliom/easy-config-bundle": 20,
         "agence-adeliom/easy-editor-bundle": 20,
         "agence-adeliom/easy-faq-bundle": 20,
         "agence-adeliom/easy-fields-bundle": 20,
         "agence-adeliom/easy-media-bundle": 20,
         "agence-adeliom/easy-menu-bundle": 20,
         "agence-adeliom/easy-page-bundle": 20,
+        "agence-adeliom/easy-redirect-bundle": 20,
         "agence-adeliom/easy-seo-bundle": 20,
-        "agence-adeliom/easy-shop-bundle": 20,
-        "agence-adeliom/easy-admin-user-bundle": 20,
-        "agence-adeliom/easy-config-bundle": 20
+        "agence-adeliom/easy-shop-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

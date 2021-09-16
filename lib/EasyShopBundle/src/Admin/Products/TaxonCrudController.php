@@ -4,13 +4,18 @@ namespace Adeliom\EasyShopBundle\Admin\Products;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 abstract class TaxonCrudController extends AbstractCrudController
 {
@@ -38,6 +43,34 @@ abstract class TaxonCrudController extends AbstractCrudController
     }
 
 
+    public function configureActions(Actions $actions): Actions
+    {
+
+        $viewTaxon = Action::new('viewTaxon', 'Voir la page', 'fa fa-eye')->linkToUrl(function (TaxonInterface $taxon) {
+            return $this->get(RouterInterface::class)->generate('easy_shop_product_index', [
+                'slug' => $taxon->getTree()
+            ]);
+        })->setHtmlAttributes(["target" => "_blank"]);
+
+        $viewTaxonButton = Action::new('viewTaxon', 'Voir la page', 'fa fa-eye')->linkToUrl(function (TaxonInterface $taxon) {
+            return $this->get(RouterInterface::class)->generate('easy_shop_product_index', [
+                'slug' => $taxon->getTree()
+            ]);
+        })->setHtmlAttributes(["target" => "_blank"])->setCssClass("btn btn-info");
+        $actions->add(Crud::PAGE_INDEX, $viewTaxon);
+        $actions->add(Crud::PAGE_DETAIL, $viewTaxonButton);
+        $actions->add(Crud::PAGE_EDIT, $viewTaxonButton);
+        return $actions;
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            RouterInterface::class => '?'.RouterInterface::class,
+        ]);
+    }
+
+
     public function configureFields(string $pageName): iterable
     {
         $fieldsConfig = [
@@ -59,7 +92,7 @@ abstract class TaxonCrudController extends AbstractCrudController
         ];
 
         yield TextField::new('code','sylius.ui.code');
-        yield AssociationField::new('parent', 'sylius.form.taxon.parent')->autocomplete()->listSelector()->listDisplayColumns([1, 2])->setCrudController(TaxonCrudController::class);
+        yield AssociationField::new('parent', 'sylius.form.taxon.parent')->autocomplete()->listSelector()->listDisplayColumns([1, 2]);
         yield BooleanField::new('enabled', 'sylius.form.taxon.enabled')->renderAsSwitch(in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT]));
         yield FormField::addPanel('sylius.form.taxon.name')->collapsible();
         yield TranslationField::new("translations", false, $fieldsConfig);

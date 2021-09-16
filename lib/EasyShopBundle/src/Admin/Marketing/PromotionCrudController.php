@@ -65,7 +65,7 @@ abstract class PromotionCrudController extends AbstractCrudController
         $actions = parent::configureActions($actions);
 
         $viewCoupon = Action::new('manageCoupon', 'sylius.ui.manage_coupons', 'fas fa-ticket-alt')
-            ->displayIf(static function (Promotion $entity) {
+            ->displayIf(static function ($entity) {
                 return $entity->isCouponBased();
             })->linkToCrudAction("manageCoupon");
 
@@ -121,7 +121,7 @@ abstract class PromotionCrudController extends AbstractCrudController
             $coupon = $form->getData();
             $this->get("sylius.manager.promotion_coupon")->persist($coupon);
             $this->get("sylius.manager.promotion_coupon")->flush();
-            $url = $this->get(AdminUrlGenerator::class)->setController(self::class)->setEntityId($coupon->getPromotion()->getId())->setAction("manageCoupon")->generateUrl();
+            $url = $this->get(AdminUrlGenerator::class)->setController(get_class($this))->setEntityId($coupon->getPromotion()->getId())->setAction("manageCoupon")->generateUrl();
             return $this->redirect($url);
         }
 
@@ -140,7 +140,7 @@ abstract class PromotionCrudController extends AbstractCrudController
             $instruction = $form->getData();
             $this->get('sylius.promotion_coupon_generator')->generate($context->getEntity()->getInstance(), $instruction);
 
-            $url = $this->get(AdminUrlGenerator::class)->setController(self::class)->setEntityId($context->getEntity()->getPrimaryKeyValue())->setAction("manageCoupon")->generateUrl();
+            $url = $this->get(AdminUrlGenerator::class)->setController(get_class($this))->setEntityId($context->getEntity()->getPrimaryKeyValue())->setAction("manageCoupon")->generateUrl();
             return $this->redirect($url);
         }
 
@@ -160,7 +160,7 @@ abstract class PromotionCrudController extends AbstractCrudController
             $this->get("sylius.manager.promotion_coupon")->remove($coupon);
             $this->get("sylius.manager.promotion_coupon")->flush();
         }
-        $url = $this->get(AdminUrlGenerator::class)->setController(self::class)->setEntityId($coupon->getPromotion()->getId())->setAction("manageCoupon")->generateUrl();
+        $url = $this->get(AdminUrlGenerator::class)->setController(get_class($this))->setEntityId($coupon->getPromotion()->getId())->setAction("manageCoupon")->generateUrl();
         return $this->redirect($url);
     }
 

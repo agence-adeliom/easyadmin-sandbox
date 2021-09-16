@@ -92,23 +92,23 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
             });
         }
 
+        if ($targetCrudControllerFqcn) {
+            $ajaxNewEndpointUrl = $this->adminUrlGenerator
+                ->setController($targetCrudControllerFqcn)
+                ->setAction('new')
+                ->setEntityId(null)
+                ->generateUrl();
 
-        $ajaxNewEndpointUrl = $this->adminUrlGenerator
-            ->setController($field->getCustomOption(AssociationField::OPTION_CRUD_CONTROLLER))
-            ->setAction('new')
-            ->setEntityId(null)
-            ->generateUrl();
+            $field->setFormTypeOption('attr.data-ea-ajax-new-endpoint-url', $ajaxNewEndpointUrl);
 
-        $field->setFormTypeOption('attr.data-ea-ajax-new-endpoint-url', $ajaxNewEndpointUrl);
+            $ajaxIndexEndpointUrl = $this->adminUrlGenerator
+                ->setController($targetCrudControllerFqcn)
+                ->setAction('index')
+                ->setEntityId(null)
+                ->generateUrl();
 
-        $ajaxIndexEndpointUrl = $this->adminUrlGenerator
-            ->setController($field->getCustomOption(AssociationField::OPTION_CRUD_CONTROLLER))
-            ->setAction('index')
-            ->setEntityId(null)
-            ->generateUrl();
-
-        $field->setFormTypeOption('attr.data-ea-ajax-index-url', $ajaxIndexEndpointUrl);
-
+            $field->setFormTypeOption('attr.data-ea-ajax-index-url', $ajaxIndexEndpointUrl);
+        }
         $settableOptions = $settableOptions = AssociationField::getSettableOptions();
 
         foreach ($settableOptions as $option) {

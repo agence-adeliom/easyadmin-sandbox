@@ -1,6 +1,6 @@
 <div class="d-block">
     <h4>{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</h4>
-    <div class="payment-methods" {{ sylius_test_html_attribute('shipments') }}>
+    <div class="payment-methods">
         {{ form_errors(form.method) }}
 
         {% for key, choice_form in form.method %}
