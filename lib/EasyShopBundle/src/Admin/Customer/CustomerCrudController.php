@@ -4,13 +4,13 @@ namespace Adeliom\EasyShopBundle\Admin\Customer;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\ChoiceMaskField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use App\Entity\Shop\Customer\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -37,8 +37,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-abstract class CustomerCrudController extends AbstractCrudController
+abstract class CustomerCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "customer";
+    }
+
     public function createEntity(string $entityFqcn)
     {
         $customer = $this->get('sylius.factory.customer')->createNew();
@@ -146,7 +151,7 @@ abstract class CustomerCrudController extends AbstractCrudController
         parent::processUploadedFiles($form);
         global $createUser;
         $createUser = false;
-        if($form->getData() instanceof Customer){
+        if($form->getData() instanceof CustomerInterface){
             $createUser = $form->get("createUser")->getData() == "yes";
         }
     }

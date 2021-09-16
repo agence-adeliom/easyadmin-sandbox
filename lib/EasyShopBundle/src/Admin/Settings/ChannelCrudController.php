@@ -4,8 +4,8 @@ namespace Adeliom\EasyShopBundle\Admin\Settings;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -21,8 +21,13 @@ use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Sylius\Component\Core\Model\Scope;
 
-abstract class ChannelCrudController extends AbstractCrudController
+abstract class ChannelCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "channel";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

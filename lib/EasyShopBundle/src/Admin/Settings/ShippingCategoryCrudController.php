@@ -2,13 +2,18 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-abstract class ShippingCategoryCrudController extends AbstractCrudController
+abstract class ShippingCategoryCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "shipping_category";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

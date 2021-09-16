@@ -5,13 +5,13 @@ namespace Adeliom\EasyShopBundle\Admin\Settings;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodCalculatorType;
 use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodRuleType;
 use App\Entity\Shop\Shipping\ShippingMethod;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -30,8 +30,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-abstract class ShippingMethodCrudController extends AbstractCrudController
+abstract class ShippingMethodCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "shipping_method";
+    }
 
     public static function getSubscribedServices()
     {

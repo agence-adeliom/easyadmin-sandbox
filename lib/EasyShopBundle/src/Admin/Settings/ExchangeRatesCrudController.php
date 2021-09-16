@@ -3,12 +3,17 @@
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 
-abstract class ExchangeRatesCrudController extends AbstractCrudController
+abstract class ExchangeRatesCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "exchange_rate";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

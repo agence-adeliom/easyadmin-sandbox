@@ -3,11 +3,11 @@
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -21,8 +21,13 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Scope;
 
-abstract class ZoneCrudController extends AbstractCrudController
+abstract class ZoneCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "zone";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

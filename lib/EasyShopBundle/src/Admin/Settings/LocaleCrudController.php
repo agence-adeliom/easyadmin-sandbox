@@ -2,13 +2,18 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use App\Entity\Shop\Locale\Locale;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\LocaleField;
 
-abstract class LocaleCrudController extends AbstractCrudController
+abstract class LocaleCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "locale";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

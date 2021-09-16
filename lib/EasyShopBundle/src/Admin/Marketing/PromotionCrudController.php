@@ -4,6 +4,7 @@ namespace Adeliom\EasyShopBundle\Admin\Marketing;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionActionType;
 use Adeliom\EasyShopBundle\Form\Type\PromotionBundle\PromotionRuleType;
 use App\Entity\Shop\Promotion\Promotion;
@@ -12,7 +13,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -30,8 +30,13 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-abstract class PromotionCrudController extends AbstractCrudController
+abstract class PromotionCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "promotion";
+    }
+
     public static function getSubscribedServices()
     {
         return array_merge(parent::getSubscribedServices(), [

@@ -4,21 +4,25 @@ namespace Adeliom\EasyShopBundle\Admin\Products;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
-abstract class TaxonCrudController extends AbstractCrudController
+abstract class TaxonCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "taxon";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

@@ -3,12 +3,12 @@
 namespace Adeliom\EasyShopBundle\Admin\Marketing;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -20,8 +20,13 @@ use Sylius\Component\Review\Model\Review;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class ReviewCrudController extends AbstractCrudController
+abstract class ReviewCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "product_review";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

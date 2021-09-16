@@ -59,6 +59,7 @@ trait EasyShopDashboardTrait {
         yield MenuItem::linkToCrud('sylius.ui.shipping_categories', 'fas fa-th-list', $this->getSyliusEntity("shipping_category"));
         yield MenuItem::linkToCrud('sylius.ui.tax_categories', 'fas fa-tags', $this->getSyliusEntity("tax_category"));
         yield MenuItem::linkToCrud('sylius.ui.tax_rates', 'fas fa-money-bill', $this->getSyliusEntity("tax_rate"));
+        yield MenuItem::linkToCrud('sylius.ui.api_users', 'fas fa-user-astronaut', $this->getSyliusEntity("admin_user"));
     }
 
 }

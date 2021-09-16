@@ -6,6 +6,7 @@ use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAssociationsField;
 use Adeliom\EasyShopBundle\Form\Admin\ProductAttributesField;
 use Adeliom\EasyShopBundle\Form\Type\ProductBundle\ChannelCollectionType;
@@ -18,7 +19,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -39,14 +39,19 @@ use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
-abstract class ProductCrudController extends AbstractCrudController
+abstract class ProductCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "product";
+    }
 
     public static function getSubscribedServices()
     {
@@ -367,6 +372,7 @@ abstract class ProductCrudController extends AbstractCrudController
         if (!($variant instanceof ProductVariantInterface)){
             throw new NotFoundHttpException();
         }
+        $this->get("event_dispatcher")->dispatch(new GenericEvent($variant) , sprintf("sylius.%s.initialize_update", static::getResource()));
 
         $form = $this->createForm(ProductVariantType::class, $variant);
         $form->handleRequest($context->getRequest());

@@ -2,6 +2,7 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Sales;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use App\Entity\Shop\Shipping\Shipment;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -12,7 +13,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -41,8 +41,13 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-abstract class ShipmentCrudController extends AbstractCrudController
+abstract class ShipmentCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "shipment";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

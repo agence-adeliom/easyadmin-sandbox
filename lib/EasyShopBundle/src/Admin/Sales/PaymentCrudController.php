@@ -2,6 +2,7 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Sales;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -11,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -24,8 +24,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-abstract class PaymentCrudController extends AbstractCrudController
+abstract class PaymentCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "payment";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

@@ -3,6 +3,7 @@ imports:
 
 parameters:
   sylius_core.public_dir: '%kernel.project_dir%/public'
+  sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
   sylius.security.new_api_route: "/api/v2"
   sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
   sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
@@ -102,6 +103,9 @@ easy_shop:
   product_grid:
     include_all_descendants: true
   locale_switcher: storage
+
+sylius_api:
+  enabled: true
 
 sylius_addressing:
   resources:

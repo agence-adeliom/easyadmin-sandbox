@@ -2,12 +2,17 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CurrencyField;
 
-abstract class CurrencyCrudController extends AbstractCrudController
+abstract class CurrencyCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "currency";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

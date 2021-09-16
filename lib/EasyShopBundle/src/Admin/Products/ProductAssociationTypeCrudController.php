@@ -3,14 +3,19 @@
 namespace Adeliom\EasyShopBundle\Admin\Products;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-abstract class ProductAssociationTypeCrudController extends AbstractCrudController
+abstract class ProductAssociationTypeCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "product_association";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

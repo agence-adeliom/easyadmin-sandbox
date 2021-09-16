@@ -2,15 +2,20 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Settings;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 
-abstract class CountryCrudController extends AbstractCrudController
+abstract class CountryCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "country";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

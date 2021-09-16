@@ -4,12 +4,12 @@ namespace Adeliom\EasyShopBundle\Admin\Products;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\FormTypeField;
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use App\Entity\Shop\Product\ProductAttribute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -24,8 +24,12 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-abstract class ProductAttributeCrudController extends AbstractCrudController
+abstract class ProductAttributeCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "product_attribute";
+    }
 
     public static function getSubscribedServices()
     {

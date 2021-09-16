@@ -3,8 +3,8 @@
 namespace Adeliom\EasyShopBundle\Admin\Products;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\TranslationField;
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -12,8 +12,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-abstract class ProductOptionCrudController extends AbstractCrudController
+abstract class ProductOptionCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "product_option";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

@@ -2,13 +2,18 @@
 
 namespace Adeliom\EasyShopBundle\Admin\Customer;
 
+use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use App\Entity\Shop\Customer\CustomerGroup;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-abstract class CustomerGroupCrudController extends AbstractCrudController
+abstract class CustomerGroupCrudController extends SyliusCrudController
 {
+    public static function getResource(): string
+    {
+        return "customer_group";
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
