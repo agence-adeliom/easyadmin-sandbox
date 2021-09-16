@@ -10,6 +10,7 @@ use function Symfony\Component\String\s;
 final class PositionSortableField implements FieldInterface
 {
     const ACTION_URL = 'actionUrl';
+    const PARENT_PROPERTY = "parentProperty";
 
     use FieldTrait;
 
@@ -21,20 +22,13 @@ final class PositionSortableField implements FieldInterface
             ->setFormType(NumberType::class)
             ->setTemplateName("form_easy_field_position_sortable")
             ->setTemplatePath('@EasyFields/form/form-easy-field-position-sortable.html.twig')
-            ->setCustomOption("parentProperty", "parent")
-            ->setCustomOption("positionProperty", "position");
+            ->setCustomOption(self::PARENT_PROPERTY, "parent");
         return $field;
     }
 
     public function setParentProperty($field)
     {
-        $this->setCustomOption("parentProperty", $field);
-        return $this;
-    }
-
-    public function setPositionProperty($field)
-    {
-        $this->setCustomOption("positionProperty", $field);
+        $this->setCustomOption(self::PARENT_PROPERTY, $field);
         return $this;
     }
 

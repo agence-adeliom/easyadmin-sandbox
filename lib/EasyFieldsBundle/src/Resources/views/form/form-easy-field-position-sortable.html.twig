@@ -1,17 +1,15 @@
 {% block form_easy_field_position_sortable_widget %}
-    {% set parent = entity.instance.getTreeField(field.customOptions.get('parentProperty')) ? entity.instance.getTreeField(field.customOptions.get('parentProperty')).getTreeField(entity.primaryKeyName) : 0 %}
+    {% set parent = entity.instance.getSortableData(field.customOptions.get('parentProperty')) ? entity.instance.getSortableData(field.customOptions.get('parentProperty')).getSortableData(entity.primaryKeyName) : 0 %}
     {% if parent %}
         <button class="btn btn-sm btn-secondary sortable-position"><i class="fa fa-arrows-alt-v"></i></button>
     {% endif %}
-        <input type="hidden" value="{{ entity.primaryKeyName ~ ":" ~ entity.primaryKeyValue ~ ":" ~ field.customOptions.get('parentProperty')  ~ ":" ~ field.customOptions.get('positionProperty') }}" class="sortable-position-datas" />
+        <input type="hidden" value="{{ entity.primaryKeyValue ~ ":" ~ field.customOptions.get('parentProperty') }}" class="sortable-position-datas" />
         <input type="hidden" value="{{ field.customOptions.get('actionUrl') }}" class="sortable-position-url" />
         <input type="hidden" value="{{ parent }}" class="sortable-parent-id" />
         <input type="hidden" value="{{ entity.primaryKeyValue }}" class="sortable-id" />
 
     {% if sortablePositionAssets is not defined %}
         {% set sortablePositionAssets = true %}
-{#        <script src="{{ asset('bundles/easyfields/form-easy-field-position-sortable.js') }}" ></script>#}
-{#        <link href="{{ asset('bundles/easyfields/form-easy-field-position-sortable.css') }}" rel="stylesheet" />#}
         <style type="text/css">
             .table.datagrid {
                 background-color: var(--body-bg);

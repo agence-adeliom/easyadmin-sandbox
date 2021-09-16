@@ -232,7 +232,7 @@ class EntryEntity {
     {
         $this->content = $content;
     }
-    
+
     /**
      * @ORM\PreRemove()
      */

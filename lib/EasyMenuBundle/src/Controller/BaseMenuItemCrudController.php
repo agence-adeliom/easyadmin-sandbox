@@ -2,21 +2,16 @@
 
 namespace Adeliom\EasyMenuBundle\Controller;
 
-use Adeliom\EasyAdminUserBundle\Entity\User;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyFieldsBundle\Admin\Field\EnumField;
 use Adeliom\EasyFieldsBundle\Admin\Field\PositionSortableField;
-use Adeliom\EasyFieldsBundle\Admin\Trait\PositionSortableActionTrait;
-use App\Controller\Admin\Menu\MenuCrudController;
-use App\Controller\Admin\Menu\MenuItemCrudController;
-use App\Entity\Menu\Menu;
+use Adeliom\EasyFieldsBundle\Traits\Admin\PositionSortableActionTrait;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
@@ -27,8 +22,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseMenuItemCrudController extends AbstractCrudController
 {
