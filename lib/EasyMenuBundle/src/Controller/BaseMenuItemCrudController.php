@@ -166,8 +166,7 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
                 return $queryBuilder;
             })
             ->setColumns(12)
-            ->setRequired(true)
-            ->onlyOnForms();
+            ->setRequired(true);
 
 
         yield UrlField::new('url', "easy.menu.admin.field.url")

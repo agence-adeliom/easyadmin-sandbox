@@ -1,7 +1,5 @@
-{% set sortablePositionAssets = false %}
-
 {% block form_easy_field_position_sortable_widget %}
-    {% set parent = entity.instance.parent ? entity.instance.getTreeField(field.customOptions.get('parentProperty')).getTreeField(entity.primaryKeyName) : 0 %}
+    {% set parent = entity.instance.getTreeField(field.customOptions.get('parentProperty')) ? entity.instance.getTreeField(field.customOptions.get('parentProperty')).getTreeField(entity.primaryKeyName) : 0 %}
     {% if parent %}
         <button class="btn btn-sm btn-secondary sortable-position"><i class="fa fa-arrows-alt-v"></i></button>
     {% endif %}
@@ -10,7 +8,7 @@
         <input type="hidden" value="{{ parent }}" class="sortable-parent-id" />
         <input type="hidden" value="{{ entity.primaryKeyValue }}" class="sortable-id" />
 
-    {% if not sortablePositionAssets %}
+    {% if sortablePositionAssets is not defined %}
         {% set sortablePositionAssets = true %}
 {#        <script src="{{ asset('bundles/easyfields/form-easy-field-position-sortable.js') }}" ></script>#}
 {#        <link href="{{ asset('bundles/easyfields/form-easy-field-position-sortable.css') }}" rel="stylesheet" />#}
@@ -19,6 +17,28 @@
                 background-color: var(--body-bg);
                 position: relative;
                 user-select: none;
+            }
+            .table.datagrid.loading:after {
+                content: url('/bundles/easyfields/images/loader.svg');
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 50%;
+                left: 50%;
+                width: 100px;
+                opacity: 1;
+                z-index: 2;
+            }
+            .table.datagrid.loading:before {
+                content:'';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                color: var(--table-thead-color);
+                background-color: var(--gray-200);
+                opacity: 0.2;
+                z-index: 1;
             }
             .table.datagrid .draggable-table__drag {
                 position: absolute;
@@ -31,6 +51,9 @@
             }
             .table.datagrid tbody tr.is-dragging {
                 background: var(--gray-200);
+            }
+            .table.datagrid tbody tr.draggable-hidden-row {
+                display: none;
             }
 
         </style>
@@ -66,6 +89,12 @@
                             if(target) {
 
                                 currRow = target;
+                                Array.from(currRow.children).forEach(td => {
+                                    td.style.width = td.offsetWidth + 'px';
+                                })
+
+                                table.style.width = table.offsetWidth;
+                                getAllChildrenRows();
                                 addDraggableRow(target);
                                 currRow.classList.add('is-dragging');
                                 startIndex = Array.from(tbody.children).indexOf(currRow);
@@ -93,6 +122,7 @@
 
                             currRow.classList.remove('is-dragging');
                             tbody.removeChild(dragElem);
+                            table.classList.add('loading');
 
                             setTimeout(() => {
                                 const tbody = table.querySelector('tbody');
@@ -123,9 +153,13 @@
                                         .catch((error) => {
                                             location.reload();
                                         });
-                                    console.log(newPosition);
+                                } else {
+                                    table.classList.remove('loading');
                                 }
-                            }, 100);
+                                Array.from(tbody.children).forEach((row) => {
+                                    row.classList.remove('draggable-hidden-row');
+                                })
+                            }, 50);
 
                             dragElem = null;
                             mouseDrag = false;
@@ -161,6 +195,16 @@
                                     swapRow(rowElem, i);
                             }
                         }
+                    }
+
+                    function getAllChildrenRows() {
+                        let id = currRow.querySelector('.sortable-id').value;
+                        Array.from(tbody.children).forEach((row) => {
+                            let parent = row.querySelector('.sortable-parent-id').value;
+                            if (id === parent) {
+                                row.classList.add('draggable-hidden-row');
+                            }
+                        })
                     }
 
                     function addDraggableRow(target) {
