@@ -17,8 +17,10 @@ final class TranslationField implements FieldInterface
         return (new self())
             ->setProperty($propertyName)
             ->setLabel($label)
+            ->setTemplatePath('@EasyFields/crud/field/translation.html.twig')
             ->setFormType(TranslationsType::class)
             ->hideOnIndex()
+            ->hideOnDetail()
             ->setFormTypeOptions(
                 [
                     'required' => true,

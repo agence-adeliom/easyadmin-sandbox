@@ -79,6 +79,17 @@ abstract class ProductCrudController extends SyliusCrudController
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
             ->addFormTheme('@EasyShop/SyliusFormTheme.html.twig')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_products")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_product")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_product")
+            ->setPageTitle(Crud::PAGE_DETAIL, function ($entity) {
+                return (string) $entity;
+            })
+            ->setEntityLabelInSingular('sylius.ui.product')
+            ->setEntityLabelInPlural('sylius.ui.products')
+            ->setFormOptions([
+                'validation_groups' => ['Default', 'sylius']
+            ])
 
             ->showEntityActionsAsDropdown();
     }

@@ -4,6 +4,7 @@ namespace Adeliom\EasyShopBundle\Admin;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -14,6 +15,13 @@ use Symfony\Component\Form\FormInterface;
 abstract class SyliusCrudController extends AbstractCrudController {
 
     abstract public static function getResource(): string;
+
+    public function configureAssets(Assets $assets): Assets
+    {
+        return $assets
+            ->addHtmlContentToHead('<style>.alert-error{    background-color: #f5d8e0;    border-color: #f0c5d0;    color: #7b243b;}</style>')
+            ;
+    }
 
     public function createEditForm(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormInterface
     {

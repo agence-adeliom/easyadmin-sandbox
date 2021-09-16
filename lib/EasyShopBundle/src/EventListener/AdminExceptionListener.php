@@ -30,10 +30,28 @@ class AdminExceptionListener
         // HttpExceptionInterface is a special type of exception that
         // holds status code and header details
         if ($exception instanceof EntityRemoveException) {
+            $bag = $request->getSession()->getFlashBag();
+            $newBag = [];
+            foreach ($bag->all() as $type => $messages) {
+                if($type == "error"){
+                    $type = "danger";
+                }
+                if(!isset($newBag[$type])){
+                    $newBag[$type] = [];
+                }
+                foreach ($messages as $message) {
+                    $newBag[$type][] = $message;
+                }
+            }
+
+            $request->getSession()->getFlashBag()->setAll($newBag);
+
             $entity = $exception->getContext()->getParameters()['entity_name'];
             $request->getSession()->getFlashBag()->add('danger', $this->translator->trans('sylius.resource.delete_error', [
-                '%resource%' => $entity
-            ], 'flashes'));
+                    '%resource%' => $entity
+                ], 'flashes'));
+
+
             $event->setResponse(new RedirectResponse($request->headers->get('referer')));
         }
 

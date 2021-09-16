@@ -27,12 +27,12 @@ abstract class AdminCrudController extends SyliusCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_zones")
-            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_zone")
-            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_zone")
-            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.zone_details")
-            ->setEntityLabelInSingular('sylius.ui.zone')
-            ->setEntityLabelInPlural('sylius.ui.zones')
+            ->setPageTitle(Crud::PAGE_INDEX, "sylius.ui.manage_api_users")
+            ->setPageTitle(Crud::PAGE_NEW, "sylius.ui.new_api_users")
+            ->setPageTitle(Crud::PAGE_EDIT, "sylius.ui.edit_api_users")
+            ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.api_users_details")
+            ->setEntityLabelInSingular('sylius.ui.api_user')
+            ->setEntityLabelInPlural('sylius.ui.api_users')
 
             ->setFormOptions([
                 'validation_groups' => ['Default', 'sylius']

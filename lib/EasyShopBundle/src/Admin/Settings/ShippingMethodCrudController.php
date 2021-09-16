@@ -9,8 +9,12 @@ use Adeliom\EasyShopBundle\Admin\SyliusCrudController;
 use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodCalculatorType;
 use Adeliom\EasyShopBundle\Form\Type\ShippingBundle\ShippingMethodRuleType;
 use App\Entity\Shop\Shipping\ShippingMethod;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -18,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
@@ -25,10 +30,12 @@ use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Review\Model\Review;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class ShippingMethodCrudController extends SyliusCrudController
 {
@@ -59,10 +66,70 @@ abstract class ShippingMethodCrudController extends SyliusCrudController
             ->setPageTitle(Crud::PAGE_DETAIL, "sylius.ui.shipping_method_details")
             ->setEntityLabelInSingular('sylius.ui.shipping_method')
             ->setEntityLabelInPlural('sylius.ui.shipping_methods')
+            ->showEntityActionsAsDropdown(false)
             ->setFormOptions([
                 'validation_groups' => ['Default', 'sylius']
             ])
             ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $archive = Action::new('archive', 'sylius.ui.archive')->addCssClass('text-warning')
+            ->displayIf(static function ($entity) {
+                return $entity->getArchivedAt() == null;
+            })->linkToCrudAction("archive");
+
+        $restore = Action::new('restore', 'sylius.ui.restore')->addCssClass('text-warning')
+            ->displayIf(static function ($entity) {
+                return $entity->getArchivedAt() != null;
+            })->linkToCrudAction("restore");
+
+        $archiveButton = Action::new('archive', 'sylius.ui.archive')
+            ->displayIf(static function ($entity) {
+                return $entity->getArchivedAt() == null;
+            })->linkToCrudAction("archive")->setCssClass("btn btn-warning");
+        $restoreButton = Action::new('restore', 'sylius.ui.restore')
+            ->displayIf(static function ($entity) {
+                return $entity->getArchivedAt() != null;
+            })->linkToCrudAction("restore")->setCssClass("btn btn-warning");
+
+        $actions->add(Crud::PAGE_INDEX, $archive);
+        $actions->add(Crud::PAGE_INDEX, $restore);
+
+        $actions->add(Crud::PAGE_EDIT, $archiveButton);
+        $actions->add(Crud::PAGE_EDIT, $restoreButton);
+
+        $actions->add(Crud::PAGE_DETAIL, $archiveButton);
+        $actions->add(Crud::PAGE_DETAIL, $restoreButton);
+
+        return $actions;
+    }
+
+    public function archive(AdminContext $context): Response
+    {
+        $entity = $context->getEntity()->getInstance();
+        $entity->setArchivedAt(new \DateTime());
+        $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
+
+        if (null !== $referrer = $context->getReferrer()) {
+            return $this->redirect($referrer);
+        }
+
+        return $this->redirect($this->get(AdminUrlGenerator::class)->setAction(Action::INDEX)->unset(EA::ENTITY_ID)->generateUrl());
+    }
+
+    public function restore(AdminContext $context): Response
+    {
+        $entity = $context->getEntity()->getInstance();
+        $entity->setArchivedAt(null);
+        $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
+
+        if (null !== $referrer = $context->getReferrer()) {
+            return $this->redirect($referrer);
+        }
+
+        return $this->redirect($this->get(AdminUrlGenerator::class)->setAction(Action::INDEX)->unset(EA::ENTITY_ID)->generateUrl());
     }
 
     public function configureFields(string $pageName): iterable
@@ -108,6 +175,10 @@ abstract class ShippingMethodCrudController extends SyliusCrudController
 
         yield FormField::addPanel('sylius.form.shipping_method.translations');
         yield TranslationField::new("translations", false, $fieldsConfig)->hideOnIndex();
+
+        yield BooleanField::new('archivedAt', 'sylius.ui.archival')->onlyOnIndex()->renderAsSwitch(false)->formatValue(function ($value){
+            return !is_null($value);
+        });
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
