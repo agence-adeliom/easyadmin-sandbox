@@ -2,12 +2,12 @@
 
 namespace Adeliom\EasyFaqBundle\Repository;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 
-class BaseCategoryRepository extends ServiceEntityRepository {
+class CategoryRepository extends ServiceEntityRepository {
 
     /**
      * @var bool
@@ -42,7 +42,7 @@ class BaseCategoryRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BaseCategoryEntity[]
+     * @return CategoryEntity[]
      */
     public function getPublished()
     {
@@ -53,7 +53,7 @@ class BaseCategoryRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BaseCategoryEntity
+     * @return CategoryEntity
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getBySlug(string $slug)

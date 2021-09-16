@@ -2,7 +2,7 @@
 
 namespace Adeliom\EasyMenuBundle\Repository;
 
-use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
+use Adeliom\EasyFaqBundle\Entity\EntryEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
 use Adeliom\EasyMenuBundle\Entity\BaseMenuItemEntity;
@@ -55,7 +55,7 @@ class BaseMenuItemRepository extends NestedTreeRepository {
     }
 
     /**
-     * @return BaseEntryEntity[]
+     * @return EntryEntity[]
      */
     public function getPublished(bool $returnQueryBuilder = false)
     {

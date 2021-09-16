@@ -63,8 +63,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('easy.blog.admin.menu.articles', 'fa fa-file-alt', Post::class);
 
         yield MenuItem::section('easy.faq.faq');
-        yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\Faq\Category::class);
-        yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\Faq\Entry::class);
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\EasyFaq\Category::class);
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\EasyFaq\Entry::class);
 
         // Shop Dashboard
         yield from $this->productItems();

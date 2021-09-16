@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Faq;
+namespace App\Repository\EasyFaq;
 
-use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
-use App\Entity\Faq\Entry;
+use Adeliom\EasyFaqBundle\Repository\EntryRepository as BaseEntryRepository;
+use App\Entity\EasyFaq\Entry;
 use Doctrine\Persistence\ManagerRegistry;
 
 

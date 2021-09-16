@@ -3,8 +3,8 @@
 namespace Adeliom\EasyFaqBundle\Controller;
 
 use Adeliom\EasyFaqBundle\Event\EasyFaqCategoryEvent;
-use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
+use Adeliom\EasyFaqBundle\Repository\CategoryRepository;
+use Adeliom\EasyFaqBundle\Repository\EntryRepository;
 use Adeliom\EasySeoBundle\Entity\SEO;
 use Adeliom\EasySeoBundle\Services\BreadCrumbCollection;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class BaseCategoryController extends AbstractController
+class CategoryController extends AbstractController
 {
     /**
      * @var Request
@@ -22,18 +22,18 @@ class BaseCategoryController extends AbstractController
     protected $request;
 
     /**
-     * @var BaseCategoryRepository
+     * @var CategoryRepository
      */
     protected $categoryRepository;
 
     /**
-     * @var BaseEntryRepository
+     * @var EntryRepository
      */
     protected $entryRepository;
 
 
     /**
-     * @var BaseEntryRepository
+     * @var EntryRepository
      */
     protected $eventDispatcher;
 
@@ -42,7 +42,7 @@ class BaseCategoryController extends AbstractController
      */
     protected $breadcrumb;
 
-    public function setRepositories(BaseCategoryRepository $categoryRepository, BaseEntryRepository $entryRepository)
+    public function setRepositories(CategoryRepository $categoryRepository, EntryRepository $entryRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->entryRepository = $entryRepository;

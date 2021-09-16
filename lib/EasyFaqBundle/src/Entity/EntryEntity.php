@@ -17,13 +17,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @UniqueEntity("slug")
- * @ORM\Table(indexes={
- *     @ORM\Index(name="faq_indexes", columns={"state"})
- * })
+ * @ORM\Table(
+ *     name="easy_faq__entry",
+ *     indexes={
+ *      @ORM\Index(name="faq_indexes", columns={"state"})
+ *     })
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\EntryRepository")
  */
-class BaseEntryEntity {
+class EntryEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -41,7 +43,7 @@ class BaseEntryEntity {
     }
 
     /**
-     * @var BaseCategoryEntity[] | null
+     * @var CategoryEntity[] | null
      */
     protected $categories;
 
@@ -56,6 +58,13 @@ class BaseEntryEntity {
      * @ORM\Column(type="text")
      */
     protected $answer;
+
+    /**
+     * @var array|null
+     * @ORM\Column(name="content", type="json", nullable=true)
+     * @Assert\Type("array")
+     */
+    protected $content = [];
 
     /**
      * @var string|null
@@ -82,7 +91,7 @@ class BaseEntryEntity {
     }
 
     /**
-     * @return BaseCategoryEntity|null
+     * @return CategoryEntity|null
      */
     public function getMainCategory()
     {
@@ -98,7 +107,7 @@ class BaseEntryEntity {
     }
 
     /**
-     * @param BaseCategoryEntity[]|null $categories
+     * @param CategoryEntity[]|null $categories
      */
     public function setCategories(?array $categories): void
     {
@@ -106,28 +115,28 @@ class BaseEntryEntity {
     }
 
     /**
-     * @param BaseCategoryEntity $baseCategoryEntity
+     * @param CategoryEntity $categoryEntity
      *
-     * @return BaseEntryEntity
+     * @return EntryEntity
      */
-    public function addCategorie(BaseCategoryEntity $baseCategoryEntity)
+    public function addCategorie(CategoryEntity $categoryEntity)
     {
-        if (!$this->categories->contains($baseCategoryEntity)) {
-            $this->categories->add($baseCategoryEntity);
+        if (!$this->categories->contains($categoryEntity)) {
+            $this->categories->add($categoryEntity);
         }
 
         return $this;
     }
 
     /**
-     * @param BaseCategoryEntity $baseCategoryEntity
+     * @param CategoryEntity $categoryEntity
      *
-     * @return BaseEntryEntity
+     * @return EntryEntity
      */
-    public function removeCategory(BaseCategoryEntity $baseCategoryEntity)
+    public function removeCategory(CategoryEntity $categoryEntity)
     {
-        if ($this->categories->contains($baseCategoryEntity)) {
-            $this->categories->removeElement($baseCategoryEntity);
+        if ($this->categories->contains($categoryEntity)) {
+            $this->categories->removeElement($categoryEntity);
         }
 
         return $this;
@@ -208,7 +217,22 @@ class BaseEntryEntity {
         }
     }
 
+    /**
+     * @return array|null
+     */
+    public function getContent(): ?array
+    {
+        return $this->content;
+    }
 
+    /**
+     * @param array|null $content
+     */
+    public function setContent(?array $content): void
+    {
+        $this->content = $content;
+    }
+    
     /**
      * @ORM\PreRemove()
      */

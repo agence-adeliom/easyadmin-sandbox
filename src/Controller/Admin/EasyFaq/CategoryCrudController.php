@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller\Admin\Faq;
+namespace App\Controller\Admin\EasyFaq;
 
-use Adeliom\EasyFaqBundle\Controller\BaseCategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\CategoryCrudController as BaseCategoryCrudController;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use App\Entity\Faq\Category;
+use App\Entity\EasyFaq\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

@@ -2,14 +2,14 @@
 
 namespace Adeliom\EasyFaqBundle\Repository;
 
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
+use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\EntryEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 
-class BaseEntryRepository extends ServiceEntityRepository {
+class EntryRepository extends ServiceEntityRepository {
 
     /**
      * @var bool
@@ -68,9 +68,9 @@ class BaseEntryRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BaseEntryEntity[]
+     * @return EntryEntity[]
      */
-    public function getByCategory(BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
+    public function getByCategory(CategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere(':category MEMBER OF entry.categories')
@@ -85,10 +85,10 @@ class BaseEntryRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BaseEntryEntity
+     * @return EntryEntity
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getBySlug(string $slug, ?BaseCategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
+    public function getBySlug(string $slug, ?CategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere('entry.slug = :slug')

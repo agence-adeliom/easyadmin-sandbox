@@ -3,14 +3,14 @@
 namespace Adeliom\EasyFaqBundle\DependencyInjection;
 
 
-use Adeliom\EasyFaqBundle\Controller\BaseCategoryController;
-use Adeliom\EasyFaqBundle\Controller\BaseCategoryCrudController;
-use Adeliom\EasyFaqBundle\Controller\BaseEntryController;
-use Adeliom\EasyFaqBundle\Controller\BaseEntryCrudController;
-use Adeliom\EasyFaqBundle\Entity\BaseCategoryEntity;
-use Adeliom\EasyFaqBundle\Entity\BaseEntryEntity;
-use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
-use Adeliom\EasyFaqBundle\Repository\BaseEntryRepository;
+use Adeliom\EasyFaqBundle\Controller\CategoryController;
+use Adeliom\EasyFaqBundle\Controller\CategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\EntryController;
+use Adeliom\EasyFaqBundle\Controller\EntryCrudController;
+use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
+use Adeliom\EasyFaqBundle\Entity\EntryEntity;
+use Adeliom\EasyFaqBundle\Repository\CategoryRepository;
+use Adeliom\EasyFaqBundle\Repository\EntryRepository;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -42,10 +42,10 @@ class Configuration implements ConfigurationInterface
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseEntryEntity::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, EntryEntity::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Entry class must be a valid class extending %s. "%s" given.',
-                                            BaseEntryEntity::class, $value
+                                            EntryEntity::class, $value
                                         ));
                                     }
                                     return $value;
@@ -53,14 +53,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('repository')
-                            ->defaultValue(BaseEntryRepository::class)
+                            ->defaultValue(EntryRepository::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseEntryRepository::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, EntryRepository::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Entry repository must be a valid class extending %s. "%s" given.',
-                                            BaseEntryRepository::class, $value
+                                            EntryRepository::class, $value
                                         ));
                                     }
                                     return $value;
@@ -68,14 +68,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('controller')
-                            ->defaultValue(BaseEntryController::class)
+                            ->defaultValue(EntryController::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseEntryController::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, EntryController::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Page controller must be a valid class extending %s. "%s" given.',
-                                            BaseEntryController::class, $value
+                                            EntryController::class, $value
                                         ));
                                     }
                                     return $value;
@@ -83,14 +83,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('crud')
-                            ->defaultValue(BaseEntryCrudController::class)
+                            ->defaultValue(EntryCrudController::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseEntryCrudController::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, EntryCrudController::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Entry crud controller must be a valid class extending %s. "%s" given.',
-                                            BaseEntryCrudController::class, $value
+                                            EntryCrudController::class, $value
                                         ));
                                     }
                                     return $value;
@@ -107,10 +107,10 @@ class Configuration implements ConfigurationInterface
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseCategoryEntity::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, CategoryEntity::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Category class must be a valid class extending %s. "%s" given.',
-                                            BaseCategoryEntity::class, $value
+                                            CategoryEntity::class, $value
                                         ));
                                     }
                                     return $value;
@@ -118,14 +118,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('repository')
-                            ->defaultValue(BaseCategoryRepository::class)
+                            ->defaultValue(CategoryRepository::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseCategoryRepository::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, CategoryRepository::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Category repository must be a valid class extending %s. "%s" given.',
-                                            BaseCategoryRepository::class, $value
+                                            CategoryRepository::class, $value
                                         ));
                                     }
                                     return $value;
@@ -133,14 +133,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('controller')
-                            ->defaultValue(BaseCategoryController::class)
+                            ->defaultValue(CategoryController::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseCategoryController::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, CategoryController::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Category controller must be a valid class extending %s. "%s" given.',
-                                            BaseCategoryController::class, $value
+                                            CategoryController::class, $value
                                         ));
                                     }
                                     return $value;
@@ -148,14 +148,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('crud')
-                            ->defaultValue(BaseCategoryCrudController::class)
+                            ->defaultValue(CategoryCrudController::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function($value) {
-                                    if (!class_exists($value) || !is_a($value, BaseCategoryCrudController::class, true)) {
+                                    if (!class_exists($value) || !is_a($value, CategoryCrudController::class, true)) {
                                         throw new InvalidConfigurationException(sprintf(
                                             'Category crud controller must be a valid class extending %s. "%s" given.',
-                                            BaseCategoryCrudController::class, $value
+                                            CategoryCrudController::class, $value
                                         ));
                                     }
                                     return $value;

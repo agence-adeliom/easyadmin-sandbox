@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Faq;
+namespace App\Repository\EasyFaq;
 
-use Adeliom\EasyFaqBundle\Repository\BaseCategoryRepository;
-use App\Entity\Faq\Category;
+use Adeliom\EasyFaqBundle\Repository\CategoryRepository as BaseCategoryRepository;
+use App\Entity\EasyFaq\Category;
 use Doctrine\Persistence\ManagerRegistry;
 
 

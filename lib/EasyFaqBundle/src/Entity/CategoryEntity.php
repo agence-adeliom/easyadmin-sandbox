@@ -15,13 +15,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @UniqueEntity("slug")
- * @ORM\Table(indexes={
- *     @ORM\Index(name="faq_category_indexes", columns={"created_at", "status"})
- * })
+ * @ORM\Table(
+ *     name="easy_faq__category",
+ *     indexes={
+ *      @ORM\Index(name="faq_category_indexes", columns={"created_at", "status"})
+ *      }
+ * )
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\BaseEntryRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\EntryRepository")
  */
-class BaseCategoryEntity {
+class CategoryEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -63,14 +66,14 @@ class BaseCategoryEntity {
     }
 
     /**
-     * @return BaseEntryEntity[]|ArrayCollection
+     * @return EntryEntity[]|ArrayCollection
      */
     public function getEntries()
     {
         return $this->entries;
     }
 
-    public function addEntry(BaseEntryEntity $entry): void
+    public function addEntry(EntryEntity $entry): void
     {
         $this->entries->add($entry);
         if ($entry->getCategory() !== $this) {
@@ -78,7 +81,7 @@ class BaseCategoryEntity {
         }
     }
 
-    public function removeEntry(BaseEntryEntity $entry): void
+    public function removeEntry(EntryEntity $entry): void
     {
         $this->entries->removeElement($entry);
         $entry->setCategory(null);
