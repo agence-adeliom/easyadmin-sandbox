@@ -91,7 +91,7 @@ abstract class BaseMenuItemCrudController extends AbstractCrudController
 
         $url = $this->adminUrlGenerator
             ->unsetAll()
-            ->setController(MenuCrudController::class)
+            ->setController( $this->container->get("parameter_bag")->get("easy_menu.menu.crud") )
             ->setAction(Action::INDEX)
             ->generateUrl();
         $goBack = Action::new('goBack', 'easy.menu.admin.crud.label.menu_item.go_back')

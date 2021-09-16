@@ -79,7 +79,7 @@ abstract class BaseMenuCrudController extends AbstractCrudController
     {
         $url = $this->adminUrlGenerator
             ->unsetAll()
-            ->setController(MenuItemCrudController::class)
+            ->setController($this->container->get("parameter_bag")->get("easy_menu.menu_item.crud") )
             ->setAction(Action::INDEX)
             ->set('fromMenuId', $context->getEntity()->getInstance()->getId())
             ->generateUrl();
