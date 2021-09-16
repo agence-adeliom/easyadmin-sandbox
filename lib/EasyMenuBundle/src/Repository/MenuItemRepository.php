@@ -4,13 +4,13 @@ namespace Adeliom\EasyMenuBundle\Repository;
 
 use Adeliom\EasyFaqBundle\Entity\EntryEntity;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
-use Adeliom\EasyMenuBundle\Entity\BaseMenuItemEntity;
+use Adeliom\EasyMenuBundle\Entity\MenuEntity;
+use Adeliom\EasyMenuBundle\Entity\MenuItemEntity;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 
-class BaseMenuItemRepository extends NestedTreeRepository {
+class MenuItemRepository extends NestedTreeRepository {
 
     /**
      * @var bool
@@ -69,9 +69,9 @@ class BaseMenuItemRepository extends NestedTreeRepository {
     }
 
     /**
-     * @return BaseMenuItemEntity[]
+     * @return MenuItemEntity[]
      */
-    public function getByMenu(BaseMenuEntity $menuEntity, bool $returnQueryBuilder = false)
+    public function getByMenu(MenuEntity $menuEntity, bool $returnQueryBuilder = false)
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere('menuitem.menu = :menu')

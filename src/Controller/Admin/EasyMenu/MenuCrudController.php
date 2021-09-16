@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Controller\Admin\Menu;
+namespace App\Controller\Admin\EasyMenu;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyMenuBundle\Controller\BaseMenuItemCrudController;
-use App\Entity\Menu\MenuItem;
+use Adeliom\EasyMenuBundle\Controller\MenuCrudController as BaseMenuCrudController;
+use App\Entity\EasyMenu\Menu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class MenuItemCrudController extends BaseMenuItemCrudController
+class MenuCrudController extends BaseMenuCrudController
 {
 
     public static function getEntityFqcn(): string
     {
-        return MenuItem::class;
+        return Menu::class;
     }
 
     public function configureActions(Actions $actions): Actions

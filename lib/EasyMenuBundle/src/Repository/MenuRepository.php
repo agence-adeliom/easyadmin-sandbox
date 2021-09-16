@@ -2,12 +2,12 @@
 
 namespace Adeliom\EasyMenuBundle\Repository;
 
-use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
+use Adeliom\EasyMenuBundle\Entity\MenuEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 
-class BaseMenuRepository extends ServiceEntityRepository {
+class MenuRepository extends ServiceEntityRepository {
 
     /**
      * @var bool
@@ -42,7 +42,7 @@ class BaseMenuRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return BaseMenuEntity[]
+     * @return MenuEntity[]
      */
     public function getPublished()
     {

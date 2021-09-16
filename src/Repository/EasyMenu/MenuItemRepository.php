@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repository\Menu;
+namespace App\Repository\EasyMenu;
 
-use Adeliom\EasyMenuBundle\Repository\BaseMenuItemRepository;
-use App\Entity\Menu\MenuItem;
+use Adeliom\EasyMenuBundle\Repository\MenuItemRepository as BaseMenuItemRepository;
+use App\Entity\EasyMenu\MenuItem;
 use Doctrine\ORM\EntityManager;
-
 
 /**
  * @method MenuItem|null find($id, $lockMode = null, $lockVersion = null)

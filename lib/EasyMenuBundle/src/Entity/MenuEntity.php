@@ -13,9 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @UniqueEntity("code")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\BaseMenuRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\MenuRepository")
  */
-class BaseMenuEntity {
+class MenuEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -25,7 +25,7 @@ class BaseMenuEntity {
     use EntityStatusTrait;
 
     /**
-     * @var BaseMenuItemEntity[] | null
+     * @var MenuItemEntity[] | null
      */
     protected $items;
 
@@ -83,14 +83,14 @@ class BaseMenuEntity {
     }
 
     /**
-     * @return BaseMenuItemEntity[]|ArrayCollection
+     * @return MenuItemEntity[]|ArrayCollection
      */
     public function getItems()
     {
         return $this->items;
     }
 
-    public function addItem(BaseMenuItemEntity $item): void
+    public function addItem(MenuItemEntity $item): void
     {
         $this->items->add($item);
         if ($item->getMenu() !== $this) {
@@ -98,7 +98,7 @@ class BaseMenuEntity {
         }
     }
 
-    public function removeItem(BaseMenuItemEntity $item): void
+    public function removeItem(MenuItemEntity $item): void
     {
         $this->items->removeElement($item);
         $item->setMenu(null);

@@ -4,8 +4,8 @@ namespace Adeliom\EasyMenuBundle\EventListener;
 
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyMenuBundle\Entity\BaseMenuEntity;
-use Adeliom\EasyMenuBundle\Entity\BaseMenuItemEntity;
+use Adeliom\EasyMenuBundle\Entity\MenuEntity;
+use Adeliom\EasyMenuBundle\Entity\MenuItemEntity;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class MenuCreationListener
@@ -21,10 +21,10 @@ class MenuCreationListener
 
     // the entity listener methods receive two arguments:
     // the entity instance and the lifecycle event
-    public function prePersist(BaseMenuEntity $menu, LifecycleEventArgs $event): void
+    public function prePersist(MenuEntity $menu, LifecycleEventArgs $event): void
     {
         /**
-         * @var BaseMenuItemEntity $rootItem
+         * @var MenuItemEntity $rootItem
          */
         $rootItem = new $this->menuItemClass();
         $rootItem->setMenu($menu);

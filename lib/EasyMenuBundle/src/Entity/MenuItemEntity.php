@@ -12,14 +12,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Prodigious\Sonata\MenuBundle\Model\MenuItem;
 
 /**
  * @ORM\HasLifecycleCallbacks()
- * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\BaseMenuItemRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyMenuBundle\Repository\MenuItemRepository")
  * @Gedmo\Tree(type="nested")
  */
-class BaseMenuItemEntity {
+class MenuItemEntity {
 
     use EntityIdTrait;
     use EntityTimestampableTrait {
@@ -34,7 +33,7 @@ class BaseMenuItemEntity {
     use PositionSortableTrait;
 
     /**
-     * @var BaseMenuEntity | null
+     * @var MenuEntity | null
      */
     protected $menu;
 
@@ -72,15 +71,15 @@ class BaseMenuItemEntity {
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="App\Entity\Menu\MenuItem", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="App\Entity\EasyMenu\MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
-     * @var BaseMenuItemEntity | null
+     * @var MenuItemEntity | null
      */
     protected $parent;
 
     /**
-     * @var BaseMenuItemEntity[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Menu\MenuItem", mappedBy="parent")
+     * @var MenuItemEntity[]
+     * @ORM\OneToMany(targetEntity="App\Entity\EasyMenu\MenuItem", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
@@ -174,23 +173,23 @@ class BaseMenuItemEntity {
     }
 
     /**
-     * @return BaseMenuEntity|null
+     * @return MenuEntity|null
      */
-    public function getMenu(): ?BaseMenuEntity
+    public function getMenu(): ?MenuEntity
     {
         return $this->menu;
     }
 
     /**
-     * @param BaseMenuEntity|null $menu
+     * @param MenuEntity|null $menu
      */
-    public function setMenu(?BaseMenuEntity $menu): void
+    public function setMenu(?MenuEntity $menu): void
     {
         $this->menu = $menu;
     }
 
     /**
-     * @return BaseMenuItemEntity
+     * @return MenuItemEntity
      */
     public function getParent()
     {
@@ -198,7 +197,7 @@ class BaseMenuItemEntity {
     }
 
     /**
-     * @param BaseMenuItemEntity $parent
+     * @param MenuItemEntity $parent
      */
     public function setParent($parent)
     {
@@ -210,9 +209,9 @@ class BaseMenuItemEntity {
 
     /**
      * Add child
-     * @param BaseMenuItemEntity $child
+     * @param MenuItemEntity $child
      */
-    public function addChild(BaseMenuItemEntity $child)
+    public function addChild(MenuItemEntity $child)
     {
         $this->children[] = $child;
     }
@@ -220,9 +219,9 @@ class BaseMenuItemEntity {
     /**
      * Remove child
      *
-     * @param BaseMenuItemEntity $child
+     * @param MenuItemEntity $child
      */
-    public function removeChild(BaseMenuItemEntity $child)
+    public function removeChild(MenuItemEntity $child)
     {
         $this->children->removeElement($child);
     }

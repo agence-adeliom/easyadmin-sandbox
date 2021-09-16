@@ -2,9 +2,7 @@
 
 namespace Adeliom\EasyMenuBundle\Controller;
 
-
-use App\Controller\Admin\Menu\MenuItemCrudController;
-use App\Entity\Menu\Menu;
+use App\Entity\EasyMenu\Menu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,7 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class BaseMenuCrudController extends AbstractCrudController
+abstract class MenuCrudController extends AbstractCrudController
 {
     private $adminUrlGenerator;
 

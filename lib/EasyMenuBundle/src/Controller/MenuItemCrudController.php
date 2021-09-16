@@ -23,7 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
-abstract class BaseMenuItemCrudController extends AbstractCrudController
+abstract class MenuItemCrudController extends AbstractCrudController
 {
     use PositionSortableActionTrait;
 

@@ -15,12 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @UniqueEntity("slug")
- * @ORM\Table(
- *     name="easy_faq__category",
- *     indexes={
- *      @ORM\Index(name="faq_category_indexes", columns={"created_at", "status"})
- *      }
- * )
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass(repositoryClass="Adeliom\EasyFaqBundle\Repository\EntryRepository")
  */
