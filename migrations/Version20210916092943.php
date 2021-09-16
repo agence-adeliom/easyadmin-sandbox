@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210914073635 extends AbstractMigration
+final class Version20210916092943 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,6 +30,8 @@ final class Version20210914073635 extends AbstractMigration
         $this->addSql('CREATE TABLE easy_media__metas (id INT AUTO_INCREMENT NOT NULL, path LONGTEXT NOT NULL, meta_key VARCHAR(255) NOT NULL, meta_value LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE easy_page__page (id INT UNSIGNED AUTO_INCREMENT NOT NULL, parent_id INT UNSIGNED DEFAULT NULL, name VARCHAR(100) NOT NULL, slug VARCHAR(100) NOT NULL, state VARCHAR(100) NOT NULL, content LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\', action VARCHAR(255) DEFAULT NULL, template VARCHAR(255) DEFAULT NULL, css LONGTEXT DEFAULT NULL, js LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, publish_date DATETIME DEFAULT NULL, unpublish_date DATETIME DEFAULT NULL, seo_title VARCHAR(255) NOT NULL, seo_description LONGTEXT DEFAULT NULL, seo_keywords VARCHAR(255) DEFAULT NULL, seo_cannonical VARCHAR(255) DEFAULT NULL, seo_cover VARCHAR(255) DEFAULT NULL, seo_key VARCHAR(255) DEFAULT NULL, seo_sitemap TINYINT(1) NOT NULL, seo_robots LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', UNIQUE INDEX UNIQ_2E074586989D9B62 (slug), INDEX IDX_2E074586727ACA70 (parent_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE easy_post__category (id INT UNSIGNED AUTO_INCREMENT NOT NULL, name VARCHAR(100) NOT NULL, slug VARCHAR(100) NOT NULL, status TINYINT(1) NOT NULL, css LONGTEXT DEFAULT NULL, js LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, seo_title VARCHAR(255) NOT NULL, seo_description LONGTEXT DEFAULT NULL, seo_keywords VARCHAR(255) DEFAULT NULL, seo_cannonical VARCHAR(255) DEFAULT NULL, seo_cover VARCHAR(255) DEFAULT NULL, seo_key VARCHAR(255) DEFAULT NULL, seo_sitemap TINYINT(1) NOT NULL, seo_robots LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', UNIQUE INDEX UNIQ_30ECF456989D9B62 (slug), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE easy_redirect__not_found (id INT AUTO_INCREMENT NOT NULL, path VARCHAR(500) NOT NULL, full_url VARCHAR(500) NOT NULL, timestamp DATETIME NOT NULL, referer VARCHAR(1000) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE easy_redirect__redirect (id INT AUTO_INCREMENT NOT NULL, source VARCHAR(255) NOT NULL, destination VARCHAR(255) NOT NULL, status VARCHAR(10) NOT NULL, count INT NOT NULL, last_accessed DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_1ADAE4A05F8A7F73 (source), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE entry (id INT UNSIGNED AUTO_INCREMENT NOT NULL, name VARCHAR(100) NOT NULL, slug VARCHAR(100) NOT NULL, state VARCHAR(100) NOT NULL, question VARCHAR(255) NOT NULL, answer LONGTEXT NOT NULL, css LONGTEXT DEFAULT NULL, js LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, publish_date DATETIME DEFAULT NULL, unpublish_date DATETIME DEFAULT NULL, seo_title VARCHAR(255) NOT NULL, seo_description LONGTEXT DEFAULT NULL, seo_keywords VARCHAR(255) DEFAULT NULL, seo_cannonical VARCHAR(255) DEFAULT NULL, seo_cover VARCHAR(255) DEFAULT NULL, seo_key VARCHAR(255) DEFAULT NULL, seo_sitemap TINYINT(1) NOT NULL, seo_robots LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', UNIQUE INDEX UNIQ_2B219D70989D9B62 (slug), INDEX faq_indexes (state), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE faq_categories_entries (entry_id INT UNSIGNED NOT NULL, category_id INT UNSIGNED NOT NULL, INDEX IDX_B1633D69BA364942 (entry_id), INDEX IDX_B1633D6912469DE2 (category_id), PRIMARY KEY(entry_id, category_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ext_log_entries (id INT AUTO_INCREMENT NOT NULL, action VARCHAR(8) NOT NULL, logged_at DATETIME NOT NULL, object_id VARCHAR(64) DEFAULT NULL, object_class VARCHAR(191) NOT NULL, version INT NOT NULL, data LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:array)\', username VARCHAR(191) DEFAULT NULL, INDEX log_class_lookup_idx (object_class), INDEX log_date_lookup_idx (logged_at), INDEX log_user_lookup_idx (username), INDEX log_version_lookup_idx (object_id, object_class, version), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB ROW_FORMAT = DYNAMIC');
@@ -45,11 +47,6 @@ final class Version20210914073635 extends AbstractMigration
         $this->addSql('ALTER TABLE faq_categories_entries ADD CONSTRAINT FK_B1633D6912469DE2 FOREIGN KEY (category_id) REFERENCES faq_categories (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE menus_items ADD CONSTRAINT FK_B07C0EE1727ACA70 FOREIGN KEY (parent_id) REFERENCES menus_items (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE menus_items ADD CONSTRAINT FK_B07C0EE1CCD7E912 FOREIGN KEY (menu_id) REFERENCES menus (id)');
-        $this->addSql('ALTER TABLE sylius_adjustment CHANGE details details LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\'');
-        $this->addSql('CREATE INDEX created_at_index ON sylius_product (created_at)');
-        $this->addSql('CREATE INDEX enabled_index ON sylius_product (enabled)');
-        $this->addSql('CREATE INDEX sylius_product_attribute_indexes ON sylius_product_attribute (storage_type, type)');
-        $this->addSql('CREATE INDEX sylius_product_attribute_value_indexes ON sylius_product_attribute_value (locale_code)');
     }
 
     public function down(Schema $schema): void
@@ -72,6 +69,8 @@ final class Version20210914073635 extends AbstractMigration
         $this->addSql('DROP TABLE easy_media__metas');
         $this->addSql('DROP TABLE easy_page__page');
         $this->addSql('DROP TABLE easy_post__category');
+        $this->addSql('DROP TABLE easy_redirect__not_found');
+        $this->addSql('DROP TABLE easy_redirect__redirect');
         $this->addSql('DROP TABLE entry');
         $this->addSql('DROP TABLE faq_categories_entries');
         $this->addSql('DROP TABLE ext_log_entries');
@@ -80,10 +79,5 @@ final class Version20210914073635 extends AbstractMigration
         $this->addSql('DROP TABLE media_entity');
         $this->addSql('DROP TABLE menus');
         $this->addSql('DROP TABLE menus_items');
-        $this->addSql('ALTER TABLE sylius_adjustment CHANGE details details LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
-        $this->addSql('DROP INDEX created_at_index ON sylius_product');
-        $this->addSql('DROP INDEX enabled_index ON sylius_product');
-        $this->addSql('DROP INDEX sylius_product_attribute_indexes ON sylius_product_attribute');
-        $this->addSql('DROP INDEX sylius_product_attribute_value_indexes ON sylius_product_attribute_value');
     }
 }

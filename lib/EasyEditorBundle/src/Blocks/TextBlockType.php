@@ -40,6 +40,6 @@ class TextBlockType extends AbstractBlock
 
     public function getTemplate(): string
     {
-        return "@EasyEditor/block/media.html.twig";
+        return "@EasyEditor/block/text.html.twig";
     }
 }

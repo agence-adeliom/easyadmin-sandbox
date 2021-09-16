@@ -27,7 +27,7 @@ class PageController extends AbstractPageController
             return $this->redirect($this->generateUrl('easy_page_index', ['slugs' => rtrim($slugs, '/')]));
         }
 
-        $template = '@EasyPage/front/index.html.twig';
+        $template = '@EasyPage/front/pages/default.html.twig';
 
         $request->setLocale($_locale ?: $request->getLocale());
 
@@ -45,12 +45,16 @@ class PageController extends AbstractPageController
             return $this->redirect($this->generateUrl('easy_page_index', $params));
         }
 
-        if ($currentPage->getTemplate() && $this->get('twig')->getLoader()->exists('@EasyPage/front/pages/type-' . $currentPage->getTemplate() . '.html.twig')) {
-            $template = '@EasyPage/front/pages/type-' . $currentPage->getTemplate() . '.html.twig';
+        if ($currentPage->getTemplate() && $this->get('twig')->getLoader()->exists('@EasyPage/front/pages/' . $currentPage->getTemplate() . '.html.twig')) {
+            $template = '@EasyPage/front/pages/' . $currentPage->getTemplate() . '.html.twig';
         }
 
-        if ($currentPage->getTemplate() && $this->get('twig')->getLoader()->exists('pages/type-' . $currentPage->getTemplate() . '.html.twig')) {
-            $template = 'pages/type-' . $currentPage->getTemplate() . '.html.twig';
+        if ($currentPage->getTemplate() && $this->get('twig')->getLoader()->exists('pages/' . $currentPage->getTemplate() . '.html.twig')) {
+            $template = 'pages/' . $currentPage->getTemplate() . '.html.twig';
+        }
+
+        if (!$this->get('twig')->getLoader()->exists($template)) {
+            throw new \Exception('Template not found ' . $template);
         }
 
         $breadcrumb = $this->get("easy_seo.breadcrumb");
