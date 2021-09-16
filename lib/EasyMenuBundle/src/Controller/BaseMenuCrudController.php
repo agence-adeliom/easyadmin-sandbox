@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -98,11 +99,14 @@ abstract class BaseMenuCrudController extends AbstractCrudController
     public function informationsFields(string $pageName, $subject): iterable
     {
         yield FormField::addPanel("easy.menu.admin.panel.information")->addCssClass("col-8");
-        yield TextField::new('code', "easy.menu.admin.field.code")
-            ->setRequired(true)
-            ->setColumns(12);
         yield TextField::new('name', "easy.menu.admin.field.name")
             ->setRequired(false)
+            ->setColumns(12);
+        yield SlugField::new('code', "easy.menu.admin.field.code")
+            ->setRequired(true)
+            ->hideOnIndex()
+            ->setTargetFieldName('name')
+            ->setUnlockConfirmationMessage("easy.page.admin.field.slug_edit")
             ->setColumns(12);
     }
 

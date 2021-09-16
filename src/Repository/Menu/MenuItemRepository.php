@@ -4,7 +4,7 @@ namespace App\Repository\Menu;
 
 use Adeliom\EasyMenuBundle\Repository\BaseMenuItemRepository;
 use App\Entity\Menu\MenuItem;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 
 
 /**
@@ -15,8 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MenuItemRepository extends BaseMenuItemRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManager $entityManager)
     {
-        parent::__construct($registry, MenuItem::class);
+        parent::__construct($entityManager, $entityManager->getClassMetadata(MenuItem::class));
     }
 }

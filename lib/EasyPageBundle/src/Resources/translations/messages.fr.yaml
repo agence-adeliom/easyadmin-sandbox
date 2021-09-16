@@ -30,6 +30,7 @@ easy:
         action: Action
         action_help: "Vous devez vider le cache Symfony pour appliquer les modifications"
         parent: Page parente
+        home_page: Page d'accueil
         name: Nom
         state: Status
         publishDate: Date de publication

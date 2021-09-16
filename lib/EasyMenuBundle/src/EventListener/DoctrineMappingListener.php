@@ -100,6 +100,7 @@ class DoctrineMappingListener implements EventSubscriber
                 'fieldName' => 'items',
                 'targetEntity' => $this->menuItemClass,
                 'mappedBy' => 'menu',
+                'cascade' => ['all'],
             ]);
         }
 

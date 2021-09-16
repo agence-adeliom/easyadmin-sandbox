@@ -24,6 +24,9 @@ services:
     Adeliom\EasyFieldsBundle\Admin\Field\Configurator\EnumConfigurator:
         public: true
 
+    Adeliom\EasyFieldsBundle\Admin\Field\Configurator\PositionSortableConfigurator:
+      public: true
+
     Adeliom\EasyFieldsBundle\EventListener\AdminListener:
         tags:
             - { name: kernel.event_listener, event: kernel.response }
