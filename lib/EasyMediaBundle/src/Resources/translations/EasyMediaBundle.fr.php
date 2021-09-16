@@ -178,6 +178,7 @@ return [
         'title'       => 'Titre',
         'alt'       => 'Texte alternatif',
         'description'       => 'Description',
+        'edit_metas'       => 'Métadonnées mise à jours',
     ],
     'save' => [
         'link'    => 'Télécharger l\'image à partir de l\'URL',

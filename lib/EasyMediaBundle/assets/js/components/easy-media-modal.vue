@@ -45,7 +45,6 @@ export default {
   },
   watch: {
     media: function (val) {
-      console.log(val)
       if(val){
         this.getInfos(val);
       }

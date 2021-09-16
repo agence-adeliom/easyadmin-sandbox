@@ -15,7 +15,7 @@
 
                 <menu class="items-wrapper">
                     <!-- move -->
-                    <div class="menu-item" v-if="!inMovableList() && enableMove">
+                    <div class="menu-item" v-if="!inMovableList() && root.enableMove">
                         <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="addToMovableList()">
@@ -31,7 +31,7 @@
                     </div>
 
                     <!-- edit metas -->
-                    <div class="menu-item" v-if="enableMetas">
+                    <div class="menu-item" v-if="root.enableMetas">
                       <button type="button" class="button btn-plain"
                               :disabled="ops_btn_disable"
                               @click.stop="editMetasItem()">
@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- rename -->
-                    <div class="menu-item" v-if="enableRename">
+                    <div class="menu-item" v-if="root.enableRename">
                         <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="renameItem()">
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- editor -->
-                    <div class="menu-item" v-if="enableEditor">
+                    <div class="menu-item" v-if="root.enableEditor">
                         <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="imageEditorCard()">
@@ -67,7 +67,7 @@
                     </div>
 
                     <!-- delete -->
-                    <div class="menu-item bg-danger" v-if="enableDelete">
+                    <div class="menu-item bg-danger" v-if="root.enableDelete">
                         <button type="button" class="button btn-plain"
                                 :disabled="ops_btn_disable"
                                 @click.stop="deleteItem()">
@@ -101,7 +101,8 @@ export default {
     ],
     data() {
         return {
-            opsMenu: false
+            opsMenu: false,
+            root: this.$root.$children[0]
         }
     },
     methods: {

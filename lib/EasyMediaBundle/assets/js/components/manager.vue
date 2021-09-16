@@ -205,7 +205,7 @@ export default {
     methods: {
         eventsListener() {
             // restrictions
-            EventHub.listen('external_modal_resrtict', (data) => {
+            EventHub.listen('external_modal_restrict', (data) => {
                 return this.restrictions = Object.assign(this.restrictions, data)
             })
 
@@ -277,6 +277,7 @@ export default {
                 this.onResize()
                 this.firstRun = true
             })
+
         },
 
         shortCuts(e) {
@@ -290,6 +291,7 @@ export default {
                         // when no bulk selection
                         if (!this.isBulkSelecting()) {
                             // open folder
+
                             if (key == 'enter' && this.selectedFile) {
                                 this.openFolder(this.selectedFile)
                             }

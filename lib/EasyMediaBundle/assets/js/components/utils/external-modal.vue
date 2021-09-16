@@ -34,16 +34,17 @@ export default {
         }
     },
     created() {
-        EventHub.fire('external_modal_resrtict', this.restrict)
+        EventHub.fire('external_modal_restrict', this.restrict)
     },
     mounted() {
         if (this.old) {
             this.updateParent(this.old)
         }
 
-        EventHub.listen('file_selected', (path) => {
+        EventHub.listen('file_modal_selected', (data) => {
             if (this.item == this.name && this.type !== 'folder' && !this.multi) {
-                this.updateParent(path)
+              this.updateParent(data.path)
+              this.$parent.hideInputModal();
             }
         })
 
