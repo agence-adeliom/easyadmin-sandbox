@@ -103,6 +103,7 @@ services:
         class: Adeliom\EasyShopBundle\Form\Type\ProductBundle\ProductAssociationEntityType
         arguments:
             - "@sylius.repository.product_association_type"
+            - "@sylius.repository.product"
             - "@sylius.form.type.data_transformer.products_to_product_associations"
         tags: [ form.type ]
 

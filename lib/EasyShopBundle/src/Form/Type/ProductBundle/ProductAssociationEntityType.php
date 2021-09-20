@@ -29,14 +29,19 @@ final class ProductAssociationEntityType extends AbstractType
     /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
+    /** @var RepositoryInterface */
+    private $productRepository;
+
     /** @var DataTransformerInterface */
     private $productsToProductAssociationsTransformer;
 
     public function __construct(
         RepositoryInterface $productAssociationTypeRepository,
+        RepositoryInterface $productRepository,
         DataTransformerInterface $productsToProductAssociationsTransformer
     ) {
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;
+        $this->productRepository = $productRepository;
         $this->productsToProductAssociationsTransformer = $productsToProductAssociationsTransformer;
     }
 
@@ -49,7 +54,7 @@ final class ProductAssociationEntityType extends AbstractType
     {
         $resolver->setDefaults([
             'by_reference' => false,
-            'class' => Product::class,
+            'class' => $this->productRepository->getClassName()
         ]);
     }
 

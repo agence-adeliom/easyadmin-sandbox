@@ -60,7 +60,7 @@ final class ProductAssociationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $assoc = $this->productAssociationTypeRepository->findAll();
-        foreach ($assoc as $i => $item){
+        foreach ($assoc as $item){
             $code = $item->getCode();
             $builder->add($code, EntityType::class, [
                 'property_path' => "[$code]",
