@@ -76,6 +76,7 @@ class AddUserCommand extends Command
             ->addArgument('email', InputArgument::OPTIONAL, 'The email of the new user')
             ->addArgument('password', InputArgument::OPTIONAL, 'The plain password of the new user')
             ->addOption('admin', null, InputOption::VALUE_NONE, 'If set, the user is created as an administrator')
+            ->addOption('super-admin', null, InputOption::VALUE_NONE, 'If set, the user is created as an administrator')
         ;
     }
 
@@ -150,6 +151,14 @@ class AddUserCommand extends Command
         $email = $input->getArgument('email');
         $plainPassword = $input->getArgument('password');
         $isAdmin = $input->getOption('admin');
+        $isSuperAdmin = $input->getOption('super-admin');
+        $role = "ROLE_USER";
+        if($isAdmin){
+            $role = "ROLE_ADMIN";
+        }
+        if($isSuperAdmin){
+            $role = "ROLE_SUPER_ADMIN";
+        }
 
         // make sure to validate the user data is correct
         $this->validateUserData($email, $plainPassword);
@@ -157,7 +166,7 @@ class AddUserCommand extends Command
         // create the user and hash its password
         $user = new $userClass();
         $user->setEmail($email);
-        $user->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
+        $user->setRoles([$role]);
 
         // See https://symfony.com/doc/current/security.html#c-encoding-passwords
         $hashedPassword = $this->passwordHasher->hashPassword($user, $plainPassword);
@@ -166,7 +175,7 @@ class AddUserCommand extends Command
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $this->io->success(sprintf('%s was successfully created: %s', $isAdmin ? 'Administrator user' : 'User', $user->getEmail()));
+        $this->io->success(sprintf('%s was successfully created: %s', ($isAdmin || $isSuperAdmin) ? 'Administrator user' : 'User', $user->getEmail()));
 
         $event = $stopwatch->stop('add-user-command');
         if ($output->isVerbose()) {
@@ -206,6 +215,11 @@ By default the command creates regular users. To create administrator users,
 add the <comment>--admin</comment> option:
 
   <info>php %command.full_name%</info> email password <comment>--admin</comment>
+  
+By default the command creates regular users. To create super-administrator users,
+add the <comment>--super-admin</comment> option:
+
+  <info>php %command.full_name%</info> email password <comment>--super-admin</comment>
 
 If you omit any of the three required arguments, the command will ask you to
 provide the missing values:

@@ -265,9 +265,8 @@ abstract class ProductCrudController extends SyliusCrudController
             ->setFormTypeOption('class', $this->get(ParameterBagInterface::class)->get('sylius.model.taxon.class'))
             ->setFormTypeOption('choice_value', "code")
             ->setFormTypeOption('choice_label', function ($item) {
-                return $item->getTree(" / ");
-            })
-            ;
+                return $item->getTree(" / ", true);
+            });
 
         yield AssociationField::new('productTaxons')
             ->setFormType(ProductTaxonType::class)

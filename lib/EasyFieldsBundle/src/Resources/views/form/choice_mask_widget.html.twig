@@ -3,7 +3,7 @@
 {% block choice_field_mask_widget %}
     {{ block('choice_widget') }}
 
-    {% set main_form_name = id|slice(0, id|length - name|length)|trim('_') %}
+    {% set main_form_name = id|slice(0, id|length - name|length) %}
 
     <script>
         var allFields_{{ main_form_name }} = {{ all_fields|json_encode|raw }};
@@ -12,7 +12,11 @@
         function choice_field_mask_show_{{ main_form_name }}(val)
         {
             var controlGroupIdFunc = function (field) {
-                return '[data-row-id={{ main_form_name }}_' + field + "]";
+                let rowId = '{{ main_form_name }}_';
+                if(rowId.endsWith('__')){
+                    rowId = rowId.replace('__', '_');
+                }
+                return '[data-row-id=' + rowId + field + "]";
             };
 
             if (map_{{ main_form_name }}[val] == undefined) {

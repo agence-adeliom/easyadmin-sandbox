@@ -74,6 +74,7 @@ abstract class PostCrudController extends AbstractCrudController
             ->setColumns(12);
         yield AssociationField::new("category", "easy.blog.admin.field.category")
             ->listSelector(true)
+            ->autocomplete()
             ->setCrudController($this->getParameter("easy_blog.category.crud"));
     }
 

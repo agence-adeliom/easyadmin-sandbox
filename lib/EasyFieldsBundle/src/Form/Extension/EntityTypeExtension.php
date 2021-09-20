@@ -38,12 +38,9 @@ class EntityTypeExtension extends AbstractTypeExtension
             AssociationField::OPTION_LIST_BUTTON_ICON => 'fa-list',
             AssociationField::OPTION_LIST_BUTTON_CANCEL_LABEL => 'action.list.cancel',
             AssociationField::OPTION_LIST_BUTTON_VALIDATE_LABEL => 'action.list.validate',
-
             AssociationField::OPTION_LIST_SHOW_FILTER => false,
             AssociationField::OPTION_LIST_SHOW_SEARCH => false,
-
             AssociationField::OPTION_LIST_FILTERS => null,
-
             AssociationField::OPTION_LIST_DISPLAY_COLUMNS => null,
         ]);
     }
@@ -73,7 +70,14 @@ class EntityTypeExtension extends AbstractTypeExtension
                 $view->vars['attr']['data-ea-ajax-index-url'] = $ajaxEndpointUrl;
             }
         }
+
+        /*if(isset($view->vars['attr']["data-ea-widget"]) && $view->vars['attr']["data-ea-widget"] == "ea-autocomplete"){
+            if(!isset($view->vars['attr']['data-ea-autocomplete-endpoint-url'])){
+                $view->vars['attr']['data-ea-autocomplete-endpoint-url'] = '/';
+            }
+        }*/
     }
+
 
     public static function getExtendedTypes(): iterable
     {
