@@ -8,16 +8,7 @@ services:
         autowire: true
         autoconfigure: true
         tags: [ 'controller.service_arguments' ]
-#
-#    Adeliom\EasyFaqBundle\Controller\BaseEntryController:
-#        calls:
-#            - [ 'setRepositories', [ '@easy_faq.category.repository', '@easy_faq.entry.repository' ] ]
-#
-#    Adeliom\EasyFaqBundle\Controller\BaseCategoryController:
-#        calls:
-#            - [ 'setRepositories', [ '@easy_faq.category.repository', '@easy_faq.entry.repository' ] ]
-#
-#
+
     easy_menu.menu.repository:
         class: '%easy_menu.menu.repository%'
         arguments:
@@ -42,23 +33,15 @@ services:
             - '%easy_menu.menu_item.class%'
         tags:
             - doctrine.event_subscriber
-#
-#    easy_faq.sitemap.subscriber:
-#        class: Adeliom\EasyFaqBundle\EventListener\SitemapSubscriber
-#        arguments:
-#            - "@router"
-#            - "@easy_faq.entry.repository"
-#            - "@easy_faq.category.repository"
-#        tags:
-#            - { name: "kernel.event_subscriber", priority: 100 }
-#
-#    Adeliom\EasyFaqBundle\EventListener\EntryListener:
-#        arguments:
-#            - "@easy_faq.entry.repository"
-#            - "@easy_faq.category.repository"
-#            - "%easy_faq.page%"
-#        tags:
-#            - kernel.event_subscriber
+
+    Adeliom\EasyMenuBundle\Twig\EasyMenuExtension:
+      public: true
+      arguments:
+        - '@twig'
+        - '@doctrine.orm.entity_manager'
+        - '%easy_menu.menu.class%'
+      tags:
+        - { name: twig.extension }
 
     Adeliom\EasyMenuBundle\EventListener\MenuCreationListener:
       arguments:
