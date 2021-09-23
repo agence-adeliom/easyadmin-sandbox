@@ -1,0 +1,42 @@
+[submodule "lib/EasyAdminUserBundle"]
+	path = lib/EasyAdminUserBundle
+	url = https://github.com/agence-adeliom/easy-admin-user-bundle
+[submodule "lib/EasyBlockBundle"]
+	path = lib/EasyBlockBundle
+	url = https://github.com/agence-adeliom/easy-block-bundle
+[submodule "lib/EasyBlogBundle"]
+	path = lib/EasyBlogBundle
+	url = https://github.com/agence-adeliom/easy-blog-bundle
+[submodule "lib/EasyCommonBundle"]
+	path = lib/EasyCommonBundle
+	url = https://github.com/agence-adeliom/easy-common-bundle
+[submodule "lib/EasyConfigBundle"]
+	path = lib/EasyConfigBundle
+	url = https://github.com/agence-adeliom/easy-config-bundle
+[submodule "lib/EasyEditorBundle"]
+	path = lib/EasyEditorBundle
+	url = https://github.com/agence-adeliom/easy-editor-bundle
+[submodule "lib/EasyFaqBundle"]
+	path = lib/EasyFaqBundle
+	url = https://github.com/agence-adeliom/easy-faq-bundle
+[submodule "lib/EasyFieldsBundle"]
+	path = lib/EasyFieldsBundle
+	url = https://github.com/agence-adeliom/easy-fields-bundle
+[submodule "lib/EasyMediaBundle"]
+	path = lib/EasyMediaBundle
+	url = https://github.com/agence-adeliom/easy-media-bundle
+[submodule "lib/EasyMenuBundle"]
+	path = lib/EasyMenuBundle
+	url = https://github.com/agence-adeliom/easy-menu-bundle
+[submodule "lib/EasyPageBundle"]
+	path = lib/EasyPageBundle
+	url = https://github.com/agence-adeliom/easy-page-bundle
+[submodule "lib/EasyRedirectBundle"]
+	path = lib/EasyRedirectBundle
+	url = https://github.com/agence-adeliom/easy-redirect-bundle
+[submodule "lib/EasySeoBundle"]
+	path = lib/EasySeoBundle
+	url = https://github.com/agence-adeliom/easy-seo-bundle
+[submodule "lib/EasyShopBundle"]
+	path = lib/EasyShopBundle
+	url = https://github.com/agence-adeliom/easy-shop-bundle
