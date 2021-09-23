@@ -40,3 +40,6 @@
 [submodule "lib/EasyShopBundle"]
 	path = lib/EasyShopBundle
 	url = https://github.com/agence-adeliom/easy-shop-bundle
+[submodule "_recipes"]
+	path = _recipes
+	url = https://github.com/agence-adeliom/symfony-recipes.git

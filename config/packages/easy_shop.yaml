@@ -2,7 +2,7 @@ imports:
   - { resource: "@EasyShopBundle/Resources/config/app/config.yml" }
 
 parameters:
-  sylius_core.public_dir: '%kernel.project_dir%/public'
+  sylius_core.public_dir: '%kernel.project_dir%/public/upload'
   sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
   sylius.security.new_api_route: "/api/v2"
   sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
@@ -29,7 +29,7 @@ knp_gaufrette:
   adapters:
     sylius_image:
       local:
-        directory: "%sylius_core.public_dir%"
+        directory: "%sylius_core.public_dir%/media/image"
         create: true
   filesystems:
     sylius_image:
@@ -55,11 +55,13 @@ liip_imagine:
   loaders:
     default:
       filesystem:
-        data_root: '%kernel.project_dir%/public/upload'
+        data_root:
+          - '%kernel.project_dir%/public/upload'
+          - '%sylius_core.public_dir%/media/image'
   resolvers:
     default:
       web_path:
-        web_root: "%sylius_core.public_dir%"
+        web_root: '%kernel.project_dir%/public'
         cache_prefix: "media/cache"
   filter_sets:
     sylius_small:
