@@ -1,3 +1,0 @@
-easy_admin_user:
-  user_class: App\Entity\EasyAdmin\User
-  reset_password_class: App\Entity\EasyAdmin\ResetPasswordRequest

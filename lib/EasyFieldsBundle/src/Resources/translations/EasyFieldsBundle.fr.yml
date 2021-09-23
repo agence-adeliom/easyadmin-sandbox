@@ -1,6 +1,0 @@
-action:
-  add_new_item: "Ajouter un nouvel élément"
-  list_items: "Liste de éléments"
-  list:
-    cancel: "Annuler"
-    validate: "Valider"

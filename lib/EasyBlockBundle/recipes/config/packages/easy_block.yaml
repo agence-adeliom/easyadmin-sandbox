@@ -1,3 +1,0 @@
-easy_block:
-  block_class: App\Entity\EasyBlock\Block
-  block_repository: App\Repository\EasyBlock\BlockRepository

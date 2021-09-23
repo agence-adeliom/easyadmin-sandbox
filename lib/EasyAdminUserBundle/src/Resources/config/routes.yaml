@@ -1,3 +1,0 @@
-easy_admin_user:
-  resource: "@EasyAdminUserBundle/Controller/"
-  type: annotation
