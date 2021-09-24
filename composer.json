@@ -173,11 +173,9 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "endpoint": "https://recipes.adev2.com/",
+            "allow-contrib": true,
             "require": "^5.2"
         }
     },
-    "symfony": {
-        "endpoint": "https://recipes.adev2.com/"
-    }
 }
