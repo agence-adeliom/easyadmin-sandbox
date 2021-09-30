@@ -37,7 +37,7 @@ class Alpha extends AbstractBlock implements BlockInterface
         ];
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add("name", TextType::class)

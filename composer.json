@@ -6,82 +6,95 @@
     "repositories": [
         {
             "type": "path",
-            "url": "lib/EasyMediaBundle"
+            "url": "lib/EasyMediaBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyEditorBundle"
+            "url": "lib/EasyEditorBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyFieldsBundle"
+            "url": "lib/EasyFieldsBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyCommonBundle"
+            "url": "lib/EasyCommonBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyPageBundle"
+            "url": "lib/EasyPageBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyBlogBundle"
+            "url": "lib/EasyBlogBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasySeoBundle"
+            "url": "lib/EasySeoBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyBlockBundle"
+            "url": "lib/EasyBlockBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyShopBundle"
+            "url": "lib/EasyShopBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyFaqBundle"
+            "url": "lib/EasyFaqBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyMenuBundle"
+            "url": "lib/EasyMenuBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyAdminUserBundle"
+            "url": "lib/EasyAdminUserBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyConfigBundle"
+            "url": "lib/EasyConfigBundle",
+            "canonical": false
         },
         {
             "type": "path",
-            "url": "lib/EasyRedirectBundle"
+            "url": "lib/EasyRedirectBundle",
+            "canonical": false
         }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-ctype": "*",
         "ext-exif": "*",
-        "ext-getext": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "agence-adeliom/easy-admin-user-bundle": "*@dev",
-        "agence-adeliom/easy-block-bundle": "*@dev",
-        "agence-adeliom/easy-blog-bundle": "*@dev",
-        "agence-adeliom/easy-common-bundle": "*@dev",
-        "agence-adeliom/easy-config-bundle": "*@dev",
-        "agence-adeliom/easy-editor-bundle": "*@dev",
-        "agence-adeliom/easy-faq-bundle": "*@dev",
-        "agence-adeliom/easy-fields-bundle": "*@dev",
-        "agence-adeliom/easy-media-bundle": "*@dev",
-        "agence-adeliom/easy-menu-bundle": "*@dev",
-        "agence-adeliom/easy-page-bundle": "*@dev",
-        "agence-adeliom/easy-redirect-bundle": "*@dev",
-        "agence-adeliom/easy-seo-bundle": "*@dev",
-        "agence-adeliom/easy-shop-bundle": "*@dev",
+        "agence-adeliom/easy-admin-user-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-block-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-blog-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-common-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-config-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-editor-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-faq-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-fields-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-media-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-menu-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-page-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-redirect-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-seo-bundle": "dev-main as 1.0.0",
+        "agence-adeliom/easy-shop-bundle": "dev-main as 1.0.0",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
@@ -119,7 +132,6 @@
         "symfony/validator": "^5.2",
         "symfony/web-link": "^5.2",
         "symfony/yaml": "^5.2",
-        "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
@@ -161,6 +173,9 @@
             "ckeditor:install --clear=drop": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
         },
+        "links": [
+            "ln -s lib/EasyShopBundle vendor/agence-adeliom/easy-shop-bundle"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
@@ -174,8 +189,8 @@
     "extra": {
         "symfony": {
             "endpoint": "https://recipes.adev2.com/",
-            "allow-contrib": true,
+            "allow-contrib": false,
             "require": "^5.2"
         }
-    },
+    }
 }
