@@ -173,16 +173,10 @@
         {
             "name": "agence-adeliom/easy-admin-user-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-admin-user-bundle.git",
-                "reference": "b7c28cc5bc4bc5579f3c839e659c6bb811f3ddab"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-admin-user-bundle/zipball/b7c28cc5bc4bc5579f3c839e659c6bb811f3ddab",
-                "reference": "b7c28cc5bc4bc5579f3c839e659c6bb811f3ddab",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyAdminUserBundle",
+                "reference": "51e6f2ba17cb8ba99881d3224075479f06c5bbf5"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -201,14 +195,12 @@
                 "symfony/validator": "^4.4 || ^5.2",
                 "symfonycasts/reset-password-bundle": "^1.8"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyAdminUserBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -229,21 +221,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-admin-user-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-admin-user-bundle"
             },
-            "time": "2021-09-24T13:22:35+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-block-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-block-bundle.git",
-                "reference": "46edf34e644c7f3f2ae748559b2b0338418c54c6"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-block-bundle/zipball/46edf34e644c7f3f2ae748559b2b0338418c54c6",
-                "reference": "46edf34e644c7f3f2ae748559b2b0338418c54c6",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyBlockBundle",
+                "reference": "d8454e6d4056e6a9f7dbc268d353ca3d3204d720"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -261,14 +249,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyBlockBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -289,21 +275,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-block-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-block-bundle"
             },
-            "time": "2021-09-28T14:13:00+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-blog-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-blog-bundle.git",
-                "reference": "7612ec80f9e610934cc128838007a3f67752a1f8"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-blog-bundle/zipball/7612ec80f9e610934cc128838007a3f67752a1f8",
-                "reference": "7612ec80f9e610934cc128838007a3f67752a1f8",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyBlogBundle",
+                "reference": "9ec7fbad33cf2d5cf4ad28e52c8e3f5d299269fb"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -324,14 +306,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyBlogBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -352,26 +332,23 @@
                 "issues": "https://github.com/agence-adeliom/easy-blog-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-blog-bundle"
             },
-            "time": "2021-09-24T13:19:21+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-common-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-common-bundle.git",
-                "reference": "e17fac8548a8593224e4b811920d2ea312ca62c3"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-common-bundle/zipball/e17fac8548a8593224e4b811920d2ea312ca62c3",
-                "reference": "e17fac8548a8593224e4b811920d2ea312ca62c3",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyCommonBundle",
+                "reference": "3ef15adaaacbd9919f7f20b012f6ea357f1adacf"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.4",
                 "ext-json": "*",
                 "php": "^7.4|^8.0",
+                "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/config": "^4.4 || ^5.2",
                 "symfony/dependency-injection": "^4.4 || ^5.2",
                 "symfony/deprecation-contracts": "^2.2",
@@ -384,14 +361,12 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "symfony/serializer": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyCommonBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -413,21 +388,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-common-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-common-bundle"
             },
-            "time": "2021-09-24T12:42:33+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-config-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-config-bundle.git",
-                "reference": "1b03add71eba0d57b011f81fd44f97d9dfad46b6"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-config-bundle/zipball/1b03add71eba0d57b011f81fd44f97d9dfad46b6",
-                "reference": "1b03add71eba0d57b011f81fd44f97d9dfad46b6",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyConfigBundle",
+                "reference": "14b71101f5224a7c136348d341583abb4e5c31c2"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -445,14 +416,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyConfigBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -473,21 +442,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-config-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-config-bundle"
             },
-            "time": "2021-09-24T12:49:39+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-editor-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-editor-bundle.git",
-                "reference": "75f202c8c8069a4d9d9eb3dc411f3085b95b79dd"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-editor-bundle/zipball/75f202c8c8069a4d9d9eb3dc411f3085b95b79dd",
-                "reference": "75f202c8c8069a4d9d9eb3dc411f3085b95b79dd",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyEditorBundle",
+                "reference": "9533f3268ac2815d372f282c105607b5064c6cc4"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -504,14 +469,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyEditorBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -533,21 +496,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-editor-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-editor-bundle"
             },
-            "time": "2021-09-28T13:53:57+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-faq-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-faq-bundle.git",
-                "reference": "121523f9c8ebe6159071d25afb37d3ba7fdd0f9d"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-faq-bundle/zipball/121523f9c8ebe6159071d25afb37d3ba7fdd0f9d",
-                "reference": "121523f9c8ebe6159071d25afb37d3ba7fdd0f9d",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyFaqBundle",
+                "reference": "d68c4b3eab06180108d60a2b8a0e3d9ac4c9ac3a"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -568,14 +527,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyFaqBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -592,34 +549,31 @@
             "description": "A Symfony simple FAQ bundle for EasyAdmin",
             "homepage": "https://github.com/agence-adeliom/easy-faq-bundle",
             "keywords": [
-                "FAQ",
                 "easyadmin",
+                "faq",
                 "symfony"
             ],
             "support": {
                 "issues": "https://github.com/agence-adeliom/easy-faq-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-faq-bundle"
             },
-            "time": "2021-09-24T13:25:54+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-fields-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-fields-bundle.git",
-                "reference": "21e5bc0fc912c7a0b4e23d151cb813c17e5bfc25"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-fields-bundle/zipball/21e5bc0fc912c7a0b4e23d151cb813c17e5bfc25",
-                "reference": "21e5bc0fc912c7a0b4e23d151cb813c17e5bfc25",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyFieldsBundle",
+                "reference": "315eb30c782ead13083d0645faabc36bd42c7281"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.4",
                 "ext-json": "*",
                 "php": "^7.4|^8.0",
+                "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/config": "^4.4 || ^5.2",
                 "symfony/dependency-injection": "^4.4 || ^5.2",
                 "symfony/deprecation-contracts": "^2.2",
@@ -630,14 +584,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyFieldsBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -662,21 +614,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-fields-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-fields-bundle"
             },
-            "time": "2021-09-24T10:06:23+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-media-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-media-bundle.git",
-                "reference": "2e039677bdf6a6c5318bec8076859d36a4e988d4"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-media-bundle/zipball/2e039677bdf6a6c5318bec8076859d36a4e988d4",
-                "reference": "2e039677bdf6a6c5318bec8076859d36a4e988d4",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyMediaBundle",
+                "reference": "785c8b87cd8f7e3d46cdb89ae475775d50ba98bd"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -701,14 +649,12 @@
             "suggest": {
                 "liip/imagine-bundle": "^2.6"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyMediaBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -730,21 +676,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-media-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-media-bundle"
             },
-            "time": "2021-09-24T10:06:47+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-menu-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-menu-bundle.git",
-                "reference": "b4f6a0e8852d44a71e4c03611b3fac84404a8cca"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-menu-bundle/zipball/b4f6a0e8852d44a71e4c03611b3fac84404a8cca",
-                "reference": "b4f6a0e8852d44a71e4c03611b3fac84404a8cca",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyMenuBundle",
+                "reference": "99c4a2cb1644b88a115928affd3a43b9e2bb0db2"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -752,6 +694,7 @@
                 "easycorp/easyadmin-bundle": "^3.4",
                 "ext-json": "*",
                 "php": "^7.4|^8.0",
+                "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/config": "^4.4 || ^5.2",
                 "symfony/dependency-injection": "^4.4 || ^5.2",
                 "symfony/deprecation-contracts": "^2.2",
@@ -762,14 +705,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyMenuBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -791,21 +732,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-menu-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-menu-bundle"
             },
-            "time": "2021-09-24T13:55:10+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-page-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-page-bundle.git",
-                "reference": "4ea684630b31b873d6601aa434a3e028a00a8b15"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-page-bundle/zipball/4ea684630b31b873d6601aa434a3e028a00a8b15",
-                "reference": "4ea684630b31b873d6601aa434a3e028a00a8b15",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyPageBundle",
+                "reference": "0a6aee76e2bde85012c948f2ef75b6ea77ba1170"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -813,6 +750,7 @@
                 "easycorp/easyadmin-bundle": "^3.4",
                 "ext-json": "*",
                 "php": "^7.4|^8.0",
+                "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/config": "^4.4 || ^5.2",
                 "symfony/dependency-injection": "^4.4 || ^5.2",
                 "symfony/deprecation-contracts": "^2.2",
@@ -824,14 +762,12 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "symfony/webpack-encore-bundle": "^1.10"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyPageBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -852,21 +788,17 @@
                 "issues": "https://github.com/agence-adeliom/easy-page-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-page-bundle"
             },
-            "time": "2021-09-24T13:23:20+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-redirect-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-redirect-bundle.git",
-                "reference": "0e6511f709e3eac13e36250e3865a6c6fafc5df3"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-redirect-bundle/zipball/0e6511f709e3eac13e36250e3865a6c6fafc5df3",
-                "reference": "0e6511f709e3eac13e36250e3865a6c6fafc5df3",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyRedirectBundle",
+                "reference": "0fb286c51fcbf8889956fbdbd7ed4d838d2f3b9d"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -882,14 +814,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyRedirectBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -910,24 +840,21 @@
                 "issues": "https://github.com/agence-adeliom/easy-redirect-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-redirect-bundle"
             },
-            "time": "2021-09-24T10:08:03+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-seo-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-seo-bundle.git",
-                "reference": "99ab5449eb94accf0bc0b18fbb62e8543583c265"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-seo-bundle/zipball/99ab5449eb94accf0bc0b18fbb62e8543583c265",
-                "reference": "99ab5449eb94accf0bc0b18fbb62e8543583c265",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasySeoBundle",
+                "reference": "24ff9bb1ea04133348f0ee88b1304ee98969d927"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
+                "agence-adeliom/easy-media-bundle": "^1.0",
                 "easycorp/easyadmin-bundle": "^3.4",
                 "ext-json": "*",
                 "php": "^7.4|^8.0",
@@ -941,14 +868,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasySeoBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -961,32 +886,28 @@
             "description": "Symfony SEO bundle for EasyAdmin",
             "homepage": "https://github.com/agence-adeliom/easy-seo-bundle",
             "keywords": [
-                "Sitemap",
+                "SEO",
                 "breadcrumb",
                 "easyadmin",
                 "metadata",
-                "seo",
+                "sitemap",
                 "symfony"
             ],
             "support": {
                 "issues": "https://github.com/agence-adeliom/easy-seo-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-seo-bundle"
             },
-            "time": "2021-09-24T10:08:33+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-shop-bundle",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-shop-bundle.git",
-                "reference": "fb05ecb74b46ce2db010fc6110b434904d8ddee4"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-shop-bundle/zipball/fb05ecb74b46ce2db010fc6110b434904d8ddee4",
-                "reference": "fb05ecb74b46ce2db010fc6110b434904d8ddee4",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyShopBundle",
+                "reference": "ea96e37a591905a8f48edcf8e1de75c8b19a6439"
             },
             "require": {
                 "a2lix/translation-form-bundle": "^3.0",
@@ -1006,14 +927,12 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "twig/extra-bundle": "^2.12|^3.0"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyShopBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1040,7 +959,9 @@
                 "issues": "https://github.com/agence-adeliom/easy-shop-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-shop-bundle"
             },
-            "time": "2021-09-29T09:44:08+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "alcohol/iso4217",
@@ -1100,16 +1021,16 @@
         },
         {
             "name": "api-platform/core",
-            "version": "v2.6.5",
+            "version": "v2.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "4e22a289e474db454480020ff37d20472668c11c"
+                "reference": "25c71b216473844cdbe5bf284ccbeeb26acd76e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/4e22a289e474db454480020ff37d20472668c11c",
-                "reference": "4e22a289e474db454480020ff37d20472668c11c",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/25c71b216473844cdbe5bf284ccbeeb26acd76e7",
+                "reference": "25c71b216473844cdbe5bf284ccbeeb26acd76e7",
                 "shasum": ""
             },
             "require": {
@@ -1128,6 +1049,7 @@
             },
             "conflict": {
                 "doctrine/common": "<2.7",
+                "doctrine/dbal": "<2.10",
                 "doctrine/mongodb-odm": "<2.2",
                 "doctrine/persistence": "<1.3"
             },
@@ -1247,7 +1169,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v2.6.5"
+                "source": "https://github.com/api-platform/core/tree/v2.6.6"
             },
             "funding": [
                 {
@@ -1255,7 +1177,86 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-15T16:53:33+00:00"
+            "time": "2021-09-29T19:11:04+00:00"
+        },
+        {
+            "name": "babdev/pagerfanta",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BabDev/Pagerfanta.git",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/7a5d0d888f77d4af5cf37889bb3ea331675a595c",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.2",
+                "symfony/deprecation-contracts": "^2.1"
+            },
+            "replace": {
+                "pagerfanta/pagerfanta": "*"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.4",
+                "doctrine/dbal": "^2.5",
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-odm": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "jackalope/jackalope-doctrine-dbal": "^1.3",
+                "mandango/mandango": "^1.0@dev",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "propel/propel": "^2.0@dev",
+                "propel/propel1": "^1.7",
+                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0",
+                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "doctrine/collections": "To use the Doctrine Collection and Selectable adapter.",
+                "doctrine/dbal": "To use the Doctrine DBAL adapters.",
+                "doctrine/mongodb-odm": "To use the Doctrine MongoDB ODM Adapter.",
+                "doctrine/orm": "To use the Doctrine ORM Adapter.",
+                "doctrine/phpcr-odm": "To use the Doctrine PHPCR ODM Adapter.",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Pagination for PHP",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "support": {
+                "issues": "https://github.com/BabDev/Pagerfanta/issues",
+                "source": "https://github.com/BabDev/Pagerfanta/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mbabker",
+                    "type": "github"
+                }
+            ],
+            "abandoned": "pagerfanta/pagerfanta",
+            "time": "2020-06-06T19:22:10+00:00"
         },
         {
             "name": "babdev/pagerfanta-bundle",
@@ -1860,16 +1861,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "51d3d4880d28951fff42a635a2389f8c63baddc5"
+                "reference": "f18adf13f6c81c67a88360dca359ad474523f8e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/51d3d4880d28951fff42a635a2389f8c63baddc5",
-                "reference": "51d3d4880d28951fff42a635a2389f8c63baddc5",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/f18adf13f6c81c67a88360dca359ad474523f8e3",
+                "reference": "f18adf13f6c81c67a88360dca359ad474523f8e3",
                 "shasum": ""
             },
             "require": {
@@ -1881,8 +1882,8 @@
                 "doctrine/phpcr-odm": "<1.3.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^8.2",
-                "doctrine/dbal": "^2.5.4",
+                "doctrine/coding-standard": "^9.0",
+                "doctrine/dbal": "^2.5.4 || ^3.0",
                 "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
                 "doctrine/orm": "^2.7.0",
                 "ext-sqlite3": "*",
@@ -1917,7 +1918,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.0"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.1"
             },
             "funding": [
                 {
@@ -1933,20 +1934,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-23T10:20:43+00:00"
+            "time": "2021-09-20T21:51:43+00:00"
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.13.3",
+            "version": "2.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0d7adf4cadfee6f70850e5b163e6cdd706417838"
+                "reference": "2411a55a2a628e6d8dd598388ab13474802c7b6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0d7adf4cadfee6f70850e5b163e6cdd706417838",
-                "reference": "0d7adf4cadfee6f70850e5b163e6cdd706417838",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2411a55a2a628e6d8dd598388ab13474802c7b6e",
+                "reference": "2411a55a2a628e6d8dd598388ab13474802c7b6e",
                 "shasum": ""
             },
             "require": {
@@ -1959,8 +1960,8 @@
             "require-dev": {
                 "doctrine/coding-standard": "9.0.0",
                 "jetbrains/phpstorm-stubs": "2021.1",
-                "phpstan/phpstan": "0.12.96",
-                "phpunit/phpunit": "^7.5.20|^8.5|9.5.5",
+                "phpstan/phpstan": "0.12.99",
+                "phpunit/phpunit": "^7.5.20|^8.5|9.5.10",
                 "psalm/plugin-phpunit": "0.16.1",
                 "squizlabs/php_codesniffer": "3.6.0",
                 "symfony/cache": "^4.4",
@@ -2026,7 +2027,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/2.13.3"
+                "source": "https://github.com/doctrine/dbal/tree/2.13.4"
             },
             "funding": [
                 {
@@ -2042,7 +2043,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-12T19:11:48+00:00"
+            "time": "2021-10-02T15:59:26+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -2089,19 +2090,20 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.4.2",
+            "version": "2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "4202ce675d29e70a8b9ee763bec021b6f44caccb"
+                "reference": "62a188ce2192e6b3b7a2019c26c5001778818b83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/4202ce675d29e70a8b9ee763bec021b6f44caccb",
-                "reference": "4202ce675d29e70a8b9ee763bec021b6f44caccb",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/62a188ce2192e6b3b7a2019c26c5001778818b83",
+                "reference": "62a188ce2192e6b3b7a2019c26c5001778818b83",
                 "shasum": ""
             },
             "require": {
+                "doctrine/annotations": "^1",
                 "doctrine/cache": "^1.11 || ^2.0",
                 "doctrine/dbal": "^2.9.0|^3.0",
                 "doctrine/persistence": "^1.3.3|^2.0",
@@ -2181,7 +2183,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.4.2"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.4.3"
             },
             "funding": [
                 {
@@ -2197,7 +2199,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-05T13:40:39+00:00"
+            "time": "2021-09-11T21:20:34+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -2729,25 +2731,24 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.9.5",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da"
+                "reference": "07e15a00382982dc8088093669108d2174e456ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
-                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/07e15a00382982dc8088093669108d2174e456ea",
+                "reference": "07e15a00382982dc8088093669108d2174e456ea",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8",
-                "doctrine/annotations": "^1.13",
                 "doctrine/cache": "^1.12.1 || ^2.1.1",
                 "doctrine/collections": "^1.5",
                 "doctrine/common": "^3.0.3",
-                "doctrine/dbal": "^2.13.0",
+                "doctrine/dbal": "^2.13.1 || ^3.1.1",
                 "doctrine/deprecations": "^0.5.3",
                 "doctrine/event-manager": "^1.1",
                 "doctrine/inflector": "^1.4 || ^2.0",
@@ -2758,17 +2759,23 @@
                 "ext-pdo": "*",
                 "php": "^7.1 ||^8.0",
                 "psr/cache": "^1 || ^2 || ^3",
-                "symfony/console": "^3.0 || ^4.0 || ^5.0 || ^6.0"
+                "symfony/console": "^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/polyfill-php72": "^1.23",
+                "symfony/polyfill-php80": "^1.15"
+            },
+            "conflict": {
+                "doctrine/annotations": "<1.13 || >= 2.0"
             },
             "require-dev": {
+                "doctrine/annotations": "^1.13",
                 "doctrine/coding-standard": "^9.0",
                 "phpbench/phpbench": "^0.16.10 || ^1.0",
-                "phpstan/phpstan": "0.12.94",
+                "phpstan/phpstan": "0.12.99",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.4",
                 "squizlabs/php_codesniffer": "3.6.0",
                 "symfony/cache": "^4.4 || ^5.2",
                 "symfony/yaml": "^3.4 || ^4.0 || ^5.0 || ^6.0",
-                "vimeo/psalm": "4.7.0"
+                "vimeo/psalm": "4.10.0"
             },
             "suggest": {
                 "symfony/cache": "Provides cache support for Setup Tool with doctrine/cache 2.0",
@@ -2817,9 +2824,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.9.5"
+                "source": "https://github.com/doctrine/orm/tree/2.10.0"
             },
-            "time": "2021-08-23T10:20:22+00:00"
+            "time": "2021-10-03T15:14:07+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2967,24 +2974,21 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.5.9",
+            "version": "v3.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "4878e54d1dc16f259f721cc3209b45ab034e3862"
+                "reference": "7f12b81e6a0080e6a37478fea349143b11423aa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/4878e54d1dc16f259f721cc3209b45ab034e3862",
-                "reference": "4878e54d1dc16f259f721cc3209b45ab034e3862",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/7f12b81e6a0080e6a37478fea349143b11423aa6",
+                "reference": "7f12b81e6a0080e6a37478fea349143b11423aa6",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "^2.13 || ^3.0",
-                "doctrine/dbal": "^2.10 || ^3.0",
                 "doctrine/doctrine-bundle": "^1.12|^2.0",
                 "doctrine/orm": "^2.6,>=2.6.3",
-                "doctrine/persistence": "^1.3.3 || ^2.0",
                 "ext-json": "*",
                 "nikic/php-parser": "^4.3",
                 "php": ">=7.2.5",
@@ -3050,7 +3054,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.9"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.10"
             },
             "funding": [
                 {
@@ -3058,7 +3062,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-16T18:06:25+00:00"
+            "time": "2021-10-01T18:09:49+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3257,27 +3261,27 @@
         },
         {
             "name": "fig/link-util",
-            "version": "1.2.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/link-util.git",
-                "reference": "10e52348a2e9ad4581f2bf3e16458f0861a88c6a"
+                "reference": "5d7b8d04ed3393b4b59968ca1e906fb7186d81e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/link-util/zipball/10e52348a2e9ad4581f2bf3e16458f0861a88c6a",
-                "reference": "10e52348a2e9ad4581f2bf3e16458f0861a88c6a",
+                "url": "https://api.github.com/repos/php-fig/link-util/zipball/5d7b8d04ed3393b4b59968ca1e906fb7186d81e8",
+                "reference": "5d7b8d04ed3393b4b59968ca1e906fb7186d81e8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0",
-                "psr/link": "^1.1.0 | ^2.0.0"
+                "php": ">=5.5.0",
+                "psr/link": "~1.0@dev"
             },
             "provide": {
                 "psr/link-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9",
+                "phpunit/phpunit": "^5.1",
                 "squizlabs/php_codesniffer": "^2.3.1"
             },
             "type": "library",
@@ -3312,9 +3316,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/link-util/issues",
-                "source": "https://github.com/php-fig/link-util/tree/1.2.0"
+                "source": "https://github.com/php-fig/link-util/tree/1.1.2"
             },
-            "time": "2021-03-11T23:09:19+00:00"
+            "time": "2021-02-03T23:36:04+00:00"
         },
         {
             "name": "flux-se/sylius-payum-monetico-plugin",
@@ -3394,22 +3398,22 @@
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
-            "version": "v1.0.1",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
-                "reference": "aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9"
+                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9",
-                "reference": "aa76978a8feaf7ddffaf346ba4f409efbfe5f9a9",
+                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/006aa5d32f887a4db4353b13b5b5095613e0611f",
+                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-code": "^3.4.1|^4.0",
+                "laminas/laminas-code": "~3.4.1|^4.0",
                 "php": ">=7.1",
-                "symfony/filesystem": "^4.4.17|^5.0"
+                "symfony/filesystem": "^4.4.17|^5.0|^6.0"
             },
             "conflict": {
                 "laminas/laminas-stdlib": "<3.2.1",
@@ -3420,7 +3424,7 @@
             },
             "require-dev": {
                 "ext-phar": "*",
-                "symfony/phpunit-bridge": "^5.2"
+                "symfony/phpunit-bridge": "^5.2|^6.0"
             },
             "type": "library",
             "extra": {
@@ -3460,7 +3464,7 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.1"
+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.5"
             },
             "funding": [
                 {
@@ -3472,7 +3476,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-28T10:50:10+00:00"
+            "time": "2021-05-22T16:11:15+00:00"
         },
         {
             "name": "friendsofsymfony/ckeditor-bundle",
@@ -4233,12 +4237,12 @@
             "version": "1.2.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/avalanche123/Imagine.git",
+                "url": "https://github.com/php-imagine/Imagine.git",
                 "reference": "d2e18be6e930ca169e4f921ef73ebfc061bf55d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/d2e18be6e930ca169e4f921ef73ebfc061bf55d8",
+                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/d2e18be6e930ca169e4f921ef73ebfc061bf55d8",
                 "reference": "d2e18be6e930ca169e4f921ef73ebfc061bf55d8",
                 "shasum": ""
             },
@@ -4285,8 +4289,8 @@
                 "image processing"
             ],
             "support": {
-                "issues": "https://github.com/avalanche123/Imagine/issues",
-                "source": "https://github.com/avalanche123/Imagine/tree/1.2.4"
+                "issues": "https://github.com/php-imagine/Imagine/issues",
+                "source": "https://github.com/php-imagine/Imagine/tree/1.2.4"
             },
             "time": "2020-11-03T22:35:03+00:00"
         },
@@ -4830,41 +4834,48 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "3.5.1",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77"
+                "reference": "1cb8f203389ab1482bf89c0e70a04849bacd7766"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/b549b70c0bb6e935d497f84f750c82653326ac77",
-                "reference": "b549b70c0bb6e935d497f84f750c82653326ac77",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/1cb8f203389ab1482bf89c0e70a04849bacd7766",
+                "reference": "1cb8f203389ab1482bf89c0e70a04849bacd7766",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-eventmanager": "^3.3",
-                "laminas/laminas-zendframework-bridge": "^1.1",
-                "php": "^7.3 || ~8.0.0"
+                "laminas/laminas-eventmanager": "^2.6 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": "^7.1"
             },
             "conflict": {
                 "phpspec/prophecy": "<1.9.0"
             },
             "replace": {
-                "zendframework/zend-code": "^3.4.1"
+                "zendframework/zend-code": "self.version"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.10.4",
+                "doctrine/annotations": "^1.7",
                 "ext-phar": "*",
-                "laminas/laminas-coding-standard": "^1.0.0",
-                "laminas/laminas-stdlib": "^3.3.0",
-                "phpunit/phpunit": "^9.4.2"
+                "laminas/laminas-coding-standard": "^1.0",
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "phpunit/phpunit": "^7.5.16 || ^8.4"
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
                 "laminas/laminas-stdlib": "Laminas\\Stdlib component"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4.x-dev",
+                    "dev-develop": "3.5.x-dev",
+                    "dev-dev-4.0": "4.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\Code\\": "src/"
@@ -4888,13 +4899,7 @@
                 "rss": "https://github.com/laminas/laminas-code/releases.atom",
                 "source": "https://github.com/laminas/laminas-code"
             },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-11-30T20:16:31+00:00"
+            "time": "2019-12-31T16:28:24+00:00"
         },
         {
             "name": "laminas/laminas-eventmanager",
@@ -6018,16 +6023,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "437e7a1c50044b92773b361af77620efb76fff59"
+                "reference": "fd4380d6fc37626e2f799f29d91195040137eba9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/437e7a1c50044b92773b361af77620efb76fff59",
-                "reference": "437e7a1c50044b92773b361af77620efb76fff59",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd4380d6fc37626e2f799f29d91195040137eba9",
+                "reference": "fd4380d6fc37626e2f799f29d91195040137eba9",
                 "shasum": ""
             },
             "require": {
@@ -6043,7 +6048,7 @@
                 "elasticsearch/elasticsearch": "^7",
                 "graylog2/gelf-php": "^1.4.2",
                 "mongodb/mongodb": "^1.8",
-                "php-amqplib/php-amqplib": "~2.4",
+                "php-amqplib/php-amqplib": "~2.4 || ^3",
                 "php-console/php-console": "^3.1.3",
                 "phpspec/prophecy": "^1.6.1",
                 "phpstan/phpstan": "^0.12.91",
@@ -6101,7 +6106,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.4"
+                "source": "https://github.com/Seldaek/monolog/tree/2.3.5"
             },
             "funding": [
                 {
@@ -6113,7 +6118,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-15T11:27:21+00:00"
+            "time": "2021-10-01T21:08:31+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -6393,17 +6398,17 @@
             "time": "2021-09-20T12:20:58+00:00"
         },
         {
-            "name": "pagerfanta/pagerfanta",
+            "name": "pagerfanta/core",
             "version": "v2.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f"
+                "url": "https://github.com/Pagerfanta/core.git",
+                "reference": "7fb7cacfb4916c9789e7a5999255214615218560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/911f515ae80898981c07c3d098f2092e97da1a2f",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f",
+                "url": "https://api.github.com/repos/Pagerfanta/core/zipball/7fb7cacfb4916c9789e7a5999255214615218560",
+                "reference": "7fb7cacfb4916c9789e7a5999255214615218560",
                 "shasum": ""
             },
             "require": {
@@ -6412,81 +6417,103 @@
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-php80": "^1.15"
             },
-            "conflict": {
-                "twig/twig": "<1.35 || >=2.0,<2.5"
-            },
-            "replace": {
-                "pagerfanta/core": "self.version",
-                "pagerfanta/doctrine-collections-adapter": "self.version",
-                "pagerfanta/doctrine-dbal-adapter": "self.version",
-                "pagerfanta/doctrine-mongodb-odm-adapter": "self.version",
-                "pagerfanta/doctrine-orm-adapter": "self.version",
-                "pagerfanta/doctrine-phpcr-odm-adapter": "self.version",
-                "pagerfanta/elastica-adapter": "self.version",
-                "pagerfanta/solarium-adapter": "self.version",
-                "pagerfanta/twig": "self.version"
-            },
-            "require-dev": {
-                "dg/bypass-finals": "^1.3.1",
-                "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/collections": "^1.4",
-                "doctrine/dbal": "^2.5 || ^3.0",
-                "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.3",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "jackalope/jackalope-doctrine-dbal": "^1.3",
-                "mandango/mandango": "^1.0@dev",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12.93",
-                "phpstan/phpstan-phpunit": "^0.12.21",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "propel/propel": "^2.0@dev",
-                "propel/propel1": "^1.7",
-                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0 || ^7.0",
-                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
-                "symfony/cache": "^4.4 || ^5.2 || ^6.0",
-                "twig/twig": "^1.35 || ^2.5 || ^3.0"
-            },
-            "suggest": {
-                "twig/twig": "To integrate Pagerfanta with Twig"
-            },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Pagerfanta\\": "lib/Core/",
-                    "Pagerfanta\\Adapter\\": "src/Adapter/",
-                    "Pagerfanta\\Doctrine\\Collections\\": "lib/Adapter/Doctrine/Collections/",
-                    "Pagerfanta\\Doctrine\\DBAL\\": "lib/Adapter/Doctrine/DBAL/",
-                    "Pagerfanta\\Doctrine\\MongoDBODM\\": "lib/Adapter/Doctrine/MongoDBODM/",
-                    "Pagerfanta\\Doctrine\\ORM\\": "lib/Adapter/Doctrine/ORM/",
-                    "Pagerfanta\\Doctrine\\PHPCRODM\\": "lib/Adapter/Doctrine/PHPCRODM/",
-                    "Pagerfanta\\Elastica\\": "lib/Adapter/Elastica/",
-                    "Pagerfanta\\Solarium\\": "lib/Adapter/Solarium/",
-                    "Pagerfanta\\Twig\\": "lib/Twig/"
+                    "Pagerfanta\\": "./"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Pagination for PHP",
+            "description": "Core Pagerfanta API",
             "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
+                "pagerfanta"
             ],
             "support": {
-                "issues": "https://github.com/BabDev/Pagerfanta/issues",
-                "source": "https://github.com/BabDev/Pagerfanta/tree/v2.7.2"
+                "source": "https://github.com/Pagerfanta/core/tree/v2.7.2"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/mbabker",
-                    "type": "github"
+            "time": "2021-07-25T19:56:13+00:00"
+        },
+        {
+            "name": "pagerfanta/doctrine-orm-adapter",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pagerfanta/doctrine-orm-adapter.git",
+                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pagerfanta/doctrine-orm-adapter/zipball/492d640993375b07ac6d23b2b8d3a724df8cf617",
+                "reference": "492d640993375b07ac6d23b2b8d3a724df8cf617",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.5",
+                "pagerfanta/core": "^2.4",
+                "php": "^7.2 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\Doctrine\\ORM\\": "./"
                 }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "time": "2021-08-01T15:53:26+00:00"
+            "description": "Pagerfanta adapter for Doctrine ORM",
+            "keywords": [
+                "doctrine",
+                "orm",
+                "pagerfanta"
+            ],
+            "support": {
+                "source": "https://github.com/Pagerfanta/doctrine-orm-adapter/tree/v2.7.2"
+            },
+            "time": "2021-07-25T19:56:13+00:00"
+        },
+        {
+            "name": "pagerfanta/twig",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pagerfanta/twig.git",
+                "reference": "cba790092c465f549c087489ce55f5eece5d6db2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pagerfanta/twig/zipball/cba790092c465f549c087489ce55f5eece5d6db2",
+                "reference": "cba790092c465f549c087489ce55f5eece5d6db2",
+                "shasum": ""
+            },
+            "require": {
+                "pagerfanta/core": "^2.4",
+                "php": "^7.2 || ^8.0",
+                "symfony/polyfill-php80": "^1.15",
+                "twig/twig": "^1.35 || ^2.5 || ^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\Twig\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Twig integration for Pagerfanta",
+            "keywords": [
+                "pagerfanta"
+            ],
+            "support": {
+                "source": "https://github.com/Pagerfanta/twig/tree/v2.7.2"
+            },
+            "time": "2021-07-25T19:56:13+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -7267,16 +7294,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f"
+                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/30f38bffc6f24293dadd1823936372dfa9e86e2f",
-                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/a12f7e301eb7258bb68acd89d4aefa05c2906cae",
+                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae",
                 "shasum": ""
             },
             "require": {
@@ -7311,9 +7338,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.1"
             },
-            "time": "2021-09-17T15:28:14+00:00"
+            "time": "2021-10-02T14:08:47+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -7492,20 +7519,20 @@
         },
         {
             "name": "psr/cache",
-            "version": "2.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b"
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
-                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0"
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
@@ -7525,7 +7552,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "homepage": "http://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -7535,9 +7562,9 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/2.0.0"
+                "source": "https://github.com/php-fig/cache/tree/master"
             },
-            "time": "2021-02-03T23:23:37+00:00"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/container",
@@ -7744,20 +7771,20 @@
         },
         {
             "name": "psr/link",
-            "version": "1.1.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/link.git",
-                "reference": "846c25f58a1f02b93a00f2404e3626b6bf9b7807"
+                "reference": "eea8e8662d5cd3ae4517c9b864493f59fca95562"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/link/zipball/846c25f58a1f02b93a00f2404e3626b6bf9b7807",
-                "reference": "846c25f58a1f02b93a00f2404e3626b6bf9b7807",
+                "url": "https://api.github.com/repos/php-fig/link/zipball/eea8e8662d5cd3ae4517c9b864493f59fca95562",
+                "reference": "eea8e8662d5cd3ae4517c9b864493f59fca95562",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0"
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
@@ -7781,7 +7808,6 @@
                 }
             ],
             "description": "Common interfaces for HTTP links",
-            "homepage": "https://github.com/php-fig/link",
             "keywords": [
                 "http",
                 "http-link",
@@ -7791,9 +7817,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/php-fig/link/tree/1.1.1"
+                "source": "https://github.com/php-fig/link/tree/master"
             },
-            "time": "2021-03-11T22:59:13+00:00"
+            "time": "2016-10-28T16:06:13+00:00"
         },
         {
             "name": "psr/log",
@@ -8125,16 +8151,16 @@
         },
         {
             "name": "sokil/php-isocodes",
-            "version": "3.3.12",
+            "version": "3.3.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sokil/php-isocodes.git",
-                "reference": "82ded34bef910f8a4dc11add7bb2c37aec13439c"
+                "reference": "cfe74b075d19d4ee09e970020c7a6157a2a3d862"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sokil/php-isocodes/zipball/82ded34bef910f8a4dc11add7bb2c37aec13439c",
-                "reference": "82ded34bef910f8a4dc11add7bb2c37aec13439c",
+                "url": "https://api.github.com/repos/sokil/php-isocodes/zipball/cfe74b075d19d4ee09e970020c7a6157a2a3d862",
+                "reference": "cfe74b075d19d4ee09e970020c7a6157a2a3d862",
                 "shasum": ""
             },
             "require": {
@@ -8177,9 +8203,9 @@
             "description": "ISO country, subdivision, language, currency and script definitions and their translations. Based on pythons pycountry and Debian's iso-codes.",
             "support": {
                 "issues": "https://github.com/sokil/php-isocodes/issues",
-                "source": "https://github.com/sokil/php-isocodes/tree/3.3.12"
+                "source": "https://github.com/sokil/php-isocodes/tree/3.3.13"
             },
-            "time": "2021-09-15T08:35:15+00:00"
+            "time": "2021-10-04T12:51:00+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -13666,26 +13692,24 @@
         },
         {
             "name": "symfony/proxy-manager-bridge",
-            "version": "v5.2.1",
+            "version": "v5.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/proxy-manager-bridge.git",
-                "reference": "fba051ee1cb00d1d40672ee2da842ba23c572576"
+                "reference": "76e61f33f6a34a340bf6e02211214f466e8e1dba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/fba051ee1cb00d1d40672ee2da842ba23c572576",
-                "reference": "fba051ee1cb00d1d40672ee2da842ba23c572576",
+                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/76e61f33f6a34a340bf6e02211214f466e8e1dba",
+                "reference": "76e61f33f6a34a340bf6e02211214f466e8e1dba",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8",
-                "ocramius/proxy-manager": "~2.1",
+                "friendsofphp/proxy-manager-lts": "^1.0.2",
                 "php": ">=7.2.5",
-                "symfony/dependency-injection": "^5.0"
-            },
-            "conflict": {
-                "zendframework/zend-eventmanager": "2.6.0"
+                "symfony/dependency-injection": "^5.0",
+                "symfony/polyfill-php80": "^1.16"
             },
             "require-dev": {
                 "symfony/config": "^4.4|^5.0"
@@ -13713,10 +13737,10 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony ProxyManager Bridge",
+            "description": "Provides integration for ProxyManager with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v5.2.1"
+                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v5.3.4"
             },
             "funding": [
                 {
@@ -13732,7 +13756,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-12T22:25:33+00:00"
+            "time": "2021-07-21T12:38:00+00:00"
         },
         {
             "name": "symfony/redis-messenger",
@@ -18958,5 +18982,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
