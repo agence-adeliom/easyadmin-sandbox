@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "838f848f9ec5f3b89a613e920785d950",
+    "content-hash": "0ff39f2f1b12a881a0aeb674235c42c3",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -172,17 +172,11 @@
         },
         {
             "name": "agence-adeliom/easy-admin-user-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-admin-user-bundle.git",
-                "reference": "2156b2bc1d6e167e18efb6cbea7c380aa324ec6d"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-admin-user-bundle/zipball/2156b2bc1d6e167e18efb6cbea7c380aa324ec6d",
-                "reference": "2156b2bc1d6e167e18efb6cbea7c380aa324ec6d",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyAdminUserBundle",
+                "reference": "c32696b3d504d612b56dd20f909499d4df7f6d9d"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -201,14 +195,12 @@
                 "symfony/validator": "^4.4 || ^5.2",
                 "symfonycasts/reset-password-bundle": "^1.8"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyAdminUserBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -229,21 +221,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-admin-user-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-admin-user-bundle"
             },
-            "time": "2021-10-05T15:22:34+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-block-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-block-bundle.git",
-                "reference": "c173b53fbefa34774c17f74fa33aecbfc02056c8"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-block-bundle/zipball/c173b53fbefa34774c17f74fa33aecbfc02056c8",
-                "reference": "c173b53fbefa34774c17f74fa33aecbfc02056c8",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyBlockBundle",
+                "reference": "6a03437805cb5e7438b005e4fcd41e9041e017f4"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -261,14 +250,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyBlockBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -289,21 +276,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-block-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-block-bundle"
             },
-            "time": "2021-10-05T08:47:03+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-blog-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-blog-bundle.git",
-                "reference": "d85a691fbdc0c552dd32e93d23a14d6dd9aebfbd"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-blog-bundle/zipball/d85a691fbdc0c552dd32e93d23a14d6dd9aebfbd",
-                "reference": "d85a691fbdc0c552dd32e93d23a14d6dd9aebfbd",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyBlogBundle",
+                "reference": "10a37d195faae4699cd50fe51abc1e36b1d45e1d"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -324,14 +308,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyBlogBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -352,21 +334,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-blog-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-blog-bundle"
             },
-            "time": "2021-10-05T08:56:01+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-common-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-common-bundle.git",
-                "reference": "2dcaee97a1b0211440c46eeaaca3a73c039c1fa9"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-common-bundle/zipball/2dcaee97a1b0211440c46eeaaca3a73c039c1fa9",
-                "reference": "2dcaee97a1b0211440c46eeaaca3a73c039c1fa9",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyCommonBundle",
+                "reference": "c335dd854712a7843b36b398216948b7132a7461"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.4",
@@ -385,14 +364,12 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "symfony/serializer": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyCommonBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -414,21 +391,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-common-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-common-bundle"
             },
-            "time": "2021-10-04T13:42:59+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-config-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-config-bundle.git",
-                "reference": "331afe4be1ee69359a80c6a2a01ed1cccaf1e2b6"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-config-bundle/zipball/331afe4be1ee69359a80c6a2a01ed1cccaf1e2b6",
-                "reference": "331afe4be1ee69359a80c6a2a01ed1cccaf1e2b6",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyConfigBundle",
+                "reference": "be366173e44719b1cf7b6007ac552d8f6003d7fb"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -446,14 +420,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyConfigBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -474,21 +446,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-config-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-config-bundle"
             },
-            "time": "2021-10-05T08:47:39+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-editor-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-editor-bundle.git",
-                "reference": "231440dc1a9b175d7c1087dcaefce9b0881b7755"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-editor-bundle/zipball/231440dc1a9b175d7c1087dcaefce9b0881b7755",
-                "reference": "231440dc1a9b175d7c1087dcaefce9b0881b7755",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyEditorBundle",
+                "reference": "0498e5401a15479206fda0d51daa49c94c99a1eb"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -505,14 +474,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyEditorBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -534,21 +501,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-editor-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-editor-bundle"
             },
-            "time": "2021-10-04T13:43:52+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-faq-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-faq-bundle.git",
-                "reference": "3bc07b1a9c08e665ce7061b6de8a959fcc93f942"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-faq-bundle/zipball/3bc07b1a9c08e665ce7061b6de8a959fcc93f942",
-                "reference": "3bc07b1a9c08e665ce7061b6de8a959fcc93f942",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyFaqBundle",
+                "reference": "3e908934783dc3f4af4186b10e3e2efa0a0896a4"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -569,14 +533,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyFaqBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -593,29 +555,26 @@
             "description": "A Symfony simple FAQ bundle for EasyAdmin",
             "homepage": "https://github.com/agence-adeliom/easy-faq-bundle",
             "keywords": [
-                "FAQ",
                 "easyadmin",
+                "faq",
                 "symfony"
             ],
             "support": {
                 "issues": "https://github.com/agence-adeliom/easy-faq-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-faq-bundle"
             },
-            "time": "2021-10-05T08:58:26+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-fields-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-fields-bundle.git",
-                "reference": "641d9540632330b2e9af1a0fec2778144ee60a54"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-fields-bundle/zipball/641d9540632330b2e9af1a0fec2778144ee60a54",
-                "reference": "641d9540632330b2e9af1a0fec2778144ee60a54",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyFieldsBundle",
+                "reference": "fee84c1c95dc958f0544c557cb2abf9c47a3784a"
             },
             "require": {
                 "easycorp/easyadmin-bundle": "^3.4",
@@ -632,14 +591,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyFieldsBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -664,21 +621,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-fields-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-fields-bundle"
             },
-            "time": "2021-10-05T08:48:16+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-media-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-media-bundle.git",
-                "reference": "4982f8652585068f91b5056bbf5059be4c975fc9"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-media-bundle/zipball/4982f8652585068f91b5056bbf5059be4c975fc9",
-                "reference": "4982f8652585068f91b5056bbf5059be4c975fc9",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyMediaBundle",
+                "reference": "900fc430feeaa799a4da2a16e09debb352f39b03"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -703,14 +657,12 @@
             "suggest": {
                 "liip/imagine-bundle": "^2.6"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyMediaBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -732,21 +684,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-media-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-media-bundle"
             },
-            "time": "2021-10-05T10:34:58+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-menu-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-menu-bundle.git",
-                "reference": "8e2c720486b6d806034f3deea69b38b54e969b80"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-menu-bundle/zipball/8e2c720486b6d806034f3deea69b38b54e969b80",
-                "reference": "8e2c720486b6d806034f3deea69b38b54e969b80",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyMenuBundle",
+                "reference": "61fe734d1305d548259ab07f236f7a029b5a900c"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -765,14 +714,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyMenuBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -794,21 +741,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-menu-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-menu-bundle"
             },
-            "time": "2021-10-05T13:40:27+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-page-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-page-bundle.git",
-                "reference": "98faa938aa43bc9a5000beebd994ec99d774bb93"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-page-bundle/zipball/98faa938aa43bc9a5000beebd994ec99d774bb93",
-                "reference": "98faa938aa43bc9a5000beebd994ec99d774bb93",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyPageBundle",
+                "reference": "517c1d2242355034a2b18c858dd8f149b3a26fb6"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -828,14 +772,12 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "symfony/webpack-encore-bundle": "^1.10"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyPageBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -856,21 +798,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-page-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-page-bundle"
             },
-            "time": "2021-10-04T13:46:52+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-redirect-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-redirect-bundle.git",
-                "reference": "f25c9ee2fc9220f8528e42c38ca2c68c8abde1cf"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-redirect-bundle/zipball/f25c9ee2fc9220f8528e42c38ca2c68c8abde1cf",
-                "reference": "f25c9ee2fc9220f8528e42c38ca2c68c8abde1cf",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasyRedirectBundle",
+                "reference": "2edaa335aae0b612db5288b8cb866c1ad18220a9"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -886,14 +825,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasyRedirectBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -914,21 +851,18 @@
                 "issues": "https://github.com/agence-adeliom/easy-redirect-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-redirect-bundle"
             },
-            "time": "2021-10-05T08:48:47+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-seo-bundle",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agence-adeliom/easy-seo-bundle.git",
-                "reference": "2d11eb5aaef193169049ed2308ade7c2b844c4cd"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-seo-bundle/zipball/2d11eb5aaef193169049ed2308ade7c2b844c4cd",
-                "reference": "2d11eb5aaef193169049ed2308ade7c2b844c4cd",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/EasySeoBundle",
+                "reference": "bd0eb1ec1c427b36a66ba80926bfb9efb596f92e"
             },
             "require": {
                 "agence-adeliom/easy-common-bundle": "^1.0",
@@ -946,14 +880,12 @@
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Adeliom\\EasySeoBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -966,31 +898,34 @@
             "description": "Symfony SEO bundle for EasyAdmin",
             "homepage": "https://github.com/agence-adeliom/easy-seo-bundle",
             "keywords": [
-                "Sitemap",
+                "SEO",
                 "breadcrumb",
                 "easyadmin",
                 "metadata",
-                "seo",
+                "sitemap",
                 "symfony"
             ],
             "support": {
                 "issues": "https://github.com/agence-adeliom/easy-seo-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-seo-bundle"
             },
-            "time": "2021-10-04T13:47:21+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agence-adeliom/easy-shop-bundle",
-            "version": "dev-main",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/agence-adeliom/easy-shop-bundle.git",
-                "reference": "0dbdb302cd5152a9daa6ebc93908d18eab359597"
+                "reference": "597f04c0f8b66c6ef56d3072846c2a4944368989"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/agence-adeliom/easy-shop-bundle/zipball/0dbdb302cd5152a9daa6ebc93908d18eab359597",
-                "reference": "0dbdb302cd5152a9daa6ebc93908d18eab359597",
+                "url": "https://api.github.com/repos/agence-adeliom/easy-shop-bundle/zipball/597f04c0f8b66c6ef56d3072846c2a4944368989",
+                "reference": "597f04c0f8b66c6ef56d3072846c2a4944368989",
                 "shasum": ""
             },
             "require": {
@@ -1011,7 +946,6 @@
                 "symfony/property-access": "^4.4 || ^5.2",
                 "twig/extra-bundle": "^2.12|^3.0"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -1045,7 +979,7 @@
                 "issues": "https://github.com/agence-adeliom/easy-shop-bundle/issues",
                 "source": "https://github.com/agence-adeliom/easy-shop-bundle"
             },
-            "time": "2021-10-04T13:50:30+00:00"
+            "time": "2021-10-04T10:08:42+00:00"
         },
         {
             "name": "alcohol/iso4217",
@@ -18889,109 +18823,9 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "agence-adeliom/easy-admin-user-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-block-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-blog-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-common-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-config-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-editor-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-faq-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-fields-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-media-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-menu-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-page-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-redirect-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-seo-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        },
-        {
-            "package": "agence-adeliom/easy-shop-bundle",
-            "version": "dev-main",
-            "alias": "1.0.0",
-            "alias_normalized": "1.0.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "agence-adeliom/easy-admin-user-bundle": 20,
-        "agence-adeliom/easy-block-bundle": 20,
-        "agence-adeliom/easy-blog-bundle": 20,
-        "agence-adeliom/easy-common-bundle": 20,
-        "agence-adeliom/easy-config-bundle": 20,
-        "agence-adeliom/easy-editor-bundle": 20,
-        "agence-adeliom/easy-faq-bundle": 20,
-        "agence-adeliom/easy-fields-bundle": 20,
-        "agence-adeliom/easy-media-bundle": 20,
-        "agence-adeliom/easy-menu-bundle": 20,
-        "agence-adeliom/easy-page-bundle": 20,
-        "agence-adeliom/easy-redirect-bundle": 20,
-        "agence-adeliom/easy-seo-bundle": 20,
-        "agence-adeliom/easy-shop-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
