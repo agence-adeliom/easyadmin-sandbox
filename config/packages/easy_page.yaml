@@ -10,3 +10,17 @@ easy_page:
         - 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'
       assets_js:
         - 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js'
+
+    home:
+      resource: '@EasyPage/default_layout.html.twig'
+      pattern: '^/$'
+
+    blog:
+      resource: '@EasyPage/default_layout.html.twig'
+      pattern: '^/blog'
+
+    faq:
+      resource: '@EasyPage/default_layout.html.twig'
+      pattern: '^/faq'
+
+

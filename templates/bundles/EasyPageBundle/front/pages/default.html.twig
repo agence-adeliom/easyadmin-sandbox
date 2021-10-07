@@ -1,15 +1,24 @@
 {% extends "@!EasyPage/front/pages/default.html.twig" %}
 
 {% block easy_page_page_content %}
-    {{ render_easy_menu('default') }}
+{#    {{ easy_menu('default') }}#}
     <section>
         <article>
             <h1 class="mb-5">{{ page.name }}</h1>
             <div class="content">
+                {{ easy_block('fghfdghfd', {
+                    'title': "over"
+                }) }}
                 {% for block in page.content %}
-                    {{ render_easy_editor_block(block) }}
+                    {{ easy_editor_block(block) }}
                 {% endfor %}
             </div>
         </article>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ easy_block_assets() }}
+    {{ easy_editor_assets() }}
 {% endblock %}

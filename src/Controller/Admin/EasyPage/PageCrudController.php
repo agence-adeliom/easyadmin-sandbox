@@ -41,6 +41,13 @@ class PageCrudController extends BasePageCrudController
             ;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->addFormTheme('@EasyEditor/form/editor_widget.html.twig')
+            ;
+    }
+
     public function configureFilters(Filters $filters): Filters
     {
         $filters->add(ChoiceFilter::new("state","Status")->setChoices(ThreeStateStatusEnum::toArray()));
