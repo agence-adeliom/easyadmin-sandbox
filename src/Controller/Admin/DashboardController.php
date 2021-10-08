@@ -2,12 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Article;
-use App\Entity\Block;
-use App\Entity\Category;
-use App\Entity\MediaEntity;
-use App\Entity\Page;
-use App\Entity\Post;
+use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
+use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
+use Adeliom\EasyRedirectBundle\Admin\EasyRedirectTrait;
+use Adeliom\EasyShopBundle\Admin\EasyShopDashboardTrait;
+use App\Entity\EasyBlock\Block;
+use App\Entity\EasyBlog\Category;
+use App\Entity\EasyBlog\Post;
+use App\Entity\EasyPage\Page;
+use App\Entity\EasyMenu\Menu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -16,6 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    use EasyShopDashboardTrait;
+    use EasyAdminUserTrait;
+    use EasyConfigTrait;
+    use EasyRedirectTrait;
+
     /**
      * @Route("/admin", name="admin")
      */
@@ -27,24 +35,39 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('My Project Name');
+            ->setTitle('My Project Name')
+            ;
     }
+
 
     public function configureMenuItems(): iterable
     {
+
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
-        yield MenuItem::section('Contenu');
+        yield from $this->administratorMenuEntry();
+        yield from $this->configMenuEntry();
+        yield from $this->configRedirectEntry();
 
-        yield MenuItem::linkToCrud('Medias', 'fa fa-picture-o', MediaEntity::class);
-        yield MenuItem::linkToCrud('Article', 'fa fa-file-alt', Article::class);
-        yield MenuItem::linkToCrud('Page', 'fa fa-file-alt', Page::class);
-        yield MenuItem::section('Blog');
-        yield MenuItem::linkToCrud('Catégorie', 'fa fa-file-alt', Category::class);
-        yield MenuItem::linkToCrud('Post', 'fa fa-file-alt', Post::class);
-        yield MenuItem::section('Settings');
-        yield MenuItem::linkToCrud('Blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::section('easy.page.admin.menu.contents');
+        yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);
+        yield MenuItem::linkToCrud('easy.block.admin.menu.shared_blocks', 'fa fa-file-alt', Block::class);
+        yield MenuItem::linkToCrud('easy.menu.admin.menus', 'fa fa-file-alt', Menu::class);
 
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::section('easy.blog.blog');
+        yield MenuItem::linkToCrud('easy.blog.admin.menu.categories', 'fa fa-folder', Category::class);
+        yield MenuItem::linkToCrud('easy.blog.admin.menu.articles', 'fa fa-file-alt', Post::class);
+
+        yield MenuItem::section('easy.faq.faq');
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\EasyFaq\Category::class);
+        yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\EasyFaq\Entry::class);
+
+        // Shop Dashboard
+        yield from $this->productItems();
+        yield from $this->salesItems();
+        yield from $this->marketingItems();
+        yield from $this->customerItems();
+        yield from $this->configurationItems();
+
     }
 }
