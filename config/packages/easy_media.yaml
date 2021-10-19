@@ -3,5 +3,7 @@ twig:
     - '@EasyMedia/form/easy-media.html.twig'
 
 easy_media:
-  lock_entity: App\Entity\EasyMedia\Lock
-  metas_entity: App\Entity\EasyMedia\Metas
+  #lock_entity: App\Entity\EasyMedia\Lock
+  #metas_entity: App\Entity\EasyMedia\Metas
+  media_entity: App\Entity\EasyMedia\Media
+  folder_entity: App\Entity\EasyMedia\Folder
