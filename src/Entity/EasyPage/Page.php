@@ -23,6 +23,15 @@ class Page extends BasePage
     protected $content = [];
 
     /**
+     * @var string|null
+     * @Groups("main")
+     * @ORM\Column(name="embed", type="string", nullable=true)
+     * @Assert\Url()
+     * @Assert\Valid()
+     */
+    protected $embed = null;
+
+    /**
      * @return array|null
      */
     public function getContent(): ?array
@@ -37,6 +46,24 @@ class Page extends BasePage
     {
         $this->content = $content;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getEmbed(): ?string
+    {
+        return $this->embed;
+    }
+
+    /**
+     * @param string|null $embed
+     */
+    public function setEmbed(?string $embed): void
+    {
+        $this->embed = $embed;
+    }
+
+
 
 
 }

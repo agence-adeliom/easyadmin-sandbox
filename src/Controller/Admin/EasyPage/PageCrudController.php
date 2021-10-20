@@ -4,6 +4,7 @@ namespace App\Controller\Admin\EasyPage;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
+use Adeliom\EasyFieldsBundle\Admin\Field\OembedField;
 use Adeliom\EasyPageBundle\Controller\PageCrudController as BasePageCrudController;
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use App\Entity\EasyPage\Page;
@@ -45,6 +46,7 @@ class PageCrudController extends BasePageCrudController
     {
         return parent::configureCrud($crud)
             ->addFormTheme('@EasyEditor/form/editor_widget.html.twig')
+            ->addFormTheme('@EasyFields/form/oembed_widget.html.twig')
             ;
     }
 
@@ -59,6 +61,9 @@ class PageCrudController extends BasePageCrudController
     public function informationsFields(string $pageName, $subject): iterable
     {
         yield from parent::informationsFields($pageName, $subject);
+        yield OembedField::new('embed')
+            ->setRequired(false)
+            ->setColumns(12);
         yield EasyEditorField::new('content')
             ->setRequired(true)
             ->allowAdd(true)

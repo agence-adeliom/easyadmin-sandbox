@@ -3,19 +3,19 @@
 namespace App\Blocks;
 
 use Adeliom\EasyEditorBundle\Block\AbstractBlock;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Adeliom\EasyFieldsBundle\Form\OembedType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class HeaderType extends AbstractBlock
+class EmbedType extends AbstractBlock
 {
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("text", TextType::class);
+        $builder->add("embed", OembedType::class);
     }
 
     public function getName(): string
     {
-        return 'HeaderType';
+        return 'EmbedType';
     }
 
     public function getIcon(): string
@@ -23,17 +23,8 @@ class HeaderType extends AbstractBlock
         return '';
     }
 
-    public static function configureAssets(): array
-    {
-        return [
-            "js" => [],
-            "css" => [],
-            "webpack" => ["app"],
-        ];
-    }
-
     public function getTemplate(): string
     {
-        return "blocks/header.html.twig";
+        return "blocks/embed.html.twig";
     }
 }
