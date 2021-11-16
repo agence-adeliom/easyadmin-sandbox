@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
+use Adeliom\EasyFieldsBundle\Admin\Field\IconField;
 use Adeliom\EasyMediaBundle\Admin\Field\EasyMediaField;
 use App\Entity\Article;
 use App\Entity\MediaEntity;
@@ -27,6 +28,8 @@ class MediaEntityCrudController extends AbstractCrudController
         return $crud
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+            ->addFormTheme('@EasyFields/form/form_theme.html.twig')
+            ->addFormTheme('@EasyFields/form/icon_widget.html.twig')
         ;
     }
 
@@ -51,16 +54,23 @@ class MediaEntityCrudController extends AbstractCrudController
                 "metas" => false,
                 "delete" => false
             ]),
-            EasyMediaField::new('text')->setFormTypeOptions([
-                "restrictions_uploadTypes" => ["image/*"],
-                "editor" => false,
-                "upload" => false,
-                "bulk_selection" => false,
-                "move" => false,
-                "rename" => false,
-                "metas" => false,
-                "delete" => false
-            ]),
+//            EasyMediaField::new('text')->setFormTypeOptions([
+//                "restrictions_uploadTypes" => ["image/*"],
+//                "editor" => false,
+//                "upload" => false,
+//                "bulk_selection" => false,
+//                "move" => false,
+//                "rename" => false,
+//                "metas" => false,
+//                "delete" => false
+//            ]),
+            IconField::new("text")
+                ->setSelectButtonLabel("Choisir une icône")
+                ->setHelp("Choisir une icône")
+                ->setFonts([
+                    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+                ])
+                ->setJsonUrl("/test.json")
         ];
     }
 

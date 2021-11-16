@@ -11,6 +11,7 @@ use App\Entity\EasyBlog\Category;
 use App\Entity\EasyBlog\Post;
 use App\Entity\EasyPage\Page;
 use App\Entity\EasyMenu\Menu;
+use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -50,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield from $this->configRedirectEntry();
 
         yield MenuItem::section('easy.page.admin.menu.contents');
+        yield MenuItem::linkToCrud('test', 'fa fa-file-alt', MediaEntity::class);
         yield MenuItem::linkToCrud('easy.page.admin.menu.pages', 'fa fa-file-alt', Page::class);
         yield MenuItem::linkToCrud('easy.block.admin.menu.shared_blocks', 'fa fa-file-alt', Block::class);
         yield MenuItem::linkToCrud('easy.menu.admin.menus', 'fa fa-file-alt', Menu::class);
