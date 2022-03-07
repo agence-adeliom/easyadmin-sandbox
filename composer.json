@@ -146,7 +146,7 @@
         "flux-se/sylius-payum-monetico-plugin": "^1.1",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "sensio/framework-extra-bundle": "^6.1",
+        "sensio/framework-extra-bundle": "6.2.6",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^5.2",
         "symfony/console": "^5.2",
