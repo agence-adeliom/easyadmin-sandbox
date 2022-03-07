@@ -131,7 +131,7 @@
         "agence-adeliom/easy-editor-bundle": "^1.0",
         "agence-adeliom/easy-faq-bundle": "^1.0",
         "agence-adeliom/easy-fields-bundle": "^1.0",
-        "agence-adeliom/easy-media-bundle": "^1.0",
+        "agence-adeliom/easy-media-bundle": "1.1.3",
         "agence-adeliom/easy-menu-bundle": "^1.0",
         "agence-adeliom/easy-page-bundle": "^1.0",
         "agence-adeliom/easy-redirect-bundle": "^1.0",
