@@ -40,7 +40,7 @@ services:
       - traefik-proxy
 
   traefik:
-    image: traefik:v2.2
+    image: traefik:v2.7
     container_name: "adeliom_traefik"
     restart: unless-stopped
     ports:
