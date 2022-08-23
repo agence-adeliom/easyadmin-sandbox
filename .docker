@@ -16,7 +16,7 @@ DB_ROOT_PASSWORD=root
 ### --- PHP ----
 
 # Linux (uid 1000 gid 1000)
-PHP_TAG=8.0-dev
+PHP_TAG=8.1-dev
 #PHP_TAG=7.4-dev
 #PHP_TAG=7.3-dev
 
