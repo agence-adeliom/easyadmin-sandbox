@@ -10,31 +10,26 @@ use Doctrine\ORM\ORMException;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 
-/**
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="sylius_product", indexes={
- *     @ORM\Index(name="created_at_index", columns={"created_at"}),
- *     @ORM\Index(name="enabled_index", columns={"enabled"})
- * })
- */
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Table(name: 'sylius_product')]
+#[ORM\Index(name: 'created_at_index', columns: ['created_at'])]
+#[ORM\Index(name: 'enabled_index', columns: ['enabled'])]
 class Product extends BaseProduct
 {
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
     }
-
     public static function getTranslationClass(): string
     {
         return ProductTranslation::class;
     }
-
     /**
-     * @ORM\PrePersist()
      * @param LifecycleEventArgs $event
      * @throws ORMException
      */
+    #[ORM\PrePersist]
     public function onCreate(LifecycleEventArgs $event)
     {
         $object = $event->getObject();
@@ -45,12 +40,11 @@ class Product extends BaseProduct
             $variant->setEnabled($object->isEnabled());
         }
     }
-
     /**
-     * @ORM\PostUpdate()
      * @param LifecycleEventArgs $event
      * @throws ORMException
      */
+    #[ORM\PostUpdate]
     public function onUpdate(LifecycleEventArgs $event)
     {
         $object = $event->getObject();
@@ -63,21 +57,16 @@ class Product extends BaseProduct
             $event->getEntityManager()->flush();
         }
     }
-
     protected ProductVariant $variant;
-
     public function getVariant(): ProductVariant
     {
         return $this->variants[0];
     }
-
     public function setVariant(ProductVariant $variant)
     {
         $this->variants[0] = $variant;
     }
-
     protected $virtualVariantChannelPricing;
-
     /**
      * @return mixed
      */
@@ -87,7 +76,6 @@ class Product extends BaseProduct
             'channelPricings' => $this->getVariant()->getChannelPricings()
         ];
     }
-
     /**
      * @param mixed $virtualVariantChannelPricing
      */
@@ -102,5 +90,4 @@ class Product extends BaseProduct
         }
         $this->variants[0] = $variant;
     }
-
 }

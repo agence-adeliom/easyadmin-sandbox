@@ -7,30 +7,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\EasyPage\PageRepository")
- * @ORM\Table(name="easy_page__page")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\EasyPage\PageRepository')]
+#[ORM\Table(name: 'easy_page__page')]
+#[ORM\HasLifecycleCallbacks]
 class Page extends BasePage
 {
     /**
      * @var array|null
-     * @Groups("main")
-     * @ORM\Column(name="content", type="json", nullable=true)
-     * @Assert\Type("array")
      */
+    #[Groups('main')]
+    #[ORM\Column(name: 'content', type: 'json', nullable: true)]
+    #[Assert\Type('array')]
     protected $content = [];
-
     /**
      * @var string|null
-     * @Groups("main")
-     * @ORM\Column(name="embed", type="string", nullable=true)
-     * @Assert\Url()
-     * @Assert\Valid()
      */
+    #[Groups('main')]
+    #[ORM\Column(name: 'embed', type: 'string', nullable: true)]
+    #[Assert\Url]
+    #[Assert\Valid]
     protected $embed = null;
-
     /**
      * @return array|null
      */
@@ -38,7 +34,6 @@ class Page extends BasePage
     {
         return $this->content;
     }
-
     /**
      * @param array|null $content
      */
@@ -46,7 +41,6 @@ class Page extends BasePage
     {
         $this->content = $content;
     }
-
     /**
      * @return string|null
      */
@@ -54,7 +48,6 @@ class Page extends BasePage
     {
         return $this->embed;
     }
-
     /**
      * @param string|null $embed
      */
@@ -62,8 +55,4 @@ class Page extends BasePage
     {
         $this->embed = $embed;
     }
-
-
-
-
 }

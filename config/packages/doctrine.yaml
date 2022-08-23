@@ -15,27 +15,6 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-            EasySeoBundle:
-              type: annotation
-              alias: Adeliom\EasySeoBundle
-              prefix: Adeliom\EasySeoBundle\Entity
-              dir: "Entity"
-            EasyBlockBundle:
-              type: annotation # or attribute
-              alias: Adeliom\EasyBlockBundle
-              prefix: Adeliom\EasyBlockBundle\Entity
-              dir: "Entity"
-            EasyBlogBundle:
-              type: annotation # or attribute
-              alias: Adeliom\EasyBlogBundle
-              prefix: Adeliom\EasyBlogBundle\Entity
-              dir: "Entity"
-            EasyMediaBundle:
-              type: annotation # or attribute
-              alias: Adeliom\EasyMediaBundle
-              prefix: Adeliom\EasyMediaBundle\Entity
-              dir: "Entity"
