@@ -32,7 +32,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+#        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+        package: ["easy-gutenberg-bundle"]
 
     steps:
       - uses: actions/checkout@v3
