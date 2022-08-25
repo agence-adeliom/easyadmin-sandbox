@@ -17,13 +17,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class TestMediaCommand extends Command
 {
-
-    private $mediaManager;
-
-    public function __construct(EasyMediaManager $mediaManager)
-    {
-        $this->mediaManager = $mediaManager;
-
+    public function __construct(/**
+         * @readonly
+         */
+        private EasyMediaManager $mediaManager
+    ) {
         parent::__construct();
     }
 

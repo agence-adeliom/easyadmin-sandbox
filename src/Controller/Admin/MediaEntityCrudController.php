@@ -2,19 +2,13 @@
 
 namespace App\Controller\Admin;
 
-use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\IconField;
 use Adeliom\EasyMediaBundle\Admin\Field\EasyMediaField;
-use App\Entity\Article;
 use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Type\ComparisonType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class MediaEntityCrudController extends AbstractCrudController
 {
@@ -73,5 +67,4 @@ class MediaEntityCrudController extends AbstractCrudController
                 ->setJsonUrl("/test.json")
         ];
     }
-
 }

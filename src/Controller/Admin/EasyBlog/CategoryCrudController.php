@@ -13,7 +13,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
 class CategoryCrudController extends BaseCategoryCrudController
 {
-
     public static function getEntityFqcn(): string
     {
         return Category::class;
@@ -29,9 +28,8 @@ class CategoryCrudController extends BaseCategoryCrudController
 
     public function configureFilters(Filters $filters): Filters
     {
-        $filters->add(ChoiceFilter::new("state","Status")->setChoices(ThreeStateStatusEnum::toArray()));
+        $filters->add(ChoiceFilter::new("state", "Status")->setChoices(ThreeStateStatusEnum::toArray()));
 
         return $filters;
     }
-
 }

@@ -5,17 +5,12 @@ namespace App\Controller\Admin;
 use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Adeliom\EasyFieldsBundle\Admin\Field\ChoiceMaskField;
-use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use App\Entity\Article;
-use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Type\ComparisonType;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -69,5 +64,4 @@ class ArticleCrudController extends AbstractCrudController
                 ->listSelector(true)
         ];
     }
-
 }

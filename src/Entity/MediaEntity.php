@@ -9,37 +9,48 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MediaEntityRepository::class)]
-class MediaEntity
+class MediaEntity implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
+    private ?int $id = null;
+
     #[ORM\Column(type: 'easy_media_type', nullable: true)]
     #[Assert\NotBlank]
     private $file;
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $text;
+
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
+    private ?string $text = null;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection<\App\Entity\Article>
+     */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'media')]
-    private $articles;
+    private \Doctrine\Common\Collections\Collection $articles;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getFile()
     {
         return $this->file;
     }
+
     public function setFile($file): self
     {
         $this->file = $file;
 
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -47,15 +58,16 @@ class MediaEntity
     {
         return $this->text;
     }
+
     /**
-     * @param mixed $text
      * @return MediaEntity
      */
-    public function setText($text)
+    public function setText(mixed $text)
     {
         $this->text = $text;
         return $this;
     }
+
     /**
      * @return Collection|Article[]
      */
@@ -63,6 +75,7 @@ class MediaEntity
     {
         return $this->articles;
     }
+
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -72,18 +85,18 @@ class MediaEntity
 
         return $this;
     }
+
     public function removeArticle(Article $article): self
     {
-        if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getMedia() === $this) {
-                $article->setMedia(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->articles->removeElement($article) && $article->getMedia() === $this) {
+            $article->setMedia(null);
         }
 
         return $this;
     }
-    public function __toString()
+
+    public function __toString(): string
     {
         return sprintf("MediaEntity #%s", $this->getId());
     }

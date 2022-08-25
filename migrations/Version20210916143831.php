@@ -47,11 +47,6 @@ final class Version20210916143831 extends AbstractMigration
         $this->addSql('ALTER TABLE easy_menu__menus_items ADD CONSTRAINT FK_A119029D727ACA70 FOREIGN KEY (parent_id) REFERENCES easy_menu__menus_items (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE easy_menu__menus_items ADD CONSTRAINT FK_A119029DCCD7E912 FOREIGN KEY (menu_id) REFERENCES easy_menu__menus (id)');
         $this->addSql('ALTER TABLE easy_page__page ADD CONSTRAINT FK_2E074586727ACA70 FOREIGN KEY (parent_id) REFERENCES easy_page__page (id)');
-        $this->addSql('ALTER TABLE sylius_adjustment CHANGE details details LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\'');
-        $this->addSql('CREATE INDEX created_at_index ON sylius_product (created_at)');
-        $this->addSql('CREATE INDEX enabled_index ON sylius_product (enabled)');
-        $this->addSql('CREATE INDEX sylius_product_attribute_indexes ON sylius_product_attribute (storage_type, type)');
-        $this->addSql('CREATE INDEX sylius_product_attribute_value_indexes ON sylius_product_attribute_value (locale_code)');
     }
 
     public function down(Schema $schema): void
@@ -84,10 +79,5 @@ final class Version20210916143831 extends AbstractMigration
         $this->addSql('DROP TABLE ext_log_entries');
         $this->addSql('DROP TABLE ext_translations');
         $this->addSql('DROP TABLE media_entity');
-        $this->addSql('ALTER TABLE sylius_adjustment CHANGE details details LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
-        $this->addSql('DROP INDEX created_at_index ON sylius_product');
-        $this->addSql('DROP INDEX enabled_index ON sylius_product');
-        $this->addSql('DROP INDEX sylius_product_attribute_indexes ON sylius_product_attribute');
-        $this->addSql('DROP INDEX sylius_product_attribute_value_indexes ON sylius_product_attribute_value');
     }
 }

@@ -6,7 +6,6 @@ use Adeliom\EasyBlogBundle\Repository\PostRepository as BasePostRepository;
 use App\Entity\EasyBlog\Post;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
  * @method Post|null findOneBy(array $criteria, array $orderBy = null)

@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Test extends AbstractBlock implements BlockInterface
 {
-
     public function getName(): string
     {
         return "test";
@@ -43,5 +42,4 @@ class Test extends AbstractBlock implements BlockInterface
             ->add("name", TextType::class)
         ;
     }
-
 }

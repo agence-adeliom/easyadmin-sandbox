@@ -6,7 +6,6 @@ use Adeliom\EasyPageBundle\Repository\PageRepository as BasePageRepository;
 use App\Entity\EasyPage\Page;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Page|null find($id, $lockMode = null, $lockVersion = null)
  * @method Page|null findOneBy(array $criteria, array $orderBy = null)

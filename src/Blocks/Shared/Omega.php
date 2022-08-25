@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Omega extends AbstractBlock implements BlockInterface
 {
-
     public function getName(): string
     {
         return "Omega";
@@ -43,5 +42,4 @@ class Omega extends AbstractBlock implements BlockInterface
             ->add("name", TextType::class)
         ;
     }
-
 }

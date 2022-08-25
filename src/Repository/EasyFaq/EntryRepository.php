@@ -6,7 +6,6 @@ use Adeliom\EasyFaqBundle\Repository\EntryRepository as BaseEntryRepository;
 use App\Entity\EasyFaq\Entry;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Entry|null find($id, $lockMode = null, $lockVersion = null)
  * @method Entry|null findOneBy(array $criteria, array $orderBy = null)

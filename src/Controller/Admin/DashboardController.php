@@ -5,12 +5,11 @@ namespace App\Controller\Admin;
 use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
 use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
 use Adeliom\EasyRedirectBundle\Admin\EasyRedirectTrait;
-use Adeliom\EasyShopBundle\Admin\EasyShopDashboardTrait;
 use App\Entity\EasyBlock\Block;
 use App\Entity\EasyBlog\Category;
 use App\Entity\EasyBlog\Post;
-use App\Entity\EasyPage\Page;
 use App\Entity\EasyMenu\Menu;
+use App\Entity\EasyPage\Page;
 use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -20,14 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    use EasyShopDashboardTrait;
     use EasyAdminUserTrait;
     use EasyConfigTrait;
     use EasyRedirectTrait;
 
-    /**
-     * @Route("/admin", name="admin")
-     */
+    #[Route(path: '/admin', name: 'admin')]
     public function index(): Response
     {
         return parent::index();
@@ -63,13 +59,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('easy.faq.faq');
         yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\EasyFaq\Category::class);
         yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\EasyFaq\Entry::class);
-
-        // Shop Dashboard
-        yield from $this->productItems();
-        yield from $this->salesItems();
-        yield from $this->marketingItems();
-        yield from $this->customerItems();
-        yield from $this->configurationItems();
-
     }
 }

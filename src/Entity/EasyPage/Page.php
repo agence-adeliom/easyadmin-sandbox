@@ -4,10 +4,10 @@ namespace App\Entity\EasyPage;
 
 use Adeliom\EasyPageBundle\Entity\Page as BasePage;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: 'App\Repository\EasyPage\PageRepository')]
+#[ORM\Entity(repositoryClass: \App\Repository\EasyPage\PageRepository::class)]
 #[ORM\Table(name: 'easy_page__page')]
 #[ORM\HasLifecycleCallbacks]
 class Page extends BasePage
@@ -16,41 +16,34 @@ class Page extends BasePage
      * @var array|null
      */
     #[Groups('main')]
-    #[ORM\Column(name: 'content', type: 'json', nullable: true)]
+    #[ORM\Column(name: 'content', type: \Doctrine\DBAL\Types\Types::JSON, nullable: true)]
     #[Assert\Type('array')]
     protected $content = [];
+
     /**
      * @var string|null
      */
     #[Groups('main')]
-    #[ORM\Column(name: 'embed', type: 'string', nullable: true)]
+    #[ORM\Column(name: 'embed', type: \Doctrine\DBAL\Types\Types::STRING, nullable: true)]
     #[Assert\Url]
     #[Assert\Valid]
-    protected $embed = null;
-    /**
-     * @return array|null
-     */
+    protected ?string $embed = null;
+
     public function getContent(): ?array
     {
         return $this->content;
     }
-    /**
-     * @param array|null $content
-     */
+
     public function setContent(?array $content): void
     {
         $this->content = $content;
     }
-    /**
-     * @return string|null
-     */
+
     public function getEmbed(): ?string
     {
         return $this->embed;
     }
-    /**
-     * @param string|null $embed
-     */
+
     public function setEmbed(?string $embed): void
     {
         $this->embed = $embed;

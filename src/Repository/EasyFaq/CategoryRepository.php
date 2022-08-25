@@ -6,7 +6,6 @@ use Adeliom\EasyFaqBundle\Repository\CategoryRepository as BaseCategoryRepositor
 use App\Entity\EasyFaq\Category;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
  * @method Category|null findOneBy(array $criteria, array $orderBy = null)
