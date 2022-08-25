@@ -1,189 +1,87 @@
 {
-    "type": "project",
+    "name": "agence-adeliom/easyadmin-sandbox",
+    "description": "A simple sandbox for Symfony 6 and Easyadmin with Adeliom's bundles",
     "license": "proprietary",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
+    "authors": [
         {
-            "type": "path",
-            "url": "lib/EasyMediaBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
+            "name": "Arnaud RITTI",
+            "homepage": "https://github.com/arnaud-ritti"
         },
         {
-            "type": "path",
-            "url": "lib/EasyEditorBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyFieldsBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyCommonBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyPageBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyBlogBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasySeoBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyBlockBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyShopBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyFaqBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyMenuBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyAdminUserBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyConfigBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyRedirectBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "lib/EasyGutenbergBundle",
-            "canonical": false,
-            "options": {
-                "symlink": true
-            }
+            "name": "Jerome ENGELN",
+            "homepage": "https://github.com/JeromeEngelnAdeliom"
         }
     ],
+    "type": "project",
     "require": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-exif": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "agence-adeliom/easy-admin-user-bundle": "*",
-        "agence-adeliom/easy-block-bundle": "*",
-        "agence-adeliom/easy-blog-bundle": "*",
-        "agence-adeliom/easy-common-bundle": "*",
-        "agence-adeliom/easy-config-bundle": "*",
-        "agence-adeliom/easy-editor-bundle": "*",
-        "agence-adeliom/easy-faq-bundle": "*",
-        "agence-adeliom/easy-fields-bundle": "*",
-        "agence-adeliom/easy-media-bundle": "*",
-        "agence-adeliom/easy-menu-bundle": "*",
-        "agence-adeliom/easy-gutenberg-bundle": "*",
-        "agence-adeliom/easy-page-bundle": "*",
-        "agence-adeliom/easy-redirect-bundle": "*",
-        "agence-adeliom/easy-seo-bundle": "*",
-        "composer/package-versions-deprecated": "1.11.99.2",
+        "babdev/pagerfanta-bundle": "^3.0",
         "doctrine/annotations": "^1.13.3",
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.13",
         "easycorp/easyadmin-bundle": "^3.4 || ^v4.0",
+        "embed/embed": "^4.2",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
+        "illuminate/support": "^8.49",
+        "james-heinrich/getid3": "^1.9",
+        "league/flysystem-bundle": "^2.1",
+        "liip/imagine-bundle": "^2.8",
+        "maennchen/zipstream-php": "^2.1.0",
+        "nyholm/psr7": "^1.4",
+        "pagerfanta/doctrine-orm-adapter": "^3.0",
+        "pagerfanta/twig": "^3.0",
         "phpdocumentor/reflection-docblock": "^5.2 || ^6.0",
+        "presta/sitemap-bundle": "^3.0",
         "sensio/framework-extra-bundle": "^6.1",
+        "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^5.4 || ^6.0",
+        "symfony/config": "^5.4 || ^6.0",
         "symfony/console": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/deprecation-contracts": "^2.2 || ^v3.0",
         "symfony/dotenv": "^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^5.4 || ^6.0",
         "symfony/expression-language": "^5.4 || ^6.0",
+        "symfony/filesystem": "^5.4 || ^6.0",
         "symfony/flex": "^1.9.0",
         "symfony/form": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/http-client": "^5.4 || ^6.0",
+        "symfony/http-kernel": "^5.4 || ^6.0",
         "symfony/intl": "^5.4 || ^6.0",
         "symfony/mailer": "^5.4 || ^6.0",
         "symfony/mime": "^5.4 || ^6.0",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "^5.4 || ^6.0",
+        "symfony/options-resolver": "^5.4 || ^6.0",
+        "symfony/password-hasher": "^5.4 || ^6.0",
         "symfony/process": "^5.4 || ^6.0",
         "symfony/property-access": "^5.4 || ^6.0",
         "symfony/property-info": "^5.4 || ^6.0",
         "symfony/proxy-manager-bridge": "^5.4 || ^6.0",
+        "symfony/psr-http-message-bridge": "^2.0",
         "symfony/runtime": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/serializer": "^5.4 || ^6.0",
+        "symfony/stopwatch": "^5.4 || ^6.0",
         "symfony/string": "^5.4 || ^6.0",
         "symfony/translation": "^5.4 || ^6.0",
         "symfony/twig-bundle": "^5.4 || ^6.0",
         "symfony/validator": "^5.4 || ^6.0",
         "symfony/web-link": "^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.10",
         "symfony/yaml": "^5.4 || ^6.0",
+        "symfonycasts/reset-password-bundle": "^1.8",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.10",
         "phpunit/phpunit": "^9.5",
@@ -193,7 +91,6 @@
         "symfony/debug-bundle": "^5.4 || ^6.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0",
-        "symfony/stopwatch": "^5.4 || ^6.0",
         "symfony/var-dumper": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
         "symplify/monorepo-builder": "^11.1"
@@ -212,7 +109,24 @@
         }
     },
     "autoload": {
+        "files": [
+            "lib/EasyGutenbergBundle/include/wp.php"
+        ],
         "psr-4": {
+            "Adeliom\\EasyAdminUserBundle\\": "lib/EasyAdminUserBundle/src/",
+            "Adeliom\\EasyBlockBundle\\": "lib/EasyBlockBundle/src/",
+            "Adeliom\\EasyBlogBundle\\": "lib/EasyBlogBundle/src/",
+            "Adeliom\\EasyCommonBundle\\": "lib/EasyCommonBundle/src/",
+            "Adeliom\\EasyConfigBundle\\": "lib/EasyConfigBundle/src/",
+            "Adeliom\\EasyEditorBundle\\": "lib/EasyEditorBundle/src/",
+            "Adeliom\\EasyFaqBundle\\": "lib/EasyFaqBundle/src/",
+            "Adeliom\\EasyFieldsBundle\\": "lib/EasyFieldsBundle/src/",
+            "Adeliom\\EasyGutenbergBundle\\": "lib/EasyGutenbergBundle/src/",
+            "Adeliom\\EasyMediaBundle\\": "lib/EasyMediaBundle/src/",
+            "Adeliom\\EasyMenuBundle\\": "lib/EasyMenuBundle/src/",
+            "Adeliom\\EasyPageBundle\\": "lib/EasyPageBundle/src/",
+            "Adeliom\\EasyRedirectBundle\\": "lib/EasyRedirectBundle/src/",
+            "Adeliom\\EasySeoBundle\\": "lib/EasySeoBundle/src/",
             "App\\": "src/"
         }
     },
@@ -222,9 +136,20 @@
         }
     },
     "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*"
+        "agence-adeliom/easy-admin-user-bundle": "6.1.0",
+        "agence-adeliom/easy-block-bundle": "6.1.0",
+        "agence-adeliom/easy-blog-bundle": "6.1.0",
+        "agence-adeliom/easy-common-bundle": "6.1.0",
+        "agence-adeliom/easy-config-bundle": "6.1.0",
+        "agence-adeliom/easy-editor-bundle": "6.1.0",
+        "agence-adeliom/easy-faq-bundle": "6.1.0",
+        "agence-adeliom/easy-fields-bundle": "6.1.0",
+        "agence-adeliom/easy-gutenberg-bundle": "6.1.0",
+        "agence-adeliom/easy-media-bundle": "6.1.0",
+        "agence-adeliom/easy-menu-bundle": "6.1.0",
+        "agence-adeliom/easy-page-bundle": "6.1.0",
+        "agence-adeliom/easy-redirect-bundle": "6.1.0",
+        "agence-adeliom/easy-seo-bundle": "6.1.0"
     },
     "scripts": {
         "auto-scripts": {
@@ -232,34 +157,6 @@
             "ckeditor:install --clear=drop": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
         },
-        "links": [
-            "rm -rf vendor/agence-adeliom/easy-admin-user-bundle",
-            "rm -rf vendor/agence-adeliom/easy-block-bundle",
-            "rm -rf vendor/agence-adeliom/easy-blog-bundle",
-            "rm -rf vendor/agence-adeliom/easy-common-bundle",
-            "rm -rf vendor/agence-adeliom/easy-config-bundle",
-            "rm -rf vendor/agence-adeliom/easy-editor-bundle",
-            "rm -rf vendor/agence-adeliom/easy-faq-bundle",
-            "rm -rf vendor/agence-adeliom/easy-fields-bundle",
-            "rm -rf vendor/agence-adeliom/easy-media-bundle",
-            "rm -rf vendor/agence-adeliom/easy-menu-bundle",
-            "rm -rf vendor/agence-adeliom/easy-page-bundle",
-            "rm -rf vendor/agence-adeliom/easy-redirect-bundle",
-            "rm -rf vendor/agence-adeliom/easy-seo-bundle",
-            "ln -s ../../lib/EasyAdminUserBundle vendor/agence-adeliom/easy-admin-user-bundle",
-            "ln -s ../../lib/EasyConfigBundle vendor/agence-adeliom/easy-config-bundle",
-            "ln -s ../../lib/EasyBlockBundle vendor/agence-adeliom/easy-block-bundle",
-            "ln -s ../../lib/EasyBlogBundle vendor/agence-adeliom/easy-blog-bundle",
-            "ln -s ../../lib/EasyCommonBundle vendor/agence-adeliom/easy-common-bundle",
-            "ln -s ../../lib/EasyEditorBundle vendor/agence-adeliom/easy-editor-bundle",
-            "ln -s ../../lib/EasyFaqBundle vendor/agence-adeliom/easy-faq-bundle",
-            "ln -s ../../lib/EasyFieldsBundle vendor/agence-adeliom/easy-fields-bundle",
-            "ln -s ../../lib/EasyMediaBundle vendor/agence-adeliom/easy-media-bundle",
-            "ln -s ../../lib/EasyMenuBundle vendor/agence-adeliom/easy-menu-bundle",
-            "ln -s ../../lib/EasyPageBundle vendor/agence-adeliom/easy-page-bundle",
-            "ln -s ../../lib/EasyRedirectBundle vendor/agence-adeliom/easy-redirect-bundle",
-            "ln -s ../../lib/EasySeoBundle vendor/agence-adeliom/easy-seo-bundle"
-        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
@@ -270,10 +167,13 @@
     "extra": {
         "symfony": {
             "endpoint": [
+                "https://api.github.com/repos/agence-adeliom/symfony-recipes/contents/index.json?ref=flex/main",
                 "flex://defaults"
             ],
             "allow-contrib": false,
-            "require": "^5.4 || ^6.0"
+            "require": "6.0.*"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

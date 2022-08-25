@@ -1,46 +1,4 @@
 {
-    "agence-adeliom/easy-admin-user-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-block-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-blog-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-common-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-config-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-editor-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-faq-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-fields-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-gutenberg-bundle": {
-        "version": "1.0.0"
-    },
-    "agence-adeliom/easy-media-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-menu-bundle": {
-        "version": "dev-ecommerce"
-    },
-    "agence-adeliom/easy-page-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-redirect-bundle": {
-        "version": "dev-master"
-    },
-    "agence-adeliom/easy-seo-bundle": {
-        "version": "dev-master"
-    },
     "babdev/pagerfanta-bundle": {
         "version": "v3.3.0"
     },
