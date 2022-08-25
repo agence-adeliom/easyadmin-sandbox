@@ -111,23 +111,23 @@
     },
     "autoload": {
         "files": [
-            "lib/EasyGutenbergBundle/include/wp.php"
+            "lib/easy-gutenberg-bundle/include/wp.php"
         ],
         "psr-4": {
-            "Adeliom\\EasyAdminUserBundle\\": "lib/EasyAdminUserBundle/src/",
-            "Adeliom\\EasyBlockBundle\\": "lib/EasyBlockBundle/src/",
-            "Adeliom\\EasyBlogBundle\\": "lib/EasyBlogBundle/src/",
-            "Adeliom\\EasyCommonBundle\\": "lib/EasyCommonBundle/src/",
-            "Adeliom\\EasyConfigBundle\\": "lib/EasyConfigBundle/src/",
-            "Adeliom\\EasyEditorBundle\\": "lib/EasyEditorBundle/src/",
-            "Adeliom\\EasyFaqBundle\\": "lib/EasyFaqBundle/src/",
-            "Adeliom\\EasyFieldsBundle\\": "lib/EasyFieldsBundle/src/",
-            "Adeliom\\EasyGutenbergBundle\\": "lib/EasyGutenbergBundle/src/",
-            "Adeliom\\EasyMediaBundle\\": "lib/EasyMediaBundle/src/",
-            "Adeliom\\EasyMenuBundle\\": "lib/EasyMenuBundle/src/",
-            "Adeliom\\EasyPageBundle\\": "lib/EasyPageBundle/src/",
-            "Adeliom\\EasyRedirectBundle\\": "lib/EasyRedirectBundle/src/",
-            "Adeliom\\EasySeoBundle\\": "lib/EasySeoBundle/src/",
+            "Adeliom\\EasyAdminUserBundle\\": "lib/easy-admin-user-bundle/src/",
+            "Adeliom\\EasyBlockBundle\\": "lib/easy-block-bundle/src/",
+            "Adeliom\\EasyBlogBundle\\": "lib/easy-blog-bundle/src/",
+            "Adeliom\\EasyCommonBundle\\": "lib/easy-common-bundle/src/",
+            "Adeliom\\EasyConfigBundle\\": "lib/easy-config-bundle/src/",
+            "Adeliom\\EasyEditorBundle\\": "lib/easy-editor-bundle/src/",
+            "Adeliom\\EasyFaqBundle\\": "lib/easy-faq-bundle/src/",
+            "Adeliom\\EasyFieldsBundle\\": "lib/easy-fields-bundle/src/",
+            "Adeliom\\EasyGutenbergBundle\\": "lib/easy-gutenberg-bundle/src/",
+            "Adeliom\\EasyMediaBundle\\": "lib/easy-media-bundle/src/",
+            "Adeliom\\EasyMenuBundle\\": "lib/easy-menu-bundle/src/",
+            "Adeliom\\EasyPageBundle\\": "lib/easy-page-bundle/src/",
+            "Adeliom\\EasyRedirectBundle\\": "lib/easy-redirect-bundle/src/",
+            "Adeliom\\EasySeoBundle\\": "lib/easy-seo-bundle/src/",
             "App\\": "src/"
         }
     },
