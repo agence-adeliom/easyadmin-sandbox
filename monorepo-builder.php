@@ -14,6 +14,9 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 
 return static function (MBConfig $mbConfig): void {
     $mbConfig->packageDirectories([__DIR__ . '/lib']);
+    $mbConfig->packageDirectoriesExcludes([
+        __DIR__ . '/lib/EasyShopBundle'
+    ]);
     $mbConfig->defaultBranch('main');
 
     $mbConfig->dataToRemove([
