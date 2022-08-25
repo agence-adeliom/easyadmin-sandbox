@@ -1,0 +1,27 @@
+{
+    "name": "agence-adeliom/easy-redirect-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony redirection bundle for EasyAdmin",
+    "keywords": ["symfony", "redirection", "easyadmin"],
+    "homepage": "https://github.com/agence-adeliom/easy-redirect-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnaud RITTI",
+            "homepage": "https://github.com/arnaud-ritti"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.2",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/http-kernel": "^5.4 || ^6.0",
+        "easycorp/easyadmin-bundle": "^3.4 || ^v4.0",
+        "agence-adeliom/easy-common-bundle": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\EasyRedirectBundle\\": "src/"
+        }
+    }
+}
