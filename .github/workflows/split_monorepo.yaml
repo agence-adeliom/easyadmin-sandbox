@@ -1,0 +1,80 @@
+name: Split Monorepo
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  provide_packages_json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Get package json list
+        id: output_data
+        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
+
+    outputs:
+      matrix: ${{ steps.output_data.outputs.matrix }}
+
+  split_monorepo:
+    needs: provide_packages_json
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: cd .terraform && terraform init
+
+      - name: Terraform Plan
+        run: cd .terraform && terraform plan -no-color
+
+      - name: Terraform Apply
+        run: cd .terraform && terraform apply -auto-approve -var='token=${{ secrets.ACCESS_TOKEN }}' -var='repo=${{ matrix.package }}'
+
+      # without tag
+      - if: "!startsWith(github.ref, 'refs/tags/')"
+        # Uses an action in the root directory
+        name: Monorepo Split of ${{ matrix.package }}
+        uses: symplify/github-action-monorepo-split@2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          package-directory: 'packages/${{ matrix.package }}'
+          split-repository-organization: 'agence-adeliom'
+          split-repository-name: '${{ matrix.package }}'
+          user-name: "GitHub Action"
+          user-email: "action@github.com"
+          branch: "main"
+
+      # with tag
+      - if: "startsWith(github.ref, 'refs/tags/')"
+        # Uses an action in the root directory
+        name: Monorepo Tagged Split of ${{ matrix.package }}
+        uses: symplify/github-action-monorepo-split@2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          tag: ${GITHUB_REF#refs/tags/}
+
+          package-directory: 'packages/${{ matrix.package }}'
+          split-repository-organization: 'agence-adeliom'
+          split-repository-name: '${{ matrix.package }}'
+          user-name: "GitHub Action"
+          user-email: "action@github.com"
+          branch: "main"
