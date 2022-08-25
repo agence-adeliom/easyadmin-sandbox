@@ -72,8 +72,8 @@ jobs:
           package_directory: 'lib/${{ matrix.package }}'
           repository_organization: 'agence-adeliom'
           repository_name: '${{ matrix.package }}'
-          user_name: ${{ github.actor }}
-          user_email: "action@github.com"
+          user_name: ${{ github.event.pusher.name }}
+          user_email: ${{ github.event.pusher.email }}
           branch: "main"
 
       # with tag
@@ -88,6 +88,6 @@ jobs:
           package_directory: 'lib/${{ matrix.package }}'
           repository_organization: 'agence-adeliom'
           repository_name: '${{ matrix.package }}'
-          user_name: ${{ github.actor }}
-          user_email: "action@github.com"
+          user_name: ${{ github.event.pusher.name }}
+          user_email: ${{ github.event.pusher.email }}
           branch: "main"
