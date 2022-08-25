@@ -15,7 +15,7 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 return static function (MBConfig $mbConfig): void {
     $mbConfig->packageDirectories([__DIR__ . '/lib']);
 
-    $mbConfig->defaultBranch('main');
+    $mbConfig->defaultBranch('master');
 
     $mbConfig->dataToRemove([
         'require' => [
