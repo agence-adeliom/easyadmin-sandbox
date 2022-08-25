@@ -2,3 +2,8 @@ easy_media:
   # loads routes from the given routing file stored in some bundle
   resource: '@EasyMediaBundle/Resources/config/routes.xml'
   prefix: /admin
+
+easy_media_public:
+  # loads routes from the given routing file stored in some bundle
+  resource: '@EasyMediaBundle/Resources/config/public_routes.xml'
+  prefix: /

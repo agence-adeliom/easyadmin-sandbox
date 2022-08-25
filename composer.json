@@ -115,6 +115,14 @@
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "path",
+            "url": "lib/EasyGutenbergBundle",
+            "canonical": false,
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {
@@ -133,6 +141,7 @@
         "agence-adeliom/easy-fields-bundle": "*",
         "agence-adeliom/easy-media-bundle": "*",
         "agence-adeliom/easy-menu-bundle": "*",
+        "agence-adeliom/easy-gutenberg-bundle": "*",
         "agence-adeliom/easy-page-bundle": "*",
         "agence-adeliom/easy-redirect-bundle": "*",
         "agence-adeliom/easy-seo-bundle": "*",
@@ -175,6 +184,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.10",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.14.0",
