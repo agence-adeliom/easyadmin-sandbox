@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_blog');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -41,12 +41,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, PostEntity::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Post class must be a valid class extending %s. "%s" given.',
-                                            PostEntity::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Post class must be a valid class extending %s. "%s" given.', PostEntity::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -57,12 +54,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, PostRepository::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Post repository must be a valid class extending %s. "%s" given.',
-                                            PostRepository::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Post repository must be a valid class extending %s. "%s" given.', PostRepository::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -73,12 +67,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, PostController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Page controller must be a valid class extending %s. "%s" given.',
-                                            PostController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Page controller must be a valid class extending %s. "%s" given.', PostController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -89,12 +80,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, PostCrudController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Post crud controller must be a valid class extending %s. "%s" given.',
-                                            PostCrudController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Post crud controller must be a valid class extending %s. "%s" given.', PostCrudController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -110,12 +98,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, CategoryEntity::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category class must be a valid class extending %s. "%s" given.',
-                                            CategoryEntity::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category class must be a valid class extending %s. "%s" given.', CategoryEntity::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -126,12 +111,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, CategoryRepository::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category repository must be a valid class extending %s. "%s" given.',
-                                            CategoryRepository::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category repository must be a valid class extending %s. "%s" given.', CategoryRepository::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -142,12 +124,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, CategoryController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category controller must be a valid class extending %s. "%s" given.',
-                                            CategoryController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category controller must be a valid class extending %s. "%s" given.', CategoryController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -158,12 +137,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, CategoryCrudController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category crud controller must be a valid class extending %s. "%s" given.',
-                                            CategoryCrudController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category crud controller must be a valid class extending %s. "%s" given.', CategoryCrudController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()

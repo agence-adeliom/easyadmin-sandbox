@@ -22,14 +22,13 @@ abstract class BlockCrudController extends AbstractCrudController
         return $crud
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
 
-
-            ->setPageTitle(Crud::PAGE_INDEX, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_INDEX)
-            ->setPageTitle(Crud::PAGE_EDIT, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_EDIT)
-            ->setPageTitle(Crud::PAGE_NEW, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_NEW)
-            ->setPageTitle(Crud::PAGE_DETAIL, "easy.block.admin.crud.title.shared_block." . Crud::PAGE_DETAIL)
-            ->setEntityLabelInSingular("easy.block.admin.crud.label.shared_block.singular")
-            ->setEntityLabelInPlural("easy.block.admin.crud.label.shared_block.plural")
-            ;
+            ->setPageTitle(Crud::PAGE_INDEX, 'easy.block.admin.crud.title.shared_block.'.Crud::PAGE_INDEX)
+            ->setPageTitle(Crud::PAGE_EDIT, 'easy.block.admin.crud.title.shared_block.'.Crud::PAGE_EDIT)
+            ->setPageTitle(Crud::PAGE_NEW, 'easy.block.admin.crud.title.shared_block.'.Crud::PAGE_NEW)
+            ->setPageTitle(Crud::PAGE_DETAIL, 'easy.block.admin.crud.title.shared_block.'.Crud::PAGE_DETAIL)
+            ->setEntityLabelInSingular('easy.block.admin.crud.label.shared_block.singular')
+            ->setEntityLabelInPlural('easy.block.admin.crud.label.shared_block.plural')
+        ;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -39,7 +38,7 @@ abstract class BlockCrudController extends AbstractCrudController
         foreach ($pages as $page) {
             $pageActions = $actions->getAsDto($page)->getActions();
             foreach ($pageActions as $action) {
-                $action->setLabel("easy.block.admin.crud.label.shared_block." . $action->getName());
+                $action->setLabel('easy.block.admin.crud.label.shared_block.'.$action->getName());
                 $actions->remove($page, $action->getAsConfigObject());
                 $actions->add($page, $action->getAsConfigObject());
             }
@@ -51,7 +50,7 @@ abstract class BlockCrudController extends AbstractCrudController
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
-            'easy_block.block_collection' => '?' . BlockCollection::class
+            'easy_block.block_collection' => '?'.BlockCollection::class,
         ]);
     }
 
@@ -60,9 +59,10 @@ abstract class BlockCrudController extends AbstractCrudController
         global $blockType;
         $blockType = $context->getRequest()->query->get('block_type');
         if (!$blockType) {
-            $blockCollection = $this->container->get("easy_block.block_collection");
-            return $this->render("@EasyBlock/crud/choose_block.html.twig", [
-                "blocks" => $blockCollection->getBlocks()
+            $blockCollection = $this->container->get('easy_block.block_collection');
+
+            return $this->render('@EasyBlock/crud/choose_block.html.twig', [
+                'blocks' => $blockCollection->getBlocks(),
             ]);
         }
 
@@ -80,7 +80,6 @@ abstract class BlockCrudController extends AbstractCrudController
         return $entity;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         global $blockType;
@@ -94,7 +93,7 @@ abstract class BlockCrudController extends AbstractCrudController
 
         if (!empty($blockType)) {
             if (method_exists($blockType, 'configureAdminAssets')) {
-                $assets = call_user_func([$blockType,'configureAdminAssets']);
+                $assets = call_user_func([$blockType, 'configureAdminAssets']);
                 if (!empty($assets['js'])) {
                     foreach ($assets['js'] as $file) {
                         $found = false;
@@ -127,20 +126,20 @@ abstract class BlockCrudController extends AbstractCrudController
             }
 
             if (method_exists($blockType, 'configureAdminFormTheme')) {
-                $formThemes = call_user_func([$blockType,'configureAdminFormTheme']);
+                $formThemes = call_user_func([$blockType, 'configureAdminFormTheme']);
                 if (!empty($formThemes) && $context->getCrud()) {
                     $context->getCrud()->setFormThemes(array_merge($context->getCrud()->getFormThemes(), $formThemes));
                 }
             }
         }
 
-        yield TextField::new('name', "easy.block.admin.field.name")->setRequired(true)->setColumns(4);
-        yield SlugField::new('key', "easy.block.admin.field.key")->setRequired(true)->setColumns(4)->hideWhenUpdating()->setTargetFieldName("name");
-        yield TextField::new('type', "easy.block.admin.field.type")->setRequired(true)->setColumns(4)->setFormTypeOption('disabled', 'disabled');
-        yield BooleanField::new('status', "easy.block.admin.field.status")->setColumns(12);
+        yield TextField::new('name', 'easy.block.admin.field.name')->setRequired(true)->setColumns(4);
+        yield SlugField::new('key', 'easy.block.admin.field.key')->setRequired(true)->setColumns(4)->hideWhenUpdating()->setTargetFieldName('name');
+        yield TextField::new('type', 'easy.block.admin.field.type')->setRequired(true)->setColumns(4)->setFormTypeOption('disabled', 'disabled');
+        yield BooleanField::new('status', 'easy.block.admin.field.status')->setColumns(12);
 
         if ($blockType && in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])) {
-            yield FormField::addPanel("easy.block.admin.field.settings_section");
+            yield FormField::addPanel('easy.block.admin.field.settings_section');
             yield BlockSettingsField::new('settings', false)->setFormType($blockType);
         }
     }

@@ -33,21 +33,15 @@ class PostEntity
     }
 
     /**
-     * @var null|CategoryEntity
+     * @var CategoryEntity|null
      */
     #[Assert\Type(CategoryEntity::class)]
     protected $category;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'css', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $css = null;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'js', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $js = null;
@@ -102,7 +96,7 @@ class PostEntity
     public function onRemove(LifecycleEventArgs $event): void
     {
         $this->setState(ThreeStateStatusEnum::UNPUBLISHED());
-        $this->setName($this->getName() . '-' . $this->getId() . '-deleted');
-        $this->setSlug($this->getSlug() . '-' . $this->getId() . '-deleted');
+        $this->setName($this->getName().'-'.$this->getId().'-deleted');
+        $this->setSlug($this->getSlug().'-'.$this->getId().'-deleted');
     }
 }

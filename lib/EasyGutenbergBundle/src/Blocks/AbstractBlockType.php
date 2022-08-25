@@ -22,6 +22,7 @@ abstract class AbstractBlockType extends AbstractType implements BlockTypeInterf
     abstract public function buildBlock(FormBuilderInterface $builder, array $options): void;
 
     abstract public static function getName(): string;
+
     abstract public static function getIcon(): string;
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
@@ -113,6 +114,7 @@ abstract class AbstractBlockType extends AbstractType implements BlockTypeInterf
     public static function getKey(): string
     {
         $name = (new CamelCaseToSnakeCaseNameConverter())->normalize(static::getName());
+
         return sprintf('%s/%s', self::getPrefix(), (new AsciiSlugger())->slug($name)->toString());
     }
 

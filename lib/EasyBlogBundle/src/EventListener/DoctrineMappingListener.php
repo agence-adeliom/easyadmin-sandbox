@@ -35,7 +35,7 @@ class DoctrineMappingListener implements EventSubscriber
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $eventArgs->getClassMetadata();
 
-        $isPost     = is_a($classMetadata->getName(), $this->postClass, true);
+        $isPost = is_a($classMetadata->getName(), $this->postClass, true);
         $isCategory = is_a($classMetadata->getName(), $this->categoryClass, true);
 
         if ($isPost) {

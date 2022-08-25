@@ -38,13 +38,13 @@ class FaqCategoryLoader extends Loader
         $routes = new RouteCollection();
 
         // prepare a new route
-        $path = $this->config['root_path'] . '/{category}';
+        $path = $this->config['root_path'].'/{category}';
         $defaults = [
-            '_controller' => $this->controller . '::index',
+            '_controller' => $this->controller.'::index',
             'category' => '',
         ];
         $requirements = [
-            //'category' => "([a-zA-Z0-9_-]+\/?)*",
+            // 'category' => "([a-zA-Z0-9_-]+\/?)*",
         ];
         $route = new Route($path, $defaults, $requirements, [], '', [], [], "request.attributes.has('_easy_faq_category') || request.attributes.get('_easy_faq_root') === true");
 

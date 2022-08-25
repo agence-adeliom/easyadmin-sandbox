@@ -53,7 +53,7 @@ class Article implements \Stringable
 
     public function __toString(): string
     {
-        return (string) ($this->title ?: "Nouvel article");
+        return (string) ($this->title ?: 'Nouvel article');
     }
 
     public function getMedia(): ?MediaEntity

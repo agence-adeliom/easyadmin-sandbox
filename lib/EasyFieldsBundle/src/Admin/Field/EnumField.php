@@ -75,23 +75,20 @@ final class EnumField implements FieldInterface
             ->setCustomOption(self::OPTION_WIDGET, self::WIDGET_NATIVE)
             ->setCustomOption(self::OPTION_ESCAPE_HTML_CONTENTS, true)
             ->setCustomOption(self::OPTION_ALLOW_MULTIPLE_CHOICES, false)
-            ;
+        ;
     }
 
     /**
-     * Given enum must follow the same format used in Symfony Forms:
+     * Given enum must follow the same format used in Symfony Forms:.
      */
     public function setEnum(string $enumFcqn): self
     {
         if (!class_exists($enumFcqn) || !is_a($enumFcqn, Enum::class, true)) {
-            throw new InvalidConfigurationException(sprintf(
-                'Enum class must be a valid class extending %s. "%s" given.',
-                Enum::class,
-                $enumFcqn
-            ));
+            throw new InvalidConfigurationException(sprintf('Enum class must be a valid class extending %s. "%s" given.', Enum::class, $enumFcqn));
         }
 
         $this->setCustomOption(self::OPTION_ENUM, $enumFcqn);
+
         return $this;
     }
 

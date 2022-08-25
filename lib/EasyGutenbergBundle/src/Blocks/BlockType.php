@@ -4,10 +4,8 @@ namespace Adeliom\EasyGutenbergBundle\Blocks;
 
 class BlockType implements BlockTypeInterface
 {
-    /** @var string */
     public string $name;
 
-    /** @var array */
     public array $attributes;
 
     /** @var callable */

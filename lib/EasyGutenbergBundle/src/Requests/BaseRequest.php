@@ -26,7 +26,7 @@ abstract class BaseRequest
 
         $messages = ['message' => 'validation_failed', 'errors' => []];
 
-        /** @var \Symfony\Component\Validator\ConstraintViolation  */
+        /* @var \Symfony\Component\Validator\ConstraintViolation */
         foreach ($errors as $message) {
             $messages['errors'][] = [
                 'property' => $message->getPropertyPath(),

@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Preset
@@ -51,7 +50,7 @@ return [
     */
 
     'exclude' => [
-        "var", "translations", "config", "public", ".composer", "_mutagen", "_recipes", "_traefik", "assets", "bin", "migrations", "vendor", "phpinsights.php"
+        'var', 'translations', 'config', 'public', '.composer', '_mutagen', '_recipes', '_traefik', 'assets', 'bin', 'migrations', 'vendor', 'phpinsights.php',
     ],
 
     'add' => [
@@ -101,5 +100,4 @@ return [
     */
 
     'threads' => null,
-
 ];

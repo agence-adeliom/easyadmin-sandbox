@@ -46,15 +46,15 @@ class BlogListener implements EventSubscriberInterface
         $path = $request->getPathInfo();
         $host = $request->getHost();
 
-        if (!str_contains($path, (string) $this->config["root_path"])) {
+        if (!str_contains($path, (string) $this->config['root_path'])) {
             return;
         }
 
-        $prefixes = preg_split('#/#', (string) $this->config["root_path"], -1, PREG_SPLIT_NO_EMPTY);
+        $prefixes = preg_split('#/#', (string) $this->config['root_path'], -1, PREG_SPLIT_NO_EMPTY);
         /** @var PostEntity[] $pages */
         $slugsArray = preg_split('#/#', $path, -1, PREG_SPLIT_NO_EMPTY);
 
-        if ($this->config["root_path"] != "/") {
+        if ('/' != $this->config['root_path']) {
             $slugsArray = array_values(array_diff($slugsArray, $prefixes));
         }
 

@@ -46,7 +46,7 @@ class DoctrineMappingListener implements EventSubscriber
      */
     private function processParent(ClassMetadata $classMetadata, string $class): void
     {
-        if (! $classMetadata->hasAssociation('parent')) {
+        if (!$classMetadata->hasAssociation('parent')) {
             $classMetadata->mapManyToOne([
                 'fieldName' => 'parent',
                 'targetEntity' => $class,
@@ -69,7 +69,7 @@ class DoctrineMappingListener implements EventSubscriber
      */
     private function processChildren(ClassMetadata $classMetadata, string $class): void
     {
-        if (! $classMetadata->hasAssociation('children')) {
+        if (!$classMetadata->hasAssociation('children')) {
             $classMetadata->mapOneToMany([
                 'fieldName' => 'children',
                 'targetEntity' => $class,
@@ -81,7 +81,7 @@ class DoctrineMappingListener implements EventSubscriber
 
     private function processMedias(ClassMetadata $classMetadata, string $class): void
     {
-        if (! $classMetadata->hasAssociation('medias')) {
+        if (!$classMetadata->hasAssociation('medias')) {
             $classMetadata->mapOneToMany([
                 'fieldName' => 'medias',
                 'targetEntity' => $class,
@@ -93,7 +93,7 @@ class DoctrineMappingListener implements EventSubscriber
 
     private function processFolder(ClassMetadata $classMetadata, string $class): void
     {
-        if (! $classMetadata->hasAssociation('folder')) {
+        if (!$classMetadata->hasAssociation('folder')) {
             $classMetadata->mapManyToOne([
                 'fieldName' => 'folder',
                 'targetEntity' => $class,

@@ -21,7 +21,7 @@ class SortableCollectionType extends CollectionType
         if ($options['allow_add'] && $options['prototype']) {
             $prototypeOptions = array_replace([
                 'required' => $options['required'],
-                'label' => $options['prototype_name'] . 'label__',
+                'label' => $options['prototype_name'].'label__',
             ], $options['entry_options']);
 
             if (null !== $options['prototype_data']) {
@@ -52,7 +52,7 @@ class SortableCollectionType extends CollectionType
             'allow_drag' => $options['allow_drag'],
             'allow_add' => $options['allow_add'],
             'allow_delete' => $options['allow_delete'],
-            'hide_title' => $options['hide_title']
+            'hide_title' => $options['hide_title'],
         ]);
 
         if ($form->getConfig()->hasAttribute('prototype')) {
@@ -102,6 +102,7 @@ class SortableCollectionType extends CollectionType
     {
         $entryOptionsNormalizer = static function (Options $options, $value) {
             $value['block_name'] = 'entry';
+
             return $value;
         };
 
@@ -116,7 +117,7 @@ class SortableCollectionType extends CollectionType
             'entry_type' => TextType::class,
             'entry_options' => [],
             'delete_empty' => false,
-            'invalid_message' => static fn(Options $options, $previousValue) => ($options['legacy_error_messages'] ?? true)
+            'invalid_message' => static fn (Options $options, $previousValue) => ($options['legacy_error_messages'] ?? true)
                 ? $previousValue
                 : 'The collection is invalid.',
         ]);

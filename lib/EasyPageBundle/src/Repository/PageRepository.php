@@ -22,7 +22,7 @@ class PageRepository extends ServiceEntityRepository
     public function setConfig(array $cacheConfig)
     {
         $this->cacheEnabled = $cacheConfig['enabled'];
-        $this->cacheTtl     = $cacheConfig['ttl'];
+        $this->cacheTtl = $cacheConfig['ttl'];
     }
 
     public function getPublishedQuery(): QueryBuilder
@@ -38,7 +38,6 @@ class PageRepository extends ServiceEntityRepository
 
         $qb->andWhere($orModule);
 
-
         $qb->setParameter('state', ThreeStateStatusEnum::PUBLISHED());
         $qb->setParameter('publishDate', new \DateTime());
         $qb->setParameter('unpublishDate', new \DateTime());
@@ -52,6 +51,7 @@ class PageRepository extends ServiceEntityRepository
     public function getPublished()
     {
         $qb = $this->getPublishedQuery();
+
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getResult();
@@ -64,7 +64,7 @@ class PageRepository extends ServiceEntityRepository
     {
         $qb = $this->getPublishedQuery();
         $qb->andWhere("page.action != ''")
-            ->andWhere("page.action IS NOT NULL");
+            ->andWhere('page.action IS NOT NULL');
 
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
@@ -106,6 +106,7 @@ class PageRepository extends ServiceEntityRepository
      *
      * @param string|null $host
      * @param string|null $locale
+     *
      * @return Page[]
      */
     public function findFrontPages(array $slugs = [], $host = null, $locale = null)
@@ -119,7 +120,7 @@ class PageRepository extends ServiceEntityRepository
             // If we are looking for homepage, let's get only the first one.
             $qb
                 ->andWhere('page.template = :template')
-                ->setParameter('template', "homepage")
+                ->setParameter('template', 'homepage')
                 ->setMaxResults(1)
             ;
         } elseif (1 === count($slugs)) {
@@ -143,7 +144,6 @@ class PageRepository extends ServiceEntityRepository
 //        }
 //        $qb->andWhere($localeWhere);
 
-
         /** @var Page[] $results */
         $results = $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
@@ -155,7 +155,7 @@ class PageRepository extends ServiceEntityRepository
         }
 
         // If we're looking for a homepage, only get the first result (matching more properties).
-        if ($searchForHomepage && $results !== []) {
+        if ($searchForHomepage && [] !== $results) {
             reset($results);
             $results = [$results[0]];
         }
@@ -167,7 +167,7 @@ class PageRepository extends ServiceEntityRepository
 
         $pages = $resultsSortedBySlug;
 
-        if ($slugs !== []) {
+        if ([] !== $slugs) {
             $pages = [];
             foreach ($slugs as $value) {
                 if (!array_key_exists($value, $resultsSortedBySlug)) {

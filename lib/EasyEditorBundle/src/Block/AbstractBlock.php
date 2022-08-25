@@ -24,8 +24,8 @@ abstract class AbstractBlock extends AbstractType implements BlockInterface
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("block_type", HiddenType::class, ["data" => $this::class])
-            ->add("position", HiddenType::class)
+            ->add('block_type', HiddenType::class, ['data' => $this::class])
+            ->add('position', HiddenType::class)
         ;
 
         $this->buildBlock($builder, $options);
@@ -36,8 +36,8 @@ abstract class AbstractBlock extends AbstractType implements BlockInterface
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $attr = [];
-        $attr["block-title"] = $this->getName();
-        $attr["block-icon"] = is_iterable($this->getIcon()) ? $this->getIcon()[0] : $this->getIcon();
+        $attr['block-title'] = $this->getName();
+        $attr['block-icon'] = is_iterable($this->getIcon()) ? $this->getIcon()[0] : $this->getIcon();
         $view->vars['attr'] = $attr;
     }
 
@@ -51,9 +51,9 @@ abstract class AbstractBlock extends AbstractType implements BlockInterface
     public static function configureAssets(): array
     {
         return [
-            "js" => [],
-            "css" => [],
-            "webpack" => [],
+            'js' => [],
+            'css' => [],
+            'webpack' => [],
         ];
     }
 

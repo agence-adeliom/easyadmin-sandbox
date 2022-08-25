@@ -24,7 +24,7 @@ class BlockRendererController extends AbstractController
     public function fetchBlocks(BlockTypeRegistry $registry): JsonResponse
     {
         $blocks = [];
-        foreach ($registry->blockTypes() as $blockType){
+        foreach ($registry->blockTypes() as $blockType) {
             $blocks[$blockType::getKey()] = array_filter([
                 'title' => $blockType::getName(),
                 'description' => $blockType::getDescription() ?: null,
@@ -39,6 +39,4 @@ class BlockRendererController extends AbstractController
 
         return $this->json($blocks);
     }
-
-
 }

@@ -17,14 +17,14 @@ class EasyMediaExtension extends Extension implements PrependExtensionInterface
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
         foreach ($config as $k => $v) {
-            $container->setParameter('easy_media.' . $k, $v);
+            $container->setParameter('easy_media.'.$k, $v);
         }
 
-        $container->setAlias("easy_media.storage", $container->getParameter("easy_media.storage_name"));
+        $container->setAlias('easy_media.storage', $container->getParameter('easy_media.storage_name'));
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -35,7 +35,7 @@ class EasyMediaExtension extends Extension implements PrependExtensionInterface
 
         $container->prependExtensionConfig('easy_media', $config);
         $twigConfig = [];
-        $twigConfig['paths'][__DIR__ . '/../Resources/views'] = 'easy_media';
+        $twigConfig['paths'][__DIR__.'/../Resources/views'] = 'easy_media';
         $twigConfig['globals']['easy_media'] = [];
         foreach ($config as $k => $v) {
             $twigConfig['globals']['easy_media'][$k] = $v;

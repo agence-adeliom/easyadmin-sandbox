@@ -10,16 +10,12 @@ class EasyFaqEntryEvent extends Event
     /**
      * @var string
      */
-    public const NAME = "EasyFaq.entry.before_render";
-
+    public const NAME = 'EasyFaq.entry.before_render';
 
     public function __construct(protected $entry, protected $args, protected $template)
     {
     }
 
-    /**
-     * @return BaseEntryEntity
-     */
     public function getEntry(): BaseEntryEntity
     {
         return $this->entry;

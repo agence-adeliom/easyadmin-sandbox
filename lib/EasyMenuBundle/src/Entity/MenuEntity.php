@@ -14,16 +14,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\MappedSuperclass(repositoryClass: \Adeliom\EasyMenuBundle\Repository\MenuRepository::class)]
 class MenuEntity implements \Stringable
 {
-    public $menuItems;
-
     use EntityIdTrait;
     use EntityTimestampableTrait {
         EntityTimestampableTrait::__construct as private TimestampableConstruct;
     }
     use EntityStatusTrait;
+    public $menuItems;
 
     /**
-     * @var MenuItemEntity[] | null
+     * @var MenuItemEntity[]|null
      */
     protected $items;
 
@@ -34,19 +33,18 @@ class MenuEntity implements \Stringable
     protected ?string $code = null;
 
     /**
-     * @var string | null
+     * @var string|null
      */
     #[ORM\Column(name: 'name', type: \Doctrine\DBAL\Types\Types::STRING, length: 255, nullable: true)]
     protected ?string $name = null;
 
     /**
-     * @var MenuItemEntity | null
+     * @var MenuItemEntity|null
      */
     protected $rootItem;
 
     /**
-     * Constructor
-     *
+     * Constructor.
      */
     public function __construct()
     {
@@ -55,7 +53,7 @@ class MenuEntity implements \Stringable
     }
 
     /**
-     * Set name
+     * Set name.
      */
     public function setName(?string $name)
     {
@@ -63,9 +61,9 @@ class MenuEntity implements \Stringable
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string | null
+     * @return string|null
      */
     public function getName()
     {
@@ -73,7 +71,7 @@ class MenuEntity implements \Stringable
     }
 
     /**
-     * Get menuItems
+     * Get menuItems.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
@@ -110,9 +108,6 @@ class MenuEntity implements \Stringable
         $this->setStatus(false);
     }
 
-    /**
-     * @return string
-     */
     public function getCode(): string
     {
         return $this->code;
@@ -123,9 +118,6 @@ class MenuEntity implements \Stringable
         $this->code = $code;
     }
 
-    /**
-     * @return MenuItemEntity|null
-     */
     public function getRootItem(): ?MenuItemEntity
     {
         return $this->rootItem;
@@ -138,6 +130,6 @@ class MenuEntity implements \Stringable
 
     public function __toString(): string
     {
-        return $this->name ?? "";
+        return $this->name ?? '';
     }
 }

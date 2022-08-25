@@ -41,13 +41,14 @@ class EasyMenuExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('easy_menu', \Closure::fromCallable(fn(\Twig\Environment $env, array $context, $code, array $extra = []): \Twig\Markup => $this->renderEasyMenu($env, $context, $code, $extra)), ['is_safe' => ['js', 'html'], 'needs_context' => true, 'needs_environment' => true]),
+            new TwigFunction('easy_menu', \Closure::fromCallable(fn (\Twig\Environment $env, array $context, $code, array $extra = []): \Twig\Markup => $this->renderEasyMenu($env, $context, $code, $extra)), ['is_safe' => ['js', 'html'], 'needs_context' => true, 'needs_environment' => true]),
         ];
     }
 
     /**
      * @param $code
      * @param array $extra
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -60,7 +61,7 @@ class EasyMenuExtension extends AbstractExtension
             throw new MenuNotFoundException($code);
         }
 
-        $template = "@EasyMenu/front/menus/" . $code . ".html.twig";
+        $template = '@EasyMenu/front/menus/'.$code.'.html.twig';
 
         if (!empty($extra['template'])) {
             $template = $extra['template'];
@@ -72,13 +73,13 @@ class EasyMenuExtension extends AbstractExtension
 
         $rootItem = $this->em->getRepository($this->menuItemClass)->findOneBy([
             'menu' => $menu,
-            'parent' => null
+            'parent' => null,
         ]);
 
         $menu->setRootItem($rootItem);
 
         return new Markup($this->twig->render($template, array_merge($context, [
-            "menu" => $menu
+            'menu' => $menu,
         ], $extra)), 'UTF-8');
     }
 }

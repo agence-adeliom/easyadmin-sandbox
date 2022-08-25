@@ -55,7 +55,7 @@ final class EasyEditorConfigurator implements FieldConfiguratorInterface
 
         foreach ($blocks as $blockType => $block) {
             if (method_exists($blockType, 'configureAdminAssets')) {
-                $assets = call_user_func([$blockType,'configureAdminAssets']);
+                $assets = call_user_func([$blockType, 'configureAdminAssets']);
                 if (!empty($assets['js'])) {
                     foreach ($assets['js'] as $file) {
                         $found = false;
@@ -88,7 +88,7 @@ final class EasyEditorConfigurator implements FieldConfiguratorInterface
             }
 
             if (method_exists($blockType, 'configureAdminFormTheme')) {
-                $formThemes = call_user_func([$blockType,'configureAdminFormTheme']);
+                $formThemes = call_user_func([$blockType, 'configureAdminFormTheme']);
                 if (!empty($formThemes) && $context->getCrud()) {
                     $context->getCrud()->setFormThemes(array_merge($context->getCrud()->getFormThemes(), $formThemes));
                 }

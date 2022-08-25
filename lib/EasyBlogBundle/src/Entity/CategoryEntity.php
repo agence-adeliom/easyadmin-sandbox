@@ -33,16 +33,10 @@ class CategoryEntity implements \Stringable
      */
     protected $posts;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'css', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $css = null;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'js', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $js = null;
@@ -51,13 +45,13 @@ class CategoryEntity implements \Stringable
     {
         $this->TimestampableConstruct();
         $this->SEOConstruct();
-        $this->posts     = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     /**
      * @return PostEntity[]|ArrayCollection
      */
-    public function getPosts(): array|\Doctrine\Common\Collections\ArrayCollection
+    public function getPosts(): array|ArrayCollection
     {
         return $this->posts;
     }
@@ -109,8 +103,8 @@ class CategoryEntity implements \Stringable
     public function onRemove(LifecycleEventArgs $event): void
     {
         $this->setStatus(false);
-        $this->setName($this->getName() . '-' . $this->getId() . '-deleted');
-        $this->setSlug($this->getSlug() . '-' . $this->getId() . '-deleted');
+        $this->setName($this->getName().'-'.$this->getId().'-deleted');
+        $this->setSlug($this->getSlug().'-'.$this->getId().'-deleted');
     }
 
     public function __toString(): string

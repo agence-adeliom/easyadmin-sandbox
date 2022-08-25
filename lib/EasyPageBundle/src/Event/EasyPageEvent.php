@@ -10,8 +10,7 @@ class EasyPageEvent extends Event
     /**
      * @var string
      */
-    public const NAME = "easypage.before_render";
-
+    public const NAME = 'easypage.before_render';
 
     public function __construct(protected Page $page, protected $args, protected $template)
     {

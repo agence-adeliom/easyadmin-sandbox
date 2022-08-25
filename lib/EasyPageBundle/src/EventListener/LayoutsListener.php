@@ -60,7 +60,7 @@ class LayoutsListener implements EventSubscriberInterface
             }
 
             // Check pattern
-            if ($layoutConfig['pattern'] && preg_match('~' . $layoutConfig['pattern'] . '~', $path)) {
+            if ($layoutConfig['pattern'] && preg_match('~'.$layoutConfig['pattern'].'~', $path)) {
                 $match = true;
             }
 
@@ -84,11 +84,7 @@ class LayoutsListener implements EventSubscriberInterface
         if (null === $finalLayout || !$this->twig->getLoader()->exists($finalLayout['resource'])) {
             $source = new Source('', $finalLayout['resource']);
 
-            throw new LoaderError(sprintf(
-                'Unable to find template %s for layout %s. The "layout" parameter must be a valid twig view to be used as a layout.',
-                $finalLayout['resource'],
-                $finalLayout['name']
-            ), 0, $source);
+            throw new LoaderError(sprintf('Unable to find template %s for layout %s. The "layout" parameter must be a valid twig view to be used as a layout.', $finalLayout['resource'], $finalLayout['name']), 0, $source);
         }
 
         /** @var Page[] $pages */

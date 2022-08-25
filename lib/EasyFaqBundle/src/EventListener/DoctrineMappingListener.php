@@ -35,8 +35,7 @@ class DoctrineMappingListener implements EventSubscriber
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $eventArgs->getClassMetadata();
 
-
-        $isEntry     = is_a($classMetadata->getName(), $this->entryClass, true);
+        $isEntry = is_a($classMetadata->getName(), $this->entryClass, true);
         $isCategory = is_a($classMetadata->getName(), $this->categoryClass, true);
 
         if ($isEntry) {
@@ -54,7 +53,7 @@ class DoctrineMappingListener implements EventSubscriber
             $classMetadata->mapManyToOne([
                 'fieldName' => 'category',
                 'targetEntity' => $this->categoryClass,
-                'inversedBy' => 'entries'
+                'inversedBy' => 'entries',
             ]);
         }
     }
@@ -65,7 +64,7 @@ class DoctrineMappingListener implements EventSubscriber
             $classMetadata->mapOneToMany([
                 'fieldName' => 'entries',
                 'targetEntity' => $this->entryClass,
-                'mappedBy' => 'category'
+                'mappedBy' => 'category',
             ]);
         }
     }

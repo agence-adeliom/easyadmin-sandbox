@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Adeliom\EasyGutenbergBundle\Form;
 
 use Adeliom\EasyGutenbergBundle\Blocks\BlockParser;
@@ -27,12 +26,12 @@ class GutenbergType extends AbstractType
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $blocks = $this->parser->parse($event->getData());
-            foreach ($blocks as $block){
+            foreach ($blocks as $block) {
                 $meta = $this->parser->validate($block);
-                if(!empty($meta["errors"])){
-                    $block->setMode("edit");
-                }else{
-                    $block->setMode("preview");
+                if (!empty($meta['errors'])) {
+                    $block->setMode('edit');
+                } else {
+                    $block->setMode('preview');
                 }
             }
             $event->setData($this->parser->serialize($blocks));
@@ -51,9 +50,9 @@ class GutenbergType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            "constraints" => [
-                new ValidGutenberg()
-            ]
+            'constraints' => [
+                new ValidGutenberg(),
+            ],
         ]);
     }
 

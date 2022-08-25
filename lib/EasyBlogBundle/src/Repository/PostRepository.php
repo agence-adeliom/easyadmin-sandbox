@@ -23,13 +23,13 @@ class PostRepository extends ServiceEntityRepository
     public function setConfig(array $cacheConfig)
     {
         $this->cacheEnabled = $cacheConfig['enabled'];
-        $this->cacheTtl     = $cacheConfig['ttl'];
+        $this->cacheTtl = $cacheConfig['ttl'];
     }
 
     public function getPublishedQuery(): QueryBuilder
     {
         $qb = $this->createQueryBuilder('post')
-            ->innerJoin('post.category', "category")
+            ->innerJoin('post.category', 'category')
             ->where('post.state = :state')
             ->andWhere('post.publishDate < :publishDate')
             ->andWhere('category.status = :categoryActive')
@@ -40,7 +40,6 @@ class PostRepository extends ServiceEntityRepository
         $orModule->add($qb->expr()->isNull('post.unpublishDate'));
 
         $qb->andWhere($orModule);
-
 
         $qb->setParameter('categoryActive', true);
         $qb->setParameter('state', ThreeStateStatusEnum::PUBLISHED());
@@ -85,6 +84,7 @@ class PostRepository extends ServiceEntityRepository
 
     /**
      * @return PostEntity
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getBySlug(string $slug, ?CategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
@@ -92,7 +92,7 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->getPublishedQuery();
         $qb->andWhere('post.slug = :slug')
             ->setParameter('slug', $slug);
-        if ($categoryEntity !== null) {
+        if (null !== $categoryEntity) {
             $qb->andWhere('post.category = :category')
                 ->setParameter('category', $categoryEntity);
         }

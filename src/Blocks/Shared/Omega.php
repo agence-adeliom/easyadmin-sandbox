@@ -11,12 +11,12 @@ class Omega extends AbstractBlock implements BlockInterface
 {
     public function getName(): string
     {
-        return "Omega";
+        return 'Omega';
     }
 
     public function getDescription(): string
     {
-        return "Create a omega block";
+        return 'Create a omega block';
     }
 
     public function getIcon(): string
@@ -26,20 +26,20 @@ class Omega extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "";
+        return '';
     }
 
     public static function getDefaultSettings(): array
     {
         return [
-          'name' => "Default name"
+          'name' => 'Default name',
         ];
     }
 
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("name", TextType::class)
+            ->add('name', TextType::class)
         ;
     }
 }

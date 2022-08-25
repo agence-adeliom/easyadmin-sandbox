@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_admin_user');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -31,11 +31,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value): string {
                             if (!class_exists($value) || !is_a($value, User::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'User class must be a valid class extending %s. "%s" given.',
-                                    User::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('User class must be a valid class extending %s. "%s" given.', User::class, $value));
                             }
 
                             return $value;
@@ -48,11 +44,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value): string {
                             if (!class_exists($value) || !is_a($value, UserRepository::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'User repository must be a valid class extending %s. "%s" given.',
-                                    UserRepository::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('User repository must be a valid class extending %s. "%s" given.', UserRepository::class, $value));
                             }
 
                             return $value;
@@ -65,11 +57,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value): string {
                             if (!class_exists($value) || !is_a($value, ResetPasswordRequest::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Reset password class must be a valid class extending %s. "%s" given.',
-                                    ResetPasswordRequest::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Reset password class must be a valid class extending %s. "%s" given.', ResetPasswordRequest::class, $value));
                             }
 
                             return $value;
@@ -82,11 +70,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value): string {
                             if (!class_exists($value) || !is_a($value, ResetPasswordRequestRepository::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Reset password repository must be a valid class extending %s. "%s" given.',
-                                    ResetPasswordRequestRepository::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Reset password repository must be a valid class extending %s. "%s" given.', ResetPasswordRequestRepository::class, $value));
                             }
 
                             return $value;

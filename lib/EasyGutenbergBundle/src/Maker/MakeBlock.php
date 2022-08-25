@@ -43,9 +43,8 @@ final class MakeBlock extends AbstractMaker
             'Type'
         );
 
-
-        $name = $io->askQuestion(new Question("Name", ""));
-        $description = $io->askQuestion(new Question("Description", ""));
+        $name = $io->askQuestion(new Question('Name', ''));
+        $description = $io->askQuestion(new Question('Description', ''));
 
         $templateName = Str::asFilePath('blocks/'.$blockClassNameDetails->getRelativeNameWithoutSuffix()).'.html.twig';
 

@@ -170,7 +170,7 @@ class EasyAdminResetPasswordController extends AbstractController
         $config = $this->parameterBag->get('easy_admin_user.reset_password');
 
         $email = (new TemplatedEmail())
-            ->from(new Address($config["from_address"], $config["from_name"]))
+            ->from(new Address($config['from_address'], $config['from_name']))
             ->to($user->getEmail())
             ->subject($this->translator->trans('easy_admin_user.reset_password.subject'))
             ->htmlTemplate('@EasyAdminUser/reset_password/email.html.twig')

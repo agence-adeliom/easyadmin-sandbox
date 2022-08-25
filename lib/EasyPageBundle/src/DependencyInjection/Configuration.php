@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_page');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -30,12 +30,9 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(function ($value) {
                             if (!class_exists($value) || !is_a($value, Page::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Page class must be a valid class extending %s. "%s" given.',
-                                    Page::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Page class must be a valid class extending %s. "%s" given.', Page::class, $value));
                             }
+
                             return $value;
                         })
                     ->end()
@@ -46,12 +43,9 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(function ($value) {
                             if (!class_exists($value) || !is_a($value, PageRepository::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Page repository must be a valid class extending %s. "%s" given.',
-                                    PageRepository::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Page repository must be a valid class extending %s. "%s" given.', PageRepository::class, $value));
                             }
+
                             return $value;
                         })
                     ->end()
@@ -62,12 +56,9 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(function ($value) {
                             if (!class_exists($value) || !is_a($value, PageController::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Page controller must be a valid class extending %s. "%s" given.',
-                                    PageController::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Page controller must be a valid class extending %s. "%s" given.', PageController::class, $value));
                             }
+
                             return $value;
                         })
                     ->end()

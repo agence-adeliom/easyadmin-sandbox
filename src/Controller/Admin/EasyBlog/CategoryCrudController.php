@@ -21,14 +21,15 @@ class CategoryCrudController extends BaseCategoryCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
+
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ;
+        ;
     }
 
     public function configureFilters(Filters $filters): Filters
     {
-        $filters->add(ChoiceFilter::new("state", "Status")->setChoices(ThreeStateStatusEnum::toArray()));
+        $filters->add(ChoiceFilter::new('state', 'Status')->setChoices(ThreeStateStatusEnum::toArray()));
 
         return $filters;
     }

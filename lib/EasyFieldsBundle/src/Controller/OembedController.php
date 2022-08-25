@@ -12,21 +12,20 @@ class OembedController extends AbstractController
 {
     public function index(Request $request): Response
     {
-        $url = $request->get("url");
+        $url = $request->get('url');
 
-        if(!$url){
+        if (!$url) {
             try {
                 $content = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
                 $url = $content['url'] ?? null;
-            }catch (\Exception){
+            } catch (\Exception) {
                 $url = null;
             }
         }
 
-        if (!$url){
+        if (!$url) {
             throw new BadRequestException("The parameter 'url' is missing");
         }
-
 
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new BadRequestException("The parameter 'url' is invalid");
@@ -34,12 +33,12 @@ class OembedController extends AbstractController
 
         $embed = new Embed();
         $infos = $embed->get($url);
-        if ($infos->code === null) {
-            throw new BadRequestException("The URL provided has no integration code");
+        if (null === $infos->code) {
+            throw new BadRequestException('The URL provided has no integration code');
         }
 
         return $this->render('@EasyFields/crud/field/oembed.html.twig', [
-            "url" => $url,
+            'url' => $url,
         ]);
     }
 }

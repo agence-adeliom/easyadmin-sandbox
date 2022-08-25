@@ -3,7 +3,6 @@
 namespace Adeliom\EasyFaqBundle\Routing;
 
 use Adeliom\EasyFaqBundle\Repository\EntryRepository;
-use Adeliom\EasyFaqBundle\Repository\PageRepository;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -11,7 +10,6 @@ use Symfony\Component\Routing\RouteCollection;
 class FaqEntryLoader extends Loader
 {
     private bool $isLoaded = false;
-
 
     public function __construct(/**
          * @readonly
@@ -40,13 +38,13 @@ class FaqEntryLoader extends Loader
         $routes = new RouteCollection();
 
         // prepare a new route
-        $path = $this->config['root_path'] . '/{category}/{entry}';
+        $path = $this->config['root_path'].'/{category}/{entry}';
         $defaults = [
-            '_controller' => $this->controller . '::index',
+            '_controller' => $this->controller.'::index',
         ];
         $requirements = [
-            //'category' => "([a-zA-Z0-9_-]+\/?)*",
-            //'entry' => "([a-zA-Z0-9_-]+\/?)*",
+            // 'category' => "([a-zA-Z0-9_-]+\/?)*",
+            // 'entry' => "([a-zA-Z0-9_-]+\/?)*",
         ];
         $route = new Route($path, $defaults, $requirements, [], '', [], [], "request.attributes.has('_easy_faq_category') && request.attributes.has('_easy_faq_entry')");
 

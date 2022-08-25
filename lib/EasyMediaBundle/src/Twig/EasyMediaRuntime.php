@@ -7,11 +7,8 @@ namespace Adeliom\EasyMediaBundle\Twig;
 use Adeliom\EasyMediaBundle\Entity\Media;
 use Adeliom\EasyMediaBundle\Service\EasyMediaHelper;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
-use Liip\ImagineBundle\Controller\ImagineController;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
-use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
-use Liip\ImagineBundle\Service\FilterService;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -24,7 +21,7 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
     /**
      * @return array|string|string[]|null
      */
-    public function resolveMedia(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media)
+    public function resolveMedia(int|string|Media $media)
     {
         $media = $this->getMedia($media);
         if (!$media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
@@ -36,9 +33,10 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
 
     /**
      * @param mixed|null $default
+     *
      * @return array|mixed|null
      */
-    public function mediaMeta(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media, ?string $key = null, $default = null)
+    public function mediaMeta(int|string|Media $media, ?string $key = null, $default = null)
     {
         $media = $this->getMedia($media);
         if (!$media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
@@ -55,7 +53,7 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
     /**
      * @return array|null
      */
-    public function mediaInfos(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media)
+    public function mediaInfos(int|string|Media $media)
     {
         $media = $this->getMedia($media);
         if (!$media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
@@ -82,7 +80,7 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
     /**
      * @return bool|null
      */
-    public function fileIsType(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media, string $compare)
+    public function fileIsType(int|string|Media $media, string $compare)
     {
         $media = $this->getMedia($media);
         if (!$media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
@@ -102,14 +100,11 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
         return EasyMediaHelper::mime2icon($mime_type);
     }
 
-    private function getMedia(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media): ?Media
+    private function getMedia(int|string|Media $media): ?Media
     {
         $class = $this->manager->getHelper()->getMediaClassName();
         if (!\is_int($media) && !\is_string($media) && !$media instanceof $class) {
-            throw new \TypeError(sprintf(
-                'Media parameter must be either an identifier or the media itself for Twig functions, "%s" given.',
-                \is_object($media) ? 'instance of ' . $media::class : \gettype($media)
-            ));
+            throw new \TypeError(sprintf('Media parameter must be either an identifier or the media itself for Twig functions, "%s" given.', \is_object($media) ? 'instance of '.$media::class : \gettype($media)));
         }
 
         if (!$media instanceof $class) {
@@ -129,9 +124,9 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param array<string, mixed>      $options
+     * @param array<string, mixed> $options
      */
-    public function media(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media, string $format = "reference", array $options = []): string
+    public function media(int|string|Media $media, string $format = 'reference', array $options = []): string
     {
         $media = $this->getMedia($media);
         $template = null;
@@ -139,19 +134,19 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
             return '';
         }
 
-        if ($this->fileIsType($media, "image")) {
+        if ($this->fileIsType($media, 'image')) {
             $options = $this->getImageHelperProperties($media, $format, $options);
-            $template = "@EasyMedia/render/image.html.twig";
+            $template = '@EasyMedia/render/image.html.twig';
         }
 
-        if ($this->fileIsType($media, "oembed")) {
+        if ($this->fileIsType($media, 'oembed')) {
             $options = $this->getOembedHelperProperties($media, $format, $options);
-            $template = "@EasyMedia/render/oembed.html.twig";
+            $template = '@EasyMedia/render/oembed.html.twig';
         }
 
-        if ($this->fileIsType($media, "video")) {
+        if ($this->fileIsType($media, 'video')) {
             $options = $this->getVideoHelperProperties($media, $format, $options);
-            $template = "@EasyMedia/render/video.html.twig";
+            $template = '@EasyMedia/render/video.html.twig';
         }
 
         if (null === $template) {
@@ -168,14 +163,14 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
     /**
      * @param mixed[]|string $format
      */
-    public function path(int|string|\Adeliom\EasyMediaBundle\Entity\Media $media, array|string $format = "reference"): string
+    public function path(int|string|Media $media, array|string $format = 'reference'): string
     {
         $media = $this->getMedia($media);
         if (!$media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
             return '';
         }
 
-        if ($format !== "reference" && $this->fileIsType($media, "image")) {
+        if ('reference' !== $format && $this->fileIsType($media, 'image')) {
             if (is_array($format)) {
                 return $this->cacheManager->getRuntimePath($media->getPath(), $format);
             }
@@ -183,63 +178,64 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
             return $this->cacheManager->getBrowserPath($media->getPath(), $format);
         }
 
-        if ($this->fileIsType($media, "oembed")) {
-            return $media->getMeta("url");
+        if ($this->fileIsType($media, 'oembed')) {
+            return $media->getMeta('url');
         }
 
         return $this->buildPath($media);
     }
 
-    private function getVideoHelperProperties(Media $media, string $format = "reference", array $options = []): array
+    private function getVideoHelperProperties(Media $media, string $format = 'reference', array $options = []): array
     {
         $params = [
             'url' => $this->buildPath($media),
             'sources' => [
                 [
-                    "src" => $this->buildPath($media),
-                    "type" => $media->getMime()
-                ]
-            ]
+                    'src' => $this->buildPath($media),
+                    'type' => $media->getMime(),
+                ],
+            ],
         ];
 
         return array_merge($params, $options);
     }
 
-    private function getOembedHelperProperties(Media $media, string $format = "reference", array $options = []): array
+    private function getOembedHelperProperties(Media $media, string $format = 'reference', array $options = []): array
     {
         $params = [
-            'title' => $media->getMeta("title", $media->getName())
+            'title' => $media->getMeta('title', $media->getName()),
         ];
-        $code = $media->getMeta("code");
-        if ("reference" === $format) {
+        $code = $media->getMeta('code');
+        if ('reference' === $format) {
             $params += $code;
         }
 
-        return array_merge($params, ["attributes" => $options]);
+        return array_merge($params, ['attributes' => $options]);
     }
 
-    private function getImageHelperProperties(Media $media, string $format = "reference", array $options = []): array
+    private function getImageHelperProperties(Media $media, string $format = 'reference', array $options = []): array
     {
         if (isset($options['srcset'], $options['picture'])) {
             throw new \LogicException("The 'srcset' and 'picture' options must not be used simultaneously.");
         }
 
         $params = [
-            'alt' => $media->getMeta("alt", $media->getName()),
-            'title' => $media->getMeta("title", $media->getName())
+            'alt' => $media->getMeta('alt', $media->getName()),
+            'title' => $media->getMeta('title', $media->getName()),
         ];
-        $box = $media->getMeta("dimensions");
+        $box = $media->getMeta('dimensions');
 
         $params += [
-            'ratio' => $box["ratio"] ?: null,
+            'ratio' => $box['ratio'] ?: null,
         ];
 
-        if ("reference" === $format) {
+        if ('reference' === $format) {
             $params += [
                 'src' => $this->path($media, $format),
-                'width' => $box["width"] ?: null,
-                'height' => $box["height"] ?: null,
+                'width' => $box['width'] ?: null,
+                'height' => $box['height'] ?: null,
             ];
+
             return array_merge($params, $options);
         }
 
@@ -254,7 +250,7 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
                     $settings = $this->getFormat($formatName);
                     if (\is_string($key) || isset($options['picture'])) {
                         $src = $this->path($media, $formatName);
-                        [$width, $height] = $settings[$formatName]["filters"]['thumbnail']["size"];
+                        [$width, $height] = $settings[$formatName]['filters']['thumbnail']['size'];
                         $mediaQuery = \is_string($key)
                             ? $key
                             : ($width ? sprintf('(max-width: %dpx)', $width) : null);
@@ -273,58 +269,60 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
                 unset($options['srcset'], $options['picture']);
 
                 if (!empty($pictureParams)) {
-                    $params['src'] = $this->path($media, (isset($formats[$format]) ? $format : "reference"));
-                    usort($pictureParams['source'], static fn($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
-                    if (isset($params["ratio"])) {
-                        $params["orientation"] = ($params["ratio"] && $params["ratio"] <= 100) ? "landscape" : "portrait";
+                    $params['src'] = $this->path($media, isset($formats[$format]) ? $format : 'reference');
+                    usort($pictureParams['source'], static fn ($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
+                    if (isset($params['ratio'])) {
+                        $params['orientation'] = ($params['ratio'] && $params['ratio'] <= 100) ? 'landscape' : 'portrait';
                     }
 
                     $pictureParams['source'] = array_map(static function ($source) {
                         unset($source['width'], $source['ratio']);
+
                         return $source;
                     }, $pictureParams['source']);
                     $pictureParams['img'] = $params + $options;
                     $params = ['picture' => $pictureParams];
                 } else {
                     foreach ($srcSetFormats as $formatName => $settings) {
-                        [$width, $height] = $settings["filters"]['thumbnail']["size"];
+                        [$width, $height] = $settings['filters']['thumbnail']['size'];
                         $srcSet[] = [
-                            "width" => $width ?: null,
-                            "set" => sprintf('%s %dw', $this->path($media, $formatName), $width),
+                            'width' => $width ?: null,
+                            'set' => sprintf('%s %dw', $this->path($media, $formatName), $width),
                         ];
                     }
 
                     // The reference format is not in the formats list
                     $srcSet[] = [
-                        "width" => $box["width"] ?: null,
-                        "set" => sprintf(
+                        'width' => $box['width'] ?: null,
+                        'set' => sprintf(
                             '%s %dw',
                             $this->path($media),
-                            $box["width"] ?: null
-                        )
+                            $box['width'] ?: null
+                        ),
                     ];
 
-                    usort($srcSet, static fn($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
+                    usort($srcSet, static fn ($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
 
-                    $srcSet = array_map(static fn($source) => $source['set'], $srcSet);
+                    $srcSet = array_map(static fn ($source) => $source['set'], $srcSet);
 
                     $params['srcset'] = implode(', ', $srcSet);
                     $params['src'] = $this->path($media);
-                    $params['sizes'] = sprintf('(max-width: %1$dpx) 100vw, %1$dpx', $box["width"] ?: null);
+                    $params['sizes'] = sprintf('(max-width: %1$dpx) 100vw, %1$dpx', $box['width'] ?: null);
                 }
             }
         } elseif ((is_countable($formats) ? count($formats) : 0) > 1) {
             $pictureParams = [];
             foreach ($formats as $formatName => $settings) {
                 $src = $this->path($media, $formatName);
-                [$width, $height] = $settings["filters"]['thumbnail']["size"];
+                [$width, $height] = $settings['filters']['thumbnail']['size'];
                 $mediaQuery = $width ? sprintf('(max-width: %dpx)', $width) : null;
-                $pictureParams['source'][] = ['media' => $mediaQuery, 'srcset' => $src, 'width' => $width, 'ratio' => $width ? ($height / $width * 100) : null ];
+                $pictureParams['source'][] = ['media' => $mediaQuery, 'srcset' => $src, 'width' => $width, 'ratio' => $width ? ($height / $width * 100) : null];
             }
 
-            usort($pictureParams['source'], static fn($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
+            usort($pictureParams['source'], static fn ($a, $b) => ($a['width'] ?: 9_999_999) <=> ($b['width'] ?: 9_999_999));
             $pictureParams['source'] = array_map(static function ($source) {
                 unset($source['width'], $source['ratio']);
+
                 return $source;
             }, $pictureParams['source']);
             $pictureParams['img'] = $params + $options;
@@ -332,13 +330,13 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
         } elseif (isset($formats[$format])) {
             $params += [
                 'src' => $this->path($media, $format),
-                'width' => $box["width"] ?: null,
-                'height' => $box["height"] ?: null,
+                'width' => $box['width'] ?: null,
+                'height' => $box['height'] ?: null,
             ];
         }
 
-        if (isset($params["ratio"])) {
-            $params["orientation"] = ($params["ratio"] && $params["ratio"] <= 100) ? "landscape" : "portrait";
+        if (isset($params['ratio'])) {
+            $params['orientation'] = ($params['ratio'] && $params['ratio'] <= 100) ? 'landscape' : 'portrait';
         }
 
         return array_merge($params, $options);
@@ -346,6 +344,6 @@ class EasyMediaRuntime implements RuntimeExtensionInterface
 
     private function getFormat(string $format)
     {
-        return array_filter($this->filterManager->getFilterConfiguration()->all(), static fn($config, $key) => $key === "default" || str_starts_with((string) $key, $format), ARRAY_FILTER_USE_BOTH);
+        return array_filter($this->filterManager->getFilterConfiguration()->all(), static fn ($config, $key) => 'default' === $key || str_starts_with((string) $key, $format), ARRAY_FILTER_USE_BOTH);
     }
 }

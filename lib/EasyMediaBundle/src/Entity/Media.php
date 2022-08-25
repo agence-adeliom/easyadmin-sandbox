@@ -49,7 +49,7 @@ class Media
     {
         $this->name = $name;
 
-        if (! $this->slug) {
+        if (!$this->slug) {
             $this->slug = (new AsciiSlugger())->slug(strtolower((string) $this->name))->toString();
         }
     }
@@ -123,9 +123,9 @@ class Media
     {
         $tree = $this->getSlug();
         $current = $this->getFolder();
-        if ($current !== null) {
+        if (null !== $current) {
             do {
-                $tree = $current->getSlug() . $separator . $tree;
+                $tree = $current->getSlug().$separator.$tree;
                 $current = $current->getParent();
             } while ($current);
         }

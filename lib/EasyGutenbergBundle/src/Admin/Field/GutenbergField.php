@@ -35,8 +35,9 @@ final class GutenbergField implements FieldInterface
             ->addCssFiles(Asset::new('bundles/easygutenberg/css/easy-gutenberg.css')->onlyOnForms())
             ->setDefaultColumns('col-12')
             ->setCustomOption(self::OPTION_RENDER_AS_HTML, true)
-            ;
+        ;
     }
+
     /**
      * This option is ignored when using 'renderAsHtml()' to avoid
      * truncating contents in the middle of an HTML tag.

@@ -21,11 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\MappedSuperclass(repositoryClass: \Adeliom\EasyPageBundle\Repository\PageRepository::class)]
 class Page
 {
-    /**
-     * @var string
-     */
-    public const HOMEPAGE = "homepage";
-
     use EntityIdTrait;
     use EntityTimestampableTrait {
         EntityTimestampableTrait::__construct as private TimestampableConstruct;
@@ -38,9 +33,13 @@ class Page
     use EntitySeoTrait {
         EntitySeoTrait::__construct as private SEOConstruct;
     }
+    /**
+     * @var string
+     */
+    public const HOMEPAGE = 'homepage';
 
     /**
-     * @var null|Page
+     * @var Page|null
      */
     #[Assert\Type(Page::class)]
     protected $parent;
@@ -50,31 +49,19 @@ class Page
      */
     protected $children;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'action', type: \Doctrine\DBAL\Types\Types::STRING, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $action = null;
 
-    /**
-     * @var string|null
-     */
     #[Groups('main')]
     #[ORM\Column(name: 'template', type: \Doctrine\DBAL\Types\Types::STRING, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $template = null;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'css', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $css = null;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'js', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $js = null;
@@ -84,7 +71,7 @@ class Page
         $this->TimestampableConstruct();
         $this->PublishableConstruct();
         $this->SEOConstruct();
-        $this->children  = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function setParent(?Page $parent = null)
@@ -112,7 +99,7 @@ class Page
     /**
      * @return Page[]|ArrayCollection
      */
-    public function getChildren(): array|\Doctrine\Common\Collections\ArrayCollection
+    public function getChildren(): array|ArrayCollection
     {
         return $this->children;
     }
@@ -137,7 +124,7 @@ class Page
 
         $current = $this;
         do {
-            $tree = $name ? $current->getName() . $separator . $tree : $current->getSlug() . $separator . $tree;
+            $tree = $name ? $current->getName().$separator.$tree : $current->getSlug().$separator.$tree;
             $current = $current->getParent();
         } while ($current);
 
@@ -146,11 +133,11 @@ class Page
 
     public function getTreeDisplay(): string
     {
-        $tree = ' ' . $this->getName();
+        $tree = ' '.$this->getName();
 
         $current = $this;
         do {
-            $tree    = '―' . $tree;
+            $tree = '―'.$tree;
             $current = $current->getParent();
         } while ($current);
 
@@ -159,7 +146,7 @@ class Page
 
     public function isHomepage(): bool
     {
-        return $this->template == self::HOMEPAGE;
+        return self::HOMEPAGE == $this->template;
     }
 
     public function getAction(): ?string
@@ -215,7 +202,7 @@ class Page
     public function onRemove(LifecycleEventArgs $event): void
     {
         $em = $event->getEntityManager();
-        if ($this->children !== null && count($this->children)) {
+        if (null !== $this->children && count($this->children)) {
             foreach ($this->children as $child) {
                 $child->setParent(null);
                 $em->persist($child);
@@ -223,8 +210,8 @@ class Page
         }
 
         $this->setState(ThreeStateStatusEnum::UNPUBLISHED());
-        $this->parent  = null;
-        $this->setName($this->getName() . '-' . $this->getId() . '-deleted');
-        $this->setSlug($this->getSlug() . '-' . $this->getId() . '-deleted');
+        $this->parent = null;
+        $this->setName($this->getName().'-'.$this->getId().'-deleted');
+        $this->setSlug($this->getSlug().'-'.$this->getId().'-deleted');
     }
 }

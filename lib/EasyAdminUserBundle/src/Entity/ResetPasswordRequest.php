@@ -19,8 +19,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     #[ORM\GeneratedValue]
     private int $id;
 
-
-    public function __construct(protected ?\Adeliom\EasyAdminUserBundle\Entity\User $user, DateTimeInterface $expiresAt, string $selector, string $hashedToken)
+    public function __construct(protected ?User $user, DateTimeInterface $expiresAt, string $selector, string $hashedToken)
     {
         $this->initialize($expiresAt, $selector, $hashedToken);
     }

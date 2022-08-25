@@ -2,7 +2,6 @@
 
 namespace Adeliom\EasyMediaBundle\Imagine\Data;
 
-use Imagine\Image\ImagineInterface;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\FilesystemException;

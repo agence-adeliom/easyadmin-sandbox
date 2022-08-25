@@ -15,7 +15,6 @@ trait EntitySeoTrait
     #[ORM\Embedded(class: \Adeliom\EasySeoBundle\Entity\SEO::class)]
     protected $seo;
 
-
     public function __construct()
     {
         $this->seo = new SEO();

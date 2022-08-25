@@ -9,9 +9,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldConfiguratorInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function Symfony\Component\String\u;
+
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
@@ -48,7 +49,6 @@ final class ChoiceMaskConfigurator implements FieldConfiguratorInterface
         $field->setFormTypeOptionIfNotSet('choices', $choices);
         $field->setFormTypeOptionIfNotSet('map', $map);
         $field->setFormTypeOptionIfNotSet('expanded', $isExpanded);
-
 
         $field->setCustomOption(ChoiceMaskField::OPTION_WIDGET, ChoiceMaskField::WIDGET_NATIVE);
 
@@ -126,6 +126,6 @@ final class ChoiceMaskConfigurator implements FieldConfiguratorInterface
 
         $badgeTypeCssClass = empty($badgeType) ? '' : u($badgeType)->ensureStart('badge-')->toString();
 
-        return $commonBadgeCssClass . ' ' . $badgeTypeCssClass;
+        return $commonBadgeCssClass.' '.$badgeTypeCssClass;
     }
 }

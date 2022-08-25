@@ -2,7 +2,6 @@
 
 namespace Adeliom\EasyFieldsBundle\Admin\Field;
 
-use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Adeliom\EasyFieldsBundle\Form\OembedType;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
@@ -25,6 +24,7 @@ final class OembedField implements FieldInterface
     public function setRequired(bool $isRequired): self
     {
         $this->setFormTypeOption('required', $isRequired);
+
         return $this;
     }
 }

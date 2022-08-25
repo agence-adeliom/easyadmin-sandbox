@@ -23,7 +23,6 @@ trait PositionSortableTrait
     #[Gedmo\TreeRoot]
     protected ?int $root = null;
 
-
     /**
      * @return mixed
      */

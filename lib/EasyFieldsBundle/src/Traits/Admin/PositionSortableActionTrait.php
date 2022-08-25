@@ -20,15 +20,15 @@ trait PositionSortableActionTrait
         $rightEntity = null;
         $entity = null;
 
-        if (!empty($leftPrimaryKeyValue) &&  !empty($leftParentProperty)) {
+        if (!empty($leftPrimaryKeyValue) && !empty($leftParentProperty)) {
             $leftEntity = $this->managerRegistry->getRepository($context->getEntity()->getFqcn())->find($leftPrimaryKeyValue);
         }
 
-        if (!empty($rightPrimaryKeyValue) &&  !empty($rightParentProperty)) {
+        if (!empty($rightPrimaryKeyValue) && !empty($rightParentProperty)) {
             $rightEntity = $this->managerRegistry->getRepository($context->getEntity()->getFqcn())->find($rightPrimaryKeyValue);
         }
 
-        if (!empty($primaryKeyValue) &&  !empty($parentProperty)) {
+        if (!empty($primaryKeyValue) && !empty($parentProperty)) {
             $entity = $this->managerRegistry->getRepository($context->getEntity()->getFqcn())->find($primaryKeyValue);
         }
 
@@ -36,7 +36,7 @@ trait PositionSortableActionTrait
 
         if (!empty($leftEntity)) {
             try {
-                if ($leftEntity->{'get' . ucFirst($parentProperty)}() !== $entity->{'get' . ucFirst($parentProperty)}()) {
+                if ($leftEntity->{'get'.ucfirst($parentProperty)}() !== $entity->{'get'.ucfirst($parentProperty)}()) {
                     $this->managerRegistry->getRepository($context->getEntity()->getFqcn())->persistAsFirstChildOf($entity, $leftEntity);
                 } else {
                     $this->managerRegistry->getRepository($context->getEntity()->getFqcn())->persistAsNextSiblingOf($entity, $leftEntity);

@@ -18,7 +18,7 @@ class BlockCollection
             $this->blocks[$block::class] = $block;
         }
 
-        uasort($this->blocks, static fn($a, $b) => $a->getPosition() <=> $b->getPosition());
+        uasort($this->blocks, static fn ($a, $b) => $a->getPosition() <=> $b->getPosition());
         $this->blocks = new ArrayCollection($this->blocks);
     }
 
@@ -26,9 +26,9 @@ class BlockCollection
     {
         $this->entityDto = $entityDto;
         $this->filterSupportedBlocks();
+
         return $this;
     }
-
 
     public function getBlocks()
     {
@@ -37,6 +37,7 @@ class BlockCollection
 
     /**
      * @param array $blockTypes
+     *
      * @return array
      */
     public function getAllowedBlocks(?array $blockTypes)
@@ -47,14 +48,13 @@ class BlockCollection
             return $blocks;
         }
 
-        return $blocks->filter(static fn(BlockInterface $block, $type) => in_array($type, $blockTypes));
+        return $blocks->filter(static fn (BlockInterface $block, $type) => in_array($type, $blockTypes));
     }
-
 
     private function filterSupportedBlocks(): void
     {
-        if ($this->entityDto !== null) {
-            $this->blocks = $this->blocks->filter(fn(BlockInterface $block, $type) => $block->supports($this->entityDto->getFqcn(), $this->entityDto->getInstance()));
+        if (null !== $this->entityDto) {
+            $this->blocks = $this->blocks->filter(fn (BlockInterface $block, $type) => $block->supports($this->entityDto->getFqcn(), $this->entityDto->getInstance()));
         }
     }
 }

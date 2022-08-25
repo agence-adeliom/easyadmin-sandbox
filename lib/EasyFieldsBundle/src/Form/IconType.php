@@ -16,13 +16,13 @@ class IconType extends AbstractType
         // this defines the available options and their default values when
         // they are not configured explicitly when using the form type
         $resolver->setDefaults([
-            'json_url' => "https://cdn.cbd.int/@furcan/iconpicker@1.5.0/dist/iconpicker-1.5.0.json",
-            'search_placeholder' => "Search Icon",
-            'select_button' => "Select Icon",
-            'show_all_button' => "Show All",
-            'cancel_button' => "Cancel",
-            'no_result_found' => "No results found.",
-            'border_radius' => "5px",
+            'json_url' => 'https://cdn.cbd.int/@furcan/iconpicker@1.5.0/dist/iconpicker-1.5.0.json',
+            'search_placeholder' => 'Search Icon',
+            'select_button' => 'Select Icon',
+            'show_all_button' => 'Show All',
+            'cancel_button' => 'Cancel',
+            'no_result_found' => 'No results found.',
+            'border_radius' => '5px',
             'fonts' => null,
         ]);
 

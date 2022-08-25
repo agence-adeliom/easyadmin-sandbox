@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
             ->ifString()
             ->then(static function ($value) {
-                if (! class_exists($value) || ! is_a($value, Media::class, true)) {
+                if (!class_exists($value) || !is_a($value, Media::class, true)) {
                     throw new InvalidConfigurationException(sprintf('Media class must be a valid class extending %s. "%s" given.', Media::class, $value));
                 }
 
@@ -42,7 +42,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
             ->ifString()
             ->then(static function ($value) {
-                if (! class_exists($value) || ! is_a($value, Folder::class, true)) {
+                if (!class_exists($value) || !is_a($value, Folder::class, true)) {
                     throw new InvalidConfigurationException(sprintf('Media Folder class must be a valid class extending %s. "%s" given.', Folder::class, $value));
                 }
 

@@ -120,22 +120,21 @@ class AddUserCommand extends Command
             "Now we'll ask you for the value of all the missing command arguments.",
         ]);
 
-
         // Ask for the email if it's not defined
         $email = $input->getArgument('email');
         if (null !== $email) {
-            $this->io->text(' > <info>Email</info>: ' . $email);
+            $this->io->text(' > <info>Email</info>: '.$email);
         } else {
-            $email = $this->io->ask('Email', null, \Closure::fromCallable(fn(?string $email): string => $this->validator->validateEmail($email)));
+            $email = $this->io->ask('Email', null, \Closure::fromCallable(fn (?string $email): string => $this->validator->validateEmail($email)));
             $input->setArgument('email', $email);
         }
 
         // Ask for the password if it's not defined
         $password = $input->getArgument('password');
         if (null !== $password) {
-            $this->io->text(' > <info>Password</info>: ' . u('*')->repeat(u($password)->length()));
+            $this->io->text(' > <info>Password</info>: '.u('*')->repeat(u($password)->length()));
         } else {
-            $password = $this->io->askHidden('Password (your type will be hidden)', \Closure::fromCallable(fn(?string $plainPassword): string => $this->validator->validatePassword($plainPassword)));
+            $password = $this->io->askHidden('Password (your type will be hidden)', \Closure::fromCallable(fn (?string $plainPassword): string => $this->validator->validatePassword($plainPassword)));
             $input->setArgument('password', $password);
         }
     }
@@ -153,13 +152,13 @@ class AddUserCommand extends Command
         $plainPassword = $input->getArgument('password');
         $isAdmin = $input->getOption('admin');
         $isSuperAdmin = $input->getOption('super-admin');
-        $role = "ROLE_USER";
+        $role = 'ROLE_USER';
         if ($isAdmin) {
-            $role = "ROLE_ADMIN";
+            $role = 'ROLE_ADMIN';
         }
 
         if ($isSuperAdmin) {
-            $role = "ROLE_SUPER_ADMIN";
+            $role = 'ROLE_SUPER_ADMIN';
         }
 
         // make sure to validate the user data is correct

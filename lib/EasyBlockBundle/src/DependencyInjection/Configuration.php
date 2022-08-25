@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_block');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -32,11 +32,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value) {
                             if (!class_exists($value) || !is_a($value, Block::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Block class must be a valid class extending %s. "%s" given.',
-                                    Block::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Block class must be a valid class extending %s. "%s" given.', Block::class, $value));
                             }
 
                             return $value;
@@ -49,11 +45,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value) {
                             if (!class_exists($value) || !is_a($value, BlockRepository::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Block repository must be a valid class extending %s. "%s" given.',
-                                    BlockRepository::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Block repository must be a valid class extending %s. "%s" given.', BlockRepository::class, $value));
                             }
 
                             return $value;

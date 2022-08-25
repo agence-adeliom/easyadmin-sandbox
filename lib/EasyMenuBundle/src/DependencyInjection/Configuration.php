@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_menu');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -39,12 +39,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuEntity::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Entry class must be a valid class extending %s. "%s" given.',
-                                            MenuEntity::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Entry class must be a valid class extending %s. "%s" given.', MenuEntity::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -55,12 +52,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuRepository::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Entry repository must be a valid class extending %s. "%s" given.',
-                                            MenuRepository::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Entry repository must be a valid class extending %s. "%s" given.', MenuRepository::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -71,12 +65,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuCrudController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Entry crud controller must be a valid class extending %s. "%s" given.',
-                                            MenuCrudController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Entry crud controller must be a valid class extending %s. "%s" given.', MenuCrudController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -92,12 +83,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuItemEntity::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category class must be a valid class extending %s. "%s" given.',
-                                            MenuItemEntity::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category class must be a valid class extending %s. "%s" given.', MenuItemEntity::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -108,12 +96,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuItemRepository::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category repository must be a valid class extending %s. "%s" given.',
-                                            MenuItemRepository::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category repository must be a valid class extending %s. "%s" given.', MenuItemRepository::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()
@@ -124,12 +109,9 @@ class Configuration implements ConfigurationInterface
                                 ->ifString()
                                 ->then(function ($value) {
                                     if (!class_exists($value) || !is_a($value, MenuItemCrudController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf(
-                                            'Category crud controller must be a valid class extending %s. "%s" given.',
-                                            MenuItemCrudController::class,
-                                            $value
-                                        ));
+                                        throw new InvalidConfigurationException(sprintf('Category crud controller must be a valid class extending %s. "%s" given.', MenuItemCrudController::class, $value));
                                     }
+
                                     return $value;
                                 })
                             ->end()

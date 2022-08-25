@@ -7,13 +7,9 @@ namespace Adeliom\EasyMediaBundle\Service;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\PathNormalizer;
-use League\FlysystemBundle\Lazy\LazyFactory;
 
 class EasyMediaFilesystem extends Filesystem
 {
-    /**
-     * @var FilesystemAdapter
-     */
     public FilesystemAdapter $adapter;
 
     public function __construct(FilesystemAdapter $adapter, array $config = [], PathNormalizer $pathNormalizer = null)

@@ -37,7 +37,7 @@ trait Delete
             ];
 
             try {
-                $entity = $type === 'folder' ? $this->manager->getFolder($id) : $this->manager->getMedia($id);
+                $entity = 'folder' === $type ? $this->manager->getFolder($id) : $this->manager->getMedia($id);
 
                 if ($entity) {
                     $this->manager->delete($entity);
@@ -45,7 +45,7 @@ trait Delete
                     $result[] = array_merge($defaults, ['success' => true]);
                     $toBroadCast[] = $defaults;
 
-                    $this->eventDispatcher->dispatch(new EasyMediaFileDeleted($item_path, $type === 'folder'), EasyMediaFileDeleted::NAME);
+                    $this->eventDispatcher->dispatch(new EasyMediaFileDeleted($item_path, 'folder' === $type), EasyMediaFileDeleted::NAME);
                 }
             } catch (\Exception) {
                 $result[] = array_merge($defaults, [

@@ -9,8 +9,6 @@ trait EntityIdTrait
 {
     /**
      * The unique auto incremented primary key.
-     *
-     * @var int|null
      */
     #[Groups('main')]
     #[ORM\Id]

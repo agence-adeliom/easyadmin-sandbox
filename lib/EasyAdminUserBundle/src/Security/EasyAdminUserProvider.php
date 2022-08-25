@@ -18,7 +18,7 @@ class EasyAdminUserProvider implements UserProviderInterface, PasswordUpgraderIn
 
     /**
      * The loadUserByIdentifier() method was introduced in Symfony 5.3.
-     * In previous versions it was called loadUserByUsername()
+     * In previous versions it was called loadUserByUsername().
      *
      * Symfony calls this method if you use features like switch_user
      * or remember_me. If you're not using these features, you do not

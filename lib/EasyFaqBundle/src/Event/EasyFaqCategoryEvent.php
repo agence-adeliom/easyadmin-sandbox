@@ -10,10 +10,9 @@ class EasyFaqCategoryEvent extends Event
     /**
      * @var string
      */
-    public const NAME = "EasyFaq.category.before_render";
+    public const NAME = 'EasyFaq.category.before_render';
 
-
-    public function __construct(protected ?\Adeliom\EasyFaqBundle\Entity\CategoryEntity $category, protected $args, protected $template)
+    public function __construct(protected ?CategoryEntity $category, protected $args, protected $template)
     {
     }
 

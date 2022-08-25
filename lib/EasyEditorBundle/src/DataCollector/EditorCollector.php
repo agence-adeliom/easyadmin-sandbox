@@ -15,7 +15,7 @@ final class EditorCollector extends AbstractDataCollector
 
     public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
-        $this->data["blocks"] = $this->blockHelper->getTraces();
+        $this->data['blocks'] = $this->blockHelper->getTraces();
     }
 
     /**

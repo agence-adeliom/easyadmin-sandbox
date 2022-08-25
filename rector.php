@@ -7,20 +7,20 @@ use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/src',
-        __DIR__ . '/lib/EasyAdminUserBundle/src',
-        __DIR__ . '/lib/EasyBlockBundle/src',
-        __DIR__ . '/lib/EasyBlogBundle/src',
-        __DIR__ . '/lib/EasyCommonBundle/src',
-        __DIR__ . '/lib/EasyConfigBundle/src',
-        __DIR__ . '/lib/EasyEditorBundle/src',
-        __DIR__ . '/lib/EasyFaqBundle/src',
-        __DIR__ . '/lib/EasyFieldsBundle/src',
-        __DIR__ . '/lib/EasyMediaBundle/src',
-        __DIR__ . '/lib/EasyMenuBundle/src',
-        __DIR__ . '/lib/EasyPageBundle/src',
-        __DIR__ . '/lib/EasyRedirectBundle/src',
-        __DIR__ . '/lib/EasySeoBundle/src'
+        __DIR__.'/src',
+        __DIR__.'/lib/EasyAdminUserBundle/src',
+        __DIR__.'/lib/EasyBlockBundle/src',
+        __DIR__.'/lib/EasyBlogBundle/src',
+        __DIR__.'/lib/EasyCommonBundle/src',
+        __DIR__.'/lib/EasyConfigBundle/src',
+        __DIR__.'/lib/EasyEditorBundle/src',
+        __DIR__.'/lib/EasyFaqBundle/src',
+        __DIR__.'/lib/EasyFieldsBundle/src',
+        __DIR__.'/lib/EasyMediaBundle/src',
+        __DIR__.'/lib/EasyMenuBundle/src',
+        __DIR__.'/lib/EasyPageBundle/src',
+        __DIR__.'/lib/EasyRedirectBundle/src',
+        __DIR__.'/lib/EasySeoBundle/src',
     ]);
 
     // register a single rule
@@ -36,7 +36,7 @@ return static function (RectorConfig $rectorConfig): void {
         \Rector\Symfony\Set\SensiolabsSetList::FRAMEWORK_EXTRA_61,
         \Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_80,
         \Rector\Set\ValueObject\SetList::CODE_QUALITY,
-        \Rector\Set\ValueObject\SetList::CODING_STYLE
+        \Rector\Set\ValueObject\SetList::CODING_STYLE,
     ]);
 
 //    $rectorConfig->sets([

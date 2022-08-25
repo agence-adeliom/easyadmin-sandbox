@@ -15,7 +15,7 @@ class EasyMediaBundle extends Bundle
      */
     public function getContainerExtension(): ?ExtensionInterface
     {
-        if ($this->extension === null) {
+        if (null === $this->extension) {
             $this->extension = new EasyMediaExtension();
         }
 

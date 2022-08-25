@@ -15,8 +15,8 @@ class PostController extends AbstractController
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
-            'event_dispatcher' => '?' . EventDispatcherInterface::class,
-            'easy_seo.breadcrumb' => '?' . BreadcrumbCollection::class,
+            'event_dispatcher' => '?'.EventDispatcherInterface::class,
+            'easy_seo.breadcrumb' => '?'.BreadcrumbCollection::class,
         ]);
     }
 
@@ -24,21 +24,21 @@ class PostController extends AbstractController
     {
         $request->setLocale($_locale ?: $request->getLocale());
         $breadcrumb = $this->container->get('easy_seo.breadcrumb');
-        $breadcrumb->addRouteItem('homepage', ['route' => "easy_page_index"]);
-        $breadcrumb->addRouteItem('blog', ['route' => "easy_blog_category_index"]);
+        $breadcrumb->addRouteItem('homepage', ['route' => 'easy_page_index']);
+        $breadcrumb->addRouteItem('blog', ['route' => 'easy_blog_category_index']);
 
         $template = '@EasyBlog/front/post.html.twig';
 
-        $category = $request->attributes->get("_easy_blog_category");
-        $post = $request->attributes->get("_easy_blog_post");
+        $category = $request->attributes->get('_easy_blog_category');
+        $post = $request->attributes->get('_easy_blog_post');
 
-        $breadcrumb->addRouteItem($category->getName(), ['route' => "easy_blog_category_index", 'params' => ['category' => $category->getSlug()]]);
-        $breadcrumb->addRouteItem($post->getName(), ['route' => "easy_blog_post_index", 'params' => ['category' => $post->getCategory()->getSlug(), 'post' => $post->getSlug()]]);
+        $breadcrumb->addRouteItem($category->getName(), ['route' => 'easy_blog_category_index', 'params' => ['category' => $category->getSlug()]]);
+        $breadcrumb->addRouteItem($post->getName(), ['route' => 'easy_blog_post_index', 'params' => ['category' => $post->getCategory()->getSlug(), 'post' => $post->getSlug()]]);
 
         $args = [
             'category' => $category,
-            'post'  => $post,
-            'breadcrumb' => $breadcrumb
+            'post' => $post,
+            'breadcrumb' => $breadcrumb,
         ];
         $event = new EasyBlogPostEvent($post, $args, $template);
         /**

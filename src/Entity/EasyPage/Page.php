@@ -20,9 +20,6 @@ class Page extends BasePage
     #[Assert\Type('array')]
     protected $content = [];
 
-    /**
-     * @var string|null
-     */
     #[Groups('main')]
     #[ORM\Column(name: 'embed', type: \Doctrine\DBAL\Types\Types::STRING, nullable: true)]
     #[Assert\Url]

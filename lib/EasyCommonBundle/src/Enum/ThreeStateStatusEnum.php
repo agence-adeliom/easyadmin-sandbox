@@ -5,7 +5,8 @@ namespace Adeliom\EasyCommonBundle\Enum;
 use Adeliom\EasyCommonBundle\Helper\Enum;
 
 /**
- * ThreeStateStatus enum
+ * ThreeStateStatus enum.
+ *
  * @method static ThreeStateStatusEnum UNPUBLISHED()
  * @method static ThreeStateStatusEnum PENDING()
  * @method static ThreeStateStatusEnum PUBLISHED()

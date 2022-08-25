@@ -30,9 +30,9 @@ class BlogCategoryLoader extends Loader
         $routes = new RouteCollection();
 
         // prepare a new route
-        $path = $this->config['root_path'] . '/{category}';
+        $path = $this->config['root_path'].'/{category}';
         $defaults = [
-            '_controller' => $this->controller . '::index',
+            '_controller' => $this->controller.'::index',
             'category' => '',
         ];
         $requirements = [

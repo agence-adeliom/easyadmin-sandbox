@@ -13,14 +13,14 @@ class EasyRedirectExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         if (null === $config['redirect_class'] && null === $config['not_found_class']) {
             throw new InvalidConfigurationException('A "redirect_class" or "not_found_class" must be set for "easy_redirect".');
         }
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        //$loader->load('services.yml');
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        // $loader->load('services.yml');
 
         $modelManagerName = $config['model_manager_name'] ?: 'default';
 

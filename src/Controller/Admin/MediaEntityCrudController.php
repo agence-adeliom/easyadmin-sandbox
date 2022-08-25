@@ -30,23 +30,24 @@ class MediaEntityCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
+
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ;
+        ;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             EasyMediaField::new('file')->setFormTypeOptions([
-                "restrictions_uploadTypes" => ["image/*"],
-                "editor" => false,
-                "upload" => false,
-                "bulk_selection" => false,
-                "move" => false,
-                "rename" => false,
-                "metas" => false,
-                "delete" => false
+                'restrictions_uploadTypes' => ['image/*'],
+                'editor' => false,
+                'upload' => false,
+                'bulk_selection' => false,
+                'move' => false,
+                'rename' => false,
+                'metas' => false,
+                'delete' => false,
             ]),
 //            EasyMediaField::new('text')->setFormTypeOptions([
 //                "restrictions_uploadTypes" => ["image/*"],
@@ -58,13 +59,13 @@ class MediaEntityCrudController extends AbstractCrudController
 //                "metas" => false,
 //                "delete" => false
 //            ]),
-            IconField::new("text")
-                ->setSelectButtonLabel("Choisir une icône")
-                ->setHelp("Choisir une icône")
+            IconField::new('text')
+                ->setSelectButtonLabel('Choisir une icône')
+                ->setHelp('Choisir une icône')
                 ->setFonts([
-                    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+                    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css',
                 ])
-                ->setJsonUrl("/test.json")
+                ->setJsonUrl('/test.json'),
         ];
     }
 }

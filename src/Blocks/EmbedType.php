@@ -10,7 +10,7 @@ class EmbedType extends AbstractBlock
 {
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("embed", OembedType::class);
+        $builder->add('embed', OembedType::class);
     }
 
     public function getName(): string
@@ -25,6 +25,6 @@ class EmbedType extends AbstractBlock
 
     public function getTemplate(): string
     {
-        return "blocks/embed.html.twig";
+        return 'blocks/embed.html.twig';
     }
 }

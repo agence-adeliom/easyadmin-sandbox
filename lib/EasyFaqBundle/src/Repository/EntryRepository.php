@@ -23,7 +23,7 @@ class EntryRepository extends ServiceEntityRepository
     public function setConfig(array $cacheConfig)
     {
         $this->cacheEnabled = $cacheConfig['enabled'];
-        $this->cacheTtl     = $cacheConfig['ttl'];
+        $this->cacheTtl = $cacheConfig['ttl'];
     }
 
     public function getPublishedQuery(): QueryBuilder
@@ -81,6 +81,7 @@ class EntryRepository extends ServiceEntityRepository
 
     /**
      * @return EntryEntity
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getBySlug(string $slug, ?CategoryEntity $categoryEntity, bool $returnQueryBuilder = false)
@@ -88,7 +89,7 @@ class EntryRepository extends ServiceEntityRepository
         $qb = $this->getPublishedQuery();
         $qb->andWhere('entry.slug = :slug')
             ->setParameter('slug', $slug);
-        if ($categoryEntity !== null) {
+        if (null !== $categoryEntity) {
             $qb->andWhere('entry.category = :category')
                 ->setParameter('category', $categoryEntity);
         }

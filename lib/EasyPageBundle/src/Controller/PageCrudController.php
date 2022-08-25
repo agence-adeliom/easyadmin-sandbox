@@ -43,13 +43,13 @@ abstract class PageCrudController extends AbstractCrudController
             ->addFormTheme('@EasyCommon/crud/custom_panel.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
 
-            ->setPageTitle(Crud::PAGE_INDEX, "easy.page.admin.crud.title.page." . Crud::PAGE_INDEX)
-            ->setPageTitle(Crud::PAGE_EDIT, "easy.page.admin.crud.title.page." . Crud::PAGE_EDIT)
-            ->setPageTitle(Crud::PAGE_NEW, "easy.page.admin.crud.title.page." . Crud::PAGE_NEW)
-            ->setPageTitle(Crud::PAGE_DETAIL, "easy.page.admin.crud.title.page." . Crud::PAGE_DETAIL)
-            ->setEntityLabelInSingular("easy.page.admin.crud.label.page.singular")
-            ->setEntityLabelInPlural("easy.page.admin.crud.label.page.plural")
-            ;
+            ->setPageTitle(Crud::PAGE_INDEX, 'easy.page.admin.crud.title.page.'.Crud::PAGE_INDEX)
+            ->setPageTitle(Crud::PAGE_EDIT, 'easy.page.admin.crud.title.page.'.Crud::PAGE_EDIT)
+            ->setPageTitle(Crud::PAGE_NEW, 'easy.page.admin.crud.title.page.'.Crud::PAGE_NEW)
+            ->setPageTitle(Crud::PAGE_DETAIL, 'easy.page.admin.crud.title.page.'.Crud::PAGE_DETAIL)
+            ->setEntityLabelInSingular('easy.page.admin.crud.label.page.singular')
+            ->setEntityLabelInPlural('easy.page.admin.crud.label.page.plural')
+        ;
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
@@ -64,7 +64,7 @@ abstract class PageCrudController extends AbstractCrudController
         foreach ($pages as $page) {
             $pageActions = $actions->getAsDto($page)->getActions();
             foreach ($pageActions as $action) {
-                $action->setLabel("easy.page.admin.crud.label.page." . $action->getName());
+                $action->setLabel('easy.page.admin.crud.label.page.'.$action->getName());
                 $actions->remove($page, $action->getAsConfigObject());
                 $actions->add($page, $action->getAsConfigObject());
             }
@@ -87,35 +87,34 @@ abstract class PageCrudController extends AbstractCrudController
 
     public function informationsFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel("easy.page.admin.panel.information")->addCssClass("col-12");
-        yield TextField::new('name', "easy.page.admin.field.name")
+        yield FormField::addPanel('easy.page.admin.panel.information')->addCssClass('col-12');
+        yield TextField::new('name', 'easy.page.admin.field.name')
             ->setRequired(true)
             ->setColumns(12)
-            ;
+        ;
     }
 
     public function metadataFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel("easy.page.admin.panel.metadatas")->collapsible()->addCssClass("col-4");
-        yield SlugField::new('slug', "easy.page.admin.field.slug")
+        yield FormField::addPanel('easy.page.admin.panel.metadatas')->collapsible()->addCssClass('col-4');
+        yield SlugField::new('slug', 'easy.page.admin.field.slug')
             ->setRequired(true)
             ->hideOnIndex()
             ->setTargetFieldName('name')
-            ->setUnlockConfirmationMessage("easy.page.admin.field.slug_edit")
+            ->setUnlockConfirmationMessage('easy.page.admin.field.slug_edit')
             ->setColumns(12);
 
-
-        yield TextField::new('action', "easy.page.admin.field.action")
+        yield TextField::new('action', 'easy.page.admin.field.action')
             ->hideOnIndex()
-            ->setHelp("easy.page.admin.field.action_help")
+            ->setHelp('easy.page.admin.field.action_help')
             ->setColumns(12);
 
-        yield AssociationField::new("parent", "easy.page.admin.field.parent")
+        yield AssociationField::new('parent', 'easy.page.admin.field.parent')
             ->setQueryBuilder(static function (QueryBuilder $queryBuilder) use ($subject) {
                 $rootAllias = $queryBuilder->getAllAliases()[0];
                 if ($subject->getPrimaryKeyValue()) {
-                    $queryBuilder->andWhere(sprintf("%s.id != :currentID", $rootAllias))
-                        ->setParameter("currentID", $subject->getPrimaryKeyValue());
+                    $queryBuilder->andWhere(sprintf('%s.id != :currentID', $rootAllias))
+                        ->setParameter('currentID', $subject->getPrimaryKeyValue());
                 }
 
                 return $queryBuilder;
@@ -125,23 +124,23 @@ abstract class PageCrudController extends AbstractCrudController
 
     public function seoFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel("easy.page.admin.panel.seo")->collapsible()->addCssClass("col-4");
-        yield SEOField::new("seo");
+        yield FormField::addPanel('easy.page.admin.panel.seo')->collapsible()->addCssClass('col-4');
+        yield SEOField::new('seo');
     }
 
     public function publishFields(string $pageName, $subject): iterable
     {
-        yield FormField::addPanel('easy.page.admin.panel.publication')->collapsible()->addCssClass("col-4");
-        yield EnumField::new("state", 'easy.page.admin.field.state')
+        yield FormField::addPanel('easy.page.admin.panel.publication')->collapsible()->addCssClass('col-4');
+        yield EnumField::new('state', 'easy.page.admin.field.state')
             ->setEnum(ThreeStateStatusEnum::class)
             ->setRequired(true)
             ->renderExpanded(true)
             ->renderAsBadges(true);
-        yield DateTimeField::new('publishDate', "easy.page.admin.field.publishDate")->setFormat('Y-MM-dd HH:mm')
+        yield DateTimeField::new('publishDate', 'easy.page.admin.field.publishDate')->setFormat('Y-MM-dd HH:mm')
             ->setRequired(true)
             ->hideOnIndex()
             ->setColumns(6);
-        yield DateTimeField::new('unpublishDate', "easy.page.admin.field.unpublishDate")->setFormat('Y-MM-dd HH:mm')
+        yield DateTimeField::new('unpublishDate', 'easy.page.admin.field.unpublishDate')->setFormat('Y-MM-dd HH:mm')
             ->setRequired(false)
             ->hideOnIndex()
             ->setColumns(6);

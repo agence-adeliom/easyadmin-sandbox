@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_config');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -32,11 +32,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value) {
                             if (!class_exists($value) || !is_a($value, Config::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Config class must be a valid class extending %s. "%s" given.',
-                                    Config::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Config class must be a valid class extending %s. "%s" given.', Config::class, $value));
                             }
 
                             return $value;
@@ -49,11 +45,7 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(static function ($value) {
                             if (!class_exists($value) || !is_a($value, ConfigRepository::class, true)) {
-                                throw new InvalidConfigurationException(sprintf(
-                                    'Config repository must be a valid class extending %s. "%s" given.',
-                                    ConfigRepository::class,
-                                    $value
-                                ));
+                                throw new InvalidConfigurationException(sprintf('Config repository must be a valid class extending %s. "%s" given.', ConfigRepository::class, $value));
                             }
 
                             return $value;

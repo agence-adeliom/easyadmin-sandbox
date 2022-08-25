@@ -66,22 +66,22 @@ class Helper
             $html .= "<style media='all'>";
 
             foreach ($this->assets['css'] as $stylesheet) {
-                $html .= "\n" . sprintf('@import url(%s);', $stylesheet);
+                $html .= "\n".sprintf('@import url(%s);', $stylesheet);
             }
 
             $html .= "\n</style>";
         }
 
         foreach ($this->assets['js'] as $javascript) {
-            $html .= "\n" . sprintf('<script src="%s" type="text/javascript"></script>', $javascript);
+            $html .= "\n".sprintf('<script src="%s" type="text/javascript"></script>', $javascript);
         }
 
         foreach ($this->assets['webpack'] as $webpack) {
             try {
-                $html .= "\n" . $this->twig->createTemplate(sprintf("{{ encore_entry_link_tags('%s') }}", $webpack))->render();
-                $html .= "\n" . $this->twig->createTemplate(sprintf("{{ encore_entry_script_tags('%s') }}", $webpack))->render();
-            } catch (LoaderError | SyntaxError) {
-                $html .= "";
+                $html .= "\n".$this->twig->createTemplate(sprintf("{{ encore_entry_link_tags('%s') }}", $webpack))->render();
+                $html .= "\n".$this->twig->createTemplate(sprintf("{{ encore_entry_script_tags('%s') }}", $webpack))->render();
+            } catch (LoaderError|SyntaxError) {
+                $html .= '';
             }
         }
 
@@ -122,7 +122,9 @@ class Helper
     /**
      * @param array $datas
      * @param array $extra
+     *
      * @return Markup|null
+     *
      * @throws LoaderError
      * @throws SyntaxError
      * @throws RuntimeError
@@ -131,13 +133,12 @@ class Helper
     {
         $block = null;
         if (is_array($datas)) {
-            $block = $this->em->getRepository($datas["class"])->find($datas["id"]);
+            $block = $this->em->getRepository($datas['class'])->find($datas['id']);
         }
 
         if (is_string($datas)) {
             $block = $this->em->getRepository($this->class)->findOneBy(['key' => $datas]);
         }
-
 
         if (!$block || !$block->getStatus()) {
             return null;
@@ -146,8 +147,8 @@ class Helper
         $blockType = $this->collection->getBlocks()[$block->getType()];
 
         $stats = $this->startTracing($block);
-        $defaultSetting = call_user_func([$blockType, "getDefaultSettings"]);
-        $defaultAssets = call_user_func([$blockType, "configureAssets"]);
+        $defaultSetting = call_user_func([$blockType, 'getDefaultSettings']);
+        $defaultAssets = call_user_func([$blockType, 'configureAssets']);
 
         // Tranform settings way 1 : use blockType form transformers
         $blockSettings = $this->transformSettingsWithBlockTypeFormBuild($blockType, $block, $defaultSetting);
@@ -160,58 +161,57 @@ class Helper
             }
 
             ++$blockLoopIndex;
-            $blockSettings['attr_id'] = 'block-' . $blockLoopIndex;
+            $blockSettings['attr_id'] = 'block-'.$blockLoopIndex;
         }
 
         // Tranform settings way 2 : with dispatch / event listeners
         $event = new GenericEvent(null, [
             'datas' => $datas,
-            "block" => $block,
-            "blockType" => $blockType,
-            "settings" => $blockSettings,
-            'assets' => $defaultAssets
+            'block' => $block,
+            'blockType' => $blockType,
+            'settings' => $blockSettings,
+            'assets' => $defaultAssets,
         ]);
 
         /**
          * @var GenericEvent $result;
          */
-        $result = $this->eventDispatcher->dispatch($event, "easy_block.render_block");
+        $result = $this->eventDispatcher->dispatch($event, 'easy_block.render_block');
 
         $block = $result->getArgument('block');
         $blockType = $result->getArgument('blockType');
         $blockDatas = $result->getArgument('settings');
 
         // Stats
-        if (isset($blockDatas["block_type"])) {
-            unset($blockDatas["block_type"]);
+        if (isset($blockDatas['block_type'])) {
+            unset($blockDatas['block_type']);
         }
 
-        if (isset($blockDatas["position"])) {
-            $stats["position"] = $blockDatas["position"];
-            unset($blockDatas["position"]);
+        if (isset($blockDatas['position'])) {
+            $stats['position'] = $blockDatas['position'];
+            unset($blockDatas['position']);
         }
 
-        $stats["defaultSettings"] = $defaultSetting;
-        $stats["settings"] = $blockDatas;
-        $stats["extra"] = $extra;
-        $stats["type"] = $blockType::class;
-        $stats["assets"] = $result->getArgument('assets') ?: [];
+        $stats['defaultSettings'] = $defaultSetting;
+        $stats['settings'] = $blockDatas;
+        $stats['extra'] = $extra;
+        $stats['type'] = $blockType::class;
+        $stats['assets'] = $result->getArgument('assets') ?: [];
 
-        $this->assets = array_merge_recursive($this->assets, $stats["assets"]);
+        $this->assets = array_merge_recursive($this->assets, $stats['assets']);
 
-        $this->stopTracing($stats["id"], $stats);
+        $this->stopTracing($stats['id'], $stats);
 
         // Render
         return new Markup($this->twig->render($blockType->getTemplate(), array_merge($context, [
-            "block" => $block,
-            "blockType" => $blockType,
-            "settings" => $blockDatas,
+            'block' => $block,
+            'blockType' => $blockType,
+            'settings' => $blockDatas,
         ], $extra)), 'UTF-8');
     }
 
     public function transformSettingsWithBlockTypeFormBuild($blockType, $block, $defaultSetting)
     {
-
         $formBuilder = $this->formFactory->createBuilder($block->getType(), null, ['csrf_protection' => false]);
 
         // init blockType form builder

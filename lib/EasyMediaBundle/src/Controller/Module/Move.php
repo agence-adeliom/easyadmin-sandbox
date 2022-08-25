@@ -23,7 +23,7 @@ trait Move
         $destinationId = $data['destination'];
         $movedFiles = $data['moved_files'];
         $destination = null;
-        if (! empty($destinationId)) {
+        if (!empty($destinationId)) {
             $destination = $this->manager->getFolder($destinationId);
         }
 
@@ -44,20 +44,20 @@ trait Move
 
             $new_path = sprintf('/%s', $file_name);
             if ($destination) {
-                $new_path = $destination->getPath() . $new_path;
+                $new_path = $destination->getPath().$new_path;
             }
 
             $defaults['new_path'] = $new_path;
             try {
-                if ($file_type === 'folder' && ($destination && $destination->getId() === $id)) {
+                if ('folder' === $file_type && ($destination && $destination->getId() === $id)) {
                     throw new \Exception($this->translator->trans('error.move_into_self', [], 'EasyMediaBundle'));
                 }
 
-                $entity = $file_type === 'folder' ? $this->manager->getFolder($id) : $this->manager->getMedia($id);
+                $entity = 'folder' === $file_type ? $this->manager->getFolder($id) : $this->manager->getMedia($id);
                 if ($entity) {
                     // Move
                     try {
-                        if ($file_type === 'folder') {
+                        if ('folder' === $file_type) {
                             $entity->setParent($destination);
                         } else {
                             $entity->setFolder($destination);
@@ -77,7 +77,7 @@ trait Move
             } catch (\Exception $e) {
                 $result[] = [
                     'success' => false,
-                    'message' => sprintf('"%s" ', $old_path) . $e->getMessage(),
+                    'message' => sprintf('"%s" ', $old_path).$e->getMessage(),
                 ];
             }
         }

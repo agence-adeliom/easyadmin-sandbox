@@ -35,13 +35,13 @@ class MediaSubscriber implements EventSubscriberInterface
     {
         /** @var Media $media */
         $media = $args->getObject();
-        if (! $media instanceof Media) {
+        if (!$media instanceof Media) {
             return;
         }
 
         if ($args->hasChangedField('folder')) {
-            $oldPath = ($args->getOldValue('folder') ? $args->getOldValue('folder')->getPath() : '') . DIRECTORY_SEPARATOR . $media->getSlug();
-            $newPath = ($args->getNewValue('folder') ? $args->getNewValue('folder')->getPath() : '') . DIRECTORY_SEPARATOR . $media->getSlug();
+            $oldPath = ($args->getOldValue('folder') ? $args->getOldValue('folder')->getPath() : '').DIRECTORY_SEPARATOR.$media->getSlug();
+            $newPath = ($args->getNewValue('folder') ? $args->getNewValue('folder')->getPath() : '').DIRECTORY_SEPARATOR.$media->getSlug();
             $this->manager->move($oldPath, $newPath);
         }
     }

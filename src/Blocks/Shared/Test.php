@@ -11,12 +11,12 @@ class Test extends AbstractBlock implements BlockInterface
 {
     public function getName(): string
     {
-        return "test";
+        return 'test';
     }
 
     public function getDescription(): string
     {
-        return "Lotem";
+        return 'Lotem';
     }
 
     public function getIcon(): string
@@ -26,20 +26,20 @@ class Test extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "blocks/test.html.twig";
+        return 'blocks/test.html.twig';
     }
 
     public static function getDefaultSettings(): array
     {
         return [
-          'name' => "Default name"
+          'name' => 'Default name',
         ];
     }
 
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("name", TextType::class)
+            ->add('name', TextType::class)
         ;
     }
 }

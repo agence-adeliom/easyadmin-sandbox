@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormInterface;
 
 class ResizeFormListener extends \Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener
 {
-
     protected $type;
     protected $options;
     protected $allowAdd;
@@ -56,9 +55,9 @@ class ResizeFormListener extends \Symfony\Component\Form\Extension\Core\EventLis
 
         // Then add all rows again in the correct order
         foreach ($data as $name => $value) {
-            if (!empty($value["block_type"])) {
-                $form->add($name, $value["block_type"], array_replace([
-                    'property_path' => '[' . $name . ']',
+            if (!empty($value['block_type'])) {
+                $form->add($name, $value['block_type'], array_replace([
+                    'property_path' => '['.$name.']',
                 ], $this->options));
             }
         }
@@ -86,8 +85,8 @@ class ResizeFormListener extends \Symfony\Component\Form\Extension\Core\EventLis
         if ($this->allowAdd) {
             foreach ($data as $name => $value) {
                 if (!$form->has($name)) {
-                    $form->add($name, $value["block_type"], array_replace([
-                        'property_path' => '[' . $name . ']',
+                    $form->add($name, $value['block_type'], array_replace([
+                        'property_path' => '['.$name.']',
                     ], $this->options));
                 }
             }
@@ -147,7 +146,7 @@ class ResizeFormListener extends \Symfony\Component\Form\Extension\Core\EventLis
             }
         }
 
-        usort($data, static fn($a, $b) => $a['position'] <=> $b['position']);
+        usort($data, static fn ($a, $b) => $a['position'] <=> $b['position']);
 
         $event->setData($data);
     }

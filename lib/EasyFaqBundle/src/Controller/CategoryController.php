@@ -31,7 +31,6 @@ class CategoryController extends AbstractController
      */
     protected $entryRepository;
 
-
     public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
     }
@@ -39,8 +38,8 @@ class CategoryController extends AbstractController
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
-            'event_dispatcher' => '?' . EventDispatcherInterface::class,
-            'easy_seo.breadcrumb' => '?' . BreadcrumbCollection::class,
+            'event_dispatcher' => '?'.EventDispatcherInterface::class,
+            'easy_seo.breadcrumb' => '?'.BreadcrumbCollection::class,
         ]);
     }
 
@@ -53,16 +52,16 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $this->managerRegistry->getRepository($this->getParameter('easy_faq.category.class'));
         $this->entryRepository = $this->managerRegistry->getRepository($this->getParameter('easy_faq.entry.class'));
 
-        $breadcrumb->addRouteItem('homepage', ['route' => "easy_page_index"]);
-        $breadcrumb->addRouteItem('faq', ['route' => "easy_faq_category_index"]);
+        $breadcrumb->addRouteItem('homepage', ['route' => 'easy_page_index']);
+        $breadcrumb->addRouteItem('faq', ['route' => 'easy_faq_category_index']);
 
-        if ($this->request->attributes->get("_easy_faq_root")) {
+        if ($this->request->attributes->get('_easy_faq_root')) {
             return $this->faqRoot();
         }
 
         $template = '@EasyFaq/front/category.html.twig';
 
-        $category = $this->request->attributes->get("_easy_faq_category");
+        $category = $this->request->attributes->get('_easy_faq_category');
         $categories = $this->categoryRepository->getPublished();
         $entriesQueryBuilder = $this->entryRepository->getByCategory($category, true);
 
@@ -70,19 +69,19 @@ class CategoryController extends AbstractController
             new QueryAdapter($entriesQueryBuilder)
         );
 
-        $breadcrumb->addRouteItem($category->getName(), ['route' => "easy_faq_category_index", 'params' => ['category' => $category->getSlug()]]);
+        $breadcrumb->addRouteItem($category->getName(), ['route' => 'easy_faq_category_index', 'params' => ['category' => $category->getSlug()]]);
 
         $args = [
             'categories' => $categories,
             'category' => $category,
-            'entries'  => $pagerfanta,
-            'breadcrumb' => $breadcrumb
+            'entries' => $pagerfanta,
+            'breadcrumb' => $breadcrumb,
         ];
         $event = new EasyFaqCategoryEvent($category, $args, $template);
         /**
          * @var EasyFaqCategoryEvent $result;
          */
-        $result = $this->container->get("event_dispatcher")->dispatch($event, EasyFaqCategoryEvent::NAME);
+        $result = $this->container->get('event_dispatcher')->dispatch($event, EasyFaqCategoryEvent::NAME);
 
         return $this->render($result->getTemplate(), $result->getArgs());
     }
@@ -100,18 +99,18 @@ class CategoryController extends AbstractController
 
         $args = [
             'categories' => $categories,
-            'entries'  => $pagerfanta,
-            'page'  => [
+            'entries' => $pagerfanta,
+            'page' => [
                 'name' => null,
-                'seo' => new SEO()
+                'seo' => new SEO(),
             ],
-            'breadcrumb' => $breadcrumb
+            'breadcrumb' => $breadcrumb,
         ];
         $event = new EasyFaqCategoryEvent(null, $args, $template);
         /**
          * @var EasyFaqCategoryEvent $result;
          */
-        $result = $this->container->get("event_dispatcher")->dispatch($event, EasyFaqCategoryEvent::NAME);
+        $result = $this->container->get('event_dispatcher')->dispatch($event, EasyFaqCategoryEvent::NAME);
 
         return $this->render($result->getTemplate(), $result->getArgs());
     }

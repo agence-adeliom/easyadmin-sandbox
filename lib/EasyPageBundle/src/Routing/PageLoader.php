@@ -11,7 +11,6 @@ class PageLoader extends Loader
 {
     private bool $isLoaded = false;
 
-
     public function __construct(/**
          * @readonly
          */
@@ -55,7 +54,7 @@ class PageLoader extends Loader
         // prepare a new route
         $path = '/{slugs}';
         $defaults = [
-            '_controller' => $this->controller . '::index',
+            '_controller' => $this->controller.'::index',
             'slugs' => '',
         ];
         $requirements = [

@@ -42,6 +42,7 @@ class Config
     public function setKey(mixed $key)
     {
         $this->key = $key;
+
         return $this;
     }
 
@@ -59,6 +60,7 @@ class Config
     public function setName(mixed $name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -72,11 +74,13 @@ class Config
 
     /**
      * @param null $description
+     *
      * @return Config
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -94,6 +98,7 @@ class Config
     public function setType(mixed $type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -107,11 +112,13 @@ class Config
 
     /**
      * @param null $value
+     *
      * @return Config
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -140,6 +147,7 @@ class Config
 
     /**
      * @param null $value
+     *
      * @return Config
      */
     public function __set($name, $value)
@@ -153,7 +161,7 @@ class Config
 
     public function getBoolean()
     {
-        if ($this->type == 'boolean') {
+        if ('boolean' == $this->type) {
             return (bool) $this->value;
         }
 
@@ -162,8 +170,8 @@ class Config
 
     public function setDate(?\DateTime $date)
     {
-        if ($this->type == 'date' && $date) {
-            $this->value = $date->format("Y-m-d");
+        if ('date' == $this->type && $date) {
+            $this->value = $date->format('Y-m-d');
         }
 
         return null;
@@ -171,7 +179,7 @@ class Config
 
     public function getDate()
     {
-        if ($this->type == 'date') {
+        if ('date' == $this->type) {
             try {
                 return new \DateTime($this->value);
             } catch (\Exception) {
@@ -184,8 +192,8 @@ class Config
 
     public function setTime(?\DateTime $date)
     {
-        if ($this->type == 'time') {
-            $this->value = $date->format("H:i:s");
+        if ('time' == $this->type) {
+            $this->value = $date->format('H:i:s');
         }
 
         return null;
@@ -193,7 +201,7 @@ class Config
 
     public function getTime()
     {
-        if ($this->type == 'time') {
+        if ('time' == $this->type) {
             try {
                 return new \DateTime($this->value);
             } catch (\Exception) {
@@ -206,8 +214,8 @@ class Config
 
     public function setDatetime(?\DateTime $date)
     {
-        if ($this->type == 'datetime' && $date) {
-            $this->value = $date->format("Y-m-d H:i:s");
+        if ('datetime' == $this->type && $date) {
+            $this->value = $date->format('Y-m-d H:i:s');
         }
 
         return null;
@@ -215,7 +223,7 @@ class Config
 
     public function getDatetime()
     {
-        if ($this->type == 'datetime') {
+        if ('datetime' == $this->type) {
             try {
                 return new \DateTime($this->value);
             } catch (\Exception) {

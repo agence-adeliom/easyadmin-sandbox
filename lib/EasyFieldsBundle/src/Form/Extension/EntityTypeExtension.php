@@ -54,7 +54,7 @@ class EntityTypeExtension extends AbstractTypeExtension
             $view->vars['attr']['data-ea-ajax-new-endpoint-url'] = $ajaxEndpointUrl;
         }
 
-        //dump($options[AssociationField::OPTION_LIST_SELECTOR]); exit;
+        // dump($options[AssociationField::OPTION_LIST_SELECTOR]); exit;
 
         if (isset($options[AssociationField::OPTION_LIST_SELECTOR]) && $options[AssociationField::OPTION_LIST_SELECTOR] && !empty($options[AssociationField::OPTION_CRUD_CONTROLLER])) {
             $ajaxEndpointUrl = $this->adminUrlGenerator
@@ -70,7 +70,6 @@ class EntityTypeExtension extends AbstractTypeExtension
             }
         }*/
     }
-
 
     /**
      * @return class-string[]

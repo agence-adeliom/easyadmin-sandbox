@@ -32,13 +32,13 @@ abstract class NotFoundCrudCrontroller extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle(Crud::PAGE_INDEX, "easy_redirect.not_founds")
-            ->setPageTitle(Crud::PAGE_DETAIL, static fn($entity) => $entity->getPath())
+            ->setPageTitle(Crud::PAGE_INDEX, 'easy_redirect.not_founds')
+            ->setPageTitle(Crud::PAGE_DETAIL, static fn ($entity) => $entity->getPath())
             ->setEntityLabelInSingular('easy_redirect.not_found')
             ->setEntityLabelInPlural('easy_redirect.not_founds')
             ->showEntityActionsInlined(true)
             ->setFormOptions([
-                'validation_groups' => ['Default']
+                'validation_groups' => ['Default'],
             ]);
     }
 
@@ -53,6 +53,7 @@ abstract class NotFoundCrudCrontroller extends AbstractCrudController
         $createRedirection = Action::new('createRedirection', 'easy_redirect.create_redirection', 'fa fa-reply')
             ->linkToCrudAction('createRedirection');
         $actions->add(Crud::PAGE_INDEX, $createRedirection);
+
         return $actions;
     }
 
@@ -61,23 +62,23 @@ abstract class NotFoundCrudCrontroller extends AbstractCrudController
      */
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new("path", "easy_redirect.form.path")->hideOnForm();
-        yield TextField::new("fullUrl", "easy_redirect.form.fullUrl")->hideOnForm();
-        yield TextField::new("referer", "easy_redirect.form.referer")->hideOnForm();
-        yield DateTimeField::new("timestamp", "easy_redirect.form.timestamp")->hideOnForm();
+        yield TextField::new('path', 'easy_redirect.form.path')->hideOnForm();
+        yield TextField::new('fullUrl', 'easy_redirect.form.fullUrl')->hideOnForm();
+        yield TextField::new('referer', 'easy_redirect.form.referer')->hideOnForm();
+        yield DateTimeField::new('timestamp', 'easy_redirect.form.timestamp')->hideOnForm();
     }
-
 
     public function createRedirection(AdminContext $context): RedirectResponse
     {
         if ($notFound = $context->getEntity()->getInstance()) {
             $redirectCrud = $context->getCrudControllers()->findCrudFqcnByEntityFqcn($this->parameterBag->get('easy_redirect.redirect_class'));
+
             return $this->redirect(
                 $this->adminUrlGenerator
                     ->unsetAll()
                     ->setController($redirectCrud)
                     ->setAction(Action::NEW)
-                    ->set("not_found", $notFound->getPath())
+                    ->set('not_found', $notFound->getPath())
                     ->generateUrl()
             );
         }
@@ -93,7 +94,7 @@ abstract class NotFoundCrudCrontroller extends AbstractCrudController
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
-            ParameterBagInterface::class => '?' . ParameterBagInterface::class
+            ParameterBagInterface::class => '?'.ParameterBagInterface::class,
         ]);
     }
 }

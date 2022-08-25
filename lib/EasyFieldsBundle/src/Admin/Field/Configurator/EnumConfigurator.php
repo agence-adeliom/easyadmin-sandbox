@@ -9,9 +9,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldConfiguratorInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function Symfony\Component\String\u;
+
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
@@ -45,7 +46,6 @@ final class EnumConfigurator implements FieldConfiguratorInterface
         $field->setFormTypeOptionIfNotSet('choices', $choices);
         $field->setFormTypeOptionIfNotSet('expanded', $isExpanded);
         $field->setFormTypeOptionIfNotSet('multiple', $isMultiple);
-
 
         $field->setCustomOption(EnumField::OPTION_WIDGET, EnumField::WIDGET_NATIVE);
 
@@ -89,7 +89,7 @@ final class EnumConfigurator implements FieldConfiguratorInterface
         $choicesEnum = $enum::toArray();
         $choices = [];
         foreach ($choicesEnum as $k => $v) {
-            $choices[sprintf("easy.enum.%s.%s", $field->getProperty(), $v)] = $v;
+            $choices[sprintf('easy.enum.%s.%s', $field->getProperty(), $v)] = $v;
         }
 
         return $choices;
@@ -112,6 +112,6 @@ final class EnumConfigurator implements FieldConfiguratorInterface
 
         $badgeTypeCssClass = empty($badgeType) ? '' : u($badgeType)->ensureStart('badge-')->toString();
 
-        return $commonBadgeCssClass . ' ' . $badgeTypeCssClass;
+        return $commonBadgeCssClass.' '.$badgeTypeCssClass;
     }
 }

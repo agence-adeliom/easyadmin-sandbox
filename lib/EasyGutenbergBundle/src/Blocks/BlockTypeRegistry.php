@@ -2,8 +2,6 @@
 
 namespace Adeliom\EasyGutenbergBundle\Blocks;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class BlockTypeRegistry
 {
     /** @var BlockTypeInterface[] */

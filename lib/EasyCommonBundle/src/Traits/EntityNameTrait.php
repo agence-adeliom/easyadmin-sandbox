@@ -16,7 +16,7 @@ trait EntityNameTrait
 
     public function __toString(): string
     {
-        return $this->name ?: "";
+        return $this->name ?: '';
     }
 
     public function getName(): ?string

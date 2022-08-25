@@ -17,12 +17,12 @@ trait EntityNameSlugTrait
 
     #[Groups('main')]
     #[ORM\Column(length: 100, unique: true)]
-    #[Gedmo\Slug(fields:["name"], updatable: false)]
+    #[Gedmo\Slug(fields: ['name'], updatable: false)]
     private ?string $slug = null;
 
     public function __toString(): string
     {
-        return $this->name ?: "";
+        return $this->name ?: '';
     }
 
     public function getName(): ?string

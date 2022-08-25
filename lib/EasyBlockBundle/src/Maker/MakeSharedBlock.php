@@ -28,7 +28,7 @@ final class MakeSharedBlock extends AbstractMaker
     {
         $command
             ->addArgument('block-type', InputArgument::OPTIONAL, sprintf('Choose a name for your shared block type (e.g. <fg=yellow>%sType</>)', Str::asClassName(Str::getRandomTerm())))
-            ->setHelp(file_get_contents(__DIR__ . '/../Resources/help/MakeSharedBlock.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeSharedBlock.txt'))
         ;
     }
 
@@ -39,11 +39,11 @@ final class MakeSharedBlock extends AbstractMaker
             'Blocks\\Shared\\',
             'Type'
         );
-        $templateName = Str::asFilePath('blocks/shared/' . $blockClassNameDetails->getRelativeNameWithoutSuffix()) . '.html.twig';
+        $templateName = Str::asFilePath('blocks/shared/'.$blockClassNameDetails->getRelativeNameWithoutSuffix()).'.html.twig';
 
         $blockPath = $generator->generateClass(
             $blockClassNameDetails->getFullName(),
-            __DIR__ . '/../Resources/skeleton/block/Block.tpl.php',
+            __DIR__.'/../Resources/skeleton/block/Block.tpl.php',
             [
                 'template_name' => $templateName,
             ]
@@ -51,7 +51,7 @@ final class MakeSharedBlock extends AbstractMaker
 
         $generator->generateTemplate(
             $templateName,
-            __DIR__ . '/../Resources/skeleton/block/twig_template.tpl.php',
+            __DIR__.'/../Resources/skeleton/block/twig_template.tpl.php',
             [
                 'block_path' => $blockPath,
                 'root_directory' => $generator->getRootDirectory(),

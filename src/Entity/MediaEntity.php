@@ -65,6 +65,7 @@ class MediaEntity implements \Stringable
     public function setText(mixed $text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -98,6 +99,6 @@ class MediaEntity implements \Stringable
 
     public function __toString(): string
     {
-        return sprintf("MediaEntity #%s", $this->getId());
+        return sprintf('MediaEntity #%s', $this->getId());
     }
 }

@@ -7,7 +7,6 @@ namespace Adeliom\EasyMediaBundle\Controller\Module;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\StorageAttributes;
 use Liip\ImagineBundle\Exception\Binary\Loader\NotLoadableException;
-use Liip\ImagineBundle\Model\Binary;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use ZipStream\Option\Archive;
@@ -31,11 +30,11 @@ trait Download
 
         /** @var array<string> $allPaths */
         $allPaths = $this->filesystem->listContents(sprintf('%s/%s', $folders, $name))
-            ->filter(static fn(StorageAttributes $attributes) => $attributes->isFile())
-            ->map(static fn(StorageAttributes $attributes) => $attributes->path())
+            ->filter(static fn (StorageAttributes $attributes) => $attributes->isFile())
+            ->map(static fn (StorageAttributes $attributes) => $attributes->path())
             ->toArray();
 
-        if ($allPaths !== []) {
+        if ([] !== $allPaths) {
             return $this->zipAndDownloadDir(
                 $name,
                 $allPaths
@@ -58,7 +57,7 @@ trait Download
         $name = $request->request->get('name');
 
         return $this->zipAndDownload(
-            $name . '-files',
+            $name.'-files',
             $list
         );
     }
@@ -140,14 +139,15 @@ trait Download
             $stream = $this->filesystem->readStream($path);
             $response = new StreamedResponse(static function () use ($stream) {
                 fpassthru($stream);
-                exit();
+                exit;
             });
 
             $response->setLastModified((new \DateTime())->setTimestamp($this->filesystem->lastModified($path)));
-            $response->headers->set("Content-Type", $mimeType);
+            $response->headers->set('Content-Type', $mimeType);
             $response->setPublic();
             $response->setMaxAge(60 * 12);
             $response->setSharedMaxAge(60 * 12);
+
             return $response;
         } catch (FilesystemException $filesystemException) {
             throw new NotLoadableException(sprintf('Source image "%s" not found.', $path), 0, $filesystemException);

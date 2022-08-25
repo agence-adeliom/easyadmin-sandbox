@@ -45,15 +45,15 @@ class EntryListener implements EventSubscriberInterface
         // Get the necessary informations to check them in layout configurations
         $path = $request->getPathInfo();
 
-        if (!str_contains($path, (string) $this->config["root_path"])) {
+        if (!str_contains($path, (string) $this->config['root_path'])) {
             return;
         }
 
-        $prefixes = preg_split('#/#', (string) $this->config["root_path"], -1, PREG_SPLIT_NO_EMPTY);
+        $prefixes = preg_split('#/#', (string) $this->config['root_path'], -1, PREG_SPLIT_NO_EMPTY);
         /** @var EntryEntity[] $pages */
         $slugsArray = preg_split('#/#', $path, -1, PREG_SPLIT_NO_EMPTY);
 
-        if ($this->config["root_path"] !== "/") {
+        if ('/' !== $this->config['root_path']) {
             $slugsArray = array_values(array_diff($slugsArray, $prefixes));
         }
 

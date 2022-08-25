@@ -3,10 +3,6 @@
 namespace Adeliom\EasyEditorBundle\Twig;
 
 use Adeliom\EasyEditorBundle\Block\Helper;
-use Adeliom\EasyEditorBundle\Editor\Editor;
-use Adeliom\EasyEditorBundle\Editor\EditorConfig;
-use Adeliom\EasyEditorBundle\Editor\EditorConfigCollection;
-use Adeliom\EasyEditorBundle\Form\EditorjsTransformer;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

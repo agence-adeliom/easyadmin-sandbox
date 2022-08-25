@@ -11,12 +11,12 @@ class Alpha extends AbstractBlock implements BlockInterface
 {
     public function getName(): string
     {
-        return "Alpha";
+        return 'Alpha';
     }
 
     public function getDescription(): string
     {
-        return "Create a alpha block";
+        return 'Create a alpha block';
     }
 
     public function getIcon(): string
@@ -26,20 +26,20 @@ class Alpha extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "";
+        return '';
     }
 
     public static function getDefaultSettings(): array
     {
         return [
-          'name' => "Default name"
+          'name' => 'Default name',
         ];
     }
 
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("name", TextType::class)
+            ->add('name', TextType::class)
         ;
     }
 }

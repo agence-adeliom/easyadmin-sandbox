@@ -3,7 +3,7 @@
 namespace Adeliom\EasyCommonBundle\Helper;
 
 /**
- * Base Enum class
+ * Base Enum class.
  *
  * Create an enum by implementing this class and adding class constants.
  *
@@ -18,15 +18,16 @@ namespace Adeliom\EasyCommonBundle\Helper;
 abstract class Enum implements \JsonSerializable, \Stringable
 {
     /**
-     * Enum value
+     * Enum value.
      *
      * @psalm-var T
+     *
      * @var mixed
      */
     protected $value;
 
     /**
-     * Enum key, the constant name
+     * Enum key, the constant name.
      */
     private string $key;
 
@@ -38,19 +39,20 @@ abstract class Enum implements \JsonSerializable, \Stringable
     protected static array $cache = [];
 
     /**
-     * Cache of instances of the Enum class
+     * Cache of instances of the Enum class.
      *
      * @psalm-var array<class-string, array<string, static>>
      */
     protected static array $instances = [];
 
     /**
-     * Creates a new value of some type
+     * Creates a new value of some type.
      *
      * @psalm-pure
      *
      * @psalm-param T $value
-     * @throws \UnexpectedValueException if incompatible type is given.
+     *
+     * @throws \UnexpectedValueException if incompatible type is given
      */
     public function __construct(mixed $value)
     {
@@ -59,22 +61,22 @@ abstract class Enum implements \JsonSerializable, \Stringable
             $value = $value->getValue();
         }
 
-        /** @psalm-suppress ImplicitToStringCast assertValidValueReturningKey returns always a string but psalm has currently an issue here */
+        /* @psalm-suppress ImplicitToStringCast assertValidValueReturningKey returns always a string but psalm has currently an issue here */
         $this->key = static::assertValidValueReturningKey($value);
 
-        /** @psalm-var T */
+        /* @psalm-var T */
         $this->value = $value;
     }
 
     /**
      * This method exists only for the compatibility reason when deserializing a previously serialized version
-     * that didn't had the key property
+     * that didn't had the key property.
      */
     public function __wakeup()
     {
-        /** @psalm-suppress DocblockTypeContradiction key can be null when deserializing an enum without the key */
-        if ($this->key === null) {
-            /**
+        /* @psalm-suppress DocblockTypeContradiction key can be null when deserializing an enum without the key */
+        if (null === $this->key) {
+            /*
              * @psalm-suppress InaccessibleProperty key is not readonly as marked by psalm
              * @psalm-suppress PossiblyFalsePropertyAssignmentValue deserializing a case that was removed
              */
@@ -95,6 +97,7 @@ abstract class Enum implements \JsonSerializable, \Stringable
     /**
      * @psalm-pure
      * @psalm-return T
+     *
      * @return mixed
      */
     public function getValue()
@@ -129,7 +132,6 @@ abstract class Enum implements \JsonSerializable, \Stringable
      *
      * @psalm-pure
      * @psalm-param mixed $variable
-     * @param mixed $variable
      */
     final public function equals(mixed $variable): bool
     {
@@ -139,7 +141,7 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Returns the names (keys) of all constants in the Enum class
+     * Returns the names (keys) of all constants in the Enum class.
      *
      * @psalm-pure
      * @psalm-return list<string>
@@ -150,10 +152,11 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Returns instances of the Enum class of all Enum constants
+     * Returns instances of the Enum class of all Enum constants.
      *
      * @psalm-pure
      * @psalm-return array<string, static>
+     *
      * @return static[] Constant name in key, Enum instance in value
      */
     public static function values(): array
@@ -169,22 +172,23 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Returns all possible values as an array
+     * Returns all possible values as an array.
      *
      * @psalm-pure
      * @psalm-suppress ImpureStaticProperty
      *
      * @psalm-return array<string, mixed>
+     *
      * @return array Constant name in key, constant value in value
      */
     public static function toArray(): array
     {
         $class = static::class;
 
-        if (! isset(static::$cache[$class])) {
+        if (!isset(static::$cache[$class])) {
             /** @psalm-suppress ImpureMethodCall this reflection API usage has no side-effects here */
             $reflection = new \ReflectionClass($class);
-            /** @psalm-suppress ImpureMethodCall this reflection API usage has no side-effects here */
+            /* @psalm-suppress ImpureMethodCall this reflection API usage has no side-effects here */
             static::$cache[$class] = $reflection->getConstants();
         }
 
@@ -192,7 +196,7 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Check if is valid enum value
+     * Check if is valid enum value.
      *
      * @psalm-param mixed $value
      * @psalm-pure
@@ -204,7 +208,7 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Asserts valid enum value
+     * Asserts valid enum value.
      *
      * @psalm-pure
      * @psalm-assert T $value
@@ -215,7 +219,7 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Asserts valid enum value
+     * Asserts valid enum value.
      *
      * @psalm-pure
      * @psalm-assert T $value
@@ -225,14 +229,14 @@ abstract class Enum implements \JsonSerializable, \Stringable
     private static function assertValidValueReturningKey(mixed $value): string
     {
         if (false === ($key = static::search($value))) {
-            throw new \UnexpectedValueException(sprintf("Value '%s' is not part of the enum ", $value) . static::class);
+            throw new \UnexpectedValueException(sprintf("Value '%s' is not part of the enum ", $value).static::class);
         }
 
         return $key;
     }
 
     /**
-     * Check if is valid enum key
+     * Check if is valid enum key.
      *
      * @param $key
      *
@@ -247,9 +251,10 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Return key for value
+     * Return key for value.
      *
      * @psalm-pure
+     *
      * @return string|true
      */
     public static function search(mixed $value)
@@ -258,20 +263,21 @@ abstract class Enum implements \JsonSerializable, \Stringable
     }
 
     /**
-     * Returns a value when called statically like so: MyEnum::SOME_VALUE() given SOME_VALUE is a class constant
+     * Returns a value when called statically like so: MyEnum::SOME_VALUE() given SOME_VALUE is a class constant.
+     *
+     * @return $this
      *
      * @throws \BadMethodCallException
      *
      * @psalm-pure
-     * @return $this
      */
     public static function __callStatic(string $name, array $arguments)
     {
         $class = static::class;
-        if (! isset(self::$instances[$class][$name])) {
+        if (!isset(self::$instances[$class][$name])) {
             $array = static::toArray();
-            if (! isset($array[$name]) && ! \array_key_exists($name, $array)) {
-                $message = sprintf("No static method or enum constant '%s' in class ", $name) . static::class;
+            if (!isset($array[$name]) && !\array_key_exists($name, $array)) {
+                $message = sprintf("No static method or enum constant '%s' in class ", $name).static::class;
                 throw new \BadMethodCallException($message);
             }
 
@@ -285,8 +291,9 @@ abstract class Enum implements \JsonSerializable, \Stringable
      * Specify data which should be serialized to JSON. This method returns data that can be serialized by json_encode()
      * natively.
      *
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @psalm-pure
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]

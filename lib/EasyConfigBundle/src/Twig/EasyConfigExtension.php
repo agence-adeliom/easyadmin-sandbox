@@ -20,7 +20,7 @@ class EasyConfigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('easy_config', \Closure::fromCallable(fn(\Twig\Environment $env, array $context, string $key, bool $directValue = true) => $this->getConfig($env, $context, $key, $directValue)), ['is_safe' => ['js', 'html'], 'needs_context' => true, 'needs_environment' => true]),
+            new TwigFunction('easy_config', \Closure::fromCallable(fn (\Twig\Environment $env, array $context, string $key, bool $directValue = true) => $this->getConfig($env, $context, $key, $directValue)), ['is_safe' => ['js', 'html'], 'needs_context' => true, 'needs_environment' => true]),
         ];
     }
 
@@ -30,9 +30,9 @@ class EasyConfigExtension extends AbstractExtension
             if ($directValue) {
                 $value = $config->{$config->getType()};
 
-                if (in_array($config->getType(), ["code", "wysiwyg", "textarea", "text"])) {
+                if (in_array($config->getType(), ['code', 'wysiwyg', 'textarea', 'text'])) {
                     return new Markup($value, 'UTF-8');
-                } elseif ($config->getType() == "json") {
+                } elseif ('json' == $config->getType()) {
                     return json_decode((string) $value, true, 512, JSON_THROW_ON_ERROR);
                 } else {
                     return $value;
@@ -42,7 +42,7 @@ class EasyConfigExtension extends AbstractExtension
             return [
                 'type' => $config->getType(),
                 'value' => $config->{$config->getType()},
-                'raw_value' => $config->getValue()
+                'raw_value' => $config->getValue(),
             ];
         }
 

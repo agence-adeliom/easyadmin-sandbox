@@ -15,17 +15,18 @@ abstract class AbstractPageController extends AbstractController
      * as it should be /parent/children.
      *
      * @param Page[] $elements
+     *
      * @return Page
      */
     protected function getFinalTreeElement(array $slugs, array $elements)
     {
         // Will check that slugs and elements match
         $slugsElements = array_keys($elements);
-        $sortedSlugs   = $slugs;
+        $sortedSlugs = $slugs;
         sort($sortedSlugs);
         sort($slugsElements);
 
-        if ($sortedSlugs !== $slugsElements || $slugs === [] || count($slugs) !== count($elements)) {
+        if ($sortedSlugs !== $slugsElements || [] === $slugs || count($slugs) !== count($elements)) {
             throw $this->createNotFoundException();
         }
 
@@ -36,8 +37,8 @@ abstract class AbstractPageController extends AbstractController
 
         foreach ($slugs as $slug) {
             $element = $elements[$slug] ?? null;
-            $match   = false;
-            if ($element !== null) {
+            $match = false;
+            if (null !== $element) {
                 // Only for the first iteration
                 $match = $previousElement
                     ? $element->getParent() && $previousElement->getSlug() === $element->getParent()->getSlug()
@@ -47,7 +48,7 @@ abstract class AbstractPageController extends AbstractController
             }
 
             if (!$match) {
-                throw $this->createNotFoundException((new \ReflectionClass($element))->getShortName() . ' hierarchy not found.');
+                throw $this->createNotFoundException((new \ReflectionClass($element))->getShortName().' hierarchy not found.');
             }
         }
 

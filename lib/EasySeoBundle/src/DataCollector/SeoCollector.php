@@ -48,7 +48,6 @@ final class SeoCollector extends AbstractDataCollector
      */
     private const METRIC_CLASS_OK = 'status-sucess';
 
-
     public function __construct(protected BreadcrumbCollection $breadcrumb, protected $config)
     {
     }
@@ -91,42 +90,42 @@ final class SeoCollector extends AbstractDataCollector
         $meta = $crawler->filterXPath('//meta[@name="keywords"]');
         if ($meta->count() > 0) {
             $this->data['keywords'] = [
-                'value' => u((string) $meta->attr('content'))
+                'value' => u((string) $meta->attr('content')),
             ];
         }
 
         $meta = $crawler->filterXPath('//meta[@name="robots"]');
         if ($meta->count() > 0) {
             $this->data['robots'] = [
-                'value' => u((string) $meta->attr('content'))
+                'value' => u((string) $meta->attr('content')),
             ];
         }
 
         $meta = $crawler->filterXPath('//meta[@name="page-key"]');
         if ($meta->count() > 0) {
             $this->data['pageKey'] = [
-                'value' => u((string) $meta->attr('content'))
+                'value' => u((string) $meta->attr('content')),
             ];
         }
 
         $meta = $crawler->filterXPath('//link[@rel="canonical"]');
         if ($meta->count() > 0) {
             $this->data['canonical'] = [
-                'value' => u((string) $meta->attr('href'))
+                'value' => u((string) $meta->attr('href')),
             ];
         }
 
         $meta = $crawler->filterXPath('//meta[@property="og:image"]');
         if ($meta->count() > 0) {
             $this->data['cover'] = [
-                'value' => u((string) $meta->attr('content'))
+                'value' => u((string) $meta->attr('content')),
             ];
         }
     }
 
     private function getTitleClass(int $size): string
     {
-        if ($size === 0) {
+        if (0 === $size) {
             return self::CLASS_ERROR;
         }
 
@@ -135,7 +134,7 @@ final class SeoCollector extends AbstractDataCollector
 
     private function getTitleStatusClass(int $size): string
     {
-        if ($size === 0) {
+        if (0 === $size) {
             return self::METRIC_CLASS_ERROR;
         }
 
@@ -144,7 +143,7 @@ final class SeoCollector extends AbstractDataCollector
 
     private function getDescriptionClass(int $size): string
     {
-        if ($size === 0) {
+        if (0 === $size) {
             return self::CLASS_ERROR;
         }
 
@@ -153,7 +152,7 @@ final class SeoCollector extends AbstractDataCollector
 
     private function getDescriptionStatusClass(int $size): string
     {
-        if ($size === 0) {
+        if (0 === $size) {
             return self::METRIC_CLASS_ERROR;
         }
 
@@ -175,7 +174,6 @@ final class SeoCollector extends AbstractDataCollector
     {
         return $this->data['description'] ?? [];
     }
-
 
     public function __get($name)
     {

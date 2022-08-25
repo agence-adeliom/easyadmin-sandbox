@@ -44,6 +44,7 @@ class EasyMediaHelper
 
     /**
      * sanitize input.
+     *
      * @return [type] [description]
      */
     public function getRandomString()
@@ -74,8 +75,8 @@ class EasyMediaHelper
      */
     public function resolveUrl(Media $media)
     {
-        return $this->clearDblSlash($this->router->generate("media.file_download", [
-            "path" => $media->getPath()
+        return $this->clearDblSlash($this->router->generate('media.file_download', [
+            'path' => $media->getPath(),
         ], UrlGeneratorInterface::ABSOLUTE_URL));
     }
 
@@ -316,31 +317,31 @@ class EasyMediaHelper
     {
         $mimes = $this->parameters->get('easy_media.extended_mimes');
         if ($type) {
-            if ((($type && (str_contains((string)$type, 'image'))) || in_array($type, $mimes['image'] ?? [])) && $compare !== 'image') {
+            if ((($type && str_contains((string) $type, 'image')) || in_array($type, $mimes['image'] ?? [])) && 'image' !== $compare) {
                 return true;
             }
 
             if (($type && str_contains((string) $type, 'video')) || in_array($type, $mimes['video'] ?? [])) {
-                return $compare === 'video';
+                return 'video' === $compare;
             }
 
             if (($type && str_contains((string) $type, 'audio')) || in_array($type, $mimes['audio'] ?? [])) {
-                return $compare === 'audio';
+                return 'audio' === $compare;
             }
 
             // because "oembed" shows up as "application" type.includes('oembed')
-            if (($type && str_contains((string) $type, 'oembed')) && $compare !== 'oembed') {
+            if (($type && str_contains((string) $type, 'oembed')) && 'oembed' !== $compare) {
                 return false;
             }
 
             // because "pdf" shows up as "application" type.includes('pdf')
-            if (($type && str_contains((string) $type, 'pdf')) && $compare !== 'pdf') {
+            if (($type && str_contains((string) $type, 'pdf')) && 'pdf' !== $compare) {
                 return false;
             }
 
             // because "archive" shows up as "application"
             if (($type && str_contains((string) $type, 'compressed')) || in_array($type, $mimes['archive'])) {
-                return $compare === 'compressed';
+                return 'compressed' === $compare;
             }
 
             return $type && str_contains((string) $type, (string) $compare);
@@ -351,6 +352,6 @@ class EasyMediaHelper
 
     protected function filePattern($item)
     {
-        return '/(script.*?\/script)|[^(' . $item . ')a-zA-Z0-9]+/ius';
+        return '/(script.*?\/script)|[^('.$item.')a-zA-Z0-9]+/ius';
     }
 }

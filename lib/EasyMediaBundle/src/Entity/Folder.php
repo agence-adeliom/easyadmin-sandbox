@@ -59,7 +59,7 @@ class Folder
     {
         $this->name = $name;
 
-        if (! $this->slug) {
+        if (!$this->slug) {
             $this->slug = (new AsciiSlugger())->slug(strtolower($this->name))->toString();
         }
     }
@@ -111,7 +111,7 @@ class Folder
         $tree = '';
         $current = $this;
         do {
-            $tree = $current->getSlug() . $separator . $tree;
+            $tree = $current->getSlug().$separator.$tree;
             $current = $current->getParent();
         } while ($current);
 

@@ -26,7 +26,7 @@ trait Upload
     {
         $upload_folder_id = $request->request->get('upload_folder');
         $folder = null;
-        if (! empty($upload_folder_id)) {
+        if (!empty($upload_folder_id)) {
             $folder = $this->manager->getFolder($upload_folder_id);
         }
 
@@ -40,7 +40,7 @@ trait Upload
                 $orig_name = $one->getClientOriginalName();
                 $name = $random_name ? $this->helper->getRandomString() : null;
 
-                if ($request->request->get("dzuuid")) {
+                if ($request->request->get('dzuuid')) {
                     $chunksRes = self::resumableUpload($request, $one->getRealPath(), $orig_name, $this->chunksDir);
                     dump($chunksRes);
                     if (!$chunksRes['final']) {
@@ -50,8 +50,8 @@ trait Upload
                     $one = new File($chunksRes['path']);
                 }
 
-                if (! empty($custom_attr)) {
-                    $custom_attr = array_filter($custom_attr, static fn($entry) => $entry['name'] === $orig_name);
+                if (!empty($custom_attr)) {
+                    $custom_attr = array_filter($custom_attr, static fn ($entry) => $entry['name'] === $orig_name);
                     $custom_attr = current($custom_attr);
                 }
 
@@ -85,7 +85,6 @@ trait Upload
             ];
         }
 
-
         return new JsonResponse($result);
     }
 
@@ -103,13 +102,13 @@ trait Upload
 
             $upload_folder_id = $data['folder'];
             $folder = null;
-            if (! empty($upload_folder_id)) {
+            if (!empty($upload_folder_id)) {
                 $folder = $this->manager->getFolder($upload_folder_id);
             }
 
             $upload_path = $folder ? $folder->getPath() : null;
             $original = $data['name'];
-            $name_only = pathinfo((string) $original, PATHINFO_FILENAME) . '_' . $this->helper->getRandomString();
+            $name_only = pathinfo((string) $original, PATHINFO_FILENAME).'_'.$this->helper->getRandomString();
 
             try {
                 $media = $this->manager->createMedia($data['data'], $upload_path, $name_only);
@@ -148,7 +147,7 @@ trait Upload
             $url = $data['url'];
             $upload_folder_id = $data['folder'];
             $folder = null;
-            if (! empty($upload_folder_id)) {
+            if (!empty($upload_folder_id)) {
                 $folder = $this->manager->getFolder($upload_folder_id);
             }
 
@@ -212,10 +211,9 @@ trait Upload
         $filesystem = new Filesystem();
         $filesystem->mkdir(Path::normalize($fileChunksFolder));
 
-
-        $filename = str_replace([' ','(', ')'], '_', $filename); # remove problematic symbols
+        $filename = str_replace([' ', '(', ')'], '_', $filename); // remove problematic symbols
         $info = pathinfo($filename);
-        $extension = isset($info['extension']) ? '.' . strtolower($info['extension']) : '';
+        $extension = isset($info['extension']) ? '.'.strtolower($info['extension']) : '';
         $filename = $info['filename'];
 
         $totalSize = (int) $request->get('dztotalfilesize', 0);
@@ -230,7 +228,7 @@ trait Upload
             $errors[] = ['text' => 'Move error', 'name' => $filename, 'index' => $chunkInd];
         }
 
-        if (count($errors) === 0 && $newPath = self::checkAllParts($fileChunksFolder, $filename, $extension, $totalSize, $totalChunks, $chunksDir, $successes, $errors, $warnings)) {
+        if (0 === count($errors) && $newPath = self::checkAllParts($fileChunksFolder, $filename, $extension, $totalSize, $totalChunks, $chunksDir, $successes, $errors, $warnings)) {
             return ['final' => true, 'path' => $newPath, 'successes' => $successes, 'errors' => $errors, 'warnings' => $warnings];
         }
 
@@ -239,9 +237,8 @@ trait Upload
 
     private static function checkAllParts(string $fileChunksFolder, string $filename, string $extension, int $totalSize, int $totalChunks, string $chunksDir, array &$successes, array &$errors, array &$warnings)
     {
-
         $parts = glob(Path::normalize(sprintf('%s/*', $fileChunksFolder)));
-        $successes[] = count($parts) . sprintf(' of %d parts done so far in %s', $totalChunks, $fileChunksFolder);
+        $successes[] = count($parts).sprintf(' of %d parts done so far in %s', $totalChunks, $fileChunksFolder);
         $filesystem = new Filesystem();
 
         // check if all the parts present, and create the final destination file
@@ -252,7 +249,7 @@ trait Upload
             }
 
             if (
-                $loaded_size >= $totalSize && $errors === [] && $newPath = self::createFileFromChunks(
+                $loaded_size >= $totalSize && [] === $errors && $newPath = self::createFileFromChunks(
                     $fileChunksFolder,
                     $filename,
                     $extension,
@@ -265,6 +262,7 @@ trait Upload
                 )
             ) {
                 $filesystem->remove(Path::normalize($fileChunksFolder));
+
                 return $newPath;
             }
         }
@@ -274,8 +272,7 @@ trait Upload
 
     private static function createFileFromChunks(string $fileChunksFolder, string $fileName, string $extension, int $totalSize, int $totalChunks, string $chunksDir, array &$successes, array &$errors, array &$warnings)
     {
-
-        $relPath = Path::normalize($chunksDir . '/assembled');
+        $relPath = Path::normalize($chunksDir.'/assembled');
         $filesystem = new Filesystem();
         $filesystem->mkdir($relPath);
 
@@ -286,16 +283,18 @@ trait Upload
         }
 
         $fp = fopen(sprintf('%s/%s%s', $relPath, $saveName, $extension), 'w');
-        if ($fp === false) {
+        if (false === $fp) {
             $errors[] = 'cannot create the destination file';
+
             return false;
         }
 
         for ($i = 0; $i < $totalChunks; ++$i) {
-            fwrite($fp, file_get_contents(Path::normalize($fileChunksFolder . '/' . $fileName . '.part' . $i)));
+            fwrite($fp, file_get_contents(Path::normalize($fileChunksFolder.'/'.$fileName.'.part'.$i)));
         }
 
         fclose($fp);
+
         return Path::normalize(sprintf('%s/%s%s', $relPath, $saveName, $extension));
     }
 
@@ -303,15 +302,16 @@ trait Upload
     {
         if (file_exists(Path::normalize(sprintf('%s/%s%s', $relPath, $origFileName, $extension)))) {
             $i = 0;
-            while (file_exists(Path::normalize(sprintf('%s/%s_', $relPath, $origFileName) . (++$i) . $extension)) && $i < 10000) {
+            while (file_exists(Path::normalize(sprintf('%s/%s_', $relPath, $origFileName).(++$i).$extension)) && $i < 10000) {
             }
 
             if ($i >= 10000) {
                 $errors[] = sprintf('Can not create unique name for saving file %s%s', $origFileName, $extension);
+
                 return false;
             }
 
-            return $origFileName . "_" . $i;
+            return $origFileName.'_'.$i;
         }
 
         return $origFileName;

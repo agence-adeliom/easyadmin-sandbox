@@ -115,7 +115,7 @@ final class AssociationField implements FieldInterface
             ->setCustomOption(self::OPTION_DOCTRINE_ASSOCIATION_TYPE, null)
             ->setCustomOption(self::OPTION_ALLOW_ADD, false)
             ->setCustomOption(self::OPTION_LIST_SELECTOR, false)
-            ;
+        ;
     }
 
     public static function getSettableOptions(): array

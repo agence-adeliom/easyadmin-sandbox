@@ -28,9 +28,6 @@ class Block
         $this->innerContent = $innerContent;
     }
 
-    /**
-     * @param string $mode
-     */
     public function setMode(string $mode): void
     {
         $this->attributes['mode'] = $mode;
@@ -44,9 +41,6 @@ class Block
         return $this->attributes['mode'] ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function isMode(string $mode): bool
     {
         return ($this->attributes['mode'] ?? null) === $mode;

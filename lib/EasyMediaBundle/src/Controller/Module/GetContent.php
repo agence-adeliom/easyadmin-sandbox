@@ -24,14 +24,14 @@ trait GetContent
         $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $folder = null;
         $path = '/';
-        if (! empty($data['folder'])) {
+        if (!empty($data['folder'])) {
             $folder = $this->manager->getFolder($data['folder']);
             if ($folder) {
                 $path = $folder->getPath();
             }
         }
 
-        if (! empty($data['folder']) && ! $folder) {
+        if (!empty($data['folder']) && !$folder) {
             return new JsonResponse([
                 'error' => $this->translator->trans('MediaManager::messages.error.doesnt_exist', ['attr' => $path]),
             ]);
@@ -153,23 +153,24 @@ trait GetContent
 
     protected function ignoreFiles($item)
     {
-        return ! preg_grep($this->ignoreFiles, [$item->getPath()]);
+        return !preg_grep($this->ignoreFiles, [$item->getPath()]);
     }
 
     /**
      * filter directory data by type.
      *
      * @param [type] $type
+     *
      * @return mixed[]
      */
     protected function getFolderListByType(array $list, $type)
     {
         $list = (new ArrayCollection($list))->filter(static function ($item) use ($type) {
-            if ($type === 'dir') {
+            if ('dir' === $type) {
                 return $item instanceof Folder;
             }
 
-            if ($type === 'file') {
+            if ('file' === $type) {
                 return $item instanceof Media;
             }
 
@@ -183,15 +184,16 @@ trait GetContent
      * get folder size.
      *
      * @param [type] $list
+     *
      * @return array<string, int>|array<string, float>
      */
     protected function getFolderInfoFromList($list)
     {
-        $list = (new ArrayCollection($list))->filter(static fn($item) => $item->isFile());
+        $list = (new ArrayCollection($list))->filter(static fn ($item) => $item->isFile());
 
         return [
             'count' => $list->count(),
-            'size' => array_sum($list->map(static fn($item) => $item->fileSize())->toArray()),
+            'size' => array_sum($list->map(static fn ($item) => $item->fileSize())->toArray()),
         ];
     }
 }

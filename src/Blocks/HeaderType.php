@@ -10,7 +10,7 @@ class HeaderType extends AbstractBlock
 {
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("text", TextType::class);
+        $builder->add('text', TextType::class);
     }
 
     public function getName(): string
@@ -26,14 +26,14 @@ class HeaderType extends AbstractBlock
     public static function configureAssets(): array
     {
         return [
-            "js" => [],
-            "css" => [],
-            "webpack" => ["app"],
+            'js' => [],
+            'css' => [],
+            'webpack' => ['app'],
         ];
     }
 
     public function getTemplate(): string
     {
-        return "blocks/header.html.twig";
+        return 'blocks/header.html.twig';
     }
 }

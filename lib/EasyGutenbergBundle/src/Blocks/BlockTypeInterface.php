@@ -9,7 +9,9 @@ interface BlockTypeInterface
     public static function getKey(): string;
 
     public static function getName(): string;
+
     public static function getDescription(): string;
+
     public static function getIcon(): string;
 
     public static function getPrefix(): string;

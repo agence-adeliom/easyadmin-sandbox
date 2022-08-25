@@ -27,15 +27,15 @@ class SharedBlockType extends AbstractBlock implements BlockInterface
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("block", EntityType::class, [
-                "class" => $this->class,
-                "required" => true,
-                "attr" => [
-                    'data-ea-widget' => 'ea-autocomplete'
+            ->add('block', EntityType::class, [
+                'class' => $this->class,
+                'required' => true,
+                'attr' => [
+                    'data-ea-widget' => 'ea-autocomplete',
                 ],
-                "constraints" => [
-                    new NotBlank()
-                ]
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
         ;
     }
@@ -44,15 +44,15 @@ class SharedBlockType extends AbstractBlock implements BlockInterface
     {
         return new CallbackTransformer(
             function ($data) {
-                if ($data && $data["block"]) {
-                    $data["block"] = $this->manager->getRepository($data["block"]["class"])->find($data["block"]["id"]);
+                if ($data && $data['block']) {
+                    $data['block'] = $this->manager->getRepository($data['block']['class'])->find($data['block']['id']);
                 }
 
                 return $data;
             },
             function ($data) {
-                if ($data["block"]) {
-                    $data["block"] = ["class" => $this->class, "id" => $data["block"]->getId()];
+                if ($data['block']) {
+                    $data['block'] = ['class' => $this->class, 'id' => $data['block']->getId()];
                 }
 
                 return $data;
@@ -60,10 +60,9 @@ class SharedBlockType extends AbstractBlock implements BlockInterface
         );
     }
 
-
     public function getName(): string
     {
-        return $this->translator->trans("easy.block.editor.shared_block");
+        return $this->translator->trans('easy.block.editor.shared_block');
     }
 
     public function getIcon(): string
@@ -73,6 +72,6 @@ class SharedBlockType extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return "@EasyBlock/editor/shared_block.html.twig";
+        return '@EasyBlock/editor/shared_block.html.twig';
     }
 }

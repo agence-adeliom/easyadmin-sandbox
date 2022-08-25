@@ -15,6 +15,7 @@ class BlockRepository extends ServiceEntityRepository
         ;
 
         $qb->setParameter('state', true);
+
         return $qb;
     }
 
@@ -24,10 +25,10 @@ class BlockRepository extends ServiceEntityRepository
     public function getActive()
     {
         $qb = $this->getPublishedQuery();
+
         return $qb->getQuery()
             ->getResult();
     }
-
 
     /**
      * @return Block[]

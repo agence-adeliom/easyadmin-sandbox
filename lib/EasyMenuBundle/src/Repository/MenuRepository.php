@@ -21,7 +21,7 @@ class MenuRepository extends ServiceEntityRepository
     public function setConfig(array $cacheConfig)
     {
         $this->cacheEnabled = $cacheConfig['enabled'];
-        $this->cacheTtl     = $cacheConfig['ttl'];
+        $this->cacheTtl = $cacheConfig['ttl'];
     }
 
     public function getPublishedQuery(): QueryBuilder
@@ -31,6 +31,7 @@ class MenuRepository extends ServiceEntityRepository
         ;
 
         $qb->setParameter('status', true);
+
         return $qb;
     }
 
@@ -40,6 +41,7 @@ class MenuRepository extends ServiceEntityRepository
     public function getPublished()
     {
         $qb = $this->getPublishedQuery();
+
         return $qb->getQuery()
             ->useResultCache($this->cacheEnabled, $this->cacheTtl)
             ->getResult();

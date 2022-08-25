@@ -13,20 +13,18 @@ class EasyBlockExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('easy_block.class', $config["block_class"]);
-        $container->setParameter('easy_block.repository', $config["block_repository"]);
-
+        $container->setParameter('easy_block.class', $config['block_class']);
+        $container->setParameter('easy_block.repository', $config['block_repository']);
 
         $container->registerForAutoconfiguration(BlockInterface::class)
             ->addTag('easy_block.block')
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
-
 
     public function getAlias(): string
     {

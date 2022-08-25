@@ -10,7 +10,7 @@ class ShaType extends AbstractBlock
 {
     public function buildBlock(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("title", TextType::class);
+        $builder->add('title', TextType::class);
     }
 
     public function getName(): string
@@ -25,7 +25,7 @@ class ShaType extends AbstractBlock
 
     public function getTemplate(): string
     {
-        return "blocks/shared/sha.html.twig";
+        return 'blocks/shared/sha.html.twig';
     }
 
     public function getDescription(): string
@@ -36,16 +36,16 @@ class ShaType extends AbstractBlock
     public static function getDefaultSettings(): array
     {
         return [
-            "title" => "Title"
+            'title' => 'Title',
         ];
     }
 
     public static function configureAssets(): array
     {
         return [
-            "js" => [],
-            "css" => [],
-            "webpack" => ['app'],
+            'js' => [],
+            'css' => [],
+            'webpack' => ['app'],
         ];
     }
 }

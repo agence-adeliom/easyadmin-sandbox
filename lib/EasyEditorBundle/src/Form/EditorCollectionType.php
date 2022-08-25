@@ -28,7 +28,7 @@ class EditorCollectionType extends CollectionType
         if ($options['allow_add'] && $options['prototype']) {
             $prototypeOptions = array_replace([
                 'required' => $options['required'],
-                'label' => $options['prototype_name'] . 'label__',
+                'label' => $options['prototype_name'].'label__',
             ], $options['entry_options']);
 
             if (null !== $options['prototype_data']) {
@@ -42,8 +42,8 @@ class EditorCollectionType extends CollectionType
 
             foreach ($options['blocks'] as $type => $block) {
                 $name = sprintf('__block_%s__', $block->getBlockPrefix());
-                if (!empty($prototypeOptions['label']) && str_contains("label__", (string) \PROTOTYPEOPTIONS['label'])) {
-                    $prototypeOptions['label'] = $name . 'label__';
+                if (!empty($prototypeOptions['label']) && str_contains('label__', (string) \PROTOTYPEOPTIONS['label'])) {
+                    $prototypeOptions['label'] = $name.'label__';
                 }
 
                 $form = $builder->create($name, $block::class, $prototypeOptions);
@@ -85,6 +85,7 @@ class EditorCollectionType extends CollectionType
     {
         $entryOptionsNormalizer = static function (Options $options, $value) {
             $value['block_name'] = 'entry';
+
             return $value;
         };
 
@@ -102,7 +103,7 @@ class EditorCollectionType extends CollectionType
             'delete_empty' => true,
             'by_reference' => false,
             'blocks' => $this->blockCollection->getBlocks()->toArray(),
-            'invalid_message' => static fn(Options $options, $previousValue) => ($options['legacy_error_messages'] ?? true)
+            'invalid_message' => static fn (Options $options, $previousValue) => ($options['legacy_error_messages'] ?? true)
                 ? $previousValue
                 : 'The collection is invalid.',
         ]);
@@ -133,7 +134,7 @@ class EditorCollectionType extends CollectionType
             array_splice($entryView->vars['block_prefixes'], $prefixOffset, 0, 'editor_collection_entry');
         }
 
-        /** @var FormInterface $prototype */
+        /* @var FormInterface $prototype */
         if ($prototypes = $form->getConfig()->getAttribute('prototypes')) {
             foreach ($prototypes as $type => $prototype) {
                 if ($view->vars['prototypes'][$type]->vars['multipart']) {
@@ -148,7 +149,6 @@ class EditorCollectionType extends CollectionType
             }
         }
     }
-
 
     public function getBlockPrefix(): string
     {

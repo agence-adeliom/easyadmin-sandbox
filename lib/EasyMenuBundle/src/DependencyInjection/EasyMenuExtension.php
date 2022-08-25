@@ -12,21 +12,20 @@ class EasyMenuExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
         foreach ($config as $key => $value) {
-            if (in_array($key, ["menu", "menu_item"])) {
+            if (in_array($key, ['menu', 'menu_item'])) {
                 foreach ($value as $type => $class) {
-                    $container->setParameter('easy_menu.' . $key . '.' . $type, $class);
+                    $container->setParameter('easy_menu.'.$key.'.'.$type, $class);
                 }
             } else {
-                $container->setParameter('easy_menu.' . $key, $value);
+                $container->setParameter('easy_menu.'.$key, $value);
             }
         }
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
-
 
     public function getAlias(): string
     {

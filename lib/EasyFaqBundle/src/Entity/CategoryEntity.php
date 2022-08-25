@@ -29,20 +29,14 @@ class CategoryEntity
     }
 
     /**
-     * @var BaseEntryEntity[] | null
+     * @var BaseEntryEntity[]|null
      */
     protected $entries;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'css', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $css = null;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'js', type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     #[Assert\Type('string')]
     protected ?string $js = null;
@@ -51,13 +45,13 @@ class CategoryEntity
     {
         $this->TimestampableConstruct();
         $this->SEOConstruct();
-        $this->entries     = new ArrayCollection();
+        $this->entries = new ArrayCollection();
     }
 
     /**
      * @return EntryEntity[]|ArrayCollection
      */
-    public function getEntries(): array|\Doctrine\Common\Collections\ArrayCollection
+    public function getEntries(): array|ArrayCollection
     {
         return $this->entries;
     }
@@ -109,7 +103,7 @@ class CategoryEntity
     public function onRemove(LifecycleEventArgs $event): void
     {
         $this->setStatus(false);
-        $this->setName($this->getName() . '-' . $this->getId() . '-deleted');
-        $this->setSlug($this->getSlug() . '-' . $this->getId() . '-deleted');
+        $this->setName($this->getName().'-'.$this->getId().'-deleted');
+        $this->setSlug($this->getSlug().'-'.$this->getId().'-deleted');
     }
 }

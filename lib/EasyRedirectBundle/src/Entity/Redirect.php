@@ -142,10 +142,10 @@ class Redirect
 
     protected function createAbsoluteUri(string $path, bool $allowQueryString = false): string
     {
-        $value = '/' . \ltrim(\parse_url($path, \PHP_URL_PATH), '/');
+        $value = '/'.\ltrim(\parse_url($path, \PHP_URL_PATH), '/');
 
         if ($allowQueryString && $query = \parse_url($path, \PHP_URL_QUERY)) {
-            $value .= '?' . $query;
+            $value .= '?'.$query;
         }
 
         return $value;

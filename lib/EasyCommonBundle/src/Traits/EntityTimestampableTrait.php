@@ -10,12 +10,12 @@ trait EntityTimestampableTrait
 {
     #[Groups('main')]
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
-    #[Gedmo\Timestampable(on: "create")]
+    #[Gedmo\Timestampable(on: 'create')]
     protected \DateTimeInterface $createdAt;
 
     #[Groups('main')]
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
-    #[Gedmo\Timestampable(on: "update")]
+    #[Gedmo\Timestampable(on: 'update')]
     protected \DateTimeInterface $updatedAt;
 
     /**

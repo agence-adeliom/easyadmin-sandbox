@@ -34,7 +34,6 @@ class NotFound
     #[ORM\Column(name: 'timestamp', type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     protected ?\DateTimeInterface $timestamp;
 
-
     public function __construct(string $path, string $fullUrl, ?string $referer = null, ?\DateTimeInterface $timestamp = null)
     {
         if (null === $timestamp) {
@@ -45,7 +44,7 @@ class NotFound
         $path = empty($path) ? null : $path;
 
         if (null !== $path) {
-            $path = '/' . \ltrim(\parse_url($path, \PHP_URL_PATH), '/');
+            $path = '/'.\ltrim(\parse_url($path, \PHP_URL_PATH), '/');
         }
 
         $this->path = $path;

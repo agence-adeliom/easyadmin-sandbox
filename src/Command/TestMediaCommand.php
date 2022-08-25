@@ -37,13 +37,13 @@ class TestMediaCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        //$media = $this->mediaManager->createMedia("TEST", '/test/');
+        // $media = $this->mediaManager->createMedia("TEST", '/test/');
 
-        $media = $this->mediaManager->createMedia("https://images.unsplash.com/photo-1634513389146-87627b4946b9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80");
+        $media = $this->mediaManager->createMedia('https://images.unsplash.com/photo-1634513389146-87627b4946b9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80');
         dump($media);
 
-        //$folder = $this->mediaManager->folderByPath("/test/coucou/qsdfqsdfsdf");
-        //dump($folder);
+        // $folder = $this->mediaManager->folderByPath("/test/coucou/qsdfqsdfsdf");
+        // dump($folder);
 
         return Command::SUCCESS;
     }

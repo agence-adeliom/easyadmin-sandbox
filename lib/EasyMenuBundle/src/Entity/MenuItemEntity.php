@@ -99,7 +99,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * @var MenuEntity | null
+     * @var MenuEntity|null
      */
     protected $menu;
 
@@ -110,19 +110,19 @@ class MenuItemEntity implements \Stringable
     protected ?string $name = null;
 
     /**
-     * @var string | null
+     * @var string|null
      */
     #[ORM\Column(name: 'url', type: \Doctrine\DBAL\Types\Types::STRING, length: 255, nullable: true)]
     protected ?string $url = null;
 
     /**
-     * @var string | null
+     * @var string|null
      */
     #[ORM\Column(name: 'class_attribute', type: \Doctrine\DBAL\Types\Types::STRING, length: 255, nullable: true)]
     protected ?string $classAttribute = null;
 
     /**
-     * @var integer
+     * @var int
      */
     #[ORM\Column(name: 'position', type: \Doctrine\DBAL\Types\Types::SMALLINT, options: ['unsigned' => true], nullable: true)]
     protected ?int $position = null;
@@ -134,7 +134,7 @@ class MenuItemEntity implements \Stringable
     protected ?bool $target = null;
 
     /**
-     * @var MenuItemEntity | null
+     * @var MenuItemEntity|null
      */
     #[ORM\ManyToOne(targetEntity: \App\Entity\EasyMenu\MenuItem::class, inversedBy: 'children')]
     #[ORM\JoinColumn(name: 'parent_id', onDelete: 'CASCADE')]
@@ -234,7 +234,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Add child
+     * Add child.
      */
     public function addChild(MenuItemEntity $child)
     {
@@ -242,7 +242,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Remove child
+     * Remove child.
      */
     public function removeChild(MenuItemEntity $child)
     {
@@ -250,7 +250,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Set children
+     * Set children.
      */
     public function setChildren(ArrayCollection $children)
     {
@@ -258,7 +258,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Get children
+     * Get children.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -268,13 +268,13 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Get only published children
+     * Get only published children.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getPublishedChildren()
     {
-        return $this->children->filter(static fn(MenuItemEntity $child) => $child->getState() == ThreeStateStatusEnum::PUBLISHED());
+        return $this->children->filter(static fn (MenuItemEntity $child) => $child->getState() == ThreeStateStatusEnum::PUBLISHED());
     }
 
     /**
@@ -300,7 +300,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Has child
+     * Has child.
      */
     public function hasChild()
     {
@@ -308,7 +308,7 @@ class MenuItemEntity implements \Stringable
     }
 
     /**
-     * Has parent
+     * Has parent.
      */
     public function hasParent(): bool
     {
@@ -338,6 +338,6 @@ class MenuItemEntity implements \Stringable
 
     public function __toString(): string
     {
-        return $this->name ?? "";
+        return $this->name ?? '';
     }
 }

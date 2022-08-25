@@ -10,8 +10,7 @@ class EasyBlogPostEvent extends Event
     /**
      * @var string
      */
-    public const NAME = "easyblog.post.before_render";
-
+    public const NAME = 'easyblog.post.before_render';
 
     public function __construct(protected PostEntity $post, protected $args, protected $template)
     {

@@ -5,9 +5,7 @@ namespace App\Controller\Admin\EasyFaq;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyFaqBundle\Controller\CategoryCrudController as BaseCategoryCrudController;
 use App\Entity\EasyFaq\Category;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
@@ -21,12 +19,13 @@ class CategoryCrudController extends BaseCategoryCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
+
         return $actions;
     }
 
     public function configureFilters(Filters $filters): Filters
     {
-        $filters->add(ChoiceFilter::new("state", "Status")->setChoices(ThreeStateStatusEnum::toArray()));
+        $filters->add(ChoiceFilter::new('state', 'Status')->setChoices(ThreeStateStatusEnum::toArray()));
 
         return $filters;
     }

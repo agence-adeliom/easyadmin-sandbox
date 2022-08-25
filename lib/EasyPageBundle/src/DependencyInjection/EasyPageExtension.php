@@ -12,28 +12,27 @@ class EasyPageExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config['layouts'] as $name => $layout) {
             $config['layouts'][$name] = array_merge([
-                'name'       => $name,
+                'name' => $name,
                 'assets_css' => [],
-                'assets_js'  => [],
-                'assets_webpack'  => [],
-                'host'       => '',
-                'pattern'    => '',
+                'assets_js' => [],
+                'assets_webpack' => [],
+                'host' => '',
+                'pattern' => '',
             ], $layout);
             ksort($config['layouts'][$name]);
         }
 
         foreach ($config as $key => $value) {
-            $container->setParameter('easy_page.' . $key, $value);
+            $container->setParameter('easy_page.'.$key, $value);
         }
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
-
 
     public function getAlias(): string
     {

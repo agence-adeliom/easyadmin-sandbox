@@ -23,7 +23,7 @@ class MenuItemRepository extends NestedTreeRepository
     public function setConfig(array $cacheConfig)
     {
         $this->cacheEnabled = $cacheConfig['enabled'];
-        $this->cacheTtl     = $cacheConfig['ttl'];
+        $this->cacheTtl = $cacheConfig['ttl'];
     }
 
     public function getPublishedQuery(): QueryBuilder

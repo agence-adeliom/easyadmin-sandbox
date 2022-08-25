@@ -33,13 +33,11 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('My Project Name')
-            ;
+        ;
     }
-
 
     public function configureMenuItems(): iterable
     {
-
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
         yield from $this->administratorMenuEntry();

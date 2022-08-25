@@ -31,7 +31,6 @@ class EasyMediaManager
 
     protected FilesystemAdapter $adapter;
 
-
     public function __construct(protected EasyMediaFilesystem $filesystem, protected EasyMediaHelper $helper, public EntityManagerInterface $em, protected ContainerBagInterface $parameters, protected TranslatorInterface $translator)
     {
     }
@@ -105,11 +104,11 @@ class EasyMediaManager
         }
 
         $folder = $this->folderByPath($path);
-        if ($folder === false) {
+        if (false === $folder) {
             throw new FolderNotExist('The folder does not exist');
         }
 
-        if (! empty($this->getHelper()->getFolderRepository()->findBy(['parent' => $folder, 'name' => $name]))) {
+        if (!empty($this->getHelper()->getFolderRepository()->findBy(['parent' => $folder, 'name' => $name]))) {
             throw new AlreadyExist($this->translator->trans('error.already_exists', [], 'EasyMediaBundle'));
         }
 
@@ -131,7 +130,7 @@ class EasyMediaManager
         }
 
         $folder = $this->folderByPath($path);
-        if ($folder === false) {
+        if (false === $folder) {
             throw new FolderNotExist('The folder does not exist');
         }
 
@@ -139,7 +138,7 @@ class EasyMediaManager
 
         if (str_starts_with((string) $source, 'data:')) {
             $entity = $this->createFromBase64($entity, $source);
-        } elseif (filter_var($source, FILTER_VALIDATE_URL) !== false) {
+        } elseif (false !== filter_var($source, FILTER_VALIDATE_URL)) {
             if ($imageType = @exif_imagetype($source)) {
                 $entity = $this->createFromImageURL($entity, $source, $imageType);
             } else {
@@ -194,7 +193,7 @@ class EasyMediaManager
         $embed = new Embed();
         $infos = $embed->get($source);
 
-        if (($oembed = $infos->getOEmbed()) && ! empty($infos->getOEmbed()->all())) {
+        if (($oembed = $infos->getOEmbed()) && !empty($infos->getOEmbed()->all())) {
             $name = $entity->getName() ?: $oembed->get('title');
             $entity->setName($name);
             $entity->setMime('application/json+oembed');
@@ -213,10 +212,10 @@ class EasyMediaManager
                 'icon' => (string) ($infos->icon ?: $infos->favicon),
                 'type' => $oembed->get('type'),
                 'code' => [
-                    'html' => $infos->code !== null ? $infos->code->html : null,
-                    'width' => $infos->code !== null ? $infos->code->width : null,
-                    'height' => $infos->code !== null ? $infos->code->height : null,
-                    'ratio' => $infos->code !== null ? $infos->code->ratio : null,
+                    'html' => null !== $infos->code ? $infos->code->html : null,
+                    'width' => null !== $infos->code ? $infos->code->width : null,
+                    'height' => null !== $infos->code ? $infos->code->height : null,
+                    'ratio' => null !== $infos->code ? $infos->code->ratio : null,
                 ],
             ]);
         } else {
@@ -237,8 +236,8 @@ class EasyMediaManager
             throw new NoFile($this->translator->trans('error.no_file', [], 'EasyMediaBundle'));
         }
 
-        $entity->setName($this->helper->cleanName(""));
-        $filename = strtolower((new AsciiSlugger())->slug(strtolower((string) $entity->getName()))->toString() . '.' . EasyMediaHelper::mime2ext($infos['mime']));
+        $entity->setName($this->helper->cleanName(''));
+        $filename = strtolower((new AsciiSlugger())->slug(strtolower((string) $entity->getName()))->toString().'.'.EasyMediaHelper::mime2ext($infos['mime']));
         $entity->setSlug($filename);
 
         if ($this->filesystem->fileExists($entity->getPath())) {
@@ -251,8 +250,7 @@ class EasyMediaManager
         $entity->setLastModified($this->filesystem->lastModified($entity->getPath()));
         $entity->setMime($this->filesystem->mimeType($entity->getPath()));
 
-
-        if (str_contains($entity->getMime(), "image/")) {
+        if (str_contains($entity->getMime(), 'image/')) {
             $tmp = tmpfile();
             if (false !== $tmp) {
                 fwrite($tmp, $this->filesystem->read($entity->getPath()));
@@ -269,7 +267,6 @@ class EasyMediaManager
             ]);
         }
 
-
         return $entity;
     }
 
@@ -282,7 +279,7 @@ class EasyMediaManager
         $file_type = image_type_to_mime_type($type);
         $ext_only = EasyMediaHelper::mime2ext($file_type) ?? pathinfo($original, PATHINFO_EXTENSION);
 
-        $final_name_slug = strtolower((new AsciiSlugger())->slug(strtolower((string) $name))->toString() . sprintf('.%s', $ext_only));
+        $final_name_slug = strtolower((new AsciiSlugger())->slug(strtolower((string) $name))->toString().sprintf('.%s', $ext_only));
         $entity->setSlug($final_name_slug);
 
         if (empty($entity->getName())) {
@@ -351,7 +348,7 @@ class EasyMediaManager
             }
         } else {
             $orig_name = $source->getFilename();
-            $name = $entity->getName() ?: $source->getBasename('.' . $source->getExtension());
+            $name = $entity->getName() ?: $source->getBasename('.'.$source->getExtension());
             $ext_only = pathinfo($orig_name, PATHINFO_EXTENSION);
             if ($type = $source->getMimeType()) {
                 $entity->setMime($type);
@@ -365,7 +362,7 @@ class EasyMediaManager
             }
         }
 
-        $final_name_slug = strtolower((new AsciiSlugger())->slug(strtolower((string) $name))->toString() . sprintf('.%s', $ext_only));
+        $final_name_slug = strtolower((new AsciiSlugger())->slug(strtolower((string) $name))->toString().sprintf('.%s', $ext_only));
         $entity->setSlug($final_name_slug);
         $entity->setSize($source->getSize());
         $entity->setLastModified($source->getMTime());
@@ -401,37 +398,37 @@ class EasyMediaManager
                 $getID3 = new \getID3();
                 $id3Datas = $getID3->analyze($source->getPathname());
 
-                if (isset($id3Datas["video"]) && $this->helper->fileIsType($entity->getMime(), 'video')) {
+                if (isset($id3Datas['video']) && $this->helper->fileIsType($entity->getMime(), 'video')) {
                     $datas = [
-                        'duration' => $id3Datas["playtime_seconds"],
-                        'frame_rate' => $id3Datas["video"]["frame_rate"],
+                        'duration' => $id3Datas['playtime_seconds'],
+                        'frame_rate' => $id3Datas['video']['frame_rate'],
                         'dimensions' => [
-                            'width' => $id3Datas["video"]["resolution_x"],
-                            'height' => $id3Datas["video"]["resolution_y"],
-                            'ratio' => $id3Datas["video"]["resolution_y"] / $id3Datas["video"]["resolution_x"] * 100,
+                            'width' => $id3Datas['video']['resolution_x'],
+                            'height' => $id3Datas['video']['resolution_y'],
+                            'ratio' => $id3Datas['video']['resolution_y'] / $id3Datas['video']['resolution_x'] * 100,
                         ],
                     ];
                 }
 
-                if (isset($id3Datas["audio"]) && $this->helper->fileIsType($entity->getMime(), 'audio')) {
+                if (isset($id3Datas['audio']) && $this->helper->fileIsType($entity->getMime(), 'audio')) {
                     $datas = [
-                        'duration' => $id3Datas["playtime_seconds"],
+                        'duration' => $id3Datas['playtime_seconds'],
                         'tags' => [],
                     ];
-                    if (!empty($id3Datas["id3v1"]["title"])) {
-                        $datas["tags"]["title"] = $id3Datas["id3v1"]["title"];
+                    if (!empty($id3Datas['id3v1']['title'])) {
+                        $datas['tags']['title'] = $id3Datas['id3v1']['title'];
                     }
 
-                    if (!empty($id3Datas["id3v1"]["artist"])) {
-                        $datas["tags"]["artist"] = $id3Datas["id3v1"]["artist"];
+                    if (!empty($id3Datas['id3v1']['artist'])) {
+                        $datas['tags']['artist'] = $id3Datas['id3v1']['artist'];
                     }
 
-                    if (!empty($id3Datas["id3v1"]["album"])) {
-                        $datas["tags"]["album"] = $id3Datas["id3v1"]["album"];
+                    if (!empty($id3Datas['id3v1']['album'])) {
+                        $datas['tags']['album'] = $id3Datas['id3v1']['album'];
                     }
 
-                    if (!empty($id3Datas["id3v1"]["year"])) {
-                        $datas["tags"]["year"] = $id3Datas["id3v1"]["year"];
+                    if (!empty($id3Datas['id3v1']['year'])) {
+                        $datas['tags']['year'] = $id3Datas['id3v1']['year'];
                     }
                 }
 
@@ -440,12 +437,11 @@ class EasyMediaManager
         } catch (\Exception $exception) {
         }
 
-
         try {
             $stream = fopen($source->getRealPath(), 'r+');
             $this->filesystem->writeStream($entity->getPath(), $stream);
             fclose($stream);
-        } catch (FileException | UnableToCopyFile $exception) {
+        } catch (FileException|UnableToCopyFile $exception) {
             dump($exception);
         }
 

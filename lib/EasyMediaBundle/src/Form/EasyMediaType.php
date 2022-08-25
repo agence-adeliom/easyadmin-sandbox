@@ -64,7 +64,7 @@ class EasyMediaType extends AbstractType
                 }
 
                 $class = $this->manager->getHelper()->getMediaClassName();
-                if (! ($media instanceof $class)) {
+                if (!($media instanceof $class)) {
                     $media = $this->manager->getMedia($media);
                 }
 
@@ -75,7 +75,7 @@ class EasyMediaType extends AbstractType
                 return $media->getId();
             },
             function ($mediaId) {
-                if (! $mediaId) {
+                if (!$mediaId) {
                     return null;
                 }
 

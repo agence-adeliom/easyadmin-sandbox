@@ -11,7 +11,7 @@ class EasyEditorType extends JsonType
      */
     public const EASYEDITORTYPE = 'easy_editor_type';
 
-     // modify to match your type name
+    // modify to match your type name
 
     public function getName()
     {

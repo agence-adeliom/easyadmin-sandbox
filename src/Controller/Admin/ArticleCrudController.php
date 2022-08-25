@@ -28,17 +28,17 @@ class ArticleCrudController extends AbstractCrudController
             ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
             ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
-            ;
+        ;
     }
 
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
+
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ;
+        ;
     }
-
 
     public function configureFields(string $pageName): iterable
     {
@@ -47,21 +47,21 @@ class ArticleCrudController extends AbstractCrudController
 
             ChoiceMaskField::new('title')
             ->setChoices([
-                "Contenu" => "content",
-                "Media" => "media"
+                'Contenu' => 'content',
+                'Media' => 'media',
             ])
             ->setMap([
-                "content" => ["content", "media"],
-                "media" => ["media"]
+                'content' => ['content', 'media'],
+                'media' => ['media'],
             ]),
 
             EasyEditorField::new('content'),
-            //SortableCollectionField::new('content')->allowAdd(true)->allowDrag(true),
-            AssociationField::new('media', "Compagny")
+            // SortableCollectionField::new('content')->allowAdd(true)->allowDrag(true),
+            AssociationField::new('media', 'Compagny')
                 ->autocomplete()
                 ->allowAdd()
                 ->setCrudController(MediaEntityCrudController::class)
-                ->listSelector(true)
+                ->listSelector(true),
         ];
     }
 }

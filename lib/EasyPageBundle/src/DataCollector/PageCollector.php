@@ -15,23 +15,23 @@ final class PageCollector extends AbstractDataCollector
 
     public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
-        $layout = $request->get("_easy_page_layout");
-        $layouts = $this->parameterBag->get("easy_page.layouts");
+        $layout = $request->get('_easy_page_layout');
+        $layouts = $this->parameterBag->get('easy_page.layouts');
 
         $this->data = [
-            "layout" => $layout,
-            "layouts" => $layouts
+            'layout' => $layout,
+            'layouts' => $layouts,
         ];
     }
 
     public function getLayout(): array
     {
-        return $this->data["layout"] ?: [];
+        return $this->data['layout'] ?: [];
     }
 
     public function getLayouts(): array
     {
-        return $this->data["layouts"] ?: [];
+        return $this->data['layouts'] ?: [];
     }
 
     public function getName(): string

@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Adeliom\EasyMediaBundle\Twig;
 
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
-use Liip\ImagineBundle\Controller\ImagineController;
-use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
-use Liip\ImagineBundle\Service\FilterService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class EasyMediaExtension extends AbstractExtension
 {
-
     public function __construct(protected EasyMediaManager $manager, protected FilterManager $filterManager)
     {
     }

@@ -13,13 +13,13 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorke
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 
 return static function (MBConfig $mbConfig): void {
-    $mbConfig->packageDirectories([__DIR__ . '/lib']);
+    $mbConfig->packageDirectories([__DIR__.'/lib']);
 
     $mbConfig->defaultBranch('main');
 
     $mbConfig->dataToRemove([
         'require' => [
-            # remove these to merge of packages' composer.json
+            // remove these to merge of packages' composer.json
             'tracy/tracy' => '*',
             'phpunit/phpunit' => '*',
         ],

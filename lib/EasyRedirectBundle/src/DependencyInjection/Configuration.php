@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_redirect');
-        $rootNode    = $treeBuilder->getRootNode();
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -25,14 +25,14 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('redirect_class')
                     ->defaultNull()
                     ->validate()
-                        ->ifTrue(static fn($value) => !\is_subclass_of($value, Redirect::class))
+                        ->ifTrue(static fn ($value) => !\is_subclass_of($value, Redirect::class))
                         ->thenInvalid('"redirect_class" must be an instance of "Adeliom\EasyRedirectBundle\Entity\Redirect"')
                     ->end()
                 ->end()
                 ->scalarNode('not_found_class')
                     ->defaultNull()
                     ->validate()
-                        ->ifTrue(static fn($value) => !\is_subclass_of($value, NotFound::class))
+                        ->ifTrue(static fn ($value) => !\is_subclass_of($value, NotFound::class))
                         ->thenInvalid('"not_found_class" must be an instance of "Adeliom\EasyRedirectBundle\Entity\NotFound"')
                     ->end()
                 ->end()

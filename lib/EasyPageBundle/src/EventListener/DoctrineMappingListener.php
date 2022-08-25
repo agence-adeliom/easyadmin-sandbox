@@ -30,7 +30,7 @@ class DoctrineMappingListener implements EventSubscriber
     {
         $classMetadata = $eventArgs->getClassMetadata();
 
-        $isPage     = is_a($classMetadata->getName(), $this->pageClass, true);
+        $isPage = is_a($classMetadata->getName(), $this->pageClass, true);
 
         if ($isPage) {
             $this->processParent($classMetadata, $this->pageClass);
@@ -53,7 +53,7 @@ class DoctrineMappingListener implements EventSubscriber
     }
 
     /**
-     * Declare self-bidirectionnal mapping for children
+     * Declare self-bidirectionnal mapping for children.
      */
     private function processChildren(ClassMetadata $classMetadata, string $class): void
     {

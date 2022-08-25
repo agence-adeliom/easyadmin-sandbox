@@ -11,7 +11,6 @@ class BlogPostLoader extends Loader
 {
     private bool $isLoaded = false;
 
-
     public function __construct(
         private string $controller,
         private string $entity,
@@ -31,9 +30,9 @@ class BlogPostLoader extends Loader
         $routes = new RouteCollection();
 
         // prepare a new route
-        $path = $this->config['root_path'] . '/{category}/{post}';
+        $path = $this->config['root_path'].'/{category}/{post}';
         $defaults = [
-            '_controller' => $this->controller . '::index',
+            '_controller' => $this->controller.'::index',
         ];
         $requirements = [
         ];

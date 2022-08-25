@@ -10,10 +10,9 @@ class EasyBlogCategoryEvent extends Event
     /**
      * @var string
      */
-    public const NAME = "easyblog.category.before_render";
+    public const NAME = 'easyblog.category.before_render';
 
-
-    public function __construct(protected ?\Adeliom\EasyBlogBundle\Entity\CategoryEntity $category, protected $args, protected $template)
+    public function __construct(protected ?CategoryEntity $category, protected $args, protected $template)
     {
     }
 

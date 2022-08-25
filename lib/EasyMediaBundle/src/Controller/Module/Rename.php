@@ -23,11 +23,11 @@ trait Rename
         $file = $data['file'];
 
         $type = $file['type'];
-        $new_filename = $this->helper->cleanName($data['new_filename'], $type === 'folder');
+        $new_filename = $this->helper->cleanName($data['new_filename'], 'folder' === $type);
         $message = '';
 
         try {
-            $object = $type === 'folder' ? $this->manager->getFolder($file['id']) : $this->manager->getMedia($file['id']);
+            $object = 'folder' === $type ? $this->manager->getFolder($file['id']) : $this->manager->getMedia($file['id']);
             $old_filename = $object->getName();
             $object->setName($new_filename);
             $this->manager->save($object);

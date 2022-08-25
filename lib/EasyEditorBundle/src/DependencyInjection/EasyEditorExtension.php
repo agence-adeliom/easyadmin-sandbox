@@ -16,10 +16,9 @@ class EasyEditorExtension extends Extension
             ->addTag('easy_editor.block')
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
-
 
     public function getAlias(): string
     {

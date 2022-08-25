@@ -27,8 +27,7 @@ class DoctrineMappingListener implements EventSubscriber
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $eventArgs->getClassMetadata();
 
-
-        $isMenuItem  = is_a($classMetadata->getName(), $this->menuItemClass, true);
+        $isMenuItem = is_a($classMetadata->getName(), $this->menuItemClass, true);
         $isMenu = is_a($classMetadata->getName(), $this->menuClass, true);
 
         if ($isMenuItem) {
@@ -48,8 +47,8 @@ class DoctrineMappingListener implements EventSubscriber
                 'targetEntity' => $this->menuClass,
                 'inversedBy' => 'items',
                 'orderBy' => [
-                    "position" => "ASC"
-                ]
+                    'position' => 'ASC',
+                ],
             ]);
         }
 
@@ -62,8 +61,8 @@ class DoctrineMappingListener implements EventSubscriber
                 'isOnDeleteCascade' => false,
                 'nullable' => true,
                 'orderBy' => [
-                    "position" => "ASC"
-                ]
+                    'position' => 'ASC',
+                ],
             ]);
         }
 
@@ -74,8 +73,8 @@ class DoctrineMappingListener implements EventSubscriber
                 'mappedBy' => 'parent',
                 'cascade' => ['all'],
                 'orderBy' => [
-                    "position" => "ASC"
-                ]
+                    'position' => 'ASC',
+                ],
             ]);
         }
     }

@@ -35,6 +35,6 @@ class EasyMediaField implements FieldInterface
             // encore_entry_link_tags('...') and encore_entry_script_tags('...')
             // ->addWebpackEncoreEntry('admin-field-map')
 
-            ;
+        ;
     }
 }
