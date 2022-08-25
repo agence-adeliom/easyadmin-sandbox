@@ -50,7 +50,13 @@ return [
     */
 
     'exclude' => [
-        'var', 'translations', 'config', 'public', '.composer', '_mutagen', '_recipes', '_traefik', 'assets', 'bin', 'migrations', 'vendor', 'phpinsights.php',
+        'var',
+        'translations',
+        'config',
+        'public',
+        '_recipes',
+        'migrations',
+        'node_modules',
     ],
 
     'add' => [

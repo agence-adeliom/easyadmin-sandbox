@@ -84,6 +84,7 @@
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.10",
+        "nunomaduro/phpinsights": "^2.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.14.0",
         "symfony/browser-kit": "^5.4 || ^6.0",
