@@ -37,9 +37,6 @@ url=git@github.com:agence-adeliom/easy-redirect-bundle
 [submodule "lib/EasySeoBundle"]
 	path = lib/EasySeoBundle
 url=git@github.com:agence-adeliom/easy-seo-bundle
-[submodule "lib/EasyShopBundle"]
-	path = lib/EasyShopBundle
-url=git@github.com:agence-adeliom/easy-shop-bundle
 [submodule "_recipes"]
 	path = _recipes
 url=git@github.com:agence-adeliom/symfony-recipes.git
