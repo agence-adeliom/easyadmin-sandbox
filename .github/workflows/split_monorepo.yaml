@@ -42,7 +42,7 @@ jobs:
         run: cd .terraform && terraform init
 
       - name: Terraform Plan
-        run: cd .terraform && terraform plan -no-color
+        run: cd .terraform && terraform plan -no-color -var='token=${{ secrets.ACCESS_TOKEN }}' -var='repo=${{ matrix.package }}'
 
       - name: Terraform Apply
         run: cd .terraform && terraform apply -auto-approve -var='token=${{ secrets.ACCESS_TOKEN }}' -var='repo=${{ matrix.package }}'
