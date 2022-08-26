@@ -50,7 +50,16 @@ resource "github_branch" "create_branch" {
   branch     = var.branch
 }
 
+data "github_repository" "package_repository" {
+  name = var.repo
+}
+
+data "github_branch" "package_branch" {
+  repository = var.repo
+  branch     = var.branch
+}
+
 resource "github_branch_default" "default"{
-  repository = data.github_repository.repository.repo_id == null ? github_repository.create_repository.name : data.github_repository.repository.name
-  branch     = data.github_branch.branch.branch == null ? github_branch.create_branch.branch : data.github_branch.branch.branch
+  repository = data.github_repository.package_repository.name
+  branch     = data.github_branch.package_branch.branch
 }
