@@ -37,20 +37,26 @@ resource "github_repository" "create_repository" {
   has_issues = false
   has_projects = true
   has_wiki = true
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
-#data "github_branch" "branch" {
-#  repository = var.repo
-#  branch     = var.branch
-#}
-#
-#resource "github_branch" "create_branch" {
-#  count = data.github_branch.branch.branch == null ? 1 : 0
-#  repository = var.repo
-#  branch     = var.branch
-#}
-#
-#resource "github_branch_default" "default"{
-#  repository = var.repo
-#  branch     = var.branch
-#}
+data "github_branch" "branch" {
+  repository = var.repo
+  branch     = var.branch
+}
+
+resource "github_branch" "create_branch" {
+  count = data.github_branch.branch.branch == null ? 1 : 0
+  repository = var.repo
+  branch     = var.branch
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_default" "default"{
+  repository = var.repo
+  branch     = var.branch
+}
