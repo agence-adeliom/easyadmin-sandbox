@@ -6,21 +6,37 @@ use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
+//    $rectorConfig->paths([
+//        __DIR__.'/src',
+//        __DIR__.'/lib/easy-admin-user-bundle/src',
+//        __DIR__.'/lib/easy-block-bundle/src',
+//        __DIR__.'/lib/easy-blog-bundle/src',
+//        __DIR__.'/lib/easy-common-bundle/src',
+//        __DIR__.'/lib/easy-config-bundle/src',
+//        __DIR__.'/lib/easy-editor-bundle/src',
+//        __DIR__.'/lib/easy-faq-bundle/src',
+//        __DIR__.'/lib/easy-fields-bundle/src',
+//        __DIR__.'/lib/easy-media-bundle/src',
+//        __DIR__.'/lib/easy-menu-bundle/src',
+//        __DIR__.'/lib/easy-page-bundle/src',
+//        __DIR__.'/lib/easy-redirect-bundle/src',
+//        __DIR__.'/lib/easy-seo-bundle/src',
+//    ]);
+
     $rectorConfig->paths([
-        __DIR__.'/src',
-        __DIR__.'/lib/EasyAdminUserBundle/src',
-        __DIR__.'/lib/EasyBlockBundle/src',
-        __DIR__.'/lib/EasyBlogBundle/src',
-        __DIR__.'/lib/EasyCommonBundle/src',
-        __DIR__.'/lib/EasyConfigBundle/src',
-        __DIR__.'/lib/EasyEditorBundle/src',
-        __DIR__.'/lib/EasyFaqBundle/src',
-        __DIR__.'/lib/EasyFieldsBundle/src',
-        __DIR__.'/lib/EasyMediaBundle/src',
-        __DIR__.'/lib/EasyMenuBundle/src',
-        __DIR__.'/lib/EasyPageBundle/src',
-        __DIR__.'/lib/EasyRedirectBundle/src',
-        __DIR__.'/lib/EasySeoBundle/src',
+        __DIR__.'/_recipes/agence-adeliom/easy-admin-user-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-block-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-blog-bundle/2.0',
+        //__DIR__.'/_recipes/agence-adeliom/easy-common-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-config-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-editor-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-faq-bundle/2.0',
+        //__DIR__.'/_recipes/agence-adeliom/easy-fields-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-media-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-menu-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-page-bundle/2.0',
+        __DIR__.'/_recipes/agence-adeliom/easy-redirect-bundle/2.0',
+        //__DIR__.'/_recipes/agence-adeliom/easy-seo-bundle/2.0',
     ]);
 
     // register a single rule
