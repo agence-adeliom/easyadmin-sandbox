@@ -15,6 +15,10 @@ variable "repo" {
   type = string
 }
 
+variable "branch" {
+  type = string
+}
+
 # Configure the GitHub Provider
 provider "github" {
   token = var.token # or `GITHUB_TOKEN`
@@ -30,7 +34,23 @@ resource "github_repository" "create_repository" {
   name = var.repo
   visibility = "public"
 
-  has_issues = true
+  has_issues = false
   has_projects = true
   has_wiki = true
+}
+
+data "github_branch" "branch" {
+  repository = var.repo
+  branch     = var.branch
+}
+
+resource "github_branch" "create_branch" {
+  count = data.github_branch.branch.branch == null ? 1 : 0
+  repository = var.repo
+  branch     = var.branch
+}
+
+resource "github_branch_default" "default"{
+  repository = data.github_repository.repository.repo_id == null ? github_repository.create_repository.name : data.github_repository.repository.name
+  branch     = data.github_branch.branch.branch == null ? github_branch.create_branch.branch : data.github_branch.branch.branch
 }
