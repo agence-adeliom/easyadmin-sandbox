@@ -7,6 +7,11 @@ on:
     tags:
       - '*'
 
+env:
+  PHP_VER: '8.1'
+  SPLIT_BRANCH: '2.x'
+  ORG_NAME: 'agence-adeliom'
+
 jobs:
   provide_packages_json:
     runs-on: ubuntu-latest
@@ -15,7 +20,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: ${{ env.PHP_VER }}
           coverage: none
 
       - name: Get Composer Cache Directory
@@ -45,9 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
-        package: ['easy-gutenberg-bundle']
-
+        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v3
@@ -70,11 +73,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           package_directory: 'lib/${{ matrix.package }}'
-          repository_organization: 'agence-adeliom'
+          repository_organization: ${{ env.ORG_NAME }}
           repository_name: '${{ matrix.package }}'
           user_name: ${{ github.event.pusher.name }}
           user_email: ${{ github.event.pusher.email }}
-          branch: "2.x"
+          branch: ${{ env.SPLIT_BRANCH }}
 
       # with tag
       - if: "startsWith(github.ref, 'refs/tags/')"
@@ -85,8 +88,8 @@ jobs:
         with:
           tag: ${GITHUB_REF#refs/tags/}
           package_directory: 'lib/${{ matrix.package }}'
-          repository_organization: 'agence-adeliom'
+          repository_organization: ${{ env.ORG_NAME }}
           repository_name: '${{ matrix.package }}'
           user_name: ${{ github.event.pusher.name }}
           user_email: ${{ github.event.pusher.email }}
-          branch: "2.x"
+          branch: ${{ env.SPLIT_BRANCH }}
