@@ -39,27 +39,18 @@ resource "github_repository" "create_repository" {
   has_wiki = true
 }
 
-data "github_branch" "branch" {
-  repository = var.repo
-  branch     = var.branch
-}
-
-resource "github_branch" "create_branch" {
-  count = data.github_branch.branch.branch == null ? 1 : 0
-  repository = var.repo
-  branch     = var.branch
-}
-
-data "github_repository" "package_repository" {
-  name = var.repo
-}
-
-data "github_branch" "package_branch" {
-  repository = var.repo
-  branch     = var.branch
-}
-
-resource "github_branch_default" "default"{
-  repository = data.github_repository.package_repository.name
-  branch     = data.github_branch.package_branch.branch
-}
+#data "github_branch" "branch" {
+#  repository = var.repo
+#  branch     = var.branch
+#}
+#
+#resource "github_branch" "create_branch" {
+#  count = data.github_branch.branch.branch == null ? 1 : 0
+#  repository = var.repo
+#  branch     = var.branch
+#}
+#
+#resource "github_branch_default" "default"{
+#  repository = var.repo
+#  branch     = var.branch
+#}
