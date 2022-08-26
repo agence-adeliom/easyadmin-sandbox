@@ -128,7 +128,8 @@
             "Adeliom\\EasyPageBundle\\": "lib/easy-page-bundle/src/",
             "Adeliom\\EasyRedirectBundle\\": "lib/easy-redirect-bundle/src/",
             "Adeliom\\EasySeoBundle\\": "lib/easy-seo-bundle/src/",
-            "App\\": "src/"
+            "App\\": "src/",
+            "MonorepoHelper\\": "monorepo-helpers/"
         }
     },
     "autoload-dev": {

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Symplify\MonorepoBuilder\Config\MBConfig;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualConflictsReleaseWorker;
@@ -17,6 +18,9 @@ return static function (MBConfig $mbConfig): void {
 
     $mbConfig->defaultBranch('main');
 
+    $mbConfig->packageAliasFormat('<major>.<minor>.x-dev');
+    $mbConfig->parameters()->set("branch_version", '<major>.x');
+
     $mbConfig->dataToRemove([
         'require' => [
             // remove these to merge of packages' composer.json
@@ -30,10 +34,12 @@ return static function (MBConfig $mbConfig): void {
     $mbConfig->workers([
         // release workers - in order to execute
         UpdateReplaceReleaseWorker::class,
-        SetCurrentMutualConflictsReleaseWorker::class,
+        //SetCurrentMutualConflictsReleaseWorker::class,
         SetCurrentMutualDependenciesReleaseWorker::class,
+        AddTagToChangelogReleaseWorker::class,
         TagVersionReleaseWorker::class,
         PushTagReleaseWorker::class,
+        \MonorepoHelper\PushRepositoryVersion::class,
         SetNextMutualDependenciesReleaseWorker::class,
         UpdateBranchAliasReleaseWorker::class,
         PushNextDevReleaseWorker::class,
