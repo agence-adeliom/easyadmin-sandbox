@@ -45,7 +45,10 @@ final class PushRepositoryVersion implements ReleaseWorkerInterface
     public function work(Version $version) : void
     {
         $versionInString = $this->getVersionDev($version);
-        $gitAddCommitCommand = \sprintf('git switch -c "%s" -q && git push --set-upstream origin "%s" && git switch "%s"', $versionInString, $versionInString, $this->branchName);
+        $gitSwitchCommand = \sprintf('git switch "%s" 2>/dev/null || git switch -c "%s"', $versionInString, $versionInString);
+        $this->processRunner->run($gitSwitchCommand);
+
+        $gitAddCommitCommand = \sprintf('git push --set-upstream origin "%s" && git switch "%s"', $versionInString, $this->branchName);
         $this->processRunner->run($gitAddCommitCommand);
         $this->parameterProvider->changeParameter(Option::DEFAULT_BRANCH_NAME, $versionInString);
     }
