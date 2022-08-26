@@ -38,6 +38,7 @@ final class PushRepositoryVersion implements ReleaseWorkerInterface
         $this->versionUtils = $versionUtils;
         $this->branchName = $parameterProvider->provideStringParameter(Option::DEFAULT_BRANCH_NAME);
         $this->branchVersionFormat = $parameterProvider->provideStringParameter('branch_version');
+        $this->parameterProvider = $parameterProvider;
 
     }
 
