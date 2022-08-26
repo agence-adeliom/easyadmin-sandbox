@@ -14,6 +14,8 @@ use Symplify\MonorepoBuilder\ValueObject\Option;
 
 final class PushRepositoryVersion implements ReleaseWorkerInterface
 {
+    use VersionHelper;
+
     /**
      * @var string
      */
@@ -36,9 +38,10 @@ final class PushRepositoryVersion implements ReleaseWorkerInterface
     {
         $this->processRunner = $processRunner;
         $this->versionUtils = $versionUtils;
+        $this->parameterProvider = $parameterProvider;
+
         $this->branchName = $parameterProvider->provideStringParameter(Option::DEFAULT_BRANCH_NAME);
         $this->branchVersionFormat = $parameterProvider->provideStringParameter('branch_version');
-        $this->parameterProvider = $parameterProvider;
 
     }
 
@@ -49,39 +52,12 @@ final class PushRepositoryVersion implements ReleaseWorkerInterface
         $this->processRunner->run($gitAddCommitCommand);
         $this->parameterProvider->changeParameter(Option::DEFAULT_BRANCH_NAME, $versionInString);
     }
+
     public function getDescription(Version $version) : string
     {
         $versionInString = $this->getVersionDev($version);
         return \sprintf('Create/Update "%s" branch on remote repository', $versionInString);
     }
-    private function getVersionDev(Version $version) : string
-    {
-        return $this->getAliasFormat($version);
-    }
 
-    public function getAliasFormat($version) : string
-    {
-        $version = $this->normalizeVersion($version);
-        /** @var Version $minor */
-        $minor = $this->getMinorNumber($version);
-        return \str_replace(['<major>', '<minor>'], [$version->getMajor()->getValue(), $minor], $this->branchVersionFormat);
-    }
 
-    /**
-     * @param \PharIo\Version\Version|string $version
-     */
-    private function normalizeVersion($version) : Version
-    {
-        if (\is_string($version)) {
-            return new Version($version);
-        }
-        return $version;
-    }
-    private function getMinorNumber(Version $version) : int
-    {
-        if ($version->hasPreReleaseSuffix()) {
-            return (int) $version->getMinor()->getValue();
-        }
-        return $version->getMinor()->getValue();
-    }
 }
