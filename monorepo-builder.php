@@ -35,11 +35,11 @@ return static function (MBConfig $mbConfig): void {
         // release workers - in order to execute
         //UpdateReplaceReleaseWorker::class,
         //SetCurrentMutualConflictsReleaseWorker::class,
+        \MonorepoHelper\PushRepositoryVersion::class,
         SetCurrentMutualDependenciesReleaseWorker::class,
         AddTagToChangelogReleaseWorker::class,
         TagVersionReleaseWorker::class,
         PushTagReleaseWorker::class,
-        \MonorepoHelper\PushRepositoryVersion::class,
         SetNextMutualDependenciesReleaseWorker::class,
         UpdateBranchAliasReleaseWorker::class,
         PushNextDevReleaseWorker::class,

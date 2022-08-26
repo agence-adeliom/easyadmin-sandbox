@@ -12,7 +12,7 @@ use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 
-final class PushRepositoryVersion implements ReleaseWorkerInterface
+final class BranchRepositoryVersion implements ReleaseWorkerInterface
 {
     /**
      * @var string
@@ -45,8 +45,9 @@ final class PushRepositoryVersion implements ReleaseWorkerInterface
     public function work(Version $version) : void
     {
         $versionInString = $this->getVersionDev($version);
-        $gitAddCommitCommand = \sprintf('git push --set-upstream origin "%s" && git switch "%s"', $versionInString, $this->branchName);
-        $this->processRunner->run($gitAddCommitCommand);
+        $gitSwitchCommand = \sprintf('git switch -c "%s" 2>/dev/null || git switch "%s"', $versionInString, $versionInString);
+        $this->processRunner->run($gitSwitchCommand);
+
         $this->parameterProvider->changeParameter(Option::DEFAULT_BRANCH_NAME, $versionInString);
     }
     public function getDescription(Version $version) : string
