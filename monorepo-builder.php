@@ -33,7 +33,7 @@ return static function (MBConfig $mbConfig): void {
 
     $mbConfig->workers([
         // release workers - in order to execute
-        //UpdateReplaceReleaseWorker::class,
+        UpdateReplaceReleaseWorker::class,
         //SetCurrentMutualConflictsReleaseWorker::class,
         SetCurrentMutualDependenciesReleaseWorker::class,
         AddTagToChangelogReleaseWorker::class,

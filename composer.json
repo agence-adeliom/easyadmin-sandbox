@@ -138,20 +138,20 @@
         }
     },
     "replace": {
-        "agence-adeliom/easy-admin-user-bundle": "self.version",
-        "agence-adeliom/easy-block-bundle": "self.version",
-        "agence-adeliom/easy-blog-bundle": "self.version",
-        "agence-adeliom/easy-common-bundle": "self.version",
-        "agence-adeliom/easy-config-bundle": "self.version",
-        "agence-adeliom/easy-editor-bundle": "self.version",
-        "agence-adeliom/easy-faq-bundle": "self.version",
-        "agence-adeliom/easy-fields-bundle": "self.version",
-        "agence-adeliom/easy-gutenberg-bundle": "self.version",
-        "agence-adeliom/easy-media-bundle": "self.version",
-        "agence-adeliom/easy-menu-bundle": "self.version",
-        "agence-adeliom/easy-page-bundle": "self.version",
-        "agence-adeliom/easy-redirect-bundle": "self.version",
-        "agence-adeliom/easy-seo-bundle": "self.version"
+        "agence-adeliom/easy-admin-user-bundle": "2.0.1",
+        "agence-adeliom/easy-block-bundle": "2.0.1",
+        "agence-adeliom/easy-blog-bundle": "2.0.1",
+        "agence-adeliom/easy-common-bundle": "2.0.1",
+        "agence-adeliom/easy-config-bundle": "2.0.1",
+        "agence-adeliom/easy-editor-bundle": "2.0.1",
+        "agence-adeliom/easy-faq-bundle": "2.0.1",
+        "agence-adeliom/easy-fields-bundle": "2.0.1",
+        "agence-adeliom/easy-gutenberg-bundle": "2.0.1",
+        "agence-adeliom/easy-media-bundle": "2.0.1",
+        "agence-adeliom/easy-menu-bundle": "2.0.1",
+        "agence-adeliom/easy-page-bundle": "2.0.1",
+        "agence-adeliom/easy-redirect-bundle": "2.0.1",
+        "agence-adeliom/easy-seo-bundle": "2.0.1"
     },
     "scripts": {
         "auto-scripts": {
