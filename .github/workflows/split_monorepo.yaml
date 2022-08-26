@@ -46,7 +46,7 @@ jobs:
       fail-fast: false
       matrix:
 #        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
-        package: ["easy-gutenberg-bundle"]
+        package: ["easy-gutenberg-bundle", "easy-admin-user-bundle"]
 
     steps:
       - uses: actions/checkout@v3
