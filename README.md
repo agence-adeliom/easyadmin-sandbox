@@ -14,10 +14,10 @@ https://github.com/sym
 
 Execute follow inside container, run ``lando ssh``
 
-``vendor/bin/monorepo-builder release v2.0.11 --dry-run``
+``vendor/bin/monorepo-builder release patch --dry-run``
 
 If dry run execution is successfull run :
 
-! Change v2.0.11
+``vendor/bin/monorepo-builder release patch``
 
-``vendor/bin/monorepo-builder release v2.0.11``
+

@@ -6,6 +6,10 @@ config:
   database: mariadb
   webroot: public
 
+keys:
+  - id_rsa
+  - JeromeEngelnAdeliom-GitHub
+
 services:
   appserver:
     build_as_root:
