@@ -12,12 +12,10 @@ https://github.com/sym
 
 ``lando lint-back``
 
-Execute follow inside container, run ``lando ssh``
+Execute follow outside your container (php 8.0 is required) and run
 
 ``vendor/bin/monorepo-builder release patch --dry-run``
 
 If dry run execution is successfull run :
 
 ``vendor/bin/monorepo-builder release patch``
-
-
