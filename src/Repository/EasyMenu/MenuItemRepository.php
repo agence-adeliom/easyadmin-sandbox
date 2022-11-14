@@ -4,7 +4,7 @@ namespace App\Repository\EasyMenu;
 
 use Adeliom\EasyMenuBundle\Repository\MenuItemRepository as BaseMenuItemRepository;
 use App\Entity\EasyMenu\MenuItem;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method MenuItem|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManager;
  */
 class MenuItemRepository extends BaseMenuItemRepository
 {
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager, $entityManager->getClassMetadata(MenuItem::class));
     }
