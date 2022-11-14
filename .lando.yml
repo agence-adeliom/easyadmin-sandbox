@@ -37,6 +37,12 @@ tooling:
   phpunit:
     service: appserver
 
+  lint-back:
+    cmd:
+      - appserver: php bin/console lint:container
+      - appserver: vendor/bin/php-cs-fixer fix --ansi --verbose --diff
+      - appserver: composer validate
+
   console:
     service: appserver
     cwd: bin
