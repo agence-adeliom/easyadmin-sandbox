@@ -27,16 +27,16 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/_recipes/agence-adeliom/easy-admin-user-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-block-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-blog-bundle/2.0',
-        //__DIR__.'/_recipes/agence-adeliom/easy-common-bundle/2.0',
+        // __DIR__.'/_recipes/agence-adeliom/easy-common-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-config-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-editor-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-faq-bundle/2.0',
-        //__DIR__.'/_recipes/agence-adeliom/easy-fields-bundle/2.0',
+        // __DIR__.'/_recipes/agence-adeliom/easy-fields-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-media-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-menu-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-page-bundle/2.0',
         __DIR__.'/_recipes/agence-adeliom/easy-redirect-bundle/2.0',
-        //__DIR__.'/_recipes/agence-adeliom/easy-seo-bundle/2.0',
+        // __DIR__.'/_recipes/agence-adeliom/easy-seo-bundle/2.0',
     ]);
 
     // register a single rule
