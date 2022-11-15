@@ -4,6 +4,12 @@
 
 ``lando composer install``
 
+``lando console doc:mig:mig``
+
+``lando console doctrine:fixtures:load -q``
+
+``lando npm install``
+
 ### Manage releases
 
 Read https://github.com/symplify/monorepo-builder

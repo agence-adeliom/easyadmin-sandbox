@@ -44,7 +44,7 @@ tooling:
   lint-back:
     cmd:
       - appserver: php bin/console lint:container
-      - appserver: vendor/bin/php-cs-fixer fix --ansi --verbose --diff
+      - appserver: vendor/bin/php-cs-fixer fix --ansi --diff
       - appserver: composer validate
 
   console:
