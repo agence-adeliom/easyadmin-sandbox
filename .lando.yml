@@ -20,6 +20,40 @@ services:
     hogfrom:
       - appserver
 
+  minio:
+    type: compose
+    app_mount: false
+    ssl: true
+    moreHttpPorts: ['9001', '9000']
+    services:
+      user: root
+      image: minio/minio
+      command: /usr/bin/docker-entrypoint.sh minio server --console-address ":9001" /data
+      ports:
+        - '9000'
+        - '9001'
+      environment:
+        MINIO_ROOT_USER: root
+        MINIO_ROOT_PASSWORD: password
+        MINIO_BROWSER_REDIRECT_URL: https://minio-easyadmin.lndo.site
+        LANDO_NO_USER_PERMS: 1
+        LANDO_NO_SCRIPTS: 1
+
+  create_bucket:
+    type: compose
+    app_mount: false
+    scanner: false
+    services:
+      image: minio/mc
+      depends_on:
+        - minio
+      command: >
+        /bin/sh -c "
+        mc alias set easyadmin http://minio:9000 root password;
+        mc mb --region=fr-par --ignore-existing easyadmin/demo;
+        mc anonymous set download easyadmin/demo;
+        exit 0;
+        "
 tooling:
   npm:
     service: appserver
