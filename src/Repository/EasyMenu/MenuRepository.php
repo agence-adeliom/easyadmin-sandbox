@@ -4,9 +4,7 @@ namespace App\Repository\EasyMenu;
 
 use Adeliom\EasyMenuBundle\Repository\MenuRepository as BaseMenuRepository;
 use App\Entity\EasyMenu\Menu;
-use App\Entity\EasyMenu\MenuItem;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Menu|null find($id, $lockMode = null, $lockVersion = null)
