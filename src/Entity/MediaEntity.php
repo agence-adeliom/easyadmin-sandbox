@@ -29,6 +29,10 @@ class MediaEntity implements \Stringable
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'media')]
     private \Doctrine\Common\Collections\Collection $articles;
 
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON, nullable: true)]
+    #[Assert\Type('array')]
+    protected ?array $data = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -93,6 +97,18 @@ class MediaEntity implements \Stringable
         if ($this->articles->removeElement($article) && $article->getMedia() === $this) {
             $article->setMedia(null);
         }
+
+        return $this;
+    }
+
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    public function setData(?array $data): self
+    {
+        $this->data = $data;
 
         return $this;
     }
