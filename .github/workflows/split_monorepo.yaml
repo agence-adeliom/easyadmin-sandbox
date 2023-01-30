@@ -67,6 +67,9 @@ jobs:
       - name: Terraform Apply
         run: cd .terraform && terraform apply -auto-approve -var='token=${{ secrets.ACCESS_TOKEN }}' -var='repo=${{ matrix.package }}' -var='branch=2.x'
 
+      - name: Set release version for branch or tag
+        run: echo "RELEASE_VERSION=${{ github.ref }}" >> $GITHUB_ENV
+
       # without tag
       - if: "!startsWith(github.ref, 'refs/tags/')"
         name: Monorepo Split of ${{ matrix.package }}
@@ -80,7 +83,7 @@ jobs:
           repository_organization: ${{ env.ORG_NAME }}
           repository_name: 'easyadmin-sandbox'
           default_branch: ${{ env.SPLIT_BRANCH }}
-          target_branch: ${{ env.SPLIT_BRANCH }}
+          target_branch: ${{ env.RELEASE_VERSION }}
           package_directory: 'lib/${{ matrix.package }}'
           remote_repository: '${{ matrix.package }}'
           remote_repository_access_token: ${{ secrets.ACCESS_TOKEN }}
