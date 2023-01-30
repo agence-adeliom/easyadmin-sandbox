@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\IconField;
+use Adeliom\EasyFieldsBundle\Admin\Field\SortableCollectionField;
 use Adeliom\EasyMediaBundle\Admin\Field\EasyMediaField;
 use App\Entity\MediaEntity;
+use App\Form\Type\DataType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -24,7 +26,9 @@ class MediaEntityCrudController extends AbstractCrudController
             ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
             ->addFormTheme('@EasyFields/form/form_theme.html.twig')
             ->addFormTheme('@EasyFields/form/icon_widget.html.twig')
-        ;
+            ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
+
+            ;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -49,6 +53,11 @@ class MediaEntityCrudController extends AbstractCrudController
                 'metas' => false,
                 'delete' => false,
             ]),
+
+             SortableCollectionField::new('data')
+                ->setEntryType(DataType::class)
+                ->hideOnIndex()
+                ->onlyOnForms(),
 //            EasyMediaField::new('text')->setFormTypeOptions([
 //                "restrictions_uploadTypes" => ["image/*"],
 //                "editor" => false,
