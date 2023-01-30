@@ -66,6 +66,15 @@ class MediaEntityCrudController extends AbstractCrudController
                     'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css',
                 ])
                 ->setJsonUrl('/test.json'),
+
+            IconField::new('icon')
+                ->setSelectButtonLabel('Choisir une icône 2')
+                ->setHelp('Choisir une icône')
+                ->setDeleteLabel('Custom delete label')
+                ->setFonts([
+                    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css',
+                ])
+                ->setJsonUrl('/test.json'),
         ];
     }
 }

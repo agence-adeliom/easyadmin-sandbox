@@ -23,6 +23,9 @@ class MediaEntity implements \Stringable
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::TEXT, nullable: true)]
     private ?string $text = null;
 
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 50, nullable: true)]
+    private ?string $icon = null;
+
     /**
      * @var \Doctrine\Common\Collections\Collection<\App\Entity\Article>
      */
@@ -65,6 +68,21 @@ class MediaEntity implements \Stringable
     public function setText(mixed $text)
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @return MediaEntity
+     */
+    public function setIcon(?string $icon)
+    {
+        $this->icon = $icon;
 
         return $this;
     }
