@@ -83,7 +83,7 @@ jobs:
           default_branch: ${{ env.SPLIT_BRANCH }}
           target_branch: ${{ env.RELEASE_VERSION }}
           package_directory: 'lib/${{ matrix.package }}'
-          remote_repository: '${{ matrix.package }}'
+          remote_repository: 'https://github.com/${{ env.ORG_NAME }}/${{ matrix.package }}'
           remote_repository_access_token: "x-access-token:${{ secrets.ACCESS_TOKEN }}"
 
       # with tag
