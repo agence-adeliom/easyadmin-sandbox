@@ -54,6 +54,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          set-safe-directory: false
       - uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
@@ -71,7 +73,6 @@ jobs:
         uses: symplify/monorepo-split-github-action@2.1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GIT_CEILING_DIRECTORIES: "/"
         with:
           package_directory: 'lib/${{ matrix.package }}'
           repository_organization: ${{ env.ORG_NAME }}
@@ -86,7 +87,6 @@ jobs:
         uses: symplify/monorepo-split-github-action@2.1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GIT_CEILING_DIRECTORIES: "/"
         with:
           tag: ${GITHUB_REF#refs/tags/}
           package_directory: 'lib/${{ matrix.package }}'
