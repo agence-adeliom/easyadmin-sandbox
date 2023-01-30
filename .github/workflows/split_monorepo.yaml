@@ -71,7 +71,7 @@ jobs:
         uses: symplify/monorepo-split-github-action@2.2
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GIT_CEILING_DIRECTORIES: "/tmp/monorepo_split/clone_directory:/github/workspace"
+          GIT_CEILING_DIRECTORIES: "/"
         with:
           package_directory: 'lib/${{ matrix.package }}'
           repository_organization: ${{ env.ORG_NAME }}
@@ -86,7 +86,7 @@ jobs:
         uses: symplify/monorepo-split-github-action@2.2
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GIT_CEILING_DIRECTORIES: "/tmp/monorepo_split/clone_directory:/github/workspace"
+          GIT_CEILING_DIRECTORIES: "/"
         with:
           tag: ${GITHUB_REF#refs/tags/}
           package_directory: 'lib/${{ matrix.package }}'
