@@ -84,8 +84,6 @@ jobs:
           package_directory: 'lib/${{ matrix.package }}'
           remote_repository: '${{ matrix.package }}'
           remote_repository_access_token: ${{ secrets.ACCESS_TOKEN }}
-          user_name: ${{ github.event.pusher.name }}
-          user_email: ${{ github.event.pusher.email }}
 
       # with tag
       - if: "startsWith(github.ref, 'refs/tags/')"
