@@ -28,7 +28,7 @@ trait MediaHelpers
                 $folderPath,
                 $fileName
             );
-        } catch (AlreadyExist|FileException|UnableToCopyFile) {}
+        } catch (AlreadyExist|FolderAlreadyExist|FileException|UnableToCopyFile) {}
 
         return null;
     }
