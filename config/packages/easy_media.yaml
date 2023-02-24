@@ -4,7 +4,7 @@ twig:
 
 easy_media:
   storage_name: uploads.storage
-  base_url: 'http://localhost:53791/demo/media/download'
+  base_url: '/media/download'
   #lock_entity: App\Entity\EasyMedia\Lock
   #metas_entity: App\Entity\EasyMedia\Metas
   media_entity: App\Entity\EasyMedia\Media
