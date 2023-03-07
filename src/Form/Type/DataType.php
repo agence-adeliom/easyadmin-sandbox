@@ -9,8 +9,9 @@ declare(strict_types=1);
 
 namespace App\Form\Type;
 
+use Adeliom\EasyFieldsBundle\Form\SortableCollectionType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -20,8 +21,18 @@ class DataType extends AbstractType implements FormTypeInterface
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('position', HiddenType::class)
             ->add('text', TextType::class)
             ->add('text2', TextType::class)
+            ->add('textList', SortableCollectionType::class, [
+                'label' => 'textList',
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'allow_drag' => true,
+                'entry_options' => ['label' => false],
+                'prototype_name' => '__textList__',
+            ])
             ;
     }
 }
