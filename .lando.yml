@@ -20,6 +20,10 @@ services:
     hogfrom:
       - appserver
 
+  phpmyadmin:
+    scanner: false
+    type: phpmyadmin
+
   minio:
     type: compose
     app_mount: false

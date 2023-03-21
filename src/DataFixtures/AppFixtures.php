@@ -6,6 +6,7 @@ use Adeliom\EasyAdminUserBundle\Entity\User as UserAlias;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
 use App\DataFixtures\MediaHelpers;
 use App\Entity\EasyAdmin\User;
+use App\Entity\EasyPage\Page;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -29,6 +30,26 @@ class AppFixtures extends Fixture
         $user->setRoles([UserAlias::SUPER_ADMIN]);
         $user->setEnabled(true);
         $manager->persist($user);
+
+        $homepage = new Page();
+        $homepage->setName("Page d'accueil");
+        $homepage->setSlug('page-daccueil');
+        $homepage->setState('published');
+        $homepage->setTemplate('homepage');
+        $manager->persist($homepage);
+
+        $childPage = new Page();
+        $childPage->setName("Child page");
+        $childPage->setSlug('child-page');
+        $childPage->setState('published');
+        $childPage->setParent($homepage);
+        $manager->persist($childPage);
+
+        $testPage = new Page();
+        $testPage->setName("Test page");
+        $testPage->setSlug('test-page');
+        $testPage->setState('published');
+        $manager->persist($testPage);
 
         $this->createMedia('logos', 'psa.svg');
         $this->createMedia('contact', 'join-1.png');
