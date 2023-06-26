@@ -11,6 +11,7 @@ use App\Entity\EasyBlog\Post;
 use App\Entity\EasyMenu\Menu;
 use App\Entity\EasyPage\Page;
 use App\Entity\MediaEntity;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -57,5 +58,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('easy.faq.faq');
         yield MenuItem::linkToCrud('easy.faq.admin.menu.categories', 'fa fa-folder', \App\Entity\EasyFaq\Category::class);
         yield MenuItem::linkToCrud('easy.faq.admin.menu.entries', 'fa fa-file-alt', \App\Entity\EasyFaq\Entry::class);
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addJsFile('bundles/easyfields/iconpicker/iconpicker-1.5.0.js')
+        ;
     }
 }
