@@ -165,6 +165,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "unit-tests": [
+            "php bin/phpunit"
         ]
     },
     "extra": {

@@ -20,6 +20,10 @@ services:
     hogfrom:
       - appserver
 
+  database:
+    run_as_root:
+      - mysql -uroot -e "CREATE DATABASE IF NOT EXISTS lamp_test; GRANT ALL PRIVILEGES ON lamp_test.* TO 'lamp'@'%'; FLUSH PRIVILEGES;"
+
   phpmyadmin:
     scanner: false
     type: phpmyadmin

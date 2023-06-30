@@ -2,6 +2,7 @@ easy_page:
   page_class: App\Entity\EasyPage\Page
   page_repository: App\Repository\EasyPage\PageRepository
   page_controller: App\Controller\EasyPage\PageController
+  trailing_slash: true
   layouts:
     front:
       resource: '@EasyPage/default_layout.html.twig'
