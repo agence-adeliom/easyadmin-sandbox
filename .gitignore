@@ -47,3 +47,4 @@ yarn-error.log
 ###< squizlabs/php_codesniffer ###
 
 lib-old
+codealike.json
