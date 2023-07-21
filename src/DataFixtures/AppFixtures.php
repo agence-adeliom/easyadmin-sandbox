@@ -45,6 +45,13 @@ class AppFixtures extends Fixture
         $childPage->setParent($homepage);
         $manager->persist($childPage);
 
+        $childSubPage = new Page();
+        $childSubPage->setName("Sub Child page");
+        $childSubPage->setSlug('sub-child-page');
+        $childSubPage->setState('published');
+        $childSubPage->setParent($childPage);
+        $manager->persist($childSubPage);
+
         $testPage = new Page();
         $testPage->setName("Test page");
         $testPage->setSlug('test-page');
