@@ -100,6 +100,20 @@ class PageRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Page[]
+     */
+    public function getBySlug(string $slug): array
+    {
+        $qb = $this->getPublishedQuery()
+            ->andWhere('page.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb->getQuery()
+            ->useResultCache($this->cacheEnabled, $this->cacheTtl)
+            ->getResult();
+    }
+
+    /**
      * Will search for pages to show in front depending on the arguments.
      * If slugs are defined, there's no problem in looking for nulled host or locale,
      * because slugs are unique, so it does not.
@@ -116,63 +130,95 @@ class PageRepository extends ServiceEntityRepository
         // Will search differently if we're looking for homepage.
         $searchForHomepage = [] === $slugs;
 
-        if ($searchForHomepage) {
-            // If we are looking for homepage, let's get only the first one.
-            $qb
-                ->andWhere('page.template = :template')
-                ->setParameter('template', 'homepage')
-                ->setMaxResults(1)
-            ;
-        } elseif (1 === count($slugs)) {
-            $qb
-                ->andWhere('page.slug = :slug')
-                ->setParameter('slug', reset($slugs))
-                ->setMaxResults(1)
-            ;
+        $useConstructedTree = false;
+        $constructedTree = [];
+
+		// Loop over the slugs and search for matching tree
+        foreach ($this->getBySlug(last($slugs)) as $item) {
+            $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
+            $tempConstructedTree[$itemSlug] = $item;
+
+            while ($item->getParent()) {
+                $item = $item->getParent();
+                $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
+                $tempConstructedTree = array_merge([$itemSlug => $item], $tempConstructedTree);
+            }
+
+            if (array_keys($tempConstructedTree) === $slugs) {
+                $useConstructedTree = true;
+                $constructedTree = $tempConstructedTree;
+                break;
+            }
+        }
+
+		// If we have a matching tree, only assign values
+		// If not, do logic
+        if ($useConstructedTree) {
+            $resultsSortedBySlug = $constructedTree;
+            $pages = $constructedTree;
         } else {
-            $qb
-                ->andWhere('page.slug IN ( :slugs )')
-                ->setParameter('slugs', $slugs)
+            if ($searchForHomepage) {
+                // If we are looking for homepage, let's get only the first one.
+                $qb
+                    ->andWhere('page.template = :template')
+                    ->setParameter('template', 'homepage')
+                    ->setMaxResults(1)
+                ;
+            } elseif (1 === count($slugs)) {
+                $qb
+                    ->andWhere('page.slug = :slug')
+                    ->setParameter('slug', reset($slugs))
+                    ->setMaxResults(1)
+                ;
+            } else {
+                $qb
+                    ->andWhere('page.slug IN ( :slugs )')
+                    ->setParameter('slugs', $slugs)
+                ;
+            }
+
+			// $localeWhere = 'page.locale IS NULL';
+			// if (null !== $locale) {
+			//     $localeWhere .= ' OR page.locale = :locale';
+			//     $qb->setParameter('locale', $locale);
+			//     $qb->addOrderBy('page.locale', 'asc');
+			// }
+			// $qb->andWhere($localeWhere);
+
+            /** @var Page[] $results */
+            $results = $qb->getQuery()
+                ->useResultCache($this->cacheEnabled, $this->cacheTtl)
+                ->getResult()
             ;
+
+            if ([] === $results) {
+                return $results;
+            }
+
+            // If we're looking for a homepage, only get the first result (matching more properties).
+            if ($searchForHomepage && [] !== $results) {
+                reset($results);
+                $results = [$results[0]];
+            }
+
+            $resultsSortedBySlug = [];
+            foreach ($results as $page) {
+                $resultsSortedBySlug[$page->getSlug()] = $page;
+            }
+
+            $pages = $resultsSortedBySlug;
         }
-
-//        $localeWhere = 'page.locale IS NULL';
-//        if (null !== $locale) {
-//            $localeWhere .= ' OR page.locale = :locale';
-//            $qb->setParameter('locale', $locale);
-//            $qb->addOrderBy('page.locale', 'asc');
-//        }
-//        $qb->andWhere($localeWhere);
-
-        /** @var Page[] $results */
-        $results = $qb->getQuery()
-            ->useResultCache($this->cacheEnabled, $this->cacheTtl)
-            ->getResult()
-        ;
-
-        if ([] === $results) {
-            return $results;
-        }
-
-        // If we're looking for a homepage, only get the first result (matching more properties).
-        if ($searchForHomepage && [] !== $results) {
-            reset($results);
-            $results = [$results[0]];
-        }
-
-        $resultsSortedBySlug = [];
-        foreach ($results as $page) {
-            $resultsSortedBySlug[$page->getSlug()] = $page;
-        }
-
-        $pages = $resultsSortedBySlug;
 
         if ([] !== $slugs) {
             $pages = [];
             foreach ($slugs as $value) {
                 if (!array_key_exists($value, $resultsSortedBySlug)) {
-                    // Means at least one page in the tree is not enabled
-                    return [];
+                    if (array_key_exists($value, $constructedTree)) {
+                        $resultsSortedBySlug[$value] = $constructedTree[$value];
+                    } else {
+                        // Means at least one page in the tree is not enabled
+                        return [];
+                    }
                 }
 
                 $pages[$value] = $resultsSortedBySlug[$value];
