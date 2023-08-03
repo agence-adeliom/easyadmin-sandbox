@@ -118,12 +118,9 @@ class PageRepository extends ServiceEntityRepository
      * If slugs are defined, there's no problem in looking for nulled host or locale,
      * because slugs are unique, so it does not.
      *
-     * @param string|null $host
-     * @param string|null $locale
-     *
      * @return Page[]
      */
-    public function findFrontPages(array $slugs = [], $host = null, $locale = null)
+    public function findFrontPages(array $slugs = [], ?string $host = null, ?string $locale = null): array
     {
         $qb = $this->getPublishedQuery();
 
@@ -133,15 +130,28 @@ class PageRepository extends ServiceEntityRepository
         $useConstructedTree = false;
         $constructedTree = [];
 
-		// Loop over the slugs and search for matching tree
         foreach ($this->getBySlug(last($slugs)) as $item) {
+            $hasNonePageElement = false;
+
             $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
             $tempConstructedTree[$itemSlug] = $item;
 
             while ($item->getParent()) {
                 $item = $item->getParent();
+
+                if (!$hasNonePageElement && !$item instanceof Page) {
+                    $hasNonePageElement = true;
+                }
+
                 $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
                 $tempConstructedTree = array_merge([$itemSlug => $item], $tempConstructedTree);
+            }
+
+            $diffBetweenSlugsAndConstructedTree = array_diff(array_keys($tempConstructedTree), $slugs);
+            $constructedWithoutExtraKeys = array_values(array_diff(array_keys($tempConstructedTree), $diffBetweenSlugsAndConstructedTree));
+
+            if ($hasNonePageElement && $constructedWithoutExtraKeys === $slugs && array_keys($tempConstructedTree) !== $slugs) {
+                return [];
             }
 
             if (array_keys($tempConstructedTree) === $slugs) {
@@ -151,8 +161,6 @@ class PageRepository extends ServiceEntityRepository
             }
         }
 
-		// If we have a matching tree, only assign values
-		// If not, do logic
         if ($useConstructedTree) {
             $resultsSortedBySlug = $constructedTree;
             $pages = $constructedTree;
@@ -177,13 +185,13 @@ class PageRepository extends ServiceEntityRepository
                 ;
             }
 
-			// $localeWhere = 'page.locale IS NULL';
-			// if (null !== $locale) {
-			//     $localeWhere .= ' OR page.locale = :locale';
-			//     $qb->setParameter('locale', $locale);
-			//     $qb->addOrderBy('page.locale', 'asc');
-			// }
-			// $qb->andWhere($localeWhere);
+//        $localeWhere = 'page.locale IS NULL';
+//        if (null !== $locale) {
+//            $localeWhere .= ' OR page.locale = :locale';
+//            $qb->setParameter('locale', $locale);
+//            $qb->addOrderBy('page.locale', 'asc');
+//        }
+//        $qb->andWhere($localeWhere);
 
             /** @var Page[] $results */
             $results = $qb->getQuery()
