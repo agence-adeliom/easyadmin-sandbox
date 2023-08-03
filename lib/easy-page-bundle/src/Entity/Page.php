@@ -131,7 +131,7 @@ class Page
 
         $current = $this;
         do {
-            $slug = method_exists($current, 'getPageSlug') ? $current->getVirtualSlug() : $current->getSlug();
+            $slug = method_exists($current, 'getPageSlug') ? $current->getPageSlug() : $current->getSlug();
             $tree = $name ? $current->getName() . $separator . $tree : $slug . $separator . $tree;
             $current = $current->getParent();
         } while ($current);
