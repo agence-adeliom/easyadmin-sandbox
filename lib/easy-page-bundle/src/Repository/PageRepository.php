@@ -123,6 +123,7 @@ class PageRepository extends ServiceEntityRepository
     public function findFrontPages(array $slugs = [], ?string $host = null, ?string $locale = null): array
     {
         $qb = $this->getPublishedQuery();
+        $allItemsPublished = true;
 
         // Will search differently if we're looking for homepage.
         $searchForHomepage = [] === $slugs;
@@ -131,7 +132,8 @@ class PageRepository extends ServiceEntityRepository
         $constructedTree = [];
 
         foreach ($this->getBySlug(last($slugs)) as $item) {
-            $hasNonePageElement = false;
+            $hasNonPageElement = false;
+            $allItemsPublished = true;
 
             $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
             $tempConstructedTree[$itemSlug] = $item;
@@ -139,22 +141,34 @@ class PageRepository extends ServiceEntityRepository
             while ($item->getParent()) {
                 $item = $item->getParent();
 
-                if (!$hasNonePageElement && !$item instanceof Page) {
-                    $hasNonePageElement = true;
+                if (!$item instanceof Page) {
+                    if (method_exists($item, 'getState')) {
+                        // If getState exists, checks if item is published to return (or not) a 404
+                        if ($item->getState() !== ThreeStateStatusEnum::PUBLISHED()->getValue()) {
+                            $allItemsPublished = false;
+                        }
+                    }
+
+                    if (!$hasNonPageElement) {
+                        // Set to true to know whether the tree contains non-page items
+                        $hasNonPageElement = true;
+                    }
                 }
+
 
                 $itemSlug = method_exists($item, 'getPageSlug') ? $item->getPageSlug() : $item->getSlug();
                 $tempConstructedTree = array_merge([$itemSlug => $item], $tempConstructedTree);
             }
 
-            $diffBetweenSlugsAndConstructedTree = array_diff(array_keys($tempConstructedTree), $slugs);
-            $constructedWithoutExtraKeys = array_values(array_diff(array_keys($tempConstructedTree), $diffBetweenSlugsAndConstructedTree));
+			$constructedKeys = array_keys($tempConstructedTree);
 
-            if ($hasNonePageElement && $constructedWithoutExtraKeys === $slugs && array_keys($tempConstructedTree) !== $slugs) {
-                return [];
-            }
+			if($hasNonPageElement){
+				if($constructedKeys !== $slugs){
+					return [];
+				}
+			}
 
-            if (array_keys($tempConstructedTree) === $slugs) {
+            if ($constructedKeys === $slugs) {
                 $useConstructedTree = true;
                 $constructedTree = $tempConstructedTree;
                 break;
@@ -162,6 +176,11 @@ class PageRepository extends ServiceEntityRepository
         }
 
         if ($useConstructedTree) {
+            // If all items in tree (non-pages) are not published, 404
+            if (!$allItemsPublished) {
+                return [];
+            }
+
             $resultsSortedBySlug = $constructedTree;
             $pages = $constructedTree;
         } else {
