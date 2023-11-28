@@ -48,3 +48,6 @@ yarn-error.log
 
 lib-old
 codealike.json
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
