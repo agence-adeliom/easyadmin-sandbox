@@ -5,8 +5,11 @@ namespace App\Controller\Admin\EasyPage;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
 use Adeliom\EasyFieldsBundle\Admin\Field\OembedField;
+use Adeliom\EasyMediaBundle\Admin\Field\EasyMediaField;
+use Adeliom\EasyMediaBundle\Types\EasyMediaType;
 use Adeliom\EasyPageBundle\Controller\PageCrudController as BasePageCrudController;
 use App\Entity\EasyPage\Page;
+use App\Fields\MediaFields;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -47,6 +50,7 @@ class PageCrudController extends BasePageCrudController
     public function informationsFields(string $pageName, $subject): iterable
     {
         yield from parent::informationsFields($pageName, $subject);
+        yield EasyMediaField::new('image');
         yield OembedField::new('embed')
             ->setRequired(false)
             ->setColumns(12);

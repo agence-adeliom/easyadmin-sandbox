@@ -26,6 +26,9 @@ class Page extends BasePage
     #[Assert\Valid]
     protected ?string $embed = null;
 
+    #[ORM\Column(type: 'easy_media_type', nullable: true)]
+    private $image = null;
+
     public function getContent(): ?array
     {
         return $this->content;
@@ -44,5 +47,17 @@ class Page extends BasePage
     public function setEmbed(?string $embed): void
     {
         $this->embed = $embed;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): static
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
