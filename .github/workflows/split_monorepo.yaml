@@ -13,44 +13,12 @@ env:
   ORG_NAME: 'agence-adeliom'
 
 jobs:
-  provide_packages_json:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.PHP_VER }}
-          coverage: none
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-      - name: Get package json list
-        id: output_data
-        run: echo "matrix=$(vendor/bin/monorepo-builder packages-json)" >> $GITHUB_OUTPUT
-
-    outputs:
-      matrix: ${{ steps.output_data.outputs.matrix }}
-
   split_monorepo:
-    needs: provide_packages_json
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+        package: [easy-admin-user-bundle, easy-blog-bundle, easy-config-bundle, easy-faq-bundle, easy-gutenberg-bundle, easy-menu-bundle, easy-redirect-bundle, easy-block-bundle, easy-common-bundle, easy-editor-bundle, easy-fields-bundle, easy-media-bundle, easy-page-bundle, easy-seo-bundle]
 
     steps:
       - uses: actions/checkout@v3
