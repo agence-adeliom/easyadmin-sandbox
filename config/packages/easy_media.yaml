@@ -9,3 +9,4 @@ easy_media:
   #metas_entity: App\Entity\EasyMedia\Metas
   media_entity: App\Entity\EasyMedia\Media
   folder_entity: App\Entity\EasyMedia\Folder
+  enable_generating_alts: true
