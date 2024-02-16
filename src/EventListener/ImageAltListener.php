@@ -13,7 +13,7 @@ class ImageAltListener
 {
 
     public function __construct(
-        #[Autowire(service: 'fakerAltGenerator')]
+        #[Autowire(service: 'gptAltGenerator')]
         private AltGeneratorInterface $altGenerator,
         private EasyMediaManager $easyMediaManager,
     ) {

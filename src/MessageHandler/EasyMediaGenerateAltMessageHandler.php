@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class EasyMediaGenerateAltMessageHandler
 {
     public function __construct(
-        #[Autowire(service: 'fakerAltGenerator')]
+        #[Autowire(service: 'gptAltGenerator')]
         private AltGeneratorInterface $altGenerator,
         private EasyMediaManager $easyMediaManager,
         private EntityManagerInterface $entityManager,
