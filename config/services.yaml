@@ -27,3 +27,11 @@ services:
     App\EventListener\BreadcrumbListener:
         tags:
             - { name: kernel.event_listener, event: easyseo.breadcrumb }
+
+    adeliom.alt_generator.gpt:
+        class: App\Services\AltGenerator\GptAltGenerator
+
+    adeliom.alt_generator.faker:
+        class: App\Services\AltGenerator\FakerAltGenerator
+
+    App\Services\AltGenerator\AltGeneratorInterface: '@adeliom.alt_generator.faker'

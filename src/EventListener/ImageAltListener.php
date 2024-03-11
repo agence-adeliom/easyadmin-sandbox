@@ -13,7 +13,6 @@ class ImageAltListener
 {
 
     public function __construct(
-        #[Autowire(service: 'gptAltGenerator')]
         private AltGeneratorInterface $altGenerator,
         private EasyMediaManager $easyMediaManager,
     ) {
@@ -21,6 +20,11 @@ class ImageAltListener
 
     public function __invoke(EasyMediaGenerateAlt $event): void
     {
+        $originalAlt = $event->getAlt();
+        if (!empty($originalAlt)) {
+            return;
+        }
+
         $entity = $event->getEntity();
         $url = $_SERVER['HTTP_ORIGIN'] . $this->easyMediaManager->publicUrl($entity);
         if ($this->easyMediaManager->getHelper()->fileIsType($entity, 'image')) {

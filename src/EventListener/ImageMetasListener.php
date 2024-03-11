@@ -11,13 +11,16 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 class ImageMetasListener
 {
     public function __construct(
-        #[Autowire(service: 'gptAltGenerator')]
         private AltGeneratorInterface $altGenerator,
     ) {
     }
 
     public function __invoke(EasyMediaBeforeSetMetas $event): void
     {
+        if (isset($event->getMetas()['alt']) && !empty($event->getMetas()['alt'])) {
+            return;
+        }
+
         $entity = $event->getEntity();
         $source = $event->getSource();
         if (@exif_imagetype($source->getPathname())) {

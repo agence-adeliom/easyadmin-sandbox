@@ -15,7 +15,6 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class EasyMediaGenerateAltMessageHandler
 {
     public function __construct(
-        #[Autowire(service: 'gptAltGenerator')]
         private AltGeneratorInterface $altGenerator,
         private EasyMediaManager $easyMediaManager,
         private EntityManagerInterface $entityManager,
@@ -27,11 +26,15 @@ class EasyMediaGenerateAltMessageHandler
         $mediaId = $message->getMediaId();
         $media = $this->easyMediaManager->getMedia($mediaId);
         if ($media) {
-            $url = $_SERVER['HTTP_ORIGIN'] . $this->easyMediaManager->publicUrl($media);
+            $metas = $media->getMetas();
+            if (!empty($metas['alt'])) {
+                return;
+            }
+
             if ($this->easyMediaManager->getHelper()->fileIsType($media, 'image')) {
+                $url = $_SERVER['HTTP_ORIGIN'] . $this->easyMediaManager->publicUrl($media);
                 $newAlt = $this->altGenerator->generate($media, $url);
-                $metas = $media->getMetas();
-                if (empty($metas['alt']) || $newAlt !== $metas['alt']) {
+                if ($newAlt !== $metas['alt']) {
                     $metas['alt'] = $newAlt;
                     $media->setMetas($metas);
                     $this->entityManager->persist($media);
