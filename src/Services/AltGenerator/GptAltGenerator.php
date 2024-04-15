@@ -62,7 +62,7 @@ PROMPT;
                         "content" => [
                             [
                                 "type" => "text",
-                                "text" => $this->prompt,
+                                "text" => $this->getPrompt(),
                             ],
                             [
                                 "type" => "image_url",
@@ -83,5 +83,15 @@ PROMPT;
         }
 
         return '';
+    }
+
+    public function getPrompt(): string
+    {
+        return $this->prompt;
+    }
+
+    public function setPrompt(string $prompt): void
+    {
+        $this->prompt = $prompt;
     }
 }
