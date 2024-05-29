@@ -123,6 +123,7 @@ return [
         'moving_cloud' => 'Les dossiers cloud ne peuvent pas être "renommés, déplacés ou copiés"',
         'move_into_self' => 'Le dossier ne peut pas être "déplacé ou copié" dans lui-même',
         'no_file' => 'Aucun fichier à télécharger',
+        'cannot_write_file' => 'Le fichier ne peux pas être créé',
         'provider_not_found' => "Ce fournisseur n'est pas valide",
     ],
     'filter' => [

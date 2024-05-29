@@ -376,17 +376,21 @@ class EasyMediaManager
                 $stream = file_get_contents($source);
                 $this->filesystem->write($entity->getPath(), $stream);
             }
+        } catch (\Throwable) {
+            throw new NoFile($this->translator->trans('error.cannot_write_file', [], 'EasyMediaBundle'));
+        }
 
-            [$width, $height] = getimagesize($source);
-            $beforeSetMetasEvent = $this->eventDispatcher->dispatch(new EasyMediaBeforeSetMetas($entity, $source, [
-                'dimensions' => [
-                    'width' => $width,
-                    'height' => $height,
-                    'ratio' => $height / $width * 100,
-                ],
-            ]), EasyMediaBeforeSetMetas::NAME);
-            $entity->setMetas($beforeSetMetasEvent->getMetas());
+        [$width, $height] = getimagesize($source) ?: [0, 0];
+        $beforeSetMetasEvent = $this->eventDispatcher->dispatch(new EasyMediaBeforeSetMetas($entity, $source, [
+            'dimensions' => [
+                'width' => $width,
+                'height' => $height,
+                'ratio' => $width > 0 ? $height / $width * 100 : 0,
+            ],
+        ]), EasyMediaBeforeSetMetas::NAME);
+        $entity->setMetas($beforeSetMetasEvent->getMetas());
 
+        try {
             $entity->setSize($this->filesystem->fileSize($entity->getPath()));
             $entity->setLastModified($this->filesystem->lastModified($entity->getPath()));
             $entity->setMime($this->filesystem->mimeType($entity->getPath()));

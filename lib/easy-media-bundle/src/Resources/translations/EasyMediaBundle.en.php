@@ -123,6 +123,8 @@ return [
         'moving_cloud' => 'Cloud Folders Can\'t Be "Renamed, Moved Or Copied"',
         'move_into_self' => 'Folder Can\'t Be "Moved Or Copied" Into It Self',
         'no_file' => 'No File To Upload',
+        'cannot_write_file' => 'This file cannot be written',
+        'provider_not_found' => "This provider not valid",
     ],
     'filter' => [
         'main' => 'Filter',
