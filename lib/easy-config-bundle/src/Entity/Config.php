@@ -123,6 +123,11 @@ class Config
         return $this;
     }
 
+    public function __isset($name)
+    {
+        return true;
+    }
+
     /**
      * @return null
      */
