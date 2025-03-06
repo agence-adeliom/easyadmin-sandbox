@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
 use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
-use Adeliom\EasyRedirectBundle\Admin\EasyRedirectTrait;
+use Adeliom\EasyRedirectBundle\Admin\EasyPageTrait;
 use App\Entity\EasyBlock\Block;
 use App\Entity\EasyBlog\Category;
 use App\Entity\EasyBlog\Post;
@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
 {
     use EasyAdminUserTrait;
     use EasyConfigTrait;
-    use EasyRedirectTrait;
+    use EasyPageTrait;
 
     #[Route(path: '/admin', name: 'admin')]
     public function index(): Response
