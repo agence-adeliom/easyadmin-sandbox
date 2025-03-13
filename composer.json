@@ -184,6 +184,6 @@
             "require": "6.4.*"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "prefer-stable": true
 }
