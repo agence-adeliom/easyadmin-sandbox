@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class ImageMetasListener
 {
     public function __construct(
-        private AltGeneratorInterface $altGenerator,
+        private readonly AltGeneratorInterface $altGenerator,
     ) {
     }
 

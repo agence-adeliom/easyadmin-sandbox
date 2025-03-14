@@ -27,7 +27,7 @@ class MediaEntity implements \Stringable
     private ?string $icon = null;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\App\Entity\Article>
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Article>
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'media')]
     private \Doctrine\Common\Collections\Collection $articles;

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 #[AsAlias(id: 'fakerAltGenerator', public: true)]
 class FakerAltGenerator implements AltGeneratorInterface
 {
-    private Generator $faker;
+    private readonly Generator $faker;
 
     public function __construct()
     {

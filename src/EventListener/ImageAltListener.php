@@ -15,8 +15,8 @@ class ImageAltListener
 {
 
     public function __construct(
-        private AltGeneratorInterface $altGenerator,
-        private EasyMediaManager $easyMediaManager,
+        private readonly AltGeneratorInterface $altGenerator,
+        private readonly EasyMediaManager $easyMediaManager,
     ) {
     }
 

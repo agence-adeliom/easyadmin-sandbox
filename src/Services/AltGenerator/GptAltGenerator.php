@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\File\File;
 #[AsAlias(id: 'gptAltGenerator', public: true)]
 class GptAltGenerator implements AltGeneratorInterface
 {
-    private \OpenAI\Client $client;
+    private readonly \OpenAI\Client $client;
+
     private string $prompt = <<<PROMPT
 Decris moi cette image pour qu\'elle soit intégrée sur un site. 
 Ta réponse doit être courte, descriptive, et ne doit contenir qu\'une phrase';
@@ -40,7 +41,7 @@ PROMPT;
             }
         }
 
-        if (str_contains($url, '.ddev.site')) {
+        if (str_contains((string) $url, '.ddev.site')) {
             // handle local images
             $file_contents = file_get_contents($url);
 

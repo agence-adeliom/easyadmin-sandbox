@@ -12,8 +12,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class ImageAllAltListener
 {
     public function __construct(
-        private EasyMediaManager $easyMediaManager,
-        private MessageBusInterface $messageBus,
+        private readonly EasyMediaManager $easyMediaManager,
+        private readonly MessageBusInterface $messageBus,
     ) {
     }
 

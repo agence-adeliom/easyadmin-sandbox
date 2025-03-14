@@ -29,6 +29,7 @@ class AppFixtures extends Fixture
         $user->setPassword($this->hasher->hashPassword($user, 'admin'));
         $user->setRoles([UserAlias::SUPER_ADMIN]);
         $user->setEnabled(true);
+
         $manager->persist($user);
 
         $homepage = new Page();
@@ -36,6 +37,7 @@ class AppFixtures extends Fixture
         $homepage->setSlug('page-daccueil');
         $homepage->setState('published');
         $homepage->setTemplate('homepage');
+
         $manager->persist($homepage);
 
         $childPage = new Page();
@@ -43,6 +45,7 @@ class AppFixtures extends Fixture
         $childPage->setSlug('child-page');
         $childPage->setState('published');
         $childPage->setParent($homepage);
+
         $manager->persist($childPage);
 
         $childSubPage = new Page();
@@ -50,12 +53,14 @@ class AppFixtures extends Fixture
         $childSubPage->setSlug('sub-child-page');
         $childSubPage->setState('published');
         $childSubPage->setParent($childPage);
+
         $manager->persist($childSubPage);
 
         $testPage = new Page();
         $testPage->setName("Test page");
         $testPage->setSlug('test-page');
         $testPage->setState('published');
+
         $manager->persist($testPage);
 
         $this->createMedia('logos', 'psa.svg');

@@ -15,9 +15,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class EasyMediaGenerateAltMessageHandler
 {
     public function __construct(
-        private AltGeneratorInterface $altGenerator,
-        private EasyMediaManager $easyMediaManager,
-        private EntityManagerInterface $entityManager,
+        private readonly AltGeneratorInterface $altGenerator,
+        private readonly EasyMediaManager $easyMediaManager,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -25,7 +25,7 @@ class EasyMediaGenerateAltMessageHandler
     {
         $mediaId = $message->getMediaId();
         $media = $this->easyMediaManager->getMedia($mediaId);
-        if ($media) {
+        if ($media instanceof \Adeliom\EasyMediaBundle\Entity\Media) {
             $metas = $media->getMetas();
             if (!empty($metas['alt'])) {
                 return;

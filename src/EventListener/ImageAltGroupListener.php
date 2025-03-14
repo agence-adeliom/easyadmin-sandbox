@@ -15,14 +15,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class ImageAltGroupListener
 {
     public function __construct(
-        private MessageBusInterface $messageBus,
+        private readonly MessageBusInterface $messageBus,
     ) {
     }
 
     public function __invoke(EasyMediaGenerateAltGroup $event): void
     {
         $files = $event->getFiles();
-        if (!empty($files)) {
+        if ($files !== []) {
             foreach ($files as $file) {
                 $this->messageBus->dispatch(new EasyMediaGenerateAltMessage($file));
             }

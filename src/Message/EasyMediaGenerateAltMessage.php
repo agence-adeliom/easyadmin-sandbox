@@ -6,11 +6,8 @@ namespace App\Message;
 
 class EasyMediaGenerateAltMessage
 {
-    private int $mediaId;
-
-    public function __construct(int $mediaId)
+    public function __construct(private readonly int $mediaId)
     {
-        $this->mediaId = $mediaId;
     }
 
     public function getMediaId(): int
