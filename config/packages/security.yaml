@@ -2,9 +2,6 @@ security:
     password_hashers:
         Adeliom\EasyAdminUserBundle\Entity\User: argon2i
 
-    # https://symfony.com/doc/current/security/experimental_authenticators.html
-    enable_authenticator_manager: true
-
     role_hierarchy:
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_API_ACCESS ]
         ROLE_ADMIN:       [ROLE_USER]

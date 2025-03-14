@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use Adeliom\EasyAdminUserBundle\Controller\Admin\EasyAdminUserTrait;
 use Adeliom\EasyConfigBundle\Controller\Admin\EasyConfigTrait;
 use Adeliom\EasyRedirectBundle\Admin\EasyPageTrait;
+use Adeliom\EasyRedirectBundle\Admin\EasyRedirectTrait;
 use App\Entity\EasyBlock\Block;
 use App\Entity\EasyBlog\Category;
 use App\Entity\EasyBlog\Post;
@@ -16,13 +17,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class DashboardController extends AbstractDashboardController
 {
     use EasyAdminUserTrait;
     use EasyConfigTrait;
-    use EasyPageTrait;
+    use EasyRedirectTrait;
 
     #[Route(path: '/admin', name: 'admin')]
     public function index(): Response

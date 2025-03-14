@@ -1,6 +1,6 @@
 {
     "name": "agence-adeliom/easyadmin-sandbox",
-    "description": "A simple sandbox for Symfony 6 and Easyadmin with Adeliom's bundles",
+    "description": "A simple sandbox for Symfony 7 and Easyadmin with Adeliom's bundles",
     "license": "proprietary",
     "authors": [
         {
@@ -10,6 +10,10 @@
         {
             "name": "Jerome ENGELN",
             "homepage": "https://github.com/JeromeEngelnAdeliom"
+        },
+        {
+            "name": "Jean-David Daviet",
+            "homepage": "https://github.com/JeanDavidDaviet"
         }
     ],
     "type": "project",
@@ -18,9 +22,7 @@
         "ext-ctype": "*",
         "ext-exif": "*",
         "ext-iconv": "*",
-        "ext-json": "*",
         "babdev/pagerfanta-bundle": "^4.0",
-        "doctrine/annotations": "^1.13.3",
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.13",
@@ -40,7 +42,6 @@
         "pagerfanta/twig": "^4.0",
         "phpdocumentor/reflection-docblock": "^5.2 || ^6.0",
         "presta/sitemap-bundle": "^4.0",
-        "sensio/framework-extra-bundle": "^6.1",
         "stof/doctrine-extensions-bundle": "^1.13",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^6.4 || ^7.0",
@@ -90,14 +91,14 @@
         "friendsofphp/php-cs-fixer": "^3.10",
         "nunomaduro/phpinsights": "^2.4",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.14.0",
-        "symfony/browser-kit": "^5.4 || ^6.0",
-        "symfony/css-selector": "^5.4 || ^6.0",
-        "symfony/debug-bundle": "^5.4 || ^6.0",
+        "rector/rector": "^1",
+        "symfony/browser-kit": "^6.4 || ^7.0",
+        "symfony/css-selector": "^6.4 || ^7.0",
+        "symfony/debug-bundle": "^6.4 || ^7.0",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^5.4 || ^6.0",
-        "symfony/var-dumper": "^5.4 || ^6.0",
-        "symfony/web-profiler-bundle": "^5.4 || ^6.0",
+        "symfony/phpunit-bridge": "^6.4 || ^7.0",
+        "symfony/var-dumper": "^6.4 || ^7.0",
+        "symfony/web-profiler-bundle": "^6.4 || ^7.0",
         "symplify/monorepo-builder": "^11.1"
     },
     "config": {
@@ -181,9 +182,9 @@
                 "flex://defaults"
             ],
             "allow-contrib": true,
-            "require": "6.4.*"
+            "require": "7.2.*"
         }
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
