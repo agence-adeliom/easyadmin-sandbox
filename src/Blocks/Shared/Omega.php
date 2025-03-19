@@ -26,7 +26,7 @@ class Omega extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return '';
+        return 'blocks/omega.html.twig';
     }
 
     public static function getDefaultSettings(): array

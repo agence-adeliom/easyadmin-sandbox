@@ -26,7 +26,7 @@ class Alpha extends AbstractBlock implements BlockInterface
 
     public function getTemplate(): string
     {
-        return '';
+        return 'blocks/alpha.html.twig';
     }
 
     public static function getDefaultSettings(): array
