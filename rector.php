@@ -49,7 +49,7 @@ return static function (RectorConfig $rectorConfig): void {
         \Rector\Symfony\Set\SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
         \Rector\Symfony\Set\SymfonySetList::SYMFONY_CODE_QUALITY,
         \Rector\Symfony\Set\SymfonySetList::SYMFONY_71,
-        \Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_82,
+        \Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_84,
         \Rector\Set\ValueObject\SetList::CODE_QUALITY,
         \Rector\Set\ValueObject\SetList::CODING_STYLE,
     ]);
