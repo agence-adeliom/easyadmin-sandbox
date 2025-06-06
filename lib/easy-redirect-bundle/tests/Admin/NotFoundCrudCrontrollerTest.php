@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\EasyRedirectBundle\Admin;
+namespace Adeliom\EasyRedirectBundle\Tests\Admin;
 
 use Adeliom\EasyRedirectBundle\Admin\NotFoundCrudCrontroller;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;

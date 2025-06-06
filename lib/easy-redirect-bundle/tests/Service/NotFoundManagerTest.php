@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\EasyRedirectBundle\Service;
+namespace Adeliom\EasyRedirectBundle\Tests\Service;
 
 use Adeliom\EasyRedirectBundle\Entity\NotFound;
 use Adeliom\EasyRedirectBundle\Entity\Redirect;

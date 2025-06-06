@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\EasyRedirectBundle\Repository;
+namespace Adeliom\EasyRedirectBundle\Tests\Repository;
 
 use Adeliom\EasyRedirectBundle\Repository\NotFoundRepositoryInterface;
 use Adeliom\EasyRedirectBundle\Repository\RedirectRepositoryInterface;
