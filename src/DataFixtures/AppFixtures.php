@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Adeliom\EasyAdminUserBundle\Entity\User as UserAlias;
+use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
 use App\DataFixtures\MediaHelpers;
 use App\Entity\EasyAdmin\User;
@@ -35,7 +36,7 @@ class AppFixtures extends Fixture
         $homepage = new Page();
         $homepage->setName("Page d'accueil");
         $homepage->setSlug('page-daccueil');
-        $homepage->setState('published');
+        $homepage->setState(ThreeStateStatusEnum::PUBLISHED);
         $homepage->setTemplate('homepage');
 
         $manager->persist($homepage);
@@ -43,7 +44,7 @@ class AppFixtures extends Fixture
         $childPage = new Page();
         $childPage->setName("Child page");
         $childPage->setSlug('child-page');
-        $childPage->setState('published');
+        $childPage->setState(ThreeStateStatusEnum::PUBLISHED);
         $childPage->setParent($homepage);
 
         $manager->persist($childPage);
@@ -51,7 +52,7 @@ class AppFixtures extends Fixture
         $childSubPage = new Page();
         $childSubPage->setName("Sub Child page");
         $childSubPage->setSlug('sub-child-page');
-        $childSubPage->setState('published');
+        $childSubPage->setState(ThreeStateStatusEnum::PUBLISHED);
         $childSubPage->setParent($childPage);
 
         $manager->persist($childSubPage);
@@ -59,7 +60,7 @@ class AppFixtures extends Fixture
         $testPage = new Page();
         $testPage->setName("Test page");
         $testPage->setSlug('test-page');
-        $testPage->setState('published');
+        $testPage->setState(ThreeStateStatusEnum::PUBLISHED);
 
         $manager->persist($testPage);
 

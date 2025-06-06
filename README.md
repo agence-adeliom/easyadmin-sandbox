@@ -1,14 +1,14 @@
 ### Installation
 
-``lando start``
+``ddev start``
 
-``lando composer install``
+``ddev composer install``
 
-``lando console doc:mig:mig``
+``ddev console doc:mig:mig``
 
-``lando console doctrine:fixtures:load -q``
+``ddev console doctrine:fixtures:load -q``
 
-``lando npm install``
+``ddev npm install``
 
 ### Manage releases
 
@@ -16,7 +16,7 @@ Read https://github.com/symplify/monorepo-builder
 
 https://github.com/sym
 
-``lando lint-back``
+``ddev lint-back``
 
 Execute follow outside your container (php 8.0 is required) and run
 
@@ -33,7 +33,7 @@ Read https://github.com/symplify/monorepo-builder
 https://github.com/sym
 
 ```
-lando console d:m:m --env=test -n
-lando console doc:fixtures:load --env=test -n
-lando composer unit-tests
+ddev console d:m:m --env=test -n
+ddev console doc:fixtures:load --env=test -n
+ddev composer unit-tests
 ``

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,6 +20,8 @@ final class Version20230321143243 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_block__block CHANGE name name VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE easy_blog__post CHANGE name name VARCHAR(255) NOT NULL, CHANGE slug slug VARCHAR(255) NOT NULL');
@@ -38,6 +41,8 @@ final class Version20230321143243 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_block__block CHANGE name name VARCHAR(100) NOT NULL');
         $this->addSql('ALTER TABLE easy_blog__post CHANGE name name VARCHAR(100) NOT NULL, CHANGE slug slug VARCHAR(100) NOT NULL');

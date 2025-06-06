@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,6 +20,8 @@ final class Version20221114161225 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE faq_categories_entries DROP FOREIGN KEY FK_B1633D6912469DE2');
         $this->addSql('ALTER TABLE faq_categories_entries DROP FOREIGN KEY FK_B1633D69BA364942');
@@ -40,6 +43,8 @@ final class Version20221114161225 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE faq_categories_entries (entry_id INT UNSIGNED NOT NULL, category_id INT UNSIGNED NOT NULL, INDEX IDX_B1633D6912469DE2 (category_id), INDEX IDX_B1633D69BA364942 (entry_id), PRIMARY KEY(entry_id, category_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('ALTER TABLE faq_categories_entries ADD CONSTRAINT FK_B1633D6912469DE2 FOREIGN KEY (category_id) REFERENCES easy_faq__category (id) ON DELETE CASCADE');

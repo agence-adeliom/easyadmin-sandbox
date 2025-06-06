@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,6 +20,9 @@ final class Version20211012155139 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
+
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_media__media ADD slug VARCHAR(100) NOT NULL, DROP locked, DROP visibility, CHANGE mime mime VARCHAR(255) DEFAULT NULL, CHANGE size size INT DEFAULT NULL');
         $this->addSql('ALTER TABLE media_entity CHANGE file file TEXT DEFAULT NULL');
@@ -26,6 +30,8 @@ final class Version20211012155139 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_media__media ADD locked TINYINT(1) NOT NULL, ADD visibility VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, DROP slug, CHANGE mime mime VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE size size INT NOT NULL');
         $this->addSql('ALTER TABLE media_entity CHANGE file file TEXT CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');

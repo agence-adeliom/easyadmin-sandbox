@@ -70,7 +70,7 @@
         "symfony/property-access": "^6.4 || ^7.0",
         "symfony/property-info": "^6.4 || ^7.0",
         "symfony/proxy-manager-bridge": "^6.4 || ^7.0",
-        "symfony/psr-http-message-bridge": "^7.2",
+        "symfony/psr-http-message-bridge": "^7.0",
         "symfony/runtime": "^6.4 || ^7.0",
         "symfony/security-bundle": "^6.4 || ^7.0",
         "symfony/serializer": "^6.4 || ^7.0",
@@ -182,7 +182,7 @@
                 "flex://defaults"
             ],
             "allow-contrib": true,
-            "require": "7.2.*"
+            "require": "7.3.*"
         }
     },
     "minimum-stability": "dev",

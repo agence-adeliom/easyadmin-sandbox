@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,6 +20,8 @@ final class Version20211020131451 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_blog__post CHANGE seo_cover seo_cover TEXT DEFAULT NULL');
         $this->addSql('ALTER TABLE easy_faq__category CHANGE seo_cover seo_cover TEXT DEFAULT NULL');
@@ -30,6 +33,8 @@ final class Version20211020131451 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_blog__post CHANGE seo_cover seo_cover VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE easy_faq__category CHANGE seo_cover seo_cover VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');

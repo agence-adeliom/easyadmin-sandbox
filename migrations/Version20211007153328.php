@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,6 +20,8 @@ final class Version20211007153328 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_admin__reset_password_request CHANGE user_id user_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE easy_admin__reset_password_request ADD CONSTRAINT FK_DB1E0C65A76ED395 FOREIGN KEY (user_id) REFERENCES easy_admin__user (id)');
@@ -31,6 +34,8 @@ final class Version20211007153328 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $isSqlite = class_exists(SqlitePlatform::class) && is_a($this->connection->getDatabasePlatform(), SqlitePlatform::class, true);
+        $this->skipIf($isSqlite);
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE easy_admin__reset_password_request DROP FOREIGN KEY FK_DB1E0C65A76ED395');
         $this->addSql('ALTER TABLE easy_admin__reset_password_request CHANGE user_id user_id INT NOT NULL');
