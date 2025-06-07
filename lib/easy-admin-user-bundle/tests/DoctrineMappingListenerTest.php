@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\UserBundle;
+namespace Adeliom\EasyAdminUserBundle\Tests;
 
 use Adeliom\EasyAdminUserBundle\Entity\ResetPasswordRequest;
 use Adeliom\EasyAdminUserBundle\Entity\User;
 use Adeliom\EasyAdminUserBundle\EventListener\DoctrineMappingListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 
 class DoctrineMappingListenerTest extends TestCase

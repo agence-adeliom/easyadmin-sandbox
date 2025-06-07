@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\UserBundle;
+namespace Adeliom\EasyAdminUserBundle\Tests;
 
 use Adeliom\EasyAdminUserBundle\Command\AddUserCommand;
 use Adeliom\EasyAdminUserBundle\Entity\User;

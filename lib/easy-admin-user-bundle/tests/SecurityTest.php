@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\UserBundle;
+namespace Adeliom\EasyAdminUserBundle\Tests;
 
-use Adeliom\EasyAdminUserBundle\Security\EasyAdminAuthenticator;
-use Adeliom\EasyAdminUserBundle\Security\EasyAdminUserProvider;
 use Adeliom\EasyAdminUserBundle\Entity\User;
 use Adeliom\EasyAdminUserBundle\Repository\UserRepository;
+use Adeliom\EasyAdminUserBundle\Security\EasyAdminAuthenticator;
+use Adeliom\EasyAdminUserBundle\Security\EasyAdminUserProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

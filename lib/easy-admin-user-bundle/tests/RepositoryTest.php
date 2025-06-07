@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\UserBundle;
+namespace Adeliom\EasyAdminUserBundle\Tests;
 
 use Adeliom\EasyAdminUserBundle\Entity\ResetPasswordRequest;
 use Adeliom\EasyAdminUserBundle\Entity\User;
@@ -9,8 +9,8 @@ use Adeliom\EasyAdminUserBundle\Repository\ResetPasswordRequestRepository;
 use Adeliom\EasyAdminUserBundle\Repository\UserRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 
 class RepositoryTest extends TestCase
