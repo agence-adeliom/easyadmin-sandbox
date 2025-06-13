@@ -19,7 +19,7 @@ class MediaControllerTest extends TestCase
 {
     public function testIndexAndBrowseTriggerRender(): void
     {
-        $this->expectError();
+        $this->expectException(\Throwable::class);
         $controller = $this->createController();
         $controller->index();
         $controller->browse(new Request(['provider' => 'default']));
