@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\Fixtures;
+namespace Adeliom\EasySeo\Tests\Fixtures;
 
 use Adeliom\EasySeoBundle\Entity\SEO;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Admin;
+namespace Adeliom\EasySeoBundle\Tests\Admin;
 
 use Adeliom\EasySeoBundle\Admin\Field\SEOField;
 use Adeliom\EasySeoBundle\Form\SeoType;

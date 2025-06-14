@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\DataCollector;
+namespace Adeliom\EasySeoBundle\Tests\DataCollector;
 
 use Adeliom\EasySeoBundle\DataCollector\SeoCollector;
 use Adeliom\EasySeoBundle\Services\BreadcrumbCollection;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use PHPUnit\Framework\TestCase;
 
 final class SeoCollectorTest extends TestCase
 {

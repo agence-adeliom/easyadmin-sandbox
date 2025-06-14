@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Twig;
+namespace Adeliom\EasySeoBundle\Tests\Twig;
 
 use Adeliom\EasySeoBundle\Entity\SEO;
 use Adeliom\EasySeoBundle\Services\BreadcrumbCollection;

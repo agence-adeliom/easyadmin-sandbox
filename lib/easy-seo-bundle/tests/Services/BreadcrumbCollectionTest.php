@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Services;
+namespace Adeliom\EasySeoBundle\Tests\Services;
 
 use Adeliom\EasySeoBundle\Services\BreadcrumbCollection;
 use PHPUnit\Framework\TestCase;

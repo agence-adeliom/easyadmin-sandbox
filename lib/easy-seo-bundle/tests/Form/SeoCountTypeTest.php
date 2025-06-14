@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Form;
+namespace Adeliom\EasySeoBundle\Tests\Form;
 
 use Adeliom\EasySeoBundle\Entity\SEO;
 use Adeliom\EasySeoBundle\Form\SeoCountType;

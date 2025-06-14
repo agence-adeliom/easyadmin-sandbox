@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Traits;
+namespace Adeliom\EasySeoBundle\Tests\Traits;
 
 use Adeliom\EasySeoBundle\Entity\SEO;
 use Adeliom\EasySeoBundle\Traits\EntitySeoTrait;

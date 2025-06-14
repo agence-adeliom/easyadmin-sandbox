@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\EasySeo\Form\Fields;
+namespace Adeliom\EasySeoBundle\Tests\Form\Fields;
 
 use Adeliom\EasySeoBundle\Form\Fields\TextareaCounterType;
 use PHPUnit\Framework\TestCase;
