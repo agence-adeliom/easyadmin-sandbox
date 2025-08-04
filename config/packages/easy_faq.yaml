@@ -6,6 +6,7 @@ easy_faq:
   category:
     class: App\Entity\EasyFaq\Category
     repository: App\Repository\EasyFaq\CategoryRepository
-    crud: App\Controller\Admin\EasyFaq\CategoryCrudController
+    crud: App\Controller\Admin\EasyFaq\FaqCategoryCrudController
   page:
     root_path: '/faq'
+#
