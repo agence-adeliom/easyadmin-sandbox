@@ -25,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     use EasyConfigTrait;
     use EasyRedirectTrait;
 
-    #[Route(path: '/admin', name: 'admin')]
+    #[Route(path: '/{_locale}/admin', name: 'admin')]
     public function index(): Response
     {
         return parent::index();
@@ -43,7 +43,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('Médiathèque', 'fa fa-picture-o', 'media.index');
+        yield MenuItem::linkToRoute('media.index', 'fa fa-picture-o', 'media.index');
         yield from $this->administratorMenuEntry();
         yield from $this->configMenuEntry();
         yield from $this->configRedirectEntry();
