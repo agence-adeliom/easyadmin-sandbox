@@ -8,9 +8,9 @@ on:
       - '*'
 
 env:
-  PHP_VER: '8.1'
-  SPLIT_BRANCH: '2.x'
-  ORG_NAME: 'agence-adeliom'
+  PHP_VER: '8.4'
+  SPLIT_BRANCH: '3.x'
+  ORG_NAME: 'survos'
 
 jobs:
   split_monorepo:
@@ -18,7 +18,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [easy-admin-user-bundle, easy-blog-bundle, easy-config-bundle, easy-faq-bundle, easy-gutenberg-bundle, easy-menu-bundle, easy-redirect-bundle, easy-block-bundle, easy-common-bundle, easy-editor-bundle, easy-fields-bundle, easy-media-bundle, easy-page-bundle, easy-seo-bundle]
+        package:
+          - easy-faq-bundle
+#          - [ easy-admin-user-bundle, easy-blog-bundle, easy-config-bundle, easy-gutenberg-bundle, easy-menu-bundle, easy-redirect-bundle, easy-block-bundle, easy-common-bundle, easy-editor-bundle, easy-fields-bundle, easy-media-bundle, easy-page-bundle, easy-seo-bundle ]
 
     steps:
       - uses: actions/checkout@v3
