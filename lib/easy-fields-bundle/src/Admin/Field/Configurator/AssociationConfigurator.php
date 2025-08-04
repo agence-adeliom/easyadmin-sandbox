@@ -180,15 +180,21 @@ final readonly class AssociationConfigurator implements FieldConfiguratorInterfa
             return null;
         }
 
+        if (!$entityDto->getPrimaryKeyValue()) {
+            return null;
+        }
+
         // TODO: check if user has permission to see the related entity
-        return $this->adminUrlGenerator
+        $adminUrl =  $this->adminUrlGenerator
             ->setController($crudController)
             ->setAction(Action::DETAIL)
-            ->setEntityId($entityDto->getPrimaryKeyValue())
             ->unset(EA::MENU_INDEX)
             ->unset(EA::SUBMENU_INDEX)
             ->includeReferrer()
+            ->setEntityId($entityDto->getPrimaryKeyValue())
             ->generateUrl();
+
+        return $adminUrl;
     }
 
     private function countNumElements($collection): int

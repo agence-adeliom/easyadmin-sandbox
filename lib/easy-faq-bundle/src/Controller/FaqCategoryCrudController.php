@@ -19,7 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 
-abstract class CategoryCrudController extends AbstractCrudController
+abstract class FaqCategoryCrudController extends AbstractCrudController
 {
     public function configureCrud(Crud $crud): Crud
     {

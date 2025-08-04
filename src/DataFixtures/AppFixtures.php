@@ -7,6 +7,7 @@ use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
 use App\DataFixtures\MediaHelpers;
 use App\Entity\EasyAdmin\User;
+use App\Entity\EasyFaq\Entry;
 use App\Entity\EasyPage\Page;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +24,13 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        foreach (['Symfony','EasyAdmin','nginx'] as $topic) {
+            $faq = new Entry();
+            $faq->setName("What is $topic");
+            $faq->setAnswer("$topic is something you should learn");
+            $manager->persist($faq);
+            $manager->flush();
+        }
         $user = new User();
         $user->setFirstname('John');
         $user->setLastname('Doe');
