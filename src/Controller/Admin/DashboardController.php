@@ -34,9 +34,11 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('My Project Name')
-        ;
+            ->setTitle('EasyAdmin Sandbox')
+            ->setLocales(['fr', 'en'])
+            ;
     }
+
 
     public function configureMenuItems(): iterable
     {
