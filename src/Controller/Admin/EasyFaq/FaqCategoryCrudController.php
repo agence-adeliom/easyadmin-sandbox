@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class CategoryCrudController extends BaseCategoryCrudController
+class FaqCategoryCrudController extends BaseCategoryCrudController
 {
     public static function getEntityFqcn(): string
     {

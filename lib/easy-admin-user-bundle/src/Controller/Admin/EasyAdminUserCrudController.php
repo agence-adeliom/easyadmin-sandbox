@@ -36,6 +36,7 @@ abstract class EasyAdminUserCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
+
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'easy_admin_user.manage_users')
             ->setPageTitle(Crud::PAGE_NEW, 'easy_admin_user.new_user')
@@ -57,6 +58,9 @@ abstract class EasyAdminUserCrudController extends AbstractCrudController
 
         $impersonate = Action::new('impersonate', 'easy_admin_user.impersonate', 'fa fa-user-secret')->linkToCrudAction('impersonate')->setCssClass('btn btn-info')->displayIf(static fn (User $entity): bool => $currentUser->getUserIdentifier() !== $entity->getEmail());
         $actions
+            ->setPermission(Action::DETAIL, 'IS_ADMIN')
+            ->setPermission(Action::EDIT, 'IS_ADMIN')
+
             ->add(Crud::PAGE_DETAIL, $impersonate)
             ->add(Crud::PAGE_EDIT, $impersonate)
             ->setPermission('impersonate', 'ROLE_ALLOWED_TO_SWITCH');
