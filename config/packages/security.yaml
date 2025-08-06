@@ -22,29 +22,29 @@ security:
             pattern: ^/media/cache/resolve
             security: false
 
-#        admin:
-#            lazy: true
-#            pattern: ^/admin
-#            provider: easy_admin_user_provider
-#            custom_authenticator: easy_admin_user.authenticator
-#            # https://symfony.com/doc/current/security/impersonating_user.html
-#            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-#            remember_me:
-#                secret: "%env(APP_SECRET)%"
-#                name: ADMIN_REMEMBER_ME
-#                lifetime: 31536000
-#                path: /admin
-#                remember_me_parameter: _admin_remember_me
-#            logout:
-#                path: easy_admin_logout
-#                target: easy_admin_login
+        admin:
+            lazy: true
+            pattern: ^/admin
+            provider: easy_admin_user_provider
+            custom_authenticator: easy_admin_user.authenticator
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
+            remember_me:
+                secret: "%env(APP_SECRET)%"
+                name: ADMIN_REMEMBER_ME
+                lifetime: 31536000
+                path: /admin
+                remember_me_parameter: _admin_remember_me
+            logout:
+                path: easy_admin_logout
+                target: easy_admin_login
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-#        - { path: ^/admin/login$, roles: PUBLIC_ACCESS }
-#        - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
-#        - { path: ^/admin/reset-password, roles: PUBLIC_ACCESS }
-#        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
 
         - { path: ^/, role: PUBLIC_ACCESS }
