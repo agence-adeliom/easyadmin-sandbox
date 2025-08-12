@@ -1,0 +1,167 @@
+{% extends '@!EasyBlog/front/root.html.twig' %}
+
+{% block title %}{{ page.name }} - Adeliom EasyAdmin Sandbox{% endblock %}
+
+{% block easy_page_page_content %}
+    <!-- Blog Header -->
+    <header class="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+        <div class="container mx-auto px-6 py-16">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4">{{ page.name }}</h1>
+                <p class="text-xl text-purple-100">Discover insights, tutorials, and thoughts from our team</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Categories Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                        </svg>
+                        Categories
+                    </h3>
+                    
+                    {% if categories is defined and categories|length > 0 %}
+                        <nav class="space-y-3">
+                            {% for category in categories %}
+                                <a href="{{ path('easy_blog_category_index', {"category" : category.slug}) }}" 
+                                   class="flex items-center justify-between p-3 text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors duration-200 group">
+                                    <span class="font-medium">{{ category.name }}</span>
+                                    <svg class="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            {% endfor %}
+                        </nav>
+                    {% else %}
+                        <p class="text-gray-500">No categories available</p>
+                    {% endif %}
+
+                    <!-- Quick Stats -->
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Blog Stats</h4>
+                        <div class="space-y-3">
+                            {% if posts is defined %}
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Total Posts</span>
+                                    <span class="font-semibold text-purple-600">{{ posts|length }}</span>
+                                </div>
+                            {% endif %}
+                            {% if categories is defined %}
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Categories</span>
+                                    <span class="font-semibold text-purple-600">{{ categories|length }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Posts Grid -->
+            <main class="lg:col-span-3">
+                {% if posts is defined and posts|length > 0 %}
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Latest Posts</h2>
+                        <p class="text-gray-600">Explore our most recent articles and insights</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {% for post in posts %}
+                            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <!-- Post Header -->
+                                <div class="p-6">
+                                    <div class="flex items-center mb-4">
+                                        {% if post.category %}
+                                            <span class="inline-block bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                                {{ post.category.name }}
+                                            </span>
+                                        {% endif %}
+                                        {% if post.publishDate %}
+                                            <span class="ml-auto text-sm text-gray-500">
+                                                {{ post.publishDate|date('M d, Y') }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-purple-600 transition-colors">
+                                        <a href="{{ path('easy_blog_post_index', {"category" : post.category.slug, "post" : post.slug}) }}">
+                                            {{ post.name }}
+                                        </a>
+                                    </h3>
+                                    
+                                    {% if post.seo and post.seo.description %}
+                                        <p class="text-gray-600 mb-4 line-clamp-3">{{ post.seo.description }}</p>
+                                    {% endif %}
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <a href="{{ path('easy_blog_post_index', {"category" : post.category.slug, "post" : post.slug}) }}" 
+                                           class="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium transition-colors">
+                                            Read More
+                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                        
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            5 min read
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Pagination placeholder -->
+                    <div class="mt-12 flex justify-center">
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 text-purple-600 border border-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition-colors">
+                                Previous
+                            </button>
+                            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg">1</button>
+                            <button class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">2</button>
+                            <button class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">3</button>
+                            <button class="px-4 py-2 text-purple-600 border border-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition-colors">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Empty State -->
+                    <div class="text-center py-16">
+                        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">No Posts Yet</h3>
+                        <p class="text-gray-600">Check back later for new articles and insights.</p>
+                    </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Stay Updated</h3>
+                <p class="text-gray-600 mb-8">Subscribe to our newsletter for the latest posts and updates</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" 
+                           class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none">
+                    <button class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% if menu and menu.items %}
+    <div class="flex flex-wrap justify-center gap-6">
+        {% for item in menu.items %}
+            {% if item.state.value == 'published' %}
+                <a href="{{ item.url }}" class="text-gray-300 hover:text-white transition-colors">
+                    {{ item.name }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,5 +1,6 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    ide: '%env(resolve:CODE_EDITOR)%'
     secret: '%env(APP_SECRET)%'
     trusted_proxies: '%env(TRUSTED_PROXIES)%'
 
