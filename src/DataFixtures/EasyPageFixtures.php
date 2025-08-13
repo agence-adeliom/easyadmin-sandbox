@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Adeliom\EasyAdminUserBundle\Entity\User as UserAlias;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
+use App\Blocks\HeaderType;
 use App\DataFixtures\MediaHelpers;
 use App\Entity\EasyAdmin\User;
 use App\Entity\EasyPage\Page;
@@ -49,6 +50,13 @@ class EasyPageFixtures extends Fixture
         $aboutPage->getSEO()->cannonical = 'https://example.com/about';
         $aboutPage->getSEO()->sitemap = true;
         $aboutPage->getSEO()->robots = ['index', 'follow'];
+        $aboutPage->setContent([
+            [
+                'text' => 'Welcome to Adeliom EasyAdmin Sandbox',
+                'position' => '0',
+                'block_type' => HeaderType::class
+            ],
+        ]);
         $manager->persist($aboutPage);
 
         $aboutCompanyPage = new Page();
