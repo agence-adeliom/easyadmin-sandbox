@@ -3,7 +3,7 @@
 namespace Adeliom\EasyFaqBundle\DependencyInjection;
 
 use Adeliom\EasyFaqBundle\Controller\CategoryController;
-use Adeliom\EasyFaqBundle\Controller\CategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\FaqCategoryCrudController;
 use Adeliom\EasyFaqBundle\Controller\EntryController;
 use Adeliom\EasyFaqBundle\Controller\EntryCrudController;
 use Adeliom\EasyFaqBundle\Entity\CategoryEntity;
@@ -132,12 +132,12 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('crud')
-                            ->defaultValue(CategoryCrudController::class)
+                            ->defaultValue(FaqCategoryCrudController::class)
                             ->validate()
                                 ->ifString()
                                 ->then(function ($value) {
-                                    if (!class_exists($value) || !is_a($value, CategoryCrudController::class, true)) {
-                                        throw new InvalidConfigurationException(sprintf('Category crud controller must be a valid class extending %s. "%s" given.', CategoryCrudController::class, $value));
+                                    if (!class_exists($value) || !is_a($value, FaqCategoryCrudController::class, true)) {
+                                        throw new InvalidConfigurationException(sprintf('Category crud controller must be a valid class extending %s. "%s" given.', FaqCategoryCrudController::class, $value));
                                     }
 
                                     return $value;

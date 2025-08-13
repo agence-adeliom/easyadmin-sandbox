@@ -3,13 +3,13 @@
 namespace App\Controller\Admin\EasyFaq;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
-use Adeliom\EasyFaqBundle\Controller\CategoryCrudController as BaseCategoryCrudController;
+use Adeliom\EasyFaqBundle\Controller\FaqCategoryCrudController as BaseCategoryCrudController;
 use App\Entity\EasyFaq\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class CategoryCrudController extends BaseCategoryCrudController
+class FaqCategoryCrudController extends BaseCategoryCrudController
 {
     public static function getEntityFqcn(): string
     {

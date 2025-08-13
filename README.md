@@ -1,3 +1,22 @@
+## Developer Installation
+
+By default, the database is sqlite.  For production, set to an appropriate database and create migrations, etc.
+
+```bash
+git clone git@github.com:tacman/easyadmin-sandbox.git ezsand && cd ezsand
+composer install
+bin/console doctrine:schema:update --force
+bin/console doctrine:fixtures:load -n 
+
+# some of the libraries require webpack.  @todo: replace with assetmapper
+yarn install && yarn dev
+
+symfony server:start -d
+symfony open:local --path=/en/admin
+
+
+```
+
 ### Installation
 
 ``ddev start``

@@ -29,6 +29,7 @@ final readonly class PositionSortableConfigurator implements FieldConfiguratorIn
         $url = $this->adminUrlGenerator
             ->setController($context->getCrud()->getControllerFqcn())
             ->setAction('sortPositionAction')
+            ->setEntityId($entityDto->getPrimaryKeyValue())
             ->generateUrl();
         $field->setCustomOption(PositionSortableField::ACTION_URL, $url);
     }
