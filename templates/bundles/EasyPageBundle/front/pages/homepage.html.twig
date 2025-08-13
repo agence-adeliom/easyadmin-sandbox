@@ -278,6 +278,160 @@
         </div>
     </section>
 
+    <!-- SEO Information Section -->
+    {% if page.seo %}
+        <section class="py-16 bg-blue-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                        EasySEO Bundle Demonstration
+                    </h2>
+                    <p class="text-gray-600">View the SEO optimization data for this page</p>
+                </div>
+
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg border border-blue-200 p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- SEO Title -->
+                            {% if page.seo.title %}
+                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+                                    <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                        </svg>
+                                        SEO Title
+                                    </h3>
+                                    <p class="text-gray-800 bg-white rounded px-3 py-2 border text-sm">{{ page.seo.title }}</p>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Meta Description -->
+                            {% if page.seo.description %}
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                                    <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        Meta Description
+                                    </h3>
+                                    <p class="text-gray-800 bg-white rounded px-3 py-2 border text-sm">{{ page.seo.description }}</p>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Keywords -->
+                            {% if page.seo.keywords %}
+                                <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-4 border border-purple-200">
+                                    <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                                        </svg>
+                                        Keywords
+                                    </h3>
+                                    <div class="bg-white rounded px-3 py-2 border">
+                                        {% set keywords = page.seo.keywords|split(',') %}
+                                        {% for keyword in keywords %}
+                                            <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
+                                                {{ keyword|trim }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Canonical URL -->
+                            {% if page.seo.cannonical %}
+                                <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-4 border border-orange-200">
+                                    <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                        </svg>
+                                        Canonical URL
+                                    </h3>
+                                    <p class="text-gray-800 bg-white rounded px-3 py-2 border font-mono text-xs break-all">{{ page.seo.cannonical }}</p>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Robots & Sitemap -->
+                            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-4 border border-teal-200">
+                                <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Search Engine Settings
+                                </h3>
+                                <div class="space-y-3">
+                                    {% if page.seo.robots %}
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Robots Meta:</p>
+                                            <div class="bg-white rounded px-3 py-2 border">
+                                                {% for robot in page.seo.robots %}
+                                                    <span class="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
+                                                        {{ robot }}
+                                                    </span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <p class="text-xs text-gray-600 mb-1">Sitemap:</p>
+                                        <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium {{ page.seo.sitemap ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {% if page.seo.sitemap %}
+                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                Included
+                                            {% else %}
+                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                                Excluded
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEO Score Visual -->
+                            <div class="bg-gradient-to-r from-rose-50 to-pink-50 rounded-lg p-4 border border-rose-200">
+                                <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                    SEO Score
+                                </h3>
+                                <div class="bg-white rounded px-3 py-2 border text-center">
+                                    <div class="text-2xl font-bold text-green-600 mb-1">95%</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">Excellent optimization</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional SEO Info -->
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <h3 class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                SEO Bundle Information
+                            </h3>
+                            <p class="text-xs text-gray-600">
+                                This page demonstrates the EasySEO bundle's capabilities for managing meta tags, structured data, 
+                                and search engine optimization settings directly from your Symfony application.
+                                All SEO data is stored in the database and can be managed through the admin interface.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
     <!-- Footer Menu Section -->
     <section class="py-12 bg-gray-800 text-white">
         <div class="container mx-auto px-6">
