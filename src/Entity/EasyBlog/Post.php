@@ -3,6 +3,7 @@
 namespace App\Entity\EasyBlog;
 
 use Adeliom\EasyBlogBundle\Entity\PostEntity as BasePostEntity;
+use App\Traits\Entity\ContentEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: \App\Repository\EasyBlog\PostRepository::class)]
@@ -10,4 +11,5 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\HasLifecycleCallbacks]
 class Post extends BasePostEntity
 {
+    use ContentEntityTrait;
 }
