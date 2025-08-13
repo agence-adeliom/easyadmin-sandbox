@@ -25,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     use EasyConfigTrait;
     use EasyRedirectTrait;
 
-    #[Route(path: '/admin', name: 'admin')]
+    #[Route(path: '/{_locale}/admin', name: 'admin')]
     public function index(): Response
     {
         return parent::index();
@@ -35,6 +35,10 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('My Project Name')
+            ->setLocales([
+                'en' => '🇬🇧 English',
+                'fr' => '🇫🇷 Français'
+            ])
         ;
     }
 
