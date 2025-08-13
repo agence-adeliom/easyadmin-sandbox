@@ -232,6 +232,14 @@ class AppFixtures extends Fixture
         $contactPage->setTemplate('contact');
         $manager->persist($contactPage);
 
+        // Configuration display page
+        $configPage = new Page();
+        $configPage->setName('System Configuration');
+        $configPage->setSlug('system-config');
+        $configPage->setState(ThreeStateStatusEnum::PUBLISHED);
+        $configPage->setTemplate('config');
+        $manager->persist($configPage);
+
         // Unpublished page for testing
         $draftPage = new Page();
         $draftPage->setName('Coming Soon');
