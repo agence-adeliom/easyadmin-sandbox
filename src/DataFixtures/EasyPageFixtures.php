@@ -13,7 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class EasyPageFixtures extends Fixture
 {
     use MediaHelpers;
 
@@ -23,16 +23,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
-        $user->setFirstname('John');
-        $user->setLastname('Doe');
-        $user->setEmail('admin@adeliom.com');
-        $user->setPassword($this->hasher->hashPassword($user, 'admin'));
-        $user->setRoles([UserAlias::SUPER_ADMIN]);
-        $user->setEnabled(true);
-
-        $manager->persist($user);
-
         // Homepage
         $homepage = new Page();
         $homepage->setName('Homepage');

@@ -1,0 +1,8 @@
+{% extends '@!EasyAdmin/page/login.html.twig' %}
+
+{% block login_form_credentials_wrapper %}
+    <div>admin: <br><strong>super.admin@example.com</strong></div>
+    <div>pass: <br><strong>SuperAdmin123!</strong></div>
+    <br>
+    {{ parent() }}
+{% endblock login_form_credentials_wrapper %}
