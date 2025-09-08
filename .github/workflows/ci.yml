@@ -59,7 +59,7 @@ jobs:
 #      - name: Run PHP test suite
 #        run: composer run-script test
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v5
         with:
           node-version: '16'
           cache: npm
