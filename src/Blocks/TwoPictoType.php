@@ -43,7 +43,7 @@ class TwoPictoType extends AbstractBlock
 
     public function getTemplate(): string
     {
-        return '';
+        return 'blocks/two_pictos.html.twig';
     }
 
     /**
