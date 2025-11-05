@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\EasyFaq;
 
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
+use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
 use Adeliom\EasyFaqBundle\Controller\EntryCrudController as BaseEntryCrudController;
 use Adeliom\EasyGutenbergBundle\Admin\Field\GutenbergField;
 use App\Entity\EasyFaq\Entry;
@@ -48,7 +49,7 @@ class EntryCrudController extends BaseEntryCrudController
             ->setRequired(true)
             ->setColumns(12);
 
-        yield GutenbergField::new('answer', 'easy.faq.admin.field.answer')
+        yield EasyEditorField::new('answer', 'easy.faq.admin.field.answer')
             ->setRequired(true)
             ->setColumns(12);
     }
