@@ -13,6 +13,7 @@ use App\Entity\EasyMenu\Menu;
 use App\Entity\EasyPage\Page;
 use App\Entity\MediaEntity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -40,6 +41,20 @@ class DashboardController extends AbstractDashboardController
                 'fr' => '🇫🇷 Français'
             ])
         ;
+    }
+
+    public function configureCrud(): Crud
+    {
+        return Crud::new()
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
+            ->addFormTheme('@EasyEditor/form/editor_widget.html.twig')
+            ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+            ->addFormTheme('@EasyFields/form/icon_widget.html.twig')
+            ->addFormTheme('@EasyFields/form/choice_mask_widget.html.twig')
+            ->addFormTheme('@EasyFields/form/sortable_widget.html.twig')
+            ->addFormTheme('@EasySeo/fields/text_counter_type.html.twig')
+            ->addFormTheme('@EasySeo/fields/textarea_counter_type.html.twig')
+            ;
     }
 
     public function configureMenuItems(): iterable
