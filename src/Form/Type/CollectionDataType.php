@@ -21,7 +21,10 @@ class CollectionDataType extends AbstractType implements FormTypeInterface
   public function buildForm(FormBuilderInterface $builder, array $options): void
   {
     $builder
-        ->add('position', HiddenType::class)
+        ->add('button', TextType::class, [
+            'label' => 'button',
+            'required' => true,
+        ])
         ->add('textList', SortableCollectionType::class, [
             'label' => 'textList',
             'entry_type' => TextType::class,
