@@ -1,2 +1,0 @@
-easy_gutenberg:
-  resource: '@EasyGutenbergBundle/Resources/config/routes.xml'

@@ -33,7 +33,6 @@ return [
     Adeliom\EasyMenuBundle\EasyMenuBundle::class => ['all' => true],
     Adeliom\EasyConfigBundle\EasyConfigBundle::class => ['all' => true],
     Adeliom\EasyRedirectBundle\EasyRedirectBundle::class => ['all' => true],
-    Adeliom\EasyGutenbergBundle\EasyGutenbergBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
 ];
