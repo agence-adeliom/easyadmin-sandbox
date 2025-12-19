@@ -80,7 +80,6 @@ ddex exec vendor/bin/monorepo-builder release patch
 - **easy-editor-bundle** - Block-based content editor
 - **easy-faq-bundle** - FAQ system with categories
 - **easy-fields-bundle** - Custom form field types
-- **easy-gutenberg-bundle** - WordPress Gutenberg-style editor
 - **easy-media-bundle** - Media management system
 - **easy-menu-bundle** - Menu management
 - **easy-page-bundle** - Page management
@@ -90,7 +89,6 @@ ddex exec vendor/bin/monorepo-builder release patch
 ### Application Structure
 - **Controllers** - Admin controllers in `src/Controller/Admin/`, page controllers in `src/Controller/EasyPage/`
 - **Entities** - Organized by bundle in `src/Entity/Easy*/`
-- **Blocks** - Custom Gutenberg blocks in `src/Blocks/`
 - **Message Handlers** - Async processing for media operations
 
 ### Frontend Assets
@@ -106,7 +104,6 @@ Entities are organized by their respective bundles (e.g., `src/Entity/EasyBlog/`
 ### Block System
 The project uses two block systems:
 1. **EasyEditor** - Simple block-based editor
-2. **EasyGutenberg** - WordPress Gutenberg-style editor with TypeScript/React
 
 ### Testing Strategy
 - **Unit tests** for individual bundle functionality in `tests/`
@@ -131,5 +128,3 @@ The project uses two block systems:
 - All bundles must maintain backward compatibility within major versions
 - The monorepo manages version synchronization across all packages
 - Each bundle has its own test suite that should be maintained
-
-- The easy-gutenberg-bundle is not supported, so don't do anything with it.

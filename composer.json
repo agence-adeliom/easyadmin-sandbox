@@ -116,9 +116,6 @@
         }
     },
     "autoload": {
-        "files": [
-            "lib/easy-gutenberg-bundle/include/wp.php"
-        ],
         "psr-4": {
             "Adeliom\\EasyAdminUserBundle\\": "lib/easy-admin-user-bundle/src/",
             "Adeliom\\EasyBlockBundle\\": "lib/easy-block-bundle/src/",
@@ -128,7 +125,6 @@
             "Adeliom\\EasyEditorBundle\\": "lib/easy-editor-bundle/src/",
             "Adeliom\\EasyFaqBundle\\": "lib/easy-faq-bundle/src/",
             "Adeliom\\EasyFieldsBundle\\": "lib/easy-fields-bundle/src/",
-            "Adeliom\\EasyGutenbergBundle\\": "lib/easy-gutenberg-bundle/src/",
             "Adeliom\\EasyMediaBundle\\": "lib/easy-media-bundle/src/",
             "Adeliom\\EasyMenuBundle\\": "lib/easy-menu-bundle/src/",
             "Adeliom\\EasyPageBundle\\": "lib/easy-page-bundle/src/",
@@ -152,7 +148,6 @@
         "agence-adeliom/easy-editor-bundle": "self.version",
         "agence-adeliom/easy-faq-bundle": "self.version",
         "agence-adeliom/easy-fields-bundle": "self.version",
-        "agence-adeliom/easy-gutenberg-bundle": "self.version",
         "agence-adeliom/easy-media-bundle": "self.version",
         "agence-adeliom/easy-menu-bundle": "self.version",
         "agence-adeliom/easy-page-bundle": "self.version",

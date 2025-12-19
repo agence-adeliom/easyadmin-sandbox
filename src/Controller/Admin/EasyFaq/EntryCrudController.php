@@ -5,7 +5,6 @@ namespace App\Controller\Admin\EasyFaq;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyEditorBundle\Admin\Field\EasyEditorField;
 use Adeliom\EasyFaqBundle\Controller\EntryCrudController as BaseEntryCrudController;
-use Adeliom\EasyGutenbergBundle\Admin\Field\GutenbergField;
 use App\Entity\EasyFaq\Entry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,13 +18,6 @@ class EntryCrudController extends BaseEntryCrudController
     public static function getEntityFqcn(): string
     {
         return Entry::class;
-    }
-
-    public function configureCrud(Crud $crud): Crud
-    {
-        return parent::configureCrud($crud)
-            ->addFormTheme('@EasyGutenberg/form/gutenberg_widget.html.twig')
-        ;
     }
 
     public function configureActions(Actions $actions): Actions
