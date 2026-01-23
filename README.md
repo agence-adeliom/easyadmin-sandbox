@@ -12,28 +12,31 @@
 
 ### Manage releases
 
-Read https://github.com/symplify/monorepo-builder
+Run the release script to create a new version:
 
-https://github.com/sym
+```bash
+./release.sh
+```
 
-``lando lint-back``
+This will:
+1. Detect the latest `2.0.x` tag and calculate the next version
+2. Update all internal agence-adeliom dependencies from `^2.1` to the release version
+3. Commit as "prepare release"
+4. Revert dependencies back to `^2.1`
+5. Commit as "open 2.1.x-dev"
+6. Create the tag on the "prepare release" commit
 
-Execute follow outside your container (php 8.0 is required) and run
+After the script completes, verify the changes and push:
 
-``vendor/bin/monorepo-builder release patch --dry-run``
-
-If dry run execution is successfull run :
-
-``vendor/bin/monorepo-builder release patch``
+```bash
+git push origin 2.x
+git push origin 2.0.X  # replace X with the new version number
+```
 
 ### PHPUnit tests
-
-Read https://github.com/symplify/monorepo-builder
-
-https://github.com/sym
 
 ```
 lando console d:m:m --env=test -n
 lando console doc:fixtures:load --env=test -n
 lando composer unit-tests
-``
+```
