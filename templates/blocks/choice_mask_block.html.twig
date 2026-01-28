@@ -1,0 +1,9 @@
+<div class="choice-mask-block">
+    {% if block.type == 'text' or block.type == 'both' %}
+        <p>{{ block.content }}</p>
+    {% endif %}
+
+    {% if block.type == 'link' or block.type == 'both' %}
+        <a href="{{ block.url }}">{{ block.linkLabel }}</a>
+    {% endif %}
+</div>
