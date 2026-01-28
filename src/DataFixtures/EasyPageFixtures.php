@@ -5,7 +5,15 @@ namespace App\DataFixtures;
 use Adeliom\EasyAdminUserBundle\Entity\User as UserAlias;
 use Adeliom\EasyCommonBundle\Enum\ThreeStateStatusEnum;
 use Adeliom\EasyMediaBundle\Service\EasyMediaManager;
+use App\Blocks\ChoiceMaskBlockType;
+use App\Blocks\CollectionBlockType;
+use App\Blocks\EmbedType;
 use App\Blocks\HeaderType;
+use App\Blocks\Shared\Alpha;
+use App\Blocks\Shared\Omega;
+use App\Blocks\Shared\ShaType;
+use App\Blocks\Shared\Test;
+use App\Blocks\TwoPictoType;
 use App\DataFixtures\MediaHelpers;
 use App\Entity\EasyAdmin\User;
 use App\Entity\EasyPage\Page;
@@ -421,6 +429,135 @@ class EasyPageFixtures extends Fixture
         $underConstructionPage->getSEO()->sitemap = false;
         $underConstructionPage->getSEO()->robots = ['noindex', 'follow'];
         $manager->persist($underConstructionPage);
+
+        // Block Debug page - showcases all available block types with all fields filled
+        $blockDebugPage = new Page();
+        $blockDebugPage->setName('Block Debug Showcase');
+        $blockDebugPage->setSlug('block-debug');
+        $blockDebugPage->setState(ThreeStateStatusEnum::PUBLISHED);
+        $blockDebugPage->setTemplate('default');
+        $blockDebugPage->getSEO()->title = 'Block Debug - All Block Types Showcase';
+        $blockDebugPage->getSEO()->description = 'Debug page showcasing all available block types with all fields filled for testing and development purposes.';
+        $blockDebugPage->getSEO()->keywords = 'debug, blocks, development, testing, showcase';
+        $blockDebugPage->getSEO()->cannonical = 'https://example.com/block-debug';
+        $blockDebugPage->getSEO()->sitemap = false;
+        $blockDebugPage->getSEO()->robots = ['noindex', 'nofollow'];
+        $blockDebugPage->setContent([
+            // 1. HeaderType - text field
+            [
+                'text' => 'Header Block - Main Title for the Page',
+                'position' => '0',
+                'block_type' => HeaderType::class,
+            ],
+            // 2. TwoPictoType - icon1 and icon2 fields
+            [
+                'icon1' => 'fas fa-star',
+                'icon2' => 'fas fa-heart',
+                'position' => '1',
+                'block_type' => TwoPictoType::class,
+            ],
+            // 3. EmbedType - embed field (oEmbed URL)
+            [
+                'embed' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'position' => '2',
+                'block_type' => EmbedType::class,
+            ],
+            // 4. ChoiceMaskBlockType - type=text variant
+            [
+                'type' => 'text',
+                'content' => 'This is a text-only content block for the Choice Mask demo.',
+                'url' => null,
+                'linkLabel' => null,
+                'position' => '3',
+                'block_type' => ChoiceMaskBlockType::class,
+            ],
+            // 5. ChoiceMaskBlockType - type=link variant
+            [
+                'type' => 'link',
+                'content' => null,
+                'url' => 'https://example.com/link-destination',
+                'linkLabel' => 'Click here to visit',
+                'position' => '4',
+                'block_type' => ChoiceMaskBlockType::class,
+            ],
+            // 6. ChoiceMaskBlockType - type=both variant (all fields filled)
+            [
+                'type' => 'both',
+                'content' => 'This block has both text content and a link for maximum flexibility.',
+                'url' => 'https://example.com/both-destination',
+                'linkLabel' => 'Learn more about this feature',
+                'position' => '5',
+                'block_type' => ChoiceMaskBlockType::class,
+            ],
+            // 7. CollectionBlockType - collection with nested sortable items
+            [
+                'collection' => [
+                    [
+                        'position' => '0',
+                        'textList' => [
+                            'First item text',
+                            'Second item text',
+                            'Third item text',
+                        ],
+                    ],
+                    [
+                        'position' => '1',
+                        'textList' => [
+                            'Another collection entry',
+                            'With multiple text items',
+                        ],
+                    ],
+                    [
+                        'position' => '2',
+                        'textList' => [
+                            'Third collection entry',
+                            'Demonstrating sortable collections',
+                            'With nested lists',
+                        ],
+                    ],
+                ],
+                'position' => '6',
+                'block_type' => CollectionBlockType::class,
+            ],
+            // 8. Alpha (Shared) - name field
+            [
+                'name' => 'Alpha Block - Custom Name Content',
+                'position' => '7',
+                'block_type' => Alpha::class,
+            ],
+            // 9. Omega (Shared) - name field
+            [
+                'name' => 'Omega Block - Another Name Content',
+                'position' => '8',
+                'block_type' => Omega::class,
+            ],
+            // 10. ShaType (Shared) - title field
+            [
+                'title' => 'ShaType Block - Title Content Here',
+                'position' => '9',
+                'block_type' => ShaType::class,
+            ],
+            // 11. Test (Shared) - name field
+            [
+                'name' => 'Test Block - Testing Name Field',
+                'position' => '10',
+                'block_type' => Test::class,
+            ],
+            // Additional HeaderType to show multiple of same type
+            [
+                'text' => 'Second Header Block - Demonstrating Multiple Headers',
+                'position' => '11',
+                'block_type' => HeaderType::class,
+            ],
+            // Additional TwoPictoType with different icons
+            [
+                'icon1' => 'fas fa-rocket',
+                'icon2' => 'fas fa-globe',
+                'position' => '12',
+                'block_type' => TwoPictoType::class,
+            ],
+        ]);
+        $manager->persist($blockDebugPage);
 
         $this->createMedia('logos', 'psa.svg');
         $this->createMedia('contact', 'join-1.png');
