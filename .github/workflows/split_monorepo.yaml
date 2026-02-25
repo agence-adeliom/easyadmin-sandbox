@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [easy-admin-user-bundle, easy-blog-bundle, easy-config-bundle, easy-faq-bundle, easy-gutenberg-bundle, easy-menu-bundle, easy-redirect-bundle, easy-block-bundle, easy-common-bundle, easy-editor-bundle, easy-fields-bundle, easy-media-bundle, easy-page-bundle, easy-seo-bundle]
+        package: [easy-admin-user-bundle, easy-blog-bundle, easy-config-bundle, easy-faq-bundle, easy-menu-bundle, easy-redirect-bundle, easy-block-bundle, easy-common-bundle, easy-editor-bundle, easy-fields-bundle, easy-media-bundle, easy-page-bundle, easy-seo-bundle]
 
     steps:
       - uses: actions/checkout@v3
