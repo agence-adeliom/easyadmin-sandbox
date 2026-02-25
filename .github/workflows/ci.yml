@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   # Trigger on Pull Requests against the master branch.
   pull_request_target:
     branches:
