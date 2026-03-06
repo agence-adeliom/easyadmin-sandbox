@@ -3,35 +3,82 @@
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
          bootstrap="tests/bootstrap.php"
-         convertDeprecationsToExceptions="false"
+         cacheDirectory=".phpunit.cache"
+         colors="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
 >
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
-        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <server name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/data.db" />
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="EasyAdminUserBundle Test Suite">
+            <directory>lib/easy-admin-user-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyBlockBundle Test Suite">
+            <directory>lib/easy-block-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyBlogBundle Test Suite">
+            <directory>lib/easy-blog-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyCommonBundle Test Suite">
+            <directory>lib/easy-common-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyConfigBundle Test Suite">
+            <directory>lib/easy-config-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyEditorBundle Test Suite">
+            <directory>lib/easy-editor-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyFaqBundle Test Suite">
+            <directory>lib/easy-faq-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyFieldsBundle Test Suite">
+            <directory>lib/easy-fields-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyMediaBundle Test Suite">
+            <directory>lib/easy-media-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyMenuBundle Test Suite">
+            <directory>lib/easy-menu-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyPageBundle Test Suite">
+            <directory>lib/easy-page-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasyRedirectBundle Test Suite">
+            <directory>lib/easy-redirect-bundle/tests</directory>
+        </testsuite>
+        <testsuite name="EasySeoBundle Test Suite">
+            <directory>lib/easy-seo-bundle/tests</directory>
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <source>
         <include>
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">lib/easy-admin-user-bundle/src</directory>
+            <directory suffix=".php">lib/easy-block-bundle/src</directory>
+            <directory suffix=".php">lib/easy-blog-bundle/src</directory>
+            <directory suffix=".php">lib/easy-common-bundle/src</directory>
+            <directory suffix=".php">lib/easy-config-bundle/src</directory>
+            <directory suffix=".php">lib/easy-editor-bundle/src</directory>
+            <directory suffix=".php">lib/easy-faq-bundle/src</directory>
+            <directory suffix=".php">lib/easy-fields-bundle/src</directory>
+            <directory suffix=".php">lib/easy-media-bundle/src</directory>
+            <directory suffix=".php">lib/easy-menu-bundle/src</directory>
+            <directory suffix=".php">lib/easy-page-bundle/src</directory>
+            <directory suffix=".php">lib/easy-redirect-bundle/src</directory>
+            <directory suffix=".php">lib/easy-seo-bundle/src</directory>
         </include>
-    </coverage>
-
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
+        <exclude>
+            <directory>lib/easy-block-bundle/src/Resources/skeleton</directory>
+            <directory>lib/easy-editor-bundle/src/Resources/skeleton</directory>
+        </exclude>
+    </source>
 
     <!-- Run `composer require symfony/panther` before enabling this extension -->
     <!--

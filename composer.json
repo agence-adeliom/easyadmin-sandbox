@@ -90,7 +90,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.10",
         "nunomaduro/phpinsights": "^2.4",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^11.5",
         "rector/rector": "^1",
         "symfony/browser-kit": "^6.4 || ^7.0",
         "symfony/css-selector": "^6.4 || ^7.0",
@@ -136,6 +136,19 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Adeliom\\EasyAdminUserBundle\\Tests\\": "lib/easy-admin-user-bundle/tests/",
+            "Adeliom\\EasyBlockBundle\\Tests\\": "lib/easy-block-bundle/tests/",
+            "Adeliom\\EasyBlogBundle\\Tests\\": "lib/easy-blog-bundle/tests/",
+            "Adeliom\\EasyCommonBundle\\Tests\\": "lib/easy-common-bundle/tests/",
+            "Adeliom\\EasyConfigBundle\\Tests\\": "lib/easy-config-bundle/tests/",
+            "Adeliom\\EasyEditorBundle\\Tests\\": "lib/easy-editor-bundle/tests/",
+            "Adeliom\\EasyFaqBundle\\Tests\\": "lib/easy-faq-bundle/tests/",
+            "Adeliom\\EasyFieldsBundle\\Tests\\": "lib/easy-fields-bundle/tests/",
+            "Adeliom\\EasyMediaBundle\\Tests\\": "lib/easy-media-bundle/tests/",
+            "Adeliom\\EasyMenuBundle\\Tests\\": "lib/easy-menu-bundle/tests/",
+            "Adeliom\\EasyPageBundle\\Tests\\": "lib/easy-page-bundle/tests/",
+            "Adeliom\\EasyRedirectBundle\\Tests\\": "lib/easy-redirect-bundle/tests/",
+            "Adeliom\\EasySeoBundle\\Tests\\": "lib/easy-seo-bundle/tests/",
             "App\\Tests\\": "tests/"
         }
     },

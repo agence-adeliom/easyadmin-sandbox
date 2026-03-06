@@ -10,7 +10,6 @@ use App\Fields\BlockFields;
 use App\Form\Type\BlockColumnPictoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class TwoPictoType extends AbstractBlock
