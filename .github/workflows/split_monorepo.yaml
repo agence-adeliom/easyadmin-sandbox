@@ -6,6 +6,7 @@ on:
       - '*.x'
     tags:
       - '*'
+  workflow_dispatch:
 
 env:
   PHP_VER: '8.1'
