@@ -57,7 +57,7 @@ Bundle codes:
 | Bump Doctrine package constraints in root `composer.json` | DONE | Root constraints updated to DoctrineBundle `^2.15`, ORM `^3.6`, DBAL `^4.4`, plus `carbonphp/carbon-doctrine-types ^3.2` to unblock DBAL 4 through `nesbot/carbon` |
 | Validate Symfony 7 + DoctrineBundle minimum compatibility | DONE | Checked against Composer metadata: DoctrineBundle `2.15.2+` supports Symfony `^6.4 || ^7.0` and ORM `^2.17 || ^3.1` in its dev matrix |
 | Rebuild lock file after dependency decisions | DONE | `composer update doctrine/doctrine-bundle doctrine/orm doctrine/dbal easycorp/easyadmin-bundle stof/doctrine-extensions-bundle pagerfanta/doctrine-orm-adapter carbonphp/carbon-doctrine-types --with-all-dependencies` completed successfully |
-| Run full sandbox smoke tests on upgraded dependencies | BLOCKED | `composer validate --strict`, `php bin/console about`, `doctrine:mapping:info`, `doctrine:schema:validate --skip-sync`, and full PHPUnit pass; full schema sync check is blocked in `dev` because host `db` is unreachable and fails in `test` because existing SQLite schema is not in sync |
+| Run full sandbox smoke tests on upgraded dependencies | BLOCKED | `composer validate --strict` / `php bin/console about` still pending; `php bin/console doctrine:mapping:info --env=test` passes after lot 2, but `php bin/console doctrine:schema:validate --env=test` still fails because the committed SQLite test schema is stale (`ext_log_entries` leftover plus broad table rebuild diff across EasyAdmin/EasyBlog/EasyFaq/EasyMedia/EasyPage tables) |
 
 ## Cross-bundle task matrix
 
@@ -76,7 +76,7 @@ Bundle codes:
 | ORM-01 | Check SQL default expressions and replace string defaults with `DefaultExpression` objects | ORM 3.6 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Also required by DBAL 4.4 |
 | ORM-02 | Check `FieldMapping::$default` assumptions and rely on `options["default"]` only | ORM 3.6 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Mostly relevant for runtime mapping listeners and tests |
 | ORM-03 | Check join columns used in primary keys are never nullable | ORM 3.6 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Includes many-to-many join tables and id associations |
-| ORM-04 | Validate all `loadClassMetadata` dynamic mappings against ORM 3 metadata rules | ORM 3.x | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | High priority for EAU, EBG, EFAQ, EMD, EMN, EPG |
+| ORM-04 | Validate all `loadClassMetadata` dynamic mappings against ORM 3 metadata rules | ORM 3.x | DONE | N/A | DONE | N/A | N/A | N/A | DONE | N/A | DONE | DONE | DONE | N/A | N/A | Lot 2 validated listeners with real ORM `ClassMetadata` tests; EMN listener also moved invalid `orderBy` from a join column payload to the `children` one-to-many mapping |
 | ORM-05 | Check there is no undeclared entity inheritance | ORM 3.0 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Must be explicit now |
 | ORM-06 | Check there is no field or association override outside mapped superclasses | ORM 3.0 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | ORM 3 throws now |
 | ORM-07 | Check embeddables do not use forbidden entity-level attributes or lifecycle callbacks | ORM 3.0 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Review traits and embeddables if any |
@@ -114,7 +114,7 @@ Bundle codes:
 | DBAL-09 | Replace deprecated `AbstractAsset` name and quoting APIs if used | DBAL 4.4 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | `getName()`, `getQuotedName()`, `isQuoted()`, `quoteIdentifier()` |
 | DBAL-10 | Review `DateTime` and `BigInt` behavior changes | DBAL 4.0 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Mutable vs immutable handling and bigint casts |
 | DBAL-11 | Replace string current-date default expressions with DBAL `Current*` classes | DBAL 4.4 | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Same review as ORM-01 |
-| DBAL-12 | Review custom DBAL types against DBAL 4 interfaces and removed methods | DBAL 4.x | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | High priority for EMD and EED |
+| DBAL-12 | Review custom DBAL types against DBAL 4 interfaces and removed methods | DBAL 4.x | N/A | N/A | N/A | N/A | N/A | DONE | N/A | N/A | DONE | N/A | N/A | N/A | N/A | Lot 2 removed the obsolete `requiresSQLCommentHint()` override and static container access from EMD, kept EED on DBAL 4 `JsonType`, and covered both types with targeted PHPUnit tests |
 
 ### Validation tasks
 
@@ -122,23 +122,23 @@ Bundle codes:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | VAL-01 | Run bundle unit tests on upgraded dependencies | Internal | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Existing PHPUnit suites under each bundle |
 | VAL-02 | Run metadata validation for the bundle inside the sandbox | Internal | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | `doctrine:mapping:info`, `doctrine:schema:validate` |
-| VAL-03 | Add or update tests for dynamic mapping listeners if the bundle has one | Internal | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | High priority for EAU, EBG, EFAQ, EMD, EMN, EPG |
-| VAL-04 | Add or update tests for custom DBAL types if the bundle has one | Internal | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | High priority for EMD and EED |
+| VAL-03 | Add or update tests for dynamic mapping listeners if the bundle has one | Internal | DONE | N/A | DONE | N/A | N/A | N/A | DONE | N/A | DONE | DONE | DONE | N/A | N/A | Lot 2 replaced mock-only assertions with real `ClassMetadata` coverage for EAU, EBG, EFAQ, EMD, EMN, and EPG listeners, including idempotence checks on repeated `loadClassMetadata` calls |
+| VAL-04 | Add or update tests for custom DBAL types if the bundle has one | Internal | N/A | N/A | N/A | N/A | N/A | DONE | N/A | N/A | DONE | N/A | N/A | N/A | N/A | Lot 2 added DBAL 4-oriented tests for EED JSON conversion behavior and updated EMD tests to assert resolver-only PHP conversion plus DB value serialization |
 | VAL-05 | Confirm no Doctrine deprecations remain at runtime in upgraded sandbox | Internal | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | TODO | Final acceptance gate |
 
 ## Known hotspots already found in the repo
 
 | Bundle | File | Why it matters | Status |
 | --- | --- | --- | --- |
-| Root | `composer.json` | Still targets DoctrineBundle `^2.7.0` and ORM `^2.13` | TODO |
-| EMD | `lib/easy-media-bundle/src/Types/EasyMediaType.php` | Custom DBAL type still implements `requiresSQLCommentHint()` and uses static container access | TODO |
-| EED | `lib/easy-editor-bundle/src/Types/EasyEditorType.php` | Custom DBAL type must be validated against DBAL 4 behavior | TODO |
-| EAU | `lib/easy-admin-user-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
-| EBG | `lib/easy-blog-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
-| EFAQ | `lib/easy-faq-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
-| EMD | `lib/easy-media-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
-| EMN | `lib/easy-menu-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
-| EPG | `lib/easy-page-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | TODO |
+| Root | `composer.json` | Still targets DoctrineBundle `^2.7.0` and ORM `^2.13` | DONE |
+| EMD | `lib/easy-media-bundle/src/Types/EasyMediaType.php` | Custom DBAL type still implements `requiresSQLCommentHint()` and uses static container access | DONE |
+| EED | `lib/easy-editor-bundle/src/Types/EasyEditorType.php` | Custom DBAL type must be validated against DBAL 4 behavior | DONE |
+| EAU | `lib/easy-admin-user-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
+| EBG | `lib/easy-blog-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
+| EFAQ | `lib/easy-faq-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
+| EMD | `lib/easy-media-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
+| EMN | `lib/easy-menu-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
+| EPG | `lib/easy-page-bundle/src/EventListener/DoctrineMappingListener.php` | Runtime mapping must be validated on ORM 3 | DONE |
 | EMN | `lib/easy-menu-bundle/src/Repository/MenuItemRepository.php` | Depends on Gedmo tree repository compatibility with ORM 3 / DBAL 4 | TODO |
 
 ## Suggested review order
@@ -155,9 +155,9 @@ Bundle codes:
 
 | Command or checkpoint | Status | Notes |
 | --- | --- | --- |
-| `composer update` with target Doctrine versions | TODO | Run after dependency policy is locked |
-| `php bin/console doctrine:mapping:info` | TODO | Must pass on upgraded stack |
-| `php bin/console doctrine:schema:validate` | TODO | Must pass on upgraded stack |
-| Targeted PHPUnit suites for touched bundles | TODO | Run per bundle during remediation |
+| `composer update` with target Doctrine versions | DONE | Completed in lot 1 with DoctrineBundle `2.18.2`, ORM `3.6.2`, and DBAL `4.4.2` locked in the sandbox |
+| `php bin/console doctrine:mapping:info` | DONE | `--env=test` passes after lot 2 with 37 mapped entities reported |
+| `php bin/console doctrine:schema:validate` | BLOCKED | `--env=test` still reports schema drift because the committed SQLite test schema is outdated (`ext_log_entries` plus broad rebuilds on existing tables) |
+| Targeted PHPUnit suites for touched bundles | DONE | Lot 2 executed targeted suites for EAU, EBG, EED, EFAQ, EMD, EMN, and EPG listeners/types: 21 tests, 71 assertions, all green |
 | Full sandbox PHPUnit run | TODO | Final regression gate |
 | Runtime deprecation scan clean for Doctrine | TODO | Final acceptance gate |
