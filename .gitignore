@@ -51,3 +51,5 @@ codealike.json
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+public/media/download
+lib/easy-media-bundle/assets/dev-server-data
