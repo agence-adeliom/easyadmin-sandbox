@@ -13,7 +13,7 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
-        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/data.db" />
+        <server name="DATABASE_TEST_PATH" value="%kernel.project_dir%/var/data_test.db" />
     </php>
 
     <testsuites>
